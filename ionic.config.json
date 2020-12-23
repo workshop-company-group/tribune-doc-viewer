@@ -1,5 +1,7 @@
 {
   "name": "tribune-doc-viewer",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
