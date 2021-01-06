@@ -1,21 +1,27 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './shared/components';
+
+import { HomeRoutingModule } from './home/home-routing.module';
+import { DetailRoutingModule } from './detail/detail-routing.module';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: '**',
+    component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
+    HomeRoutingModule,
+    DetailRoutingModule
   ],
   exports: [RouterModule]
 })
