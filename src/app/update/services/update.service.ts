@@ -11,7 +11,7 @@ export class UpdateService {
 
   constructor() {
     this.fs = window.require('fs');
-    const data = this.fs.readFileSync('version.json').toString('utf8');
+    const data = this.fs.readFileSync('config.json').toString('utf8');
     const json = JSON.parse(data);
     this.version = json.version;
   }
