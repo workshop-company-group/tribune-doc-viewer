@@ -1,0 +1,17 @@
+.main-container {
+  width: 395px;
+  height: 70px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--light-grey-gradient);
+  color: var(--dark-grey-color);
+  
+  font-size: var(--normal-font-size);
+  line-height: var(--normal-line-height);
+  text-transform: uppercase;
+
+  border-radius: 10px;
+}
