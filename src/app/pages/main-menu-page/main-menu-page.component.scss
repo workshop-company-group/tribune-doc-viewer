@@ -7,21 +7,27 @@
   width: 100%;
   height: 100vh;
 
-  background: var(--white-color);
-
   overflow: hidden;
-
-  z-index: -2;
 }
 
 .background {
+  background: var(--white-color);
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+
+  width: 100%;
+  height: 100%;
+}
+
+.background img {
   position: absolute;
   left: -8vw;
   bottom: -30vh;
-  z-index: -1;
-
   height: 87vh;
-  
+
   transform: rotate(30deg);
 }
 
@@ -29,11 +35,11 @@
   width: 50%;
   height: 100%;
 
-  padding: 60px 100px;
+  padding: 3% 5%;
 }
 
 .logo {
-  height: 90px;
+  height: 8vh;
 }
 
 .tribune {
@@ -43,7 +49,7 @@
 }
 
 .tribune img {
-  height: 1490px;
+  height: 137vh;
 }
 
 .tribune span {

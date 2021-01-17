@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { WindowStateService } from '../../shared/services/window-state.service';
+
 @Component({
   selector: 'app-main-menu-page',
   templateUrl: './main-menu-page.component.html',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainMenuPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private stateService: WindowStateService) { }
 
   ngOnInit(): void {
+  }
+
+  public openFileView(): void {
+    console.log('File view page called');
+  }
+
+  public openSettings(): void {
+    console.log('Settings page called');
+  }
+
+  public quitApplication(): void {
+    this.stateService.exit();
   }
 
 }

@@ -1,5 +1,7 @@
 <div class="main-container">
-  <img class="background" src="assets/background/filled-brandbook.svg">
+  <div class="background">
+    <img src="assets/background/filled-brandbook.svg">
+  </div>
   <div class="tribune">
     <img src="assets/images/tribune.png">
     <span>BM Tribune</span>
@@ -11,8 +13,11 @@
   </div>
 
   <div class="buttons__container">
-    <app-normal-button>Начать работу</app-normal-button>
-    <app-normal-button>Параметры</app-normal-button>
-    <app-normal-button>Выход</app-normal-button>
+    <app-normal-button
+      (click)="openFileView()">Начать работу</app-normal-button>
+    <app-normal-button
+      (click)="openSettings()">Параметры</app-normal-button>
+    <app-normal-button
+      (click)="quitApplication()">Выход</app-normal-button>
   </div>
 </div>
