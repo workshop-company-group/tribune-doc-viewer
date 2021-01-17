@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -77,6 +77,9 @@ try {
       createWindow();
     }
   });
+
+  // Quit app on signal
+  ipcMain.on('app-exit', () => win.close());
 
 } catch (e) {
   // Catch Error
