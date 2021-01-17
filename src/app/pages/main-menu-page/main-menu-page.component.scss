@@ -66,6 +66,17 @@
   text-transform: uppercase;
 }
 
+.version {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+
+  color: var(--light-grey-color);
+
+  font-size: var(--tiny-font-size);
+  line-height: var(--tiny-line-height);
+}
+
 .buttons__container {
   width: 50%;
   height: 100%;

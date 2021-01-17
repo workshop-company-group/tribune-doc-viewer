@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { WindowStateService } from '../../shared/services/window-state.service';
+import { UpdateService } from '../../update/services/update.service';
 
 @Component({
   selector: 'app-main-menu-page',
@@ -9,7 +10,8 @@ import { WindowStateService } from '../../shared/services/window-state.service';
 })
 export class MainMenuPageComponent implements OnInit {
 
-  constructor(private stateService: WindowStateService) { }
+  constructor(private stateService: WindowStateService,
+              public updateService: UpdateService) { }
 
   ngOnInit(): void {
   }
