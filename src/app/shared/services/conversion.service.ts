@@ -48,7 +48,6 @@ export class ConversionService {
       const dir: string = this.getFileDir(path);
       const name: string = this.getFileName(path, type);
       const newPath: string = dir + '/' + name + outputType;
-      console.log(type, dir, name, newPath);
       const execAsync = util.promisify(this.childProcess.exec);
       await execAsync(`soffice --headless --convert-to ${outputType.slice(1)} --outdir ${dir} ${path}`);
       return {
