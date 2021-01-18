@@ -36,13 +36,28 @@ export class ConversionService {
     }
   }
 
-  public async convertDocument(path: string, outputType: string = '.pdf'): Promise<void> {
+  private getFileName(path: string, type: string = ''): string {
+    if (this.electron.isElectron) {
+      return this.path.basename(path, type);
+    }
+  }
+
+  public async convertDocument(path: string, outputType: string = '.pdf'): Promise<Document> {
     if (this.electron.isElectron) {
       const type: string = this.getFileType(path);
       const dir: string = this.getFileDir(path);
+      const name: string = this.getFileName(path, type);
+      const newPath: string = dir + '/' + name + outputType;
+      console.log(type, dir, name, newPath);
       const execAsync = util.promisify(this.childProcess.exec);
       await execAsync(`soffice --headless --convert-to ${outputType.slice(1)} --outdir ${dir} ${path}`);
+      return {
+        originPath: path,
+        convertedPath: newPath,
+        title: name + outputType,
+        length: 0
+    }
+      }
     }
   }
-//.pptx /Users/minish144/Desktop test.pptx /Users/minish144/Desktop/test.pptx.pdf
 }
