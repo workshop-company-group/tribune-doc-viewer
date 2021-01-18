@@ -7,6 +7,7 @@ import { ElectronService } from '../../core/services';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ConversionService {
   path: typeof path;
   childProcess: typeof childProcess;
@@ -24,9 +25,19 @@ export class ConversionService {
     }
   }
 
-  public convertDocument(path: string): Document {
+  public convertDocument(path: string): void {
     if (this.electron.isElectron) {
-
+      this.childProcess.exec('pwd', (error, stdout, stderr) => {
+        if (error) {
+          console.log(`error: ${error.message}`);
+          return;
+        }
+        if (stderr) {
+            console.log(`stderr: ${stderr}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+      })
     }
   }
 
