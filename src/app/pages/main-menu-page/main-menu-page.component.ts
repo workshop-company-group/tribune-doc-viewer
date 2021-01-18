@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { WindowStateService } from '../../shared/services/window-state.service';
 import { UpdateService } from '../../update/services/update.service';
 
-import { ConversionService } from '../../shared/services/conversion.service';
-
 @Component({
   selector: 'app-main-menu-page',
   templateUrl: './main-menu-page.component.html',
