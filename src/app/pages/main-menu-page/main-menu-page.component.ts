@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { WindowStateService } from '../../shared/services/window-state.service';
 import { UpdateService } from '../../update/services/update.service';
 
+import { ConversionService } from '../../shared/services/conversion.service';
+
 @Component({
   selector: 'app-main-menu-page',
   templateUrl: './main-menu-page.component.html',
@@ -11,7 +13,10 @@ import { UpdateService } from '../../update/services/update.service';
 export class MainMenuPageComponent implements OnInit {
 
   constructor(private stateService: WindowStateService,
-              public updateService: UpdateService) { }
+              public updateService: UpdateService,
+              private conv: ConversionService) {
+    this.conv.convertDocument('test');
+  }
 
   ngOnInit(): void {
   }
