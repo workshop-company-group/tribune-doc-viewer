@@ -13,10 +13,7 @@ import { ConversionService } from '../../shared/services/conversion.service';
 export class MainMenuPageComponent implements OnInit {
 
   constructor(private stateService: WindowStateService,
-              public updateService: UpdateService,
-              private conv: ConversionService) {
-    this.conv.convertDocument('test');
-  }
+              public updateService: UpdateService) { }
 
   ngOnInit(): void {
   }

@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Document } from '../../models/document';
 import * as path from 'path';
 import * as childProcess from 'child_process';
+import * as util from 'util';
 import { ElectronService } from '../../core/services';
 
-const OUTPUT_FOLDER = '../'
+const TEST = '/Users/minish144/Desktop/test.pptx';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,13 @@ const OUTPUT_FOLDER = '../'
 export class ConversionService {
   path: typeof path;
   childProcess: typeof childProcess;
+  util: typeof util;
 
   constructor(private electron: ElectronService) {
     if (this.electron.isElectron) {
       this.path = window.require('path');
       this.childProcess = window.require('child_process');
+      this.util = window.require('util');
     }
   }
 
@@ -33,22 +36,13 @@ export class ConversionService {
     }
   }
 
-  public convertDocument(path: string): void {
+  public async convertDocument(path: string, outputType: string = '.pdf'): Promise<void> {
     if (this.electron.isElectron) {
       const type: string = this.getFileType(path);
       const dir: string = this.getFileDir(path);
-      this.childProcess.exec('pwd', (error, stdout, stderr) => {
-        if (error) {
-          console.log(`error: ${error.message}`);
-          return;
-        }
-        if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
-      })
+      const execAsync = util.promisify(this.childProcess.exec);
+      await execAsync(`soffice --headless --convert-to ${outputType.slice(1)} --outdir ${dir} ${path}`);
     }
   }
-
+//.pptx /Users/minish144/Desktop test.pptx /Users/minish144/Desktop/test.pptx.pdf
 }
