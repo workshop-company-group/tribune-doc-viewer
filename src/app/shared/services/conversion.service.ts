@@ -56,8 +56,8 @@ export class ConversionService {
         convertedPath: newPath,
         title: name + outputType,
         length: 0
-    }
       }
     }
   }
 }
+
