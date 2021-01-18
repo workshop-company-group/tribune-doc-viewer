@@ -17,6 +17,9 @@ export class UpdateService {
       const json = JSON.parse(data);
       this.version = json.version;
     }
+    else {
+      this.version = "dev";
+    }
   }
 
 }
