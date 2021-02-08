@@ -18,18 +18,20 @@
   --tiny-line-height: 19px;
 
   /* ----- Color styles ----- */
-  --dark-grey-color: #3E3E3F;
-  --light-grey-color: #CDCDCD;
-  --background-color: #F3F3F3;
-  --white-color: #FFFFFF;
-  --red-color: #D25F33;
-  --blue-color: #507DF2;
-  --accent-color: #F2CC50;
-  
-  --dark-grey-gradient: linear-gradient(180deg, #E5E5E5 0%, #C5C3C3 100%);
-  --light-grey-gradient: linear-gradient(180deg, #F1F1F1 0%, #D8D8D8 100%);
-  --white-gradient: linear-gradient(180deg, #FFFFFF 0%, #E5E5E5 100%);
-  --accent-gradient: linear-gradient(180deg, #FFEEB1 0%, #E5E5E5 100%);
+  /* Base */
+  --base-white-color: #FFFFFF;
+  --base-black-color: #3E3E3F;
+  /* Faint */
+  --faint-dark-grey-color: #CDCDCD;
+  --faint-dark-grey-gradient: linear-gradient(180deg, #E5E5E5 0%, #C5C3C3 100%);
+  --faint-light-grey-color: #F3F3F3;
+  --faint-light-grey-gradient: linear-gradient(180deg, #F1F1F1 0%, #D8D8D8 100%);
+  --faint-white-gradient: linear-gradient(180deg, #FFFFFF 0%, #E5E5E5 100%);
+  /* Accent */ 
+  --accent-red-color: #D25F33;
+  --accent-blue-color: #507DF2;
+  --accent-yellow-color: #F2CC50;
+  --accent-yellow-gradient: linear-gradient(180deg, #FFEEB1 0%, #E5E5E5 100%);
 
   /* ----- Effect styles ----- */
   --base-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);

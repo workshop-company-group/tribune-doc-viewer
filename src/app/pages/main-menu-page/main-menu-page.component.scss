@@ -11,7 +11,7 @@
 }
 
 .background {
-  background: var(--white-color);
+  background: var(--base-white-color);
 
   position: absolute;
   left: 0;
@@ -57,7 +57,7 @@
   top: 41%;
   right: -15%;
 
-  color: var(--light-grey-color);
+  color: var(--faint-dark-grey-color);
 
   font-size: var(--bold-font-size);
   line-height: var(--bold-font-height);
@@ -71,7 +71,7 @@
   right: 5px;
   bottom: 5px;
 
-  color: var(--light-grey-color);
+  color: var(--faint-dark-grey-color);
 
   font-size: var(--tiny-font-size);
   line-height: var(--tiny-line-height);
