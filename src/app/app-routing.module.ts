@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { MainMenuPageComponent } from './pages';
+import { FileViewPageComponent,
+         MainMenuPageComponent } from './pages';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'main-menu',
     component: MainMenuPageComponent
+  },
+  {
+    path: 'file-view',
+    component: FileViewPageComponent
   }
 ];
 

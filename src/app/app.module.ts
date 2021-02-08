@@ -10,12 +10,14 @@ import { UpdateModule } from './update/update.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { MainMenuPageComponent } from './pages';
+import { FileViewPageComponent, 
+         MainMenuPageComponent } from './pages';
 
 @NgModule({
   declarations: [
     AppComponent, 
-    MainMenuPageComponent
+    MainMenuPageComponent, 
+    FileViewPageComponent
   ],
   imports: [
     BrowserModule,
