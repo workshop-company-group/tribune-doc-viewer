@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ipcRenderer, webFrame, remote } from 'electron';
+import { ElectronService } from '../../core/services';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +8,15 @@ import { ipcRenderer, webFrame, remote } from 'electron';
 export class WindowStateService {
   ipcRenderer: typeof ipcRenderer;
 
-  constructor() {
-    this.ipcRenderer = window.require('electron').ipcRenderer;
+  constructor(private electron: ElectronService) {
+    if (this.electron.isElectron) {
+      this.ipcRenderer = window.require('electron').ipcRenderer;
+    }
   }
 
   public exit(): void {
-    this.ipcRenderer.send('app-exit');
+    if (this.electron.isElectron) {
+      this.ipcRenderer.send('app-exit');
+    }
   }
 }
