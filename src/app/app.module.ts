@@ -12,18 +12,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FileTitleMenuComponent, 
          FileTitleMenuItemComponent,
+         FileViewBackgroundComponent,
          FileViewPageComponent, 
-         FileViewBackgroundComponent } from './pages';
+         FileViewerComponent } from './pages';
 import { MainMenuPageComponent } from './pages';
 
 @NgModule({
   declarations: [
     AppComponent, 
     MainMenuPageComponent, 
-    FileViewPageComponent, 
-    FileViewBackgroundComponent, 
     FileTitleMenuComponent, 
-    FileTitleMenuItemComponent
+    FileTitleMenuItemComponent, 
+    FileViewBackgroundComponent, 
+    FileViewPageComponent, 
+    FileViewerComponent
   ],
   imports: [
     BrowserModule,

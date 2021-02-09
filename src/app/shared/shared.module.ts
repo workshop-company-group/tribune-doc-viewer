@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { WebviewDirective } from './directives/';
 import { FormsModule } from '@angular/forms';
 
-import { NormalButtonComponent } from './components/buttons';
+import { LargeIconButtonComponent,
+         NormalButtonComponent } from './components/buttons';
 
 @NgModule({
   declarations: [
     WebviewDirective,
+    LargeIconButtonComponent,
     NormalButtonComponent
   ],
   imports: [
@@ -18,6 +20,7 @@ import { NormalButtonComponent } from './components/buttons';
   exports: [
     WebviewDirective, 
     FormsModule,
+    LargeIconButtonComponent,
     NormalButtonComponent
   ]
 })

@@ -1,0 +1,22 @@
+<div class="viewer-container">
+  <div class="left-container"
+    [ngClass]="{'fullscreen': documentService.count < 2}"
+    *ngIf="documentService.count >= 0">
+
+    <div class="add-container"
+      *ngIf="documentService.count === 0">
+      <app-large-icon-button class="add-button"
+        src="assets/icons/plus.svg"
+        (click)="documentService.open()">
+      </app-large-icon-button>
+
+      <span class="add-hint">
+        Добавить файлы
+      </span>
+    </div>
+  </div>
+
+  <div class="right-container"
+    *ngIf="documentService.count > 1">
+  </div>
+</div>

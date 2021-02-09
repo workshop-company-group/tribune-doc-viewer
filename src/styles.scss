@@ -42,7 +42,7 @@
   --accent-red-color: #D25F33;
   --accent-blue-color: #507DF2;
   --accent-yellow-color: #F2CC50;
-  --accent-yellow-gradient: linear-gradient(180deg, #FFEEB1 0%, #E5E5E5 100%);
+  --accent-yellow-gradient: linear-gradient(180deg, #FFEEB1 0%, #FAD450 100%);
 
   /* ----- Effect styles ----- */
   --base-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
@@ -55,4 +55,10 @@ body {
 
   font-family: var(--base-font-family);
   font-weight: var(--base-font-weight);
+}
+
+button {
+  padding: 0;
+  border: 0;
+  outline: 0;
 }
