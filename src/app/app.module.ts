@@ -10,7 +10,9 @@ import { UpdateModule } from './update/update.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { FileViewPageComponent, 
+import { FileTitleMenuComponent, 
+         FileTitleMenuItemComponent,
+         FileViewPageComponent, 
          FileViewBackgroundComponent } from './pages';
 import { MainMenuPageComponent } from './pages';
 
@@ -19,7 +21,9 @@ import { MainMenuPageComponent } from './pages';
     AppComponent, 
     MainMenuPageComponent, 
     FileViewPageComponent, 
-    FileViewBackgroundComponent
+    FileViewBackgroundComponent, 
+    FileTitleMenuComponent, 
+    FileTitleMenuItemComponent
   ],
   imports: [
     BrowserModule,

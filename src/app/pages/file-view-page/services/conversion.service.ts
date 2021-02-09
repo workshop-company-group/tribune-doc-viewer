@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Document } from '../../models/document';
 import * as path from 'path';
 import * as childProcess from 'child_process';
 import * as util from 'util';
-import { ElectronService } from '../../core/services';
+import { ElectronService } from '../../../core/services';
+
+import { Document } from '../models';
 
 const TEST = '/Users/minish144/Desktop/test.pptx';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class ConversionService {
   path: typeof path;
   childProcess: typeof childProcess;

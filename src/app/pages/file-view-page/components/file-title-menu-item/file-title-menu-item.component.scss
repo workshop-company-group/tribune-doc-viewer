@@ -1,0 +1,29 @@
+.item-container {
+  width: 100%;
+  height: 100%;
+  padding-left: 30px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  background: var(--faint-light-grey-gradient);
+}
+
+.item-container.selected {
+  background: var(--accent-yellow-gradient);
+}
+
+.title {
+  width: 100%;
+
+  font-size: var(--small-font-size);
+  line-height: var(--small-line-height);
+  font-weight: var(--small-font-weight);
+  text-transform: uppercase;  
+}
+
+.close-button {
+  height: 20px;
+  padding: 0 30px;
+}

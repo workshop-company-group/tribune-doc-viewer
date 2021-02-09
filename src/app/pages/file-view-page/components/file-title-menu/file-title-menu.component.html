@@ -1,0 +1,36 @@
+<div class="menu-container">
+  <div class="left-container">
+    <img class="menu-button" 
+      src="assets/icons/menu.svg"
+      (click)="openMainMenu()">
+
+    <app-file-title-menu-item 
+      class="left-item"
+      *ngIf="documentService.count > 0"
+      [document]="documentService.opened[0].doc"
+      [selected]="documentService.opened[0].selected"
+      (click)="selectDocument(0)">
+    </app-file-title-menu-item>
+  </div>
+
+  <div class="right-container">
+    <div class="ritem-container">
+      <app-file-title-menu-item 
+        class="right-item"
+        *ngIf="documentService.count > 1"
+        [document]="documentService.opened[1].doc"
+        [selected]="documentService.opened[1].selected"
+        (click)="selectDocument(1)">
+      </app-file-title-menu-item>
+
+      <div class="add-document-button"
+        *ngIf="documentService.count === 1"
+        (click)="documentService.open()">
+        <img src="assets/icons/plus.svg">
+      </div>
+    </div>
+
+    <img class="logo" 
+      src="assets/logos/white-logo.svg">
+  </div>
+</div>

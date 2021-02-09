@@ -3,19 +3,30 @@
   /* ----- Text styles----- */
   --base-font-family: TT Lakes, sans-serif;
 
-  --bold-font-weight: bold;
-  --base-font-weight: 500;
-
+  /* Bold */
   --bold-font-size: 50px;
   --bold-line-height: 68px;
+  --bold-font-weight: bold;
+
+  /* Large */
   --large-font-size: 40px;
   --large-line-height: 54px;
+  --large-font-weight: 500;
+
+  /* Normal */
   --normal-font-size: 30px;
   --normal-line-height: 41px;
+  --normal-font-weight: 500;
+
+  /* Small */
   --small-font-size: 25px;
   --small-line-height: 34px;
+  --small-font-weight: 500;
+
+  /* Tiny */
   --tiny-font-size: 14px;
   --tiny-line-height: 19px;
+  --tiny-font-weight: 500;
 
   /* ----- Color styles ----- */
   /* Base */

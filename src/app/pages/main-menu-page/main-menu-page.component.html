@@ -18,7 +18,9 @@
 
   <div class="buttons__container">
     <app-normal-button
-      (click)="openFileView()">Начать работу</app-normal-button>
+      (click)="openFileView()">
+      {{ documentService.isEmpty() ? 'Начать работу' : 'Продолжить' }}
+    </app-normal-button>
     <app-normal-button
       (click)="openSettings()">Параметры</app-normal-button>
     <app-normal-button

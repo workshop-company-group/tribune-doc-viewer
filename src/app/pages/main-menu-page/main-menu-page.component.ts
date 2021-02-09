@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { WindowStateService } from '../../shared/services/window-state.service';
 import { UpdateService } from '../../update/services/update.service';
+import { DocumentService } from '../file-view-page/services';
 
 @Component({
   selector: 'app-main-menu-page',
@@ -11,7 +12,8 @@ import { UpdateService } from '../../update/services/update.service';
 })
 export class MainMenuPageComponent implements OnInit {
 
-  constructor(private stateService: WindowStateService,
+  constructor(public documentService: DocumentService,
+              private stateService: WindowStateService,
               private router: Router,
               public updateService: UpdateService) { }
 

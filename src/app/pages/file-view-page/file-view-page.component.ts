@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { DocumentService } from './services';
+
 @Component({
   selector: 'app-file-view-page',
   templateUrl: './file-view-page.component.html',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FileViewPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private documentService: DocumentService) { }
 
   ngOnInit(): void {
   }
