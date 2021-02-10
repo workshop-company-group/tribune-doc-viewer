@@ -1,6 +1,6 @@
 <div class="item-container"
      [ngClass]="{'selected': selected}">
-  <div class="title">{{ doc.title }}</div>
+  <div class="title">{{ doc.title | documentTitle }}</div>
   <img class="close-button" 
     src="assets/icons/cross.svg"
     (click)="close()">

@@ -54,6 +54,10 @@
   height: 100%;
 }
 
+.upload-document-input {
+  display: none;
+}
+
 .add-document-button {
   width: 65px;
   height: 100%;
@@ -65,7 +69,7 @@
   background: var(--accent-yellow-gradient);
 }
 
-.add-document-button {
+.add-document-button img {
   width: 20px;
 }
 

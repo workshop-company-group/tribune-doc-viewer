@@ -9,7 +9,8 @@
       *ngIf="documentService.count > 0"
       [document]="documentService.opened[0].doc"
       [selected]="documentService.opened[0].selected"
-      (click)="selectDocument(0)">
+      (click)="documentService.select(0)"
+      (close)="documentService.close(0)">
     </app-file-title-menu-item>
   </div>
 
@@ -20,12 +21,17 @@
         *ngIf="documentService.count > 1"
         [document]="documentService.opened[1].doc"
         [selected]="documentService.opened[1].selected"
-        (click)="selectDocument(1)">
+        (click)="documentService.select(1)"
+        (close)="documentService.close(1)">
       </app-file-title-menu-item>
 
+      <input class="upload-document-input" 
+        type="file"
+        (change)="openDocument($event.target.files)"
+        #uploadDocumentInput>
       <div class="add-document-button"
         *ngIf="documentService.count === 1"
-        (click)="documentService.open()">
+        (click)="uploadDocumentInput.click()">
         <img src="assets/icons/plus.svg">
       </div>
     </div>

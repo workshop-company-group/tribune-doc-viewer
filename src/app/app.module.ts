@@ -8,14 +8,16 @@ import { SharedModule } from './shared/shared.module';
 import { UpdateModule } from './update/update.module';
 
 import { AppRoutingModule } from './app-routing.module';
-
 import { AppComponent } from './app.component';
+
 import { FileTitleMenuComponent, 
          FileTitleMenuItemComponent,
          FileViewBackgroundComponent,
-         FileViewPageComponent, 
-         FileViewerComponent } from './pages';
-import { MainMenuPageComponent } from './pages';
+         FileViewerComponent } from './pages/file-view-page/components';
+import { DocumentTitlePipe } from './pages/file-view-page/pipes';
+
+import { FileViewPageComponent,
+         MainMenuPageComponent } from './pages';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,7 @@ import { MainMenuPageComponent } from './pages';
     FileTitleMenuItemComponent, 
     FileViewBackgroundComponent, 
     FileViewPageComponent, 
-    FileViewerComponent
+    FileViewerComponent, DocumentTitlePipe
   ],
   imports: [
     BrowserModule,
