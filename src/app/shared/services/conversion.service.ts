@@ -48,7 +48,7 @@ export class ConversionService {
   private fileRename(oldPath: string, newPath: string): void {
     if (this.electron.isElectron) {
       this.fs.rename(oldPath, newPath, function(err) {
-        if ( err ) console.log('ERROR: ' + err);
+        if (err) console.error('ERROR: ' + err);
       });
     }
   }
@@ -61,14 +61,13 @@ export class ConversionService {
       const name: string = this.getFileName(path, type);
       const convertedPath: string = dir + '/' + name + outputType;
       const newConvertedPath: string = dir + '/' + name + Date.now().toString() + outputType;
-      console.log(type, dir, name, newConvertedPath);
       const execAsync = util.promisify(this.childProcess.exec);
       await execAsync(`soffice --headless --convert-to ${outputType.slice(1)} --outdir ${dir} ${path.replace(' ', '\\ ')}`);
       this.fileRename(convertedPath, newConvertedPath);
       return {
         originPath: path,
         convertedPath: newConvertedPath,
-        title: name + outputType,
+        title: name,
         length: 0
       }
     }
