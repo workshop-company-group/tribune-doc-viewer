@@ -20,9 +20,7 @@ export class DocumentService {
   }
 
   public open(path: string): void {
-    console.log('open', path);
     this.converter.convertDocument(path).then((doc) => {
-      console.log('convert', doc);
       this.opened.push({
         doc,
         selected: false,

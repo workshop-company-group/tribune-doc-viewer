@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+
+import * as fs from 'fs';
 import * as path from 'path';
 import * as childProcess from 'child_process';
 import * as util from 'util';
@@ -13,12 +15,14 @@ const TEST = '/Users/minish144/Desktop/test.pptx';
 })
 export class ConversionService {
   path: typeof path;
+  fs: typeof fs;
   childProcess: typeof childProcess;
   util: typeof util;
 
   constructor(private electron: ElectronService) {
     if (this.electron.isElectron) {
       this.path = window.require('path');
+      this.fs = window.require('fs');
       this.childProcess = window.require('child_process');
       this.util = window.require('util');
     }
@@ -42,18 +46,29 @@ export class ConversionService {
     }
   }
 
-  public async convertDocument(path: string, outputType: string = '.pdf'): Promise<Document> {
+  private fileRename(oldPath: string, newPath: string): void {
+    if (this.electron.isElectron) {
+      this.fs.rename(oldPath, newPath, function(err) {
+        if (err) console.error('ERROR: ' + err);
+      });
+    }
+  }
+
+  public async convertDocument(path: string, outputType: string = 'pdf'): Promise<Document> {
+    outputType = '.' + outputType;
     if (this.electron.isElectron) {
       const type: string = this.getFileType(path);
       const dir: string = this.getFileDir(path);
       const name: string = this.getFileName(path, type);
-      const newPath: string = dir + '/' + name + outputType;
+      const convertedPath: string = dir + '/' + name + outputType;
+      const newConvertedPath: string = dir + '/' + name + Date.now().toString() + outputType;
       const execAsync = util.promisify(this.childProcess.exec);
-      await execAsync(`soffice --headless --convert-to ${outputType.slice(1)} --outdir ${dir} ${path}`);
+      await execAsync(`soffice --headless --convert-to ${outputType.slice(1)} --outdir ${dir} ${path.replace(' ', '\\ ')}`);
+      this.fileRename(convertedPath, newConvertedPath);
       return {
         originPath: path,
-        convertedPath: newPath,
-        title: name + outputType,
+        convertedPath: newConvertedPath,
+        title: name,
         length: 0
       }
     }
