@@ -3,11 +3,6 @@
     [ngClass]="{'fullscreen': documentService.count < 2}"
     *ngIf="documentService.count >= 0">
 
-    <app-main-slide class="main-slide"
-      *ngIf="documentService.count > 0"
-      [doc]="documentService.opened[0]">
-    </app-main-slide>
-
     <div class="add-container"
       *ngIf="documentService.count === 0">
 
@@ -25,13 +20,16 @@
       </span>
     </div>
 
-    <app-slide-nav class="slide-nav"
+    <app-document-view class="document-view"
       *ngIf="documentService.count > 0"
       [doc]="documentService.opened[0]">
-    </app-slide-nav>
+    </app-document-view>
   </div>
 
   <div class="right-container"
     *ngIf="documentService.count > 1">
+    <app-document-view class="document-view"
+      [doc]="documentService.opened[1]">
+    </app-document-view>
   </div>
 </div>

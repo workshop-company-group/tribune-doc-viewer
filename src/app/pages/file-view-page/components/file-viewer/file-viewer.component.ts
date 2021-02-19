@@ -16,8 +16,7 @@ export class FileViewerComponent implements OnInit {
     public documentService: DocumentService
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   public async openDocument(files: FileList): Promise<void> {
     if (files.length !== 1) {
