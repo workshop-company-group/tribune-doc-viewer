@@ -20,6 +20,7 @@ import { DocumentTitlePipe } from './pages/file-view-page/pipes';
 
 import { FileViewPageComponent,
          MainMenuPageComponent } from './pages';
+import { SlideButtonComponent } from './pages/file-view-page/components/view-utils/slide-button/slide-button.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FileViewPageComponent,
     FileViewPageComponent, 
     FileViewerComponent, 
     PdfViewComponent,
-    DocumentTitlePipe, 
+    DocumentTitlePipe,
+    SlideButtonComponent, 
   ],
   imports: [
     BrowserModule,
