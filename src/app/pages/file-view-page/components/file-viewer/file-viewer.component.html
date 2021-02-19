@@ -24,6 +24,11 @@
         Добавить файлы
       </span>
     </div>
+
+    <app-slide-nav class="slide-nav"
+      *ngIf="documentService.count > 0"
+      [doc]="documentService.opened[0]">
+    </app-slide-nav>
   </div>
 
   <div class="right-container"

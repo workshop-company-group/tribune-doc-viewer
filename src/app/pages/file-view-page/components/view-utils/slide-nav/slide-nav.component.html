@@ -1,0 +1,9 @@
+<nav class="nav-container">
+  <app-slide-thumbnail class="thumbnail"
+    *ngFor="let page of pageIterable; index as i"
+    [pdf]="doc.pdf"
+    [page]="i"
+    [selected]="i === doc.currentPage"
+    (click)="doc.currentPage = i">
+  </app-slide-thumbnail>
+</nav>

@@ -1,0 +1,12 @@
+.nav-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+
+  overflow-y: scroll;
+}
+
+.thumbnail {
+  margin: 0 30px;
+}
