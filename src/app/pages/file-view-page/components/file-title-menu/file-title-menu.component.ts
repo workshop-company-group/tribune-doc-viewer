@@ -19,17 +19,13 @@ export class FileTitleMenuComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  public openDocument(files: FileList): void {
+  public async openDocument(files: FileList): Promise<void> {
     if (files.length !== 1) {
       console.warn('WARNING: zero or multiple files were selected for openining' + 
                    ' :FileViewerComponent:openDocument');
       return;
     }
-    this.documentService.open(files[0].path)
-  }
-
-  public openMainMenu(): void {
-    this.router.navigate(['/main-menu']);
+    await this.documentService.open(files[0].path);
   }
 
 }

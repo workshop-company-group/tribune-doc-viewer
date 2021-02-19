@@ -14,6 +14,8 @@ import { FileTitleMenuComponent,
          FileTitleMenuItemComponent,
          FileViewBackgroundComponent,
          FileViewerComponent } from './pages/file-view-page/components';
+import { PdfViewComponent } from './pages/file-view-page/components/view-utils';
+
 import { DocumentTitlePipe } from './pages/file-view-page/pipes';
 
 import { FileViewPageComponent,
@@ -27,7 +29,9 @@ import { FileViewPageComponent,
     FileTitleMenuItemComponent, 
     FileViewBackgroundComponent, 
     FileViewPageComponent, 
-    FileViewerComponent, DocumentTitlePipe
+    FileViewerComponent, 
+    PdfViewComponent,
+    DocumentTitlePipe, 
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,7 @@ import { FileViewPageComponent,
     CoreModule,
     SharedModule,
     UpdateModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

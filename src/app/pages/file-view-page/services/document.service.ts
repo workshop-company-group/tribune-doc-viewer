@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { OpenedDocument } from '../models'
-import { ConversionService } from './conversion.service';
+import { Document, 
+         OpenedDocument,
+         PdfDocument } from '../models'
 
+import { ConversionService } from './conversion.service';
+import { PdfService } from './pdf.service';
 import { FileSystemService } from '../../../shared/services';
 
 @Injectable({
@@ -10,27 +13,33 @@ import { FileSystemService } from '../../../shared/services';
 })
 export class DocumentService {
 
-  public opened: OpenedDocument[] = [];
+  public readonly opened: OpenedDocument[] = [];
 
-  constructor(private converter: ConversionService,
-              private fileSystem: FileSystemService) {}
+  constructor(
+    private readonly converter: ConversionService,
+    private readonly fileSystem: FileSystemService,
+    private readonly pdfService: PdfService,
+  ) {}
 
   public get count(): number {
     return this.opened.length;
   }
 
-  public open(path: string): void {
-    this.converter.convertDocument(path).then((doc) => {
-      this.opened.push({
-        doc,
-        selected: false,
-        currentPage: 1
-      });
+  public async open(path: string): Promise<void> {
+    const doc: Document = await this.converter.convertDocument(path);
+    const pdf: PdfDocument = await this.pdfService.loadPdf(doc.convertedPath);
 
-      // selecting opened document
-      this.unselectAll();
-      this.opened[this.opened.length - 1].selected = true;
+    this.opened.push({
+      doc, 
+      pdf,
+      selected: false,
+      currentPage: 1
     });
+
+    // selecting opened document
+    this.unselectAll();
+    this.opened[this.opened.length - 1].selected = true;
+  
   }
 
   public async close(index: number): Promise<void> {

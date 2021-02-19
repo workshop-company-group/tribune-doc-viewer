@@ -3,6 +3,12 @@
     [ngClass]="{'fullscreen': documentService.count < 2}"
     *ngIf="documentService.count >= 0">
 
+    <app-pdf-view class="pdf-view"
+      *ngIf="documentService.count > 0"
+      [pdf]="documentService.opened[0].pdf"
+      [page]="documentService.opened[0].currentPage - 1">
+    </app-pdf-view>
+
     <div class="add-container"
       *ngIf="documentService.count === 0">
 

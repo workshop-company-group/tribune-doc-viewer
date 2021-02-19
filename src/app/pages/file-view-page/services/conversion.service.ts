@@ -69,7 +69,6 @@ export class ConversionService {
         originPath: path,
         convertedPath: newConvertedPath,
         title: name,
-        length: 0
       }
     }
   }
