@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-slide-button',
@@ -7,18 +7,20 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SlideButtonComponent implements OnInit {
 
+  @Output('slide-click')
+  public readonly clickEmitter = new EventEmitter<void>();
+
   @Input()
   public readonly disabled: boolean = false;
 
-  @Input()
+  @Input('icon')
   public readonly iconSrc: string;
 
-  @Input()
+  @Input('disabled-icon')
   public readonly disabledIconSrc: string;
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

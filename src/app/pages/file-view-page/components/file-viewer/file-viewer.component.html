@@ -3,11 +3,10 @@
     [ngClass]="{'fullscreen': documentService.count < 2}"
     *ngIf="documentService.count >= 0">
 
-    <app-pdf-view class="pdf-view"
+    <app-main-slide class="main-slide"
       *ngIf="documentService.count > 0"
-      [pdf]="documentService.opened[0].pdf"
-      [page]="documentService.opened[0].currentPage - 1">
-    </app-pdf-view>
+      [doc]="documentService.opened[0]">
+    </app-main-slide>
 
     <div class="add-container"
       *ngIf="documentService.count === 0">

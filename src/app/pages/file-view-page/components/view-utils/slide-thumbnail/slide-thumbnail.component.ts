@@ -10,7 +10,7 @@ import { PdfDocument } from '../../../models';
 export class SlideThumbnailComponent implements OnInit {
 
   @Input()
-  public readonly doc: PdfDocument;
+  public readonly pdf: PdfDocument;
 
   @Input()
   public readonly page: number;
