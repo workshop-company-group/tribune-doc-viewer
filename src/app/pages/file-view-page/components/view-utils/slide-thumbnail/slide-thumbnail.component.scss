@@ -1,0 +1,39 @@
+.thumbnail-container {
+  padding: 3px;
+
+  position: relative;
+
+  background: var(--faint-light-grey-color);
+  border-radius: 10px;
+  box-shadow: var(--base-shadow);
+}
+
+.thumbnail-container.selected {
+  background: var(--accent-yellow-color);
+}
+
+.pdf-view {
+  border-radius: 7px;
+}
+
+.page-number {
+  width: 56px;
+  height: 28px;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--base-white-color);
+  border-radius: 10px 0px;
+
+  color: var(--base-black-color);
+  font-size: var(--small-font-size);
+  line-height: var(--small-line-height);
+  font-weight: var(--small-font-weight);
+}
