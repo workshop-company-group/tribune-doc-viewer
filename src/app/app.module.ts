@@ -14,13 +14,14 @@ import { FileTitleMenuComponent,
          FileTitleMenuItemComponent,
          FileViewBackgroundComponent,
          FileViewerComponent } from './pages/file-view-page/components';
-import { PdfViewComponent } from './pages/file-view-page/components/view-utils';
+import { PdfViewComponent,
+         SlideButtonComponent,
+         SlideContentComponent, } from './pages/file-view-page/components/view-utils';
 
 import { DocumentTitlePipe } from './pages/file-view-page/pipes';
 
 import { FileViewPageComponent,
          MainMenuPageComponent } from './pages';
-import { SlideButtonComponent } from './pages/file-view-page/components/view-utils/slide-button/slide-button.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +33,9 @@ import { SlideButtonComponent } from './pages/file-view-page/components/view-uti
     FileViewPageComponent, 
     FileViewerComponent, 
     PdfViewComponent,
+    SlideButtonComponent,
+    SlideContentComponent, 
     DocumentTitlePipe,
-    SlideButtonComponent, 
   ],
   imports: [
     BrowserModule,
