@@ -16,7 +16,8 @@ import { FileTitleMenuComponent,
          FileViewerComponent } from './pages/file-view-page/components';
 import { PdfViewComponent,
          SlideButtonComponent,
-         SlideContentComponent, } from './pages/file-view-page/components/view-utils';
+         SlideContentComponent, 
+         SlideProgressBarComponent, } from './pages/file-view-page/components/view-utils';
 
 import { DocumentTitlePipe } from './pages/file-view-page/pipes';
 
@@ -35,7 +36,8 @@ import { FileViewPageComponent,
     PdfViewComponent,
     SlideButtonComponent,
     SlideContentComponent, 
-    DocumentTitlePipe,
+    SlideProgressBarComponent,
+    DocumentTitlePipe, 
   ],
   imports: [
     BrowserModule,

@@ -33,7 +33,7 @@ export class DocumentService {
       doc, 
       pdf,
       selected: false,
-      currentPage: 1
+      currentPage: 0
     });
 
     // selecting opened document
