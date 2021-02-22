@@ -22,14 +22,16 @@
 
     <app-document-view class="document-view"
       *ngIf="documentService.count > 0"
-      [doc]="documentService.opened[0]">
+      [doc]="documentService.opened[0]"
+      (click)="documentService.select(0)">
     </app-document-view>
   </div>
 
   <div class="right-container"
     *ngIf="documentService.count > 1">
     <app-document-view class="document-view"
-      [doc]="documentService.opened[1]">
+      [doc]="documentService.opened[1]"
+      (click)="documentService.select(1)">
     </app-document-view>
   </div>
 </div>
