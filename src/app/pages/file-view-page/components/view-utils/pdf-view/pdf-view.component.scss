@@ -1,4 +1,14 @@
-canvas {
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+canvas.vertical {
   width: 100%;
+}
+
+canvas.horizontal {
   height: 100%;
 }
+

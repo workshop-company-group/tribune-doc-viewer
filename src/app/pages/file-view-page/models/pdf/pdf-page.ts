@@ -1,11 +1,28 @@
+import { PdfOrientation } from './pdf-orientation';
+
 // wrapper for PDFPageProxy class from pdf.js
 export class PdfPage {
 
-  // TODO: make private
-  public pageProxy; // typeof pageProxy === PDFPageProxy
+  private pageProxy; // typeof pageProxy === PDFPageProxy
+
+  public orientation: PdfOrientation;
 
   constructor(pageProxy) {
     this.pageProxy = pageProxy;
+
+    if (this.height > this.width) {
+      this.orientation = 'vertical';
+    } else {
+      this.orientation = 'horizontal';
+    }
+  }
+
+  public get width(): number {
+    return this.pageProxy.view[2];
+  }
+
+  public get height(): number {
+    return this.pageProxy.view[3];
   }
 
   public async render(canvasContext: CanvasRenderingContext2D): Promise<void> {

@@ -1,12 +1,14 @@
 import * as pdfjs from 'pdfjs-dist';
 
 import { PdfPage } from './pdf-page';
+import { PdfOrientation } from './pdf-orientation';
 
 // wrapper for PDFDocumentProxy class from pdf.js
 export class PdfDocument {
 
-  // TODO: make private
-  public docProxy; // typeof docProxy === PDFDocumentProxy
+  private docProxy; // typeof docProxy === PDFDocumentProxy
+
+  public orientation: PdfOrientation;
   
   constructor() {}
 
@@ -21,6 +23,9 @@ export class PdfDocument {
 
   public async init(path: string): Promise<void> {
     this.docProxy = await pdfjs.getDocument(path).promise; 
+
+    // document orientation bases on first page orientation
+    this.orientation = (await this.getPage(0)).orientation;
   }
 
 }

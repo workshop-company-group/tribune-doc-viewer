@@ -1,6 +1,7 @@
 <div class="thumbnail-container"
   [ngClass]="{ 'selected': selected }">
   <app-pdf-view class="pdf-view"
+    [orientation]="pdf.orientation"
     [pdf]="pdf"
     [page]="page">
   </app-pdf-view>

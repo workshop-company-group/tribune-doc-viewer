@@ -1,12 +1,26 @@
 .nav-container {
-  width: 100%;
-
   display: flex;
-  flex-direction: row;
+}
+
+.nav-container.vertical {
+  height: 100%;
+  flex-direction: column;
 
   overflow-y: scroll;
 }
 
-.thumbnail {
-  margin: 0 30px;
+.nav-container.horizontal {
+  width: 100%;
+  flex-direction: row;
+
+  overflow-x: scroll;
 }
+
+.nav-container.vertical .thumbnail {
+  margin-bottom: 30px;
+}
+
+.nav-container.horizontal .thumbnail {
+  margin-right: 30px;
+}
+

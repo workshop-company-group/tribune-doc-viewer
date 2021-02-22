@@ -1,4 +1,5 @@
-<nav class="nav-container">
+<nav class="nav-container" 
+  [ngClass]="doc.pdf.orientation">
   <app-slide-thumbnail class="thumbnail"
     *ngFor="let page of pageIterable; index as i"
     [pdf]="doc.pdf"
