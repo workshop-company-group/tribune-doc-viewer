@@ -1,8 +1,11 @@
 import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import * as path from 'path';
+import { electron } from 'process';
 import * as url from 'url';
 
 let win: BrowserWindow = null;
+let externalWin: BrowserWindow = null;
+
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
 
@@ -26,9 +29,7 @@ function createWindow(): BrowserWindow {
   });
 
   if (serve) {
-
     win.webContents.openDevTools();
-
     require('electron-reload')(__dirname, {
       electron: require(`${__dirname}/node_modules/electron`)
     });
@@ -43,6 +44,8 @@ function createWindow(): BrowserWindow {
     }));
   }
 
+
+
   // Emitted when the window is closed.
   win.on('closed', () => {
     // Dereference the window object, usually you would store window
@@ -52,6 +55,22 @@ function createWindow(): BrowserWindow {
   });
 
   return win;
+}
+
+function createExternalWindow(): void {
+  const electronScreen = screen;
+  const displays = electronScreen.getAllDisplays()
+  const externalDisplay = displays.find((display) => {
+    return display.bounds.x !== 0 || display.bounds.y !== 0
+  })
+
+  if (externalDisplay) {
+    externalWin = new BrowserWindow({
+      x: externalDisplay.bounds.x + 50,
+      y: externalDisplay.bounds.y + 50
+    })
+    externalWin.loadURL('https://github.com')
+  }
 }
 
 try {
@@ -79,7 +98,17 @@ try {
   });
 
   // Quit app on signal
-  ipcMain.on('app-exit', () => win.close());
+  ipcMain.on('app-exit', () => app.quit());
+
+  // Create new window on signal
+  ipcMain.on('external-window', () => {
+    createExternalWindow();
+  });
+
+  // Closes the window on external monitor on signal
+  ipcMain.on('close-external-window', () => {
+    externalWin.close();
+  })
 
 } catch (e) {
   // Catch Error
