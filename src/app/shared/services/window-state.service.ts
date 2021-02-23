@@ -31,7 +31,7 @@ export class WindowStateService {
 
   public closeExternalWindow(): void {
     if (this.electron.isElectron) {
-      console.log('called new window!');
+      console.log('closed external window!');
       this.ipcRenderer.send('close-external-window');
     }
   }
