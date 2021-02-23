@@ -12,6 +12,9 @@ export class SlideNavComponent implements OnInit {
   @Input()
   public readonly doc: OpenedDocument;
 
+  @Input()
+  public readonly wrap: boolean = false;
+
   public pageIterable;
 
   constructor() { }

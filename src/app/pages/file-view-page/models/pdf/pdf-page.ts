@@ -26,17 +26,24 @@ export class PdfPage {
   }
 
   public async render(canvasContext: CanvasRenderingContext2D): Promise<void> {
-    await this.pageProxy.render({ canvasContext });
+    await this.pageProxy.render({
+      canvasContext,
+      viewport: this.pageProxy.getViewport({ scale: 1, })
+    });
   }
 
-  public async renderScaled(width: number,
-                            canvasContext: CanvasRenderingContext2D): Promise<void> {
+  public async renderScaled(canvas: HTMLCanvasElement): Promise<void> {
     const currentViewport = this.pageProxy.getViewport({ scale: 1, });
 
-    const scale = width / currentViewport.width;
+    const scale = canvas.width / currentViewport.width;
     const viewport = this.pageProxy.getViewport({ scale });
 
-    await this.pageProxy.render({ canvasContext, viewport }); 
+    canvas.height = viewport.height;
+
+    await this.pageProxy.render({
+      canvasContext: canvas.getContext('2d'),
+      viewport
+    });
   }
 
 }

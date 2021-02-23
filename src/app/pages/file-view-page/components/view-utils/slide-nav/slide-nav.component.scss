@@ -16,6 +16,14 @@
   overflow-x: scroll;
 }
 
+.nav-container.horizontal.wrap {
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  overflow-y: scroll;
+}
+
 .nav-container.vertical .thumbnail {
   margin-bottom: 30px;
   width: 170px;

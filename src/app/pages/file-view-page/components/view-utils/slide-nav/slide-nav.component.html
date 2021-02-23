@@ -1,5 +1,9 @@
 <nav class="nav-container" 
-  [ngClass]="doc.pdf.orientation">
+  [ngClass]="{ 
+               'horizontal': doc.pdf.orientation === 'horizontal',
+               'vertical': doc.pdf.orientation === 'vertical',
+               'wrap': wrap 
+             }">
   <app-slide-thumbnail class="thumbnail"
     *ngFor="let page of pageIterable; index as i"
     [pdf]="doc.pdf"

@@ -13,6 +13,8 @@
 
   <app-slide-nav class="slide-nav"
     *ngIf="doc.pdf.orientation === 'horizontal'"
+    [ngClass]="{ 'wrap': isHalfScreen() }"
+    [wrap]="isHalfScreen()"
     [doc]="doc">
   </app-slide-nav>
 </div>

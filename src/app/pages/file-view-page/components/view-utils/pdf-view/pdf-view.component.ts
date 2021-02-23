@@ -34,8 +34,7 @@ export class PdfViewComponent implements AfterViewInit {
         this.calculateOrientation();
       }
 
-      page.renderScaled(this.canvas.nativeElement.width,
-                        this.canvas.nativeElement.getContext('2d'));
+      page.renderScaled(this.canvas.nativeElement);
     });
   }
 
@@ -43,13 +42,13 @@ export class PdfViewComponent implements AfterViewInit {
     private el: ElementRef,
   ) { }
 
-  ngAfterViewInit(): void { 
-    const sensor = new ResizeSensor(this.el.nativeElement, 
+  ngAfterViewInit(): void {
+    const sensor = new ResizeSensor(this.el.nativeElement,
       () => this.calculateOrientation());
   }
 
   private calculateOrientation(): void {
-    if (this.el.nativeElement.offsetWidth / 
+    if (this.el.nativeElement.offsetWidth /
         this.el.nativeElement.offsetHeight > this.sideRatio) {
       this.orientation = 'horizontal';
     } else {
