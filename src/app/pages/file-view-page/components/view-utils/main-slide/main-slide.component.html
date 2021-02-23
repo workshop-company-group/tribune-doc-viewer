@@ -1,0 +1,24 @@
+<app-slide-button class="previous-button"
+  [disabled]="doc.currentPage <= 0"
+  icon="assets/icons/arrows/left-arrow.svg"
+  disabled-icon="assets/icons/arrows/dim-left-arrow.svg"
+  (slide-click)="previousSlide()">
+</app-slide-button>
+
+<app-pdf-view class="pdf-content"
+  [pdf]="doc.pdf"
+  [page]="doc.currentPage">
+</app-pdf-view>
+
+<app-slide-button class="next-button"
+  [disabled]="doc.currentPage >= (doc.pdf.numPages - 1)"
+  icon="assets/icons/arrows/right-arrow.svg"
+  disabled-icon="assets/icons/arrows/dim-right-arrow.svg"
+  (slide-click)="nextSlide()">
+</app-slide-button>
+
+<div class="grid-item"></div>
+<app-slide-progress-bar class="progress-bar"
+  [doc]="doc">
+</app-slide-progress-bar>
+<div class="grid-item"></div>

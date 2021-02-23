@@ -1,0 +1,30 @@
+:host {
+  display: grid;
+  grid-template-columns: min-content auto min-content;
+  grid-template-rows: auto min-content;
+}
+
+.pdf-content ::ng-deep canvas {
+  box-shadow: var(--base-shadow);
+
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.previous-button {
+  margin-right: 15px;
+
+  align-self: center;
+  justify-self: end;
+}
+
+.next-button {
+  margin-left: 15px;
+
+  align-self: center;
+  justify-self: start;
+}
+
+.progress-bar {
+  margin-top: 10px;
+}

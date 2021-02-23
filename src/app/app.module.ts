@@ -8,14 +8,42 @@ import { SharedModule } from './shared/shared.module';
 import { UpdateModule } from './update/update.module';
 
 import { AppRoutingModule } from './app-routing.module';
-
 import { AppComponent } from './app.component';
-import { MainMenuPageComponent } from './pages';
+
+import { FileTitleMenuComponent, 
+         FileTitleMenuItemComponent,
+         FileViewBackgroundComponent,
+         FileViewerComponent } from './pages/file-view-page/components';
+import { DocumentViewComponent, 
+         MainSlideComponent,
+         PdfViewComponent,
+         SlideButtonComponent,
+         SlideNavComponent,
+         SlideProgressBarComponent,
+         SlideThumbnailComponent, } from './pages/file-view-page/components/view-utils';
+
+import { DocumentTitlePipe } from './pages/file-view-page/pipes';
+
+import { FileViewPageComponent,
+         MainMenuPageComponent } from './pages';
 
 @NgModule({
   declarations: [
     AppComponent, 
-    MainMenuPageComponent
+    MainMenuPageComponent, 
+    FileTitleMenuComponent, 
+    FileTitleMenuItemComponent, 
+    FileViewBackgroundComponent, 
+    FileViewPageComponent, 
+    FileViewerComponent, 
+    DocumentViewComponent,
+    MainSlideComponent,
+    PdfViewComponent,
+    SlideButtonComponent,
+    SlideNavComponent,
+    SlideProgressBarComponent,
+    SlideThumbnailComponent, 
+    DocumentTitlePipe,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +52,7 @@ import { MainMenuPageComponent } from './pages';
     CoreModule,
     SharedModule,
     UpdateModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

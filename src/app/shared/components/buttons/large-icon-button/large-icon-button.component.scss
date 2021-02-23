@@ -1,0 +1,17 @@
+.button-container {
+  width: 210px;  
+  height: 110px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--accent-yellow-gradient);
+  box-shadow: var(--base-shadow);
+
+  border-radius: 10px;
+}
+
+img {
+  width: 40px;
+}

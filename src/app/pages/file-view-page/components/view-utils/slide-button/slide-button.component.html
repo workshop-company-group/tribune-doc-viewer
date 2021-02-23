@@ -1,0 +1,4 @@
+<button [disabled]="disabled"
+  (click)="clickEmitter.emit()">
+  <img [src]="disabled ? disabledIconSrc : iconSrc">
+</button>

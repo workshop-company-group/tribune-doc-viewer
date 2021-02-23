@@ -1,25 +1,8 @@
 {
-  "name": "angular-electron",
-  "version": "9.0.3",
-  "description": "Angular 11 with Electron (Typescript + SASS + Hot Reload)",
-  "homepage": "https://github.com/maximegris/angular-electron",
-  "author": {
-    "name": "Maxime GRIS",
-    "email": "maxime.gris@gmail.com"
-  },
-  "keywords": [
-    "angular",
-    "angular 11",
-    "electron",
-    "nodejs",
-    "typescript",
-    "spectron",
-    "eslint",
-    "sass",
-    "windows",
-    "mac",
-    "linux"
-  ],
+  "name": "tribune-doc-viewer",
+  "version": "0.0.0",
+  "description": "Document viewer for interactive tribunes",
+  "homepage": "https://github.com/Tribunes/tribune-doc-viewer",
   "main": "main.js",
   "private": true,
   "scripts": {
@@ -99,5 +82,11 @@
   },
   "browserslist": [
     "chrome 83"
-  ]
+  ],
+  "dependencies": {
+    "@types/pdfjs-dist": "~2.0.1",
+    "css-element-queries": "1.2.3",
+    "file-loader": "6.0.0",
+    "pdfjs-dist": "2.6.347"
+  }
 }

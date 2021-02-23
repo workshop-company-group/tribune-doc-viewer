@@ -1,0 +1,36 @@
+.progress-bar-container {
+  width: 100%;
+  height: 25px;
+
+  position: relative;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--base-white-color);
+  border-radius: 10px;
+}
+
+.filler {
+  height: 100%;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+
+  background: var(--accent-yellow-color);
+  border-radius: 10px;
+}
+
+.counter {
+  position: relative;
+  z-index: 1;
+
+  color: var(--base-black-color);
+
+  font-size: var(--small-font-size);
+  line-height: var(--small-line-height);
+  font-weight: var(--small-font-weight);
+}
