@@ -77,6 +77,14 @@ function createExternalWindow(): BrowserWindow {
   return externalWin
 }
 
+function isExternalMonitorAvailable(): boolean {
+  const displays = screen.getAllDisplays();
+  const externalDisplay = displays.find((display) => {
+    return display.bounds.x !== 0 || display.bounds.y !== 0
+  });
+  return externalDisplay ? true : false;
+}
+
 try {
   app.on('ready', () => setTimeout(createWindow, 400));
 
@@ -101,23 +109,31 @@ try {
     createExternalWindow();
   });
 
+  ipcMain.handle('is-external-connected', async (event, arg) => {
+    return isExternalMonitorAvailable();
+  });
+
   // Closes the window on external monitor on signal
   ipcMain.on('close-external-window', () => {
     externalWin.close();
   });
 
+  // Sets pdf on external screen by path
   ipcMain.on('set-pdf', (event, arg) => {
     externalWin.webContents.send('set-pdf', arg);
   });
 
+  // Changes the page to the next one
   ipcMain.on('next-page', () => {
     externalWin.webContents.send('next-page');
   });
 
+  // Changes the page to the next one
   ipcMain.on('previous-page', () => {
     externalWin.webContents.send('previous-page');
   });
 
+  // Changes the page to one which is stated in argument
   ipcMain.on('set-page', (event, arg) => {
     externalWin.webContents.send('set-page', arg);
   });
