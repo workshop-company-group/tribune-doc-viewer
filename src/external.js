@@ -1,8 +1,14 @@
 const pdfjs = require('pdfjs-dist');
 const pdfjsWorker = require('pdfjs-dist/build/pdf.worker.entry');
+const { ipcRenderer } = require('electron');
 
 var pdf = null;
 var pageNumber = 1;
+
+function resetPdf() {
+    pdf = null;
+    pageNumber = 1;
+}
 
 async function loadPdf(path) {
     pdf = await pdfjs.getDocument(path).promise;
@@ -42,11 +48,30 @@ async function renderPreviousPage() {
     renderPage(pageNumber);
 }
 
-// // Tests
-// loadPdf('test.pdf');
-// setTimeout(() => {
-//     renderNextPage();
-// }, 1000)
-// setTimeout(() => {
-//     renderNextPage();
-// }, 2000)
+ipcRenderer.on('set-pdf', async (event, arg) => {
+    try {
+        await loadPdf(arg);
+    } catch (error) { }
+});
+
+ipcRenderer.on('next-page', async () => {
+    try {
+        await renderNextPage();
+    } catch (error) { }
+});
+
+ipcRenderer.on('previous-page', async () => {
+    try {
+        await renderPreviousPage();
+    } catch (error) { }
+});
+
+ipcRenderer.on('set-page', async (event, arg) => {
+    try {
+        await renderPage(arg);
+    } catch (error) { }
+});
+
+ipcRenderer.on('reset-pdf', () => {
+    resetPdf();
+})

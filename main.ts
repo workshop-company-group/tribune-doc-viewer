@@ -68,6 +68,10 @@ function createExternalWindow(): BrowserWindow {
       protocol: 'file:',
       slashes: true
     }));
+
+    externalWin.on('closed', () => {
+      externalWin.webContents.send('reset-pdf');
+    })
   }
 
   return externalWin
@@ -100,7 +104,23 @@ try {
   // Closes the window on external monitor on signal
   ipcMain.on('close-external-window', () => {
     externalWin.close();
-  })
+  });
+
+  ipcMain.on('set-pdf', (event, arg) => {
+    externalWin.webContents.send('set-pdf', arg);
+  });
+
+  ipcMain.on('next-page', () => {
+    externalWin.webContents.send('next-page');
+  });
+
+  ipcMain.on('previous-page', () => {
+    externalWin.webContents.send('previous-page');
+  });
+
+  ipcMain.on('set-page', (event, arg) => {
+    externalWin.webContents.send('set-page', arg);
+  });
 
 } catch (e) {
   // Catch Error
