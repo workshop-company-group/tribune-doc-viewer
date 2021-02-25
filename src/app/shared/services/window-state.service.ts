@@ -22,6 +22,12 @@ export class WindowStateService {
     }
   }
 
+  public async isExternalConnected(): Promise<boolean> {
+    const result: boolean = await this.ipcRenderer.invoke('is-external-connected');
+    console.log(result);
+    return result;
+  }
+
   public externalWindow(): void {
     if (this.electron.isElectron) {
       console.log('called new window!');
