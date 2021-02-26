@@ -89,7 +89,7 @@ export class RecorderService {
 
     if (!this.filepath) {
       const date = new Date().toString();
-      this.filepath = '/Users/minish144/' + date + '.webm';
+      this.filepath = '/temp/' + date + '.webm';
     }
     fs.writeFile(this.filepath, buffer, () => console.log('video saved successfully!'));
     recordedChunks = [];
