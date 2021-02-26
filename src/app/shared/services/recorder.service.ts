@@ -18,6 +18,7 @@ export class RecorderService {
   mediaRecorder: MediaRecorder = null;
   stream: MediaStream = null;
   recordedBlobs = [];
+  filepath: string = null;
 
   constructor(private electron: ElectronService) {
     if (this.electron.isElectron) {
@@ -27,7 +28,6 @@ export class RecorderService {
   }
 
   private async getScreens() {
-    // return await this.desktopCapturer.getSources({types: ['window']});
     return await this.desktopCapturer.getSources({types: ['screen']});
   }
 
@@ -43,12 +43,12 @@ export class RecorderService {
   public async setExternalMonitor(): Promise<void> {
     const screens = await this.getScreens();
     const mics = await this.getAudioDevices();
-    if (screens.length === 1) // comment for primary monitor testing
-    // if (screens.length === 0) // uncomment for primary monitor testing
+    // if (screens.length === 0) // uncomment for testing on primary monitor
+    if (screens.length === 1)
       this.recordScreen = null;
     else {
-      this.recordScreen = screens[1]; // uncomment for primary monitor testing
-      // this.recordScreen = screens[0]; // uncomment for primary monitor testing
+      // this.recordScreen = screens[0]; // uncomment for testing on primary monitor
+      this.recordScreen = screens[1];
       console.log(mics[1].deviceId);
       this.screenStream = await navigator.mediaDevices.getUserMedia({
         video: {
@@ -58,6 +58,7 @@ export class RecorderService {
           }
         }
       });
+
       this.micStream = await navigator.mediaDevices.getUserMedia({
         audio: {
           deviceId: { exact: mics[1].deviceId }
@@ -66,7 +67,8 @@ export class RecorderService {
       let tracks = [...this.screenStream.getTracks(), ...this.micStream.getAudioTracks()]
       this.stream = new MediaStream(tracks);
       console.log('screenStream: ', this.screenStream);
-      this.mediaRecorder = new MediaRecorder(this.stream);
+
+      this.mediaRecorder = new MediaRecorder(this.stream, { mimeType: 'video\/webm' });
       this.mediaRecorder.ondataavailable = this.onDataAvailable;
       this.mediaRecorder.onstop = this.onStop;
     }
@@ -84,12 +86,12 @@ export class RecorderService {
     });
 
     const buffer = Buffer.from(await blob.arrayBuffer());
-    const date = new Date().toString();
-    const filePath = '/Users/minish144/' + date + '.webm';
 
-    console.log(filePath);
-
-    fs.writeFile(filePath, buffer, () => console.log('video saved successfully!'));
+    if (!this.filepath) {
+      const date = new Date().toString();
+      this.filepath = '/Users/minish144/' + date + '.webm';
+    }
+    fs.writeFile(this.filepath, buffer, () => console.log('video saved successfully!'));
     recordedChunks = [];
   }
 
@@ -97,14 +99,7 @@ export class RecorderService {
     this.mediaRecorder.start();
   }
 
-  public stop(): void {
+  public stop(filepath: string = null): void {
     this.mediaRecorder.stop();
-  }
-
-  public save(): void {
-  }
-
-  public stopAndSave(): void {
-
   }
 }
