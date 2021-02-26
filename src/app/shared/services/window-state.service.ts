@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ipcRenderer } from 'electron';
 import { ElectronService } from '../../core/services';
-import { WindowError } from '../services/exceptions/window-error';
 
 @Injectable({
   providedIn: 'root'
