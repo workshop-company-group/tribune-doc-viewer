@@ -5,7 +5,8 @@
     "module": "commonjs",
     "types": [
       "mocha",
-      "node"
+      "node",
+      "dom-mediacapture-record"
     ]
   },
   "include": [
