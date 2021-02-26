@@ -31,7 +31,7 @@ export class RecorderService {
     return await this.desktopCapturer.getSources({types: ['screen']});
   }
 
-  private async getMics() {
+  private async getAudioDevices() {
     const devices = await navigator.mediaDevices.enumerateDevices()
     devices.forEach(function(device) {
     console.log(device.kind + ": " + device.label +
@@ -42,7 +42,7 @@ export class RecorderService {
 
   public async setExternalMonitor(): Promise<void> {
     const screens = await this.getScreens();
-    const mics = await this.getMics();
+    const mics = await this.getAudioDevices();
     if (screens.length === 1) // comment for primary monitor testing
     // if (screens.length === 0) // uncomment for primary monitor testing
       this.recordScreen = null;
