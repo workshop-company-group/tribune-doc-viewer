@@ -12,7 +12,7 @@ export class WindowStateService {
   constructor(private electron: ElectronService) {
     if (this.electron.isElectron) {
       this.ipcRenderer = window.require('electron').ipcRenderer;
-      this.externalWindow();
+      this.createExternalWindow();
     }
   }
 
@@ -27,7 +27,7 @@ export class WindowStateService {
     return result;
   }
 
-  public externalWindow(): void {
+  public createExternalWindow(): void {
     if (this.electron.isElectron) {
       console.log('called new window!');
       this.ipcRenderer.send('external-window');
