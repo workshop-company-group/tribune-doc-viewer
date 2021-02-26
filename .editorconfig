@@ -1,13 +1,32 @@
-# Editor configuration, see http://editorconfig.org
+###   Editor configuration   ###
+### https://editorconfig.org ###
+
+# top-most EditorConfig file
 root = true
 
 [*]
-charset = utf-8
+# tabs and indents
 indent_style = space
-indent_size = 2
-insert_final_newline = true
+# encoding
+charset = utf-8
+# line & file endings
+end_of_line = lf
 trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{js,ts,json}]
+# tabs and indents
+indent_size = 2
+
+[*.html]
+# tabs and indents
+indent_size = 4
+trim_trailing_whitespace = false
+
+[*.{css,scss}]
+# tabs and indents
+indent_size = 2
 
 [*.md]
-max_line_length = off
+# line & file endings
 trim_trailing_whitespace = false
