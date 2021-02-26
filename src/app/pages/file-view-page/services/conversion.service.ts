@@ -58,8 +58,14 @@ export class ConversionService {
     outputType = '.' + outputType;
     if (this.electron.isElectron) {
       const type: string = this.getFileType(path);
-      const dir: string = this.getFileDir(path);
       const name: string = this.getFileName(path, type);
+      if (type == '.pdf')
+        return {
+          originPath: path,
+          convertedPath: path,
+          title: name,
+        }
+      const dir: string = this.getFileDir(path);
       const convertedPath: string = dir + '/' + name + outputType;
       const newConvertedPath: string = dir + '/' + name + Date.now().toString() + outputType;
       const execAsync = util.promisify(this.childProcess.exec);
