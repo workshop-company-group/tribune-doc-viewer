@@ -59,7 +59,7 @@ export class ConversionService {
     if (this.electron.isElectron) {
       const type: string = this.getFileType(path);
       const name: string = this.getFileName(path, type);
-      if (type == '.pdf')
+      if (type === '.pdf')
         return {
           originPath: path,
           convertedPath: path,
