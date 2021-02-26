@@ -1,53 +1,110 @@
 import { Injectable } from '@angular/core';
 import { desktopCapturer } from 'electron';
 import { ElectronService } from '../../core/services';
+import * as fs from 'fs';
+
+declare var navigator: any;
+let recordedChunks = [];
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecorderService {
+  fs: typeof fs;
   desktopCapturer: typeof desktopCapturer;
   recordScreen: Electron.DesktopCapturerSource;
-  options: object;
-  mediaRecorder: MediaRecorder;
+  screenStream: MediaStream = null;
+  micStream: MediaStream = null;
+  mediaRecorder: MediaRecorder = null;
+  stream: MediaStream = null;
+  recordedBlobs = [];
 
   constructor(private electron: ElectronService) {
     if (this.electron.isElectron) {
+      this.fs = window.require('fs');
       this.desktopCapturer = window.require('electron').desktopCapturer;
-      this.recordScreen = null;
     }
   }
 
   private async getScreens() {
+    // return await this.desktopCapturer.getSources({types: ['window']});
     return await this.desktopCapturer.getSources({types: ['screen']});
   }
 
-  private async setExternalMonitor(): Promise<void> {
+  private async getMics() {
+    const devices = await navigator.mediaDevices.enumerateDevices()
+    devices.forEach(function(device) {
+    console.log(device.kind + ": " + device.label +
+                " id = " + device.deviceId);
+    });
+    return devices;
+  }
+
+  public async setExternalMonitor(): Promise<void> {
     const screens = await this.getScreens();
-    // if (screens.length === 1)
-    if (screens.length === 0)
+    const mics = await this.getMics();
+    if (screens.length === 1) // comment for primary monitor testing
+    // if (screens.length === 0) // uncomment for primary monitor testing
       this.recordScreen = null;
     else {
-      // this.recordScreen = screens[1];
-      this.recordScreen = screens[0];
-      const options = {
-        audio: false,
+      this.recordScreen = screens[1]; // uncomment for primary monitor testing
+      // this.recordScreen = screens[0]; // uncomment for primary monitor testing
+      console.log(mics[1].deviceId);
+      this.screenStream = await navigator.mediaDevices.getUserMedia({
         video: {
           mandatory: {
             chromeMediaSource: 'desktop',
-            chromeMediaSourceId: this.recordScreen.id,
-            minWidth: 1600,
-            maxWidth: 900,
-            minHeight: 1600,
-            maxHeight: 900
+            chromeMediaSourceId: this.recordScreen.id
           }
         }
-      }
-      const media = await navigator.mediaDevices.getUserMedia(this.options);
-      this.mediaRecorder = new MediaRecorder(media);
+      });
+      this.micStream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          deviceId: { exact: mics[1].deviceId }
+        }
+      });
+      let tracks = [...this.screenStream.getTracks(), ...this.micStream.getAudioTracks()]
+      this.stream = new MediaStream(tracks);
+      console.log('screenStream: ', this.screenStream);
+      this.mediaRecorder = new MediaRecorder(this.stream);
+      this.mediaRecorder.ondataavailable = this.onDataAvailable;
+      this.mediaRecorder.onstop = this.onStop;
     }
   }
 
-  private async start(): Promise<void> {
+  private onDataAvailable(e: Event): void {
+    console.log('video data available');
+    recordedChunks.push(e['data']);
+  }
+
+  private async onStop(e: Event): Promise<void> {
+    console.log('onstop: ', e);
+    const blob = new Blob(recordedChunks, {
+      type: 'video/mp4; codecs=vp9'
+    });
+
+    const buffer = Buffer.from(await blob.arrayBuffer());
+    const date = new Date().toString();
+    const filePath = '/Users/minish144/' + date + '.webm';
+
+    console.log(filePath);
+
+    fs.writeFile(filePath, buffer, () => console.log('video saved successfully!'));
+    recordedChunks = [];
+  }
+
+  public start(): void {
+    this.mediaRecorder.start();
+  }
+
+  public stop(): void {
+    this.mediaRecorder.stop();
+  }
+
+  public save(): void {
+  }
+
+  public stopAndSave(): void {
+
   }
 }
