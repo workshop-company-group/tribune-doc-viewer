@@ -64,7 +64,7 @@ function createExternalWindow(): BrowserWindow {
 
     externalWin.webContents.openDevTools();
     externalWin.loadURL(url.format({
-      pathname: path.join(__dirname, 'src/external.html'),
+      pathname: path.join(__dirname, 'src/external/external.html'),
       protocol: 'file:',
       slashes: true
     }));
