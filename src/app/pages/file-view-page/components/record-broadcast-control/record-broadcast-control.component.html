@@ -1,0 +1,29 @@
+<div class="record-broadcast-container"
+    *ngIf="!wrapped">
+    <div class="record-container">
+        <span class="hint">Запись</span>
+
+        <app-record-broadcast-button
+            icon="assets/icons/record/record.svg"
+            *ngIf="true">
+        </app-record-broadcast-button>
+
+        <app-record-controls
+            *ngIf="false">
+        </app-record-controls>
+    </div>
+
+    <div class="broadcast-container">
+        <span class="hint">Трансляция</span>
+
+        <app-record-broadcast-button
+            [icon]="true ? 'assets/icons/broadcast/broadcast.svg'
+                         : 'assets/icons/broadcast/broadcast-stop.svg'">
+        </app-record-broadcast-button>
+    </div>
+</div>
+
+<img class="wrap-control"
+     [src]="wrapped ? 'assets/icons/arrows/up-arrow.svg'
+                    : 'assets/icons/arrows/down-arrow.svg'"
+     (click)="wrapped = !wrapped">

@@ -4,3 +4,4 @@ export { FileTitleMenuComponent } from './file-title-menu/file-title-menu.compon
 export { FileTitleMenuItemComponent } from './file-title-menu-item/file-title-menu-item.component';
 export { FileViewBackgroundComponent } from './file-view-background/file-view-background.component';
 export { FileViewerComponent } from './file-viewer/file-viewer.component';
+export { RecordBroadcastControlComponent } from './record-broadcast-control/record-broadcast-control.component';

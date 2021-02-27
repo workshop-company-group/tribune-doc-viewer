@@ -16,7 +16,7 @@ export class RecordControlsComponent {
   @Input()
   public readonly recordState: 'recording' | 'paused';
 
-  private readonly pauseIcons = {
+  public readonly pauseIcons = {
     'recording': 'assets/icons/record/controls/pause.svg',
     'paused': 'assets/icons/record/controls/play.svg',
   }; // icon src depends on this.recordState

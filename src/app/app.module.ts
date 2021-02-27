@@ -13,7 +13,8 @@ import { AppComponent } from './app.component';
 import { FileTitleMenuComponent,
          FileTitleMenuItemComponent,
          FileViewBackgroundComponent,
-         FileViewerComponent } from './pages/file-view-page/components';
+         FileViewerComponent,
+         RecordBroadcastControlComponent, } from './pages/file-view-page/components';
 import { DocumentViewComponent,
          MainSlideComponent,
          PdfViewComponent,
@@ -38,6 +39,7 @@ import { FileViewPageComponent,
     FileViewBackgroundComponent,
     FileViewPageComponent,
     FileViewerComponent,
+    RecordBroadcastControlComponent,
     DocumentViewComponent,
     MainSlideComponent,
     PdfViewComponent,
