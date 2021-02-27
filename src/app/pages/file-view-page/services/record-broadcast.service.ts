@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
 
+import { BehaviorSubject, Subscription } from 'rxjs';
+
 import { ExternalViewerService,
          RecorderService,
          WindowStateService, } from '../../../shared/services';
 import { OpenedDocument, RecordBroadcastState } from '../models';
+
+type ConfirmationState = null | 'stop-recording' | 'close-recording'
+                              | 'close-broadcasting' | 'choose-broadcasting';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +17,11 @@ export class RecordBroadcastService {
 
   private doc: OpenedDocument = null;
 
-  public get docState(): RecordBroadcastState {
-    if (this.doc === null) {
-      return null;
-    }
-    return this.doc.state;
-  }
+  public state = new BehaviorSubject<RecordBroadcastState>(null);
+
+  public confirmationState = new BehaviorSubject<ConfirmationState>(null);
+
+  private docSubscription: Subscription;
 
   constructor(
     private readonly external: ExternalViewerService,
@@ -25,8 +29,8 @@ export class RecordBroadcastService {
     private readonly windowStateService: WindowStateService,
   ) { }
 
-  public continueRecording(): void {
-    this.doc.state = 'recording';
+  public resumeRecording(): void {
+    this.doc.state.next('recording');
   }
 
   public async isBroadcastingAvailable(): Promise<boolean> {
@@ -38,7 +42,7 @@ export class RecordBroadcastService {
   }
 
   public pauseRecording(): void {
-    this.doc.state = 'paused';
+    this.doc.state.next('paused');
   }
 
   public async startBroadcasting(doc: OpenedDocument): Promise<void> {
@@ -53,7 +57,8 @@ export class RecordBroadcastService {
       this.doc.currentPage.subscribe((page) =>
         this.external.setPage(page+1));
 
-      this.doc.state = 'broadcasting';
+      this.docSubscription = this.doc.state.subscribe(this.state);
+      this.doc.state.next('broadcasting');
     }, 2000)
   }
 
@@ -61,18 +66,22 @@ export class RecordBroadcastService {
     await this.recorder.setExternalMonitor();
     this.recorder.start();
 
-    this.doc.state = 'recording';
+    this.doc.state.next('recording');
   }
 
   public stopBroadcasting(): void {
     this.windowStateService.closeExternalWindow();
 
-    this.doc = null;
+    this.doc.state = null;
+    this.doc = null
+    this.docSubscription.unsubscribe();
   }
 
   public stopRecording(): void {
     this.recorder.stop(this.doc.doc.convertedPath + '.webm');
-    this.doc.state = 'broadcasting';
+    this.doc.state.next('broadcasting');
+
+    this.confirmationState.next('stop-recording');
   }
 
 }

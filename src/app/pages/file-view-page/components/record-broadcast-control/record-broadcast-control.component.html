@@ -6,15 +6,15 @@
         <app-record-broadcast-button
             icon="assets/icons/record/record.svg"
             [disabled]="!recordBroadcastService.isRecordingAvailable()"
-            *ngIf="recordBroadcastService.docState === null
-                || recordBroadcastService.docState === 'broadcasting'"
+            *ngIf="recordBroadcastService.state.value === null
+                || recordBroadcastService.state.value === 'broadcasting'"
             (button-click)="recordBroadcastService.startRecording()">
         </app-record-broadcast-button>
 
         <app-record-controls
-            [recordState]="recordBroadcastService.docState"
-            *ngIf="recordBroadcastService.docState === 'recording'
-                || recordBroadcastService.docState === 'paused'"
+            [recordState]="recordBroadcastService.state.value"
+            *ngIf="recordBroadcastService.state.value === 'recording'
+                || recordBroadcastService.state.value === 'paused'"
             (pause-click)="pauseClickHandler()"
             (stop-click)="recordBroadcastService.stopRecording()">
         </app-record-controls>
@@ -25,7 +25,7 @@
 
         <app-record-broadcast-button
             [disabled]="!broadcastAvailability.value"
-            [icon]="recordBroadcastService.docState === null
+            [icon]="recordBroadcastService.state.value === null
                     ? 'assets/icons/broadcast/broadcast.svg'
                     : 'assets/icons/broadcast/broadcast-stop.svg'"
             (button-click)="broadcastClickHandler()">
