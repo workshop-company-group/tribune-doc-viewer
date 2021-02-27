@@ -25,11 +25,10 @@ export class WindowStateService {
     return result;
   }
 
-  public createExternalWindow(): void {
-    if (this.electron.isElectron) {
-      console.log('called new window!');
-      this.ipcRenderer.send('external-window');
-    }
+  public async createExternalWindow(): Promise<void> {
+    console.log('called new window!');
+    const result = await this.ipcRenderer.invoke('external-window');
+    console.log(result);
   }
 
   public closeExternalWindow(): void {
