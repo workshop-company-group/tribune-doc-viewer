@@ -15,7 +15,7 @@ export class RecordBroadcastControlComponent implements OnInit {
   @Output('choice-request')
   public choiceRequestEmitter = new EventEmitter<void>();
 
-  public wrapped: boolean = false;
+  public wrapped: boolean = true;
 
   public readonly broadcastAvailability = new BehaviorSubject<boolean>(false);
 

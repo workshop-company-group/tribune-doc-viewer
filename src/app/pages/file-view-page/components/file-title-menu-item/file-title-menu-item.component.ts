@@ -1,27 +1,21 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Document } from '../../models';
+import { OpenedDocument } from '../../models';
 
 @Component({
   selector: 'app-file-title-menu-item',
   templateUrl: './file-title-menu-item.component.html',
   styleUrls: ['./file-title-menu-item.component.scss']
 })
-export class FileTitleMenuItemComponent implements OnInit {
+export class FileTitleMenuItemComponent {
 
   @Input('document')
-  public doc: Document;
-
-  @Input()
-  public selected: boolean;
+  public doc: OpenedDocument;
 
   @Output('close')
   public closeEvent = new EventEmitter<void>();
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  constructor() {}
 
   public close(): void {
     this.closeEvent.emit();
