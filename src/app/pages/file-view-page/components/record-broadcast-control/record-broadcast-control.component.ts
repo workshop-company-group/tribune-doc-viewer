@@ -41,7 +41,9 @@ export class RecordBroadcastControlComponent implements OnInit {
 
   public async broadcastClickHandler(): Promise<void> {
     if (this.recordBroadcastService.docState !== null) {
-      this.recordBroadcastService.stopRecording();
+      if (this.recordBroadcastService.docState !== 'broadcasting') {
+        this.recordBroadcastService.stopRecording();
+      }
       this.recordBroadcastService.stopBroadcasting();
       return;
     }
