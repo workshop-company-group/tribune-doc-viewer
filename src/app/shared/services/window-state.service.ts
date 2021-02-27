@@ -11,7 +11,6 @@ export class WindowStateService {
   constructor(private electron: ElectronService) {
     if (this.electron.isElectron) {
       this.ipcRenderer = window.require('electron').ipcRenderer;
-      this.createExternalWindow();
     }
   }
 
