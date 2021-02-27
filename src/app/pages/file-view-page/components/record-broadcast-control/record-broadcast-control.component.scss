@@ -7,6 +7,8 @@
   box-shadow: var(--strong-shadow);
   border-radius: 10px;
 
+  pointer-events: auto;
+
   .record-broadcast-container {
     width: 470px;
     margin: 35px 30px 35px 50px;

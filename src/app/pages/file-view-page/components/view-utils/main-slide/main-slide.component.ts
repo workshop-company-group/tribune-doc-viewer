@@ -17,11 +17,11 @@ export class MainSlideComponent implements OnInit {
   ngOnInit(): void { }
 
   public nextSlide(): void {
-    this.doc.currentPage++;
+    this.doc.currentPage.next(this.doc.currentPage.value + 1);
   }
 
   public previousSlide(): void {
-    this.doc.currentPage--;
+    this.doc.currentPage.next(this.doc.currentPage.value - 1);
   }
 
 }
