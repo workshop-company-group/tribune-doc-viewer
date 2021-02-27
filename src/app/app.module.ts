@@ -27,6 +27,7 @@ import { DocumentTitlePipe } from './pages/file-view-page/pipes';
 
 import { FileViewPageComponent,
          MainMenuPageComponent } from './pages';
+import { BroadcastButtonComponent } from './pages/file-view-page/components/record-broadcast-utils/broadcast-button/broadcast-button.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { FileViewPageComponent,
     SlideThumbnailComponent,
     RecordButtonComponent,
     DocumentTitlePipe,
+    BroadcastButtonComponent,
   ],
   imports: [
     BrowserModule,

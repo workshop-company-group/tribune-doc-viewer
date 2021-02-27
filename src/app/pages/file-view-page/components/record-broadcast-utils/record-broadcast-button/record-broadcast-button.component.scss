@@ -12,7 +12,7 @@ button {
   justify-content: center;
 
   img {
-    width: 30px;
+    width: var(--record-broadcast-button-icon-width);
   }
 
   &:disabled {
