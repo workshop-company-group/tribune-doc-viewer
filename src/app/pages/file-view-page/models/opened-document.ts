@@ -1,9 +1,13 @@
+import { BehaviorSubject } from 'rxjs';
+
 import { Document } from './document';
-import { PdfDocument } from './pdf'; 
+import { PdfDocument } from './pdf';
+import { RecordBroadcastState } from './record-broadcast-state';
 
 export interface OpenedDocument {
   doc: Document;
   pdf: PdfDocument;
   selected: boolean;
-  currentPage: number;
+  currentPage: BehaviorSubject<number>;
+  state: RecordBroadcastState;
 };

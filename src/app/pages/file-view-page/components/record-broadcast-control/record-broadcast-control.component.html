@@ -1,0 +1,39 @@
+<div class="record-broadcast-container"
+    *ngIf="!wrapped">
+    <div class="record-container">
+        <span class="hint">Запись</span>
+
+        <app-record-broadcast-button
+            icon="assets/icons/record/record.svg"
+            [disabled]="!recordBroadcastService.isRecordingAvailable()"
+            *ngIf="recordBroadcastService.docState === null
+                || recordBroadcastService.docState === 'broadcasting'"
+            (button-click)="recordBroadcastService.startRecording()">
+        </app-record-broadcast-button>
+
+        <app-record-controls
+            [recordState]="recordBroadcastService.docState"
+            *ngIf="recordBroadcastService.docState === 'recording'
+                || recordBroadcastService.docState === 'paused'"
+            (pause-click)="pauseClickHandler()"
+            (stop-click)="recordBroadcastService.stopRecording()">
+        </app-record-controls>
+    </div>
+
+    <div class="broadcast-container">
+        <span class="hint">Трансляция</span>
+
+        <app-record-broadcast-button
+            [disabled]="!broadcastAvailability.value"
+            [icon]="recordBroadcastService.docState === null
+                    ? 'assets/icons/broadcast/broadcast.svg'
+                    : 'assets/icons/broadcast/broadcast-stop.svg'"
+            (button-click)="broadcastClickHandler()">
+        </app-record-broadcast-button>
+    </div>
+</div>
+
+<img class="wrap-control"
+     [src]="wrapped ? 'assets/icons/arrows/up-arrow.svg'
+                    : 'assets/icons/arrows/down-arrow.svg'"
+     (click)="wrapped = !wrapped">

@@ -1,60 +1,76 @@
-.viewer-container {
+:host {
   width: 100%;
   height: 100%;
-  
+
+  position: relative;
+
   display: flex;
   flex-direction: row;
+
+  .left-container, .right-container {
+    width: 50%;
+    height: 100%;
+
+    .document-view {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .left-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding-right: 1px;
+
+    &.fullscreen {
+      width: 100%;
+      padding: 0;
+    }
+
+    .add-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .upload-document-input {
+        display: none;
+      }
+
+      .add-hint {
+        color: var(--base-black-color);
+
+        font-size: var(--normal-font-size);
+        line-height: var(--normal-line-height);
+        font-weight: var(--normal-font-weight);
+        text-transform: uppercase;
+
+        margin-top: 4vh;
+      }
+    }
+  }
+
+  .right-container {
+    padding-left: 1px;
+  }
+
+  .record-broadcast-container {
+    width: 100%;
+
+    padding-bottom: 50px;
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    pointer-events: none;
+  }
 }
 
-.document-view {
-  width: 100%;
-  height: 100%;
-}
-
-/* ----- left-side container ----- */
-.left-container {
-  width: 50%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  padding-right: 1px;
-}
-
-.left-container.fullscreen {
-  width: 100%;
-  padding: 0;
-}
-
-/* -- add button -- */
-.add-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.upload-document-input {
-  display: none;
-}
-
-.add-hint {
-  color: var(--base-black-color);
-
-  font-size: var(--normal-font-size);
-  line-height: var(--normal-line-height);
-  font-weight: var(--normal-font-weight);
-  text-transform: uppercase;
-
-  margin-top: 4vh;
-}
-
-/* ----- right-side container ----- */
-.right-container {
-  width: 50%;
-  height: 100%;
-
-  padding-left: 1px;
-}

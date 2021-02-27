@@ -38,7 +38,7 @@
   --faint-light-grey-color: #F3F3F3;
   --faint-light-grey-gradient: linear-gradient(180deg, #F1F1F1 0%, #D8D8D8 100%);
   --faint-white-gradient: linear-gradient(180deg, #FFFFFF 0%, #E5E5E5 100%);
-  /* Accent */ 
+  /* Accent */
   --accent-red-color: #D25F33;
   --accent-blue-color: #507DF2;
   --accent-yellow-color: #F2CC50;
@@ -48,13 +48,15 @@
   --base-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
   --strong-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   --base-inner-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.2);
+
+  /* ----- Component styles ----- */
+  --record-broadcast-button-icon-width: 30px;
 }
 
 body {
   margin: 0;
 
   font-family: var(--base-font-family);
-  font-weight: var(--base-font-weight);
 }
 
 button {

@@ -16,9 +16,6 @@ export class SlideButtonComponent implements OnInit {
   @Input('icon')
   public readonly iconSrc: string;
 
-  @Input('disabled-icon')
-  public readonly disabledIconSrc: string;
-
   constructor() { }
 
   ngOnInit(): void { }

@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-direction: row;
+
+  button {
+    width: 40px;
+    height: 40px;
+
+    &.pause {
+      margin-right: 15px;
+    }
+
+    img {
+      /* icons should be square */
+      width: 100%;
+    }
+  }
+}

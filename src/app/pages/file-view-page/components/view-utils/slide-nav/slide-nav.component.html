@@ -8,7 +8,7 @@
     *ngFor="let page of pageIterable; index as i"
     [pdf]="doc.pdf"
     [page]="i"
-    [selected]="i === doc.currentPage"
-    (click)="doc.currentPage = i">
+    [selected]="i === doc.currentPage.value"
+    (click)="doc.currentPage.next(i)">
   </app-slide-thumbnail>
 </nav>

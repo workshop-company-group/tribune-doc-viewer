@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { Document, 
+import { BehaviorSubject } from 'rxjs';
+
+import { Document,
          OpenedDocument,
          PdfDocument } from '../models'
 
@@ -30,16 +32,17 @@ export class DocumentService {
     const pdf: PdfDocument = await this.pdfService.loadPdf(doc.convertedPath);
 
     this.opened.push({
-      doc, 
+      doc,
       pdf,
       selected: false,
-      currentPage: 0
+      currentPage: new BehaviorSubject<number>(0),
+      state: null
     });
 
     // selecting opened document
     this.unselectAll();
     this.opened[this.opened.length - 1].selected = true;
-  
+
   }
 
   public async close(index: number): Promise<void> {

@@ -1,0 +1,23 @@
+button {
+  width: 60px;
+  height: 60px;
+
+  background: var(--base-white-color);
+  border: 1px solid var(--faint-dark-grey-color);
+  border-radius: 30px;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: var(--record-broadcast-button-icon-width);
+  }
+
+  &:disabled {
+    img {
+      opacity: .5;
+    }
+  }
+}

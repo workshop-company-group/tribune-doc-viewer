@@ -10,17 +10,20 @@ import { UpdateModule } from './update/update.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { FileTitleMenuComponent, 
+import { FileTitleMenuComponent,
          FileTitleMenuItemComponent,
          FileViewBackgroundComponent,
-         FileViewerComponent } from './pages/file-view-page/components';
-import { DocumentViewComponent, 
+         FileViewerComponent,
+         RecordBroadcastControlComponent, } from './pages/file-view-page/components';
+import { DocumentViewComponent,
          MainSlideComponent,
          PdfViewComponent,
          SlideButtonComponent,
          SlideNavComponent,
          SlideProgressBarComponent,
          SlideThumbnailComponent, } from './pages/file-view-page/components/view-utils';
+import { RecordBroadcastButtonComponent,
+         RecordControlsComponent } from './pages/file-view-page/components/record-broadcast-utils';
 
 import { DocumentTitlePipe } from './pages/file-view-page/pipes';
 
@@ -29,20 +32,23 @@ import { FileViewPageComponent,
 
 @NgModule({
   declarations: [
-    AppComponent, 
-    MainMenuPageComponent, 
-    FileTitleMenuComponent, 
-    FileTitleMenuItemComponent, 
-    FileViewBackgroundComponent, 
-    FileViewPageComponent, 
-    FileViewerComponent, 
+    AppComponent,
+    MainMenuPageComponent,
+    FileTitleMenuComponent,
+    FileTitleMenuItemComponent,
+    FileViewBackgroundComponent,
+    FileViewPageComponent,
+    FileViewerComponent,
+    RecordBroadcastControlComponent,
     DocumentViewComponent,
     MainSlideComponent,
     PdfViewComponent,
     SlideButtonComponent,
     SlideNavComponent,
     SlideProgressBarComponent,
-    SlideThumbnailComponent, 
+    SlideThumbnailComponent,
+    RecordBroadcastButtonComponent,
+    RecordControlsComponent,
     DocumentTitlePipe,
   ],
   imports: [

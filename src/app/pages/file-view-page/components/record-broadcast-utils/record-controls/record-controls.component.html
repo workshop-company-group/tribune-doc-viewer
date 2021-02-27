@@ -1,0 +1,8 @@
+<button class="pause"
+        (click)="pauseEmitter.emit()">
+    <img [src]="pauseIcons[recordState]">
+</button>
+<button class="stop"
+        (click)="stopEmitter.emit()">
+    <img src="assets/icons/record/controls/stop.svg">
+</button>

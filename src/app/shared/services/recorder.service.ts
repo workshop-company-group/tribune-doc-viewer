@@ -70,7 +70,7 @@ export class RecorderService {
 
       this.mediaRecorder = new MediaRecorder(this.stream, { mimeType: 'video\/webm' });
       this.mediaRecorder.ondataavailable = this.onDataAvailable;
-      this.mediaRecorder.onstop = this.onStop;
+      this.mediaRecorder.onstop = (e) => { this.onStop(e) };
     }
   }
 
@@ -87,10 +87,11 @@ export class RecorderService {
 
     const buffer = Buffer.from(await blob.arrayBuffer());
 
-    if (!this.filepath) {
-      const date = new Date().toString();
-      this.filepath = '/temp/' + date + '.webm';
-    }
+    // if (!this.filepath) {
+    //   const date = new Date().toString();
+    //   this.filepath = './temp/' + date + '.webm';
+    // }
+    console.log('this filepath: ', this.filepath);
     fs.writeFile(this.filepath, buffer, () => console.log('video saved successfully!'));
     recordedChunks = [];
   }
@@ -100,6 +101,9 @@ export class RecorderService {
   }
 
   public stop(filepath: string = null): void {
+    console.log('path: ', filepath);
+    if (filepath)
+      this.filepath = filepath;
     this.mediaRecorder.stop();
   }
 }
