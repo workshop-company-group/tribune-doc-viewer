@@ -15,7 +15,7 @@ export class RecordBroadcastControlComponent implements OnInit {
   @Output('choice-request')
   public choiceRequestEmitter = new EventEmitter<void>();
 
-  public wrapped: boolean = false;
+  public wrapped: boolean = true;
 
   public readonly broadcastAvailability = new BehaviorSubject<boolean>(false);
 
@@ -32,16 +32,16 @@ export class RecordBroadcastControlComponent implements OnInit {
   }
 
   public pauseClickHandler(): void {
-    if (this.recordBroadcastService.docState === 'recording') {
+    if (this.recordBroadcastService.state.value === 'recording') {
       this.recordBroadcastService.pauseRecording();
-    } else if (this.recordBroadcastService.docState === 'paused') {
-      this.recordBroadcastService.continueRecording();
+    } else if (this.recordBroadcastService.state.value === 'paused') {
+      this.recordBroadcastService.resumeRecording();
     }
   }
 
   public async broadcastClickHandler(): Promise<void> {
-    if (this.recordBroadcastService.docState !== null) {
-      if (this.recordBroadcastService.docState !== 'broadcasting') {
+    if (this.recordBroadcastService.state.value !== null) {
+      if (this.recordBroadcastService.state.value !== 'broadcasting') {
         this.recordBroadcastService.stopRecording();
       }
       this.recordBroadcastService.stopBroadcasting();

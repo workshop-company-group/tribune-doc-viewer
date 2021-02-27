@@ -1,0 +1,28 @@
+:host {
+  padding: 50px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: var(--base-white-color);
+  border-radius: 10px;
+  opacity: 1;
+
+  .hint {
+    color: var(--base-black-color);
+
+    font-size: var(--normal-font-size);
+    line-height: var(--normal-line-height);
+    font-weight: var(--normal-font-weight);
+
+    text-transform: uppercase;
+    text-align: center;
+
+    margin-bottom: 50px;
+  }
+
+  .confirm-button {
+    --small-button-background: var(--accent-yellow-gradient);
+  }
+}

@@ -5,23 +5,26 @@ import { WebviewDirective } from './directives/';
 import { FormsModule } from '@angular/forms';
 
 import { LargeIconButtonComponent,
-         NormalButtonComponent } from './components/buttons';
+         NormalButtonComponent,
+         SmallButtonComponent } from './components/buttons';
 
 @NgModule({
   declarations: [
     WebviewDirective,
     LargeIconButtonComponent,
-    NormalButtonComponent
+    NormalButtonComponent,
+    SmallButtonComponent
   ],
   imports: [
-    CommonModule, 
+    CommonModule,
     FormsModule
   ],
   exports: [
-    WebviewDirective, 
+    WebviewDirective,
     FormsModule,
     LargeIconButtonComponent,
-    NormalButtonComponent
+    NormalButtonComponent,
+    SmallButtonComponent,
   ]
 })
 export class SharedModule {}

@@ -4,7 +4,8 @@ import { BehaviorSubject } from 'rxjs';
 
 import { Document,
          OpenedDocument,
-         PdfDocument } from '../models'
+         PdfDocument,
+         RecordBroadcastState, } from '../models'
 
 import { ConversionService } from './conversion.service';
 import { PdfService } from './pdf.service';
@@ -36,7 +37,7 @@ export class DocumentService {
       pdf,
       selected: false,
       currentPage: new BehaviorSubject<number>(0),
-      state: null
+      state: new BehaviorSubject<RecordBroadcastState>(null),
     });
 
     // selecting opened document
