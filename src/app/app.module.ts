@@ -21,13 +21,13 @@ import { DocumentViewComponent,
          SlideNavComponent,
          SlideProgressBarComponent,
          SlideThumbnailComponent, } from './pages/file-view-page/components/view-utils';
-import { RecordButtonComponent } from './pages/file-view-page/components/record-broadcast-utils';
+import { RecordBroadcastButtonComponent,
+         RecordControlsComponent } from './pages/file-view-page/components/record-broadcast-utils';
 
 import { DocumentTitlePipe } from './pages/file-view-page/pipes';
 
 import { FileViewPageComponent,
          MainMenuPageComponent } from './pages';
-import { BroadcastButtonComponent } from './pages/file-view-page/components/record-broadcast-utils/broadcast-button/broadcast-button.component';
 
 @NgModule({
   declarations: [
@@ -45,9 +45,9 @@ import { BroadcastButtonComponent } from './pages/file-view-page/components/reco
     SlideNavComponent,
     SlideProgressBarComponent,
     SlideThumbnailComponent,
-    RecordButtonComponent,
+    RecordBroadcastButtonComponent,
+    RecordControlsComponent,
     DocumentTitlePipe,
-    BroadcastButtonComponent,
   ],
   imports: [
     BrowserModule,
