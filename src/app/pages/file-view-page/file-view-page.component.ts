@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { RecordBroadcastService } from './services';
+
 @Component({
   selector: 'app-file-view-page',
   templateUrl: './file-view-page.component.html',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FileViewPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public readonly recordBroadcastService: RecordBroadcastService,
+  ) { }
 
   ngOnInit(): void { }
 

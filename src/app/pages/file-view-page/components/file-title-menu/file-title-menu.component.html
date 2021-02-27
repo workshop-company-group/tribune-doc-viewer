@@ -7,8 +7,7 @@
     <app-file-title-menu-item 
       class="left-item"
       *ngIf="documentService.count > 0"
-      [document]="documentService.opened[0].doc"
-      [selected]="documentService.opened[0].selected"
+      [document]="documentService.opened[0]"
       (click)="documentService.select(0)"
       (close)="documentService.close(0)">
     </app-file-title-menu-item>
@@ -19,8 +18,7 @@
       <app-file-title-menu-item 
         class="right-item"
         *ngIf="documentService.count > 1"
-        [document]="documentService.opened[1].doc"
-        [selected]="documentService.opened[1].selected"
+        [document]="documentService.opened[1]"
         (click)="documentService.select(1)"
         (close)="documentService.close(1)">
       </app-file-title-menu-item>

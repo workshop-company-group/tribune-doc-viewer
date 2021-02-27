@@ -1,0 +1,17 @@
+button {
+  height: 50px;
+  width: 230px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--small-button-background);
+  border-radius: 10px;
+
+  color: var(--base-black-color);
+  font-size: var(--small-font-size);
+  line-height: var(--small-line-height);
+  font-weight: var(--small-font-size);
+  text-transform: uppercase;
+}

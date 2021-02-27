@@ -6,3 +6,14 @@
 
 <app-file-viewer class="viewer">
 </app-file-viewer>
+
+<div class="finish-record-container"
+    *ngIf="recordBroadcastService.confirmationState.value === 'stop-recording'">
+    <div class="backdrop"></div>
+
+    <app-finish-record-confirmation 
+        class="confirmation"
+        (confirm-click)="recordBroadcastService.confirmationState.next(null)">
+    </app-finish-record-confirmation>
+</div>
+

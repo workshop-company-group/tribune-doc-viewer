@@ -1,7 +1,16 @@
 <div class="item-container"
-     [ngClass]="{'selected': selected}">
-  <div class="title">{{ doc.title | documentTitle }}</div>
-  <img class="close-button" 
-    src="assets/icons/cross.svg"
-    (click)="close()">
+    [ngClass]="{ 'selected': doc.selected }">
+    <div class="title">{{ doc.doc.title | documentTitle }}</div>
+
+    <img class="record-icon"
+        src="assets/icons/record/record.svg"
+        *ngIf="doc.state.value === 'recording'
+            || doc.state.value === 'paused'">
+    <img class="broadcast-icon"
+        src="assets/icons/broadcast/broadcast-dark.svg"
+        *ngIf="doc.state.value !== null">
+
+    <img class="close-button" 
+        src="assets/icons/cross.svg"
+        (click)="close()">
 </div>
