@@ -10,7 +10,7 @@ export class RecordButtonComponent {
   @Input()
   public readonly disabled: boolean = false;
 
-  @Output('buttonClick')
+  @Output('button-click')
   public readonly clickEmitter = new EventEmitter<void>();
 
   constructor() { }

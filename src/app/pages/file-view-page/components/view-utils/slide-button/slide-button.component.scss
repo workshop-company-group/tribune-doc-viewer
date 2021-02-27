@@ -9,8 +9,15 @@ button {
   background: rgba(255, 255, 255, 0.5);
 
   border-radius: 25px;
+
+  img {
+    height: 25px;
+  }
+
+  &:disabled {
+    img {
+      opacity: .5;
+    }
+  }
 }
 
-img {
-  height: 25px;
-}
