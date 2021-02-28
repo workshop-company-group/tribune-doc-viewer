@@ -56,7 +56,7 @@ export class RecordBroadcastService {
     this.doc.currentPage.subscribe((page) =>
       this.external.setPage(page+1));
 
-    this.doc.state = 'broadcasting';
+    this.doc.state.next('broadcasting');
   }
 
   public async startRecording(): Promise<void> {
