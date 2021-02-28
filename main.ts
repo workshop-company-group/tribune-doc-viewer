@@ -71,7 +71,7 @@ function createExternalWindow(): BrowserWindow {
       // .then(() => { isExternalWinCreated.next(); });
 
     externalWin.on('closed', () => {
-      externalWin.webContents.send('reset-pdf');
+      // externalWin.webContents.send('reset-pdf');
     })
   }
 
