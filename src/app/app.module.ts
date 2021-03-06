@@ -30,6 +30,7 @@ import { DocumentTitlePipe } from './pages/file-view-page/pipes';
 
 import { FileViewPageComponent,
          MainMenuPageComponent } from './pages';
+import { FileChooseConfirmationComponent } from './pages/file-view-page/components/file-choose-confirmation/file-choose-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { FileViewPageComponent,
     RecordBroadcastButtonComponent,
     RecordControlsComponent,
     DocumentTitlePipe,
+    FileChooseConfirmationComponent,
   ],
   imports: [
     BrowserModule,
