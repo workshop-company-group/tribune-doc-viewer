@@ -56,5 +56,9 @@
     .cancel-button {
       margin-right: 30px;
     }
+
+    .select-button {
+      --small-button-color: var(--accent-yellow-gradient);
+    }
   }
 }

@@ -3,11 +3,11 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { DocumentService } from '../../../services';
 
 @Component({
-  selector: 'app-file-choose-confirmation',
-  templateUrl: './file-choose-confirmation.component.html',
-  styleUrls: ['./file-choose-confirmation.component.scss']
+  selector: 'app-file-select-confirmation',
+  templateUrl: './file-select-confirmation.component.html',
+  styleUrls: ['./file-select-confirmation.component.scss']
 })
-export class FileChooseConfirmationComponent {
+export class FileSelectConfirmationComponent {
 
   @Output('cancel-click')
   public readonly cancelClickEmitter = new EventEmitter<void>();
