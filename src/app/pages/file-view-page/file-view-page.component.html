@@ -8,12 +8,25 @@
 </app-file-viewer>
 
 <div class="finish-record-container"
-    *ngIf="recordBroadcastService.confirmationState.value === 'stop-recording'">
+    *ngIf="confirmation.state">
     <div class="backdrop"></div>
 
-    <app-finish-record-confirmation 
-        class="confirmation"
-        (confirm-click)="recordBroadcastService.confirmationState.next(null)">
+    <app-finish-record-confirmation class="confirmation"
+        *ngIf="confirmation.state === 'stop-recording'"
+        (confirm-click)="confirmation.state = null">
     </app-finish-record-confirmation>
+
+    <app-file-select-confirmation class="confirmation"
+        *ngIf="confirmation.state === 'select-broadcasting'"
+        (cancel-click)="confirmation.state === null"
+        (select-click)="startBroadcasting()">
+    </app-file-select-confirmation>
+
+    <app-file-close-confirmation class="confirmation"
+        *ngIf="confirmation.state === 'close-broadcasting'
+            || confirmation.state === 'close-recording'"
+        (cancel-click)="confirmation.state === null"
+        (confirm-click)="closeDocument()">
+    </app-file-close-confirmation>
 </div>
 

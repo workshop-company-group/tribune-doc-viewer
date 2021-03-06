@@ -9,5 +9,6 @@ export interface OpenedDocument {
   pdf: PdfDocument;
   selected: boolean;
   currentPage: BehaviorSubject<number>;
-  state: BehaviorSubject<RecordBroadcastState>;
+  recordBroadcastState: BehaviorSubject<RecordBroadcastState>;
+  closingState: BehaviorSubject<boolean>;
 };
