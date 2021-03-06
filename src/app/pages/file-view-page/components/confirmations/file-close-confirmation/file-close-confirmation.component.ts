@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, } from '@angular/core';
+
+import { RecordBroadcastService } from '../../../services';
 
 @Component({
   selector: 'app-file-close-confirmation',
   templateUrl: './file-close-confirmation.component.html',
   styleUrls: ['./file-close-confirmation.component.scss']
 })
-export class FileCloseConfirmationComponent implements OnInit {
+export class FileCloseConfirmationComponent {
 
-  constructor() { }
+  @Output('confirm-click')
+  public readonly confirmClickEmitter = new EventEmitter<void>();
 
-  ngOnInit(): void {
-  }
+  @Output('cancel-click')
+  public readonly cancelClickEmitter = new EventEmitter<void>();
+
+  constructor(
+    public readonly recordBroadcast: RecordBroadcastService,
+  ) {}
 
 }

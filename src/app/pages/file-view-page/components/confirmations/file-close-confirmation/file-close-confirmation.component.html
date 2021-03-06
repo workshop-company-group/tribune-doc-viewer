@@ -1,1 +1,23 @@
-<p>file-close-confirmation works!</p>
+<span class="title"
+    *ngIf="recordBroadcast.confirmationState.value === 'close-broadcasting'">
+    Файл транслируется
+</span>
+<span class="title"
+    *ngIf="recordBroadcast.confirmationState.value === 'close-recording'">
+    Идет запись
+</span>
+
+<span class="subtitle">
+    Вы действительно хотите закрыть данный файл?
+</span>
+
+<div class="buttons-container">
+    <app-small-button class="confirm-button"
+        (button-click)="confirmClickEmitter.emit()">
+        Закрыть
+    </app-small-button>
+    <app-small-button class="cancel-button"
+        (button-click)="cancelClickEmitter.emit()">
+        Отмена
+    </app-small-button>
+</div>
