@@ -1,18 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, } from '@angular/core';
 
-import { RecordBroadcastService } from './services';
+import {
+  ConfirmationService,
+  DocumentService,
+  RecordBroadcastService,
+} from './services';
 
 @Component({
   selector: 'app-file-view-page',
   templateUrl: './file-view-page.component.html',
   styleUrls: ['./file-view-page.component.scss']
 })
-export class FileViewPageComponent implements OnInit {
+export class FileViewPageComponent {
 
   constructor(
-    public readonly recordBroadcastService: RecordBroadcastService,
+    public readonly confirmation: ConfirmationService,
+    private readonly documentService: DocumentService,
+    private readonly recordBroadcast: RecordBroadcastService,
   ) { }
 
-  ngOnInit(): void { }
+  public closeDocument(): void {
+    if (this.confirmation.state === 'stop-recording') {
+      this.recordBroadcast.stopRecording();
+    }
+    this.recordBroadcast.stopBroadcasting();
+    this.documentService.close();
+    this.confirmation.state = null;
+  }
+
+  public startBroadcasting(): void {
+    this.confirmation.state = null;
+    this.recordBroadcast.startBroadcasting(
+      this.documentService.selected);
+  }
 
 }

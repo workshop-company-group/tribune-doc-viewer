@@ -1,0 +1,34 @@
+<span class="title">Запись/трансляция</span>
+
+<span class="subtitle">Выберите файл для трансляции</span>
+
+<div class="slides-container">
+    <app-slide-thumbnail class="slide first"
+        [pdf]="documentService.opened[0].pdf"
+        [page]="documentService.opened[0].currentPage"
+        [selected]="documentService.opened[0].selected"
+        (click)="documentService.select(0)"
+        [ngClass]="documentService.opened[0].pdf.orientation">
+    </app-slide-thumbnail>
+
+    <app-slide-thumbnail class="slide second"
+        [pdf]="documentService.opened[1].pdf"
+        [page]="documentService.opened[1].currentPage"
+        [selected]="documentService.opened[1].selected"
+        (click)="documentService.select(1)"
+        [ngClass]="documentService.opened[1].pdf.orientation">
+    </app-slide-thumbnail>
+</div>
+
+<div class="buttons-container">
+    <app-small-button class="cancel-button"
+        (button-click)="cancelClickEmitter.emit()">
+        Отмена
+    </app-small-button>
+
+    <app-small-button class="select-button"
+        (button-click)="selectClickEmitter.emit()">
+        Выбрать
+    </app-small-button>
+</div>
+

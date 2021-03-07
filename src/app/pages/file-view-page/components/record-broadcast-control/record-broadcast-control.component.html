@@ -16,7 +16,7 @@
             *ngIf="recordBroadcastService.state.value === 'recording'
                 || recordBroadcastService.state.value === 'paused'"
             (pause-click)="pauseClickHandler()"
-            (stop-click)="recordBroadcastService.stopRecording()">
+            (stop-click)="stopRecording()">
         </app-record-controls>
     </div>
 
