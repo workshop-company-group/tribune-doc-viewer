@@ -51,8 +51,8 @@ export class RecordBroadcastService {
     this.external.setPdf(this.doc.doc.convertedPath);
     this.doc.currentPage.subscribe((page) =>
       this.external.setPage(page+1));
-    this.docSubscription = this.doc.state.subscribe(this.state);
-    this.doc.state.next('broadcasting');
+    this.docSubscription = this.doc.recordBroadcastState.subscribe(this.state);
+    this.doc.recordBroadcastState.next('broadcasting');
   }
 
   public async startRecording(): Promise<void> {
