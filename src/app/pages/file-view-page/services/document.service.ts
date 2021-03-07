@@ -28,6 +28,23 @@ export class DocumentService {
     return this.opened.length;
   }
 
+  public get selected(): OpenedDocument {
+    for (const doc of this.opened) {
+      if (doc.selected) {
+        return doc;
+      }
+    }
+  }
+
+  private findClosingIndex(): number {
+    for (const index in this.opened) {
+      if (this.opened[index].closingState.value) {
+        return Number(index);
+      }
+    }
+    return null;
+  }
+
   public async open(path: string): Promise<void> {
     const doc: Document = await this.converter.convertDocument(path);
     const pdf: PdfDocument = await this.pdfService.loadPdf(doc.convertedPath);
@@ -37,7 +54,8 @@ export class DocumentService {
       pdf,
       selected: false,
       currentPage: new BehaviorSubject<number>(0),
-      state: new BehaviorSubject<RecordBroadcastState>(null),
+      recordBroadcastState: new BehaviorSubject<RecordBroadcastState>(null),
+      closingState: new BehaviorSubject<boolean>(false),
     });
 
     // selecting opened document
@@ -46,7 +64,14 @@ export class DocumentService {
 
   }
 
-  public async close(index: number): Promise<void> {
+  public async close(index?: number): Promise<void> {
+    if (!index) {
+      index = this.findClosingIndex();
+    }
+    if (!index) {
+      return;
+    }
+
     await this.fileSystem.removeFile(this.opened[index].doc.convertedPath);
     this.opened.splice(index, 1);
 
