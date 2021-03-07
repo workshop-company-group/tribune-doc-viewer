@@ -65,7 +65,7 @@ export class RecordBroadcastService {
   public stopBroadcasting(): void {
     this.windowStateService.closeExternalWindow();
 
-    this.doc.recordBroadcastState = null;
+    this.doc.recordBroadcastState.next(null);
     this.doc = null
     this.docSubscription.unsubscribe();
   }
