@@ -65,10 +65,10 @@ export class DocumentService {
   }
 
   public async close(index?: number): Promise<void> {
-    if (!index) {
+    if (index === undefined) {
       index = this.findClosingIndex();
     }
-    if (!index) {
+    if (index === undefined) {
       return;
     }
 
