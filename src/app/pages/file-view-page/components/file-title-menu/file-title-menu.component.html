@@ -1,8 +1,8 @@
-<div class="menu-container">
-  <div class="left-container">
-    <img class="menu-button" 
-      src="assets/icons/menu.svg"
-      [routerLink]="['/main-menu']">
+<div class="left-container">
+    <button class="menu-button"
+        [routerLink]="['/main-menu']">
+        <img src="assets/icons/menu.svg">
+    </button>
 
     <app-file-title-menu-item 
       class="left-item"
@@ -11,30 +11,29 @@
       (click)="documentService.select(0)"
       (close)="documentService.close(0)">
     </app-file-title-menu-item>
-  </div>
+</div>
 
-  <div class="right-container">
+<div class="right-container">
     <div class="item-container">
-      <app-file-title-menu-item 
-        class="right-item"
-        *ngIf="documentService.count > 1"
-        [document]="documentService.opened[1]"
-        (click)="documentService.select(1)"
-        (close)="documentService.close(1)">
-      </app-file-title-menu-item>
+        <app-file-title-menu-item 
+            class="right-item"
+            *ngIf="documentService.count > 1"
+            [document]="documentService.opened[1]"
+            (click)="documentService.select(1)"
+            (close)="documentService.close(1)">
+        </app-file-title-menu-item>
 
-      <input class="upload-document-input" 
-        type="file"
-        (change)="openDocument($event.target.files)"
-        #uploadDocumentInput>
-      <div class="add-document-button"
-        *ngIf="documentService.count === 1"
-        (click)="uploadDocumentInput.click()">
-        <img src="assets/icons/plus.svg">
-      </div>
+        <input class="upload-document-input" 
+            type="file"
+            (change)="openDocument($event.target.files)"
+            #uploadDocumentInput>
+        <div class="add-document-button"
+            *ngIf="documentService.count === 1"
+            (click)="uploadDocumentInput.click()">
+            <img src="assets/icons/plus.svg">
+        </div>
     </div>
 
     <img class="logo" 
-      src="assets/logos/white-logo.svg">
-  </div>
+        src="assets/logos/white-logo.svg">
 </div>

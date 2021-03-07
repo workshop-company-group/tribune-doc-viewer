@@ -1,4 +1,4 @@
-.menu-container {
+:host {
   width: 100%;
   height: 65px;
 
@@ -7,74 +7,73 @@
 
   background: var(--faint-dark-grey-gradient);
   box-shadow: var(--base-shadow);
+
+  .left-container {
+    width: 50%;
+    height: 100%;
+
+    padding-right: 1px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .menu-button {
+      img {
+        width: 25px;
+        padding: 0 30px;
+      }
+    }
+
+    .left-item {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+
+  .right-container {
+    width: 50%;
+    height: 100%;
+
+    padding-left: 1px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .item-container {
+      height: 100%;
+
+      .right-item {
+        width: 100%;
+        height: 100%;
+      }
+
+      .upload-document-input {
+        display: none;
+      }
+
+      .add-document-button {
+        width: 65px;
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: var(--accent-yellow-gradient);
+
+        img {
+          width: 20px;
+        }
+      }
+    }
+
+    .logo {
+      width: 175px;
+      margin: 30px;
+    }
+  }
 }
-
-.left-container {
-  width: 50%;
-  height: 100%;
-
-  padding-right: 1px;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.menu-button {
-  width: 25px;
-  height: 100%;
-
-  padding: 0 30px;
-}
-
-.left-item {
-  width: 100%;
-  height: 100%;
-}
-
-.right-container {
-  width: 50%;
-  height: 100%;
-
-  padding-left: 1px;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.item-container {
-  width: 100%;
-  height: 100%;
-}
-
-.right-item {
-  width: 100%;
-  height: 100%;
-}
-
-.upload-document-input {
-  display: none;
-}
-
-.add-document-button {
-  width: 65px;
-  height: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: var(--accent-yellow-gradient);
-}
-
-.add-document-button img {
-  width: 20px;
-}
-
-.logo {
-  width: 175px;
-  margin: 30px;
-}
-
