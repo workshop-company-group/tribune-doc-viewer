@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { WindowStateService } from '../../shared/services/window-state.service';
 import { UpdateService } from '../../update/services/update.service';
-import { DocumentService } from '../file-view-page/services';
+import { DocumentService, RecordBroadcastService, } from '../file-view-page/services';
 
 @Component({
   selector: 'app-main-menu-page',
@@ -12,10 +12,13 @@ import { DocumentService } from '../file-view-page/services';
 })
 export class MainMenuPageComponent implements OnInit {
 
-  constructor(public documentService: DocumentService,
-              private stateService: WindowStateService,
-              private router: Router,
-              public updateService: UpdateService) { }
+  constructor(
+    public readonly documentService: DocumentService,
+    private readonly stateService: WindowStateService,
+    private readonly recordBroadcast: RecordBroadcastService,
+    private readonly router: Router,
+    public readonly updateService: UpdateService
+  ) { }
 
   ngOnInit(): void {}
 
@@ -28,6 +31,20 @@ export class MainMenuPageComponent implements OnInit {
   }
 
   public quitApplication(): void {
+    // stop recording and broadcasting
+    if (this.recordBroadcast.state.value) {
+      if (this.recordBroadcast.state.value === 'recording'
+        || this.recordBroadcast.state.value === 'paused') {
+        this.recordBroadcast.stopRecording();
+      }
+      this.recordBroadcast.stopBroadcasting();
+    }
+
+    // remove converted documents
+    for (const index in this.documentService.opened) {
+      this.documentService.close(0);
+    }
+
     this.stateService.exit();
   }
 
