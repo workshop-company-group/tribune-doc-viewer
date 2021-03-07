@@ -7,7 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class FinishRecordConfirmationComponent {
 
-  @Output('confirm-clicked')
+  @Output('confirm-click')
   public readonly confirmClickEmitter = new EventEmitter<void>();
 
   constructor() { }

@@ -17,7 +17,13 @@ export class RecordBroadcastService {
 
   public state = new BehaviorSubject<RecordBroadcastState>(null);
 
-  private docSubscription: Subscription;
+  private docSubscription: {
+    state: Subscription,
+    page: Subscription
+  } = {
+    state: null,
+    page: null
+  };
 
   constructor(
     private readonly external: ExternalViewerService,
@@ -26,6 +32,7 @@ export class RecordBroadcastService {
   ) { }
 
   public resumeRecording(): void {
+    this.recorder.continue();
     this.doc.recordBroadcastState.next('recording');
   }
 
@@ -38,6 +45,7 @@ export class RecordBroadcastService {
   }
 
   public pauseRecording(): void {
+    this.recorder.pause();
     this.doc.recordBroadcastState.next('paused');
   }
 
@@ -49,10 +57,10 @@ export class RecordBroadcastService {
     this.doc = doc;
     await this.windowStateService.createExternalWindow();
     this.external.setPdf(this.doc.doc.convertedPath);
-    this.doc.currentPage.subscribe((page) =>
-      this.external.setPage(page+1));
-    this.docSubscription = this.doc.state.subscribe(this.state);
-    this.doc.state.next('broadcasting');
+    this.docSubscription.page = this.doc.currentPage.subscribe((page) =>
+      this.external.setPage(page + 1));
+    this.docSubscription.state = this.doc.recordBroadcastState.subscribe(this.state);
+    this.doc.recordBroadcastState.next('broadcasting');
   }
 
   public async startRecording(): Promise<void> {
@@ -65,9 +73,10 @@ export class RecordBroadcastService {
   public stopBroadcasting(): void {
     this.windowStateService.closeExternalWindow();
 
-    this.doc.recordBroadcastState = null;
+    this.doc.recordBroadcastState.next(null);
     this.doc = null
-    this.docSubscription.unsubscribe();
+    this.docSubscription.state.unsubscribe();
+    this.docSubscription.page.unsubscribe();
   }
 
   public stopRecording(): void {

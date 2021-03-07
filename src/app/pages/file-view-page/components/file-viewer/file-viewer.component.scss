@@ -40,6 +40,8 @@
       }
 
       .add-hint {
+        margin-top: 4vh;
+
         color: var(--base-black-color);
 
         font-size: var(--normal-font-size);
@@ -47,7 +49,7 @@
         font-weight: var(--normal-font-weight);
         text-transform: uppercase;
 
-        margin-top: 4vh;
+        user-select: none;
       }
     }
   }

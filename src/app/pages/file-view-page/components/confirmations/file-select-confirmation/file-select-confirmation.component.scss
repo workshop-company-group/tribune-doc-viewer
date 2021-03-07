@@ -27,6 +27,8 @@
   }
 
   .slides-container {
+    margin-bottom: 50px;
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -58,7 +60,7 @@
     }
 
     .select-button {
-      --small-button-color: var(--accent-yellow-gradient);
+      --small-button-background: var(--accent-yellow-gradient);
     }
   }
 }

@@ -19,8 +19,17 @@ export class FileViewPageComponent {
     private readonly recordBroadcast: RecordBroadcastService,
   ) { }
 
+  public cancelClosing(): void {
+    for (const doc of this.documentService.opened) {
+      if (doc.closingState.value === true) {
+        doc.closingState.next(false);
+      }
+    }
+    this.confirmation.state = null;
+  }
+
   public closeDocument(): void {
-    if (this.confirmation.state === 'stop-recording') {
+    if (this.confirmation.state === 'close-recording') {
       this.recordBroadcast.stopRecording();
     }
     this.recordBroadcast.stopBroadcasting();

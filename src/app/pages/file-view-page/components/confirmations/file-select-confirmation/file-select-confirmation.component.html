@@ -5,7 +5,7 @@
 <div class="slides-container">
     <app-slide-thumbnail class="slide first"
         [pdf]="documentService.opened[0].pdf"
-        [page]="documentService.opened[0].currentPage"
+        [page]="documentService.opened[0].currentPage.value"
         [selected]="documentService.opened[0].selected"
         (click)="documentService.select(0)"
         [ngClass]="documentService.opened[0].pdf.orientation">
@@ -13,7 +13,7 @@
 
     <app-slide-thumbnail class="slide second"
         [pdf]="documentService.opened[1].pdf"
-        [page]="documentService.opened[1].currentPage"
+        [page]="documentService.opened[1].currentPage.value"
         [selected]="documentService.opened[1].selected"
         (click)="documentService.select(1)"
         [ngClass]="documentService.opened[1].pdf.orientation">
