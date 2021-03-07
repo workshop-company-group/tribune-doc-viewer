@@ -18,14 +18,14 @@
 
     <app-file-select-confirmation class="confirmation"
         *ngIf="confirmation.state === 'select-broadcasting'"
-        (cancel-click)="confirmation.state === null"
+        (cancel-click)="confirmation.state = null"
         (select-click)="startBroadcasting()">
     </app-file-select-confirmation>
 
     <app-file-close-confirmation class="confirmation"
         *ngIf="confirmation.state === 'close-broadcasting'
             || confirmation.state === 'close-recording'"
-        (cancel-click)="confirmation.state === null"
+        (cancel-click)="cancelClosing()"
         (confirm-click)="closeDocument()">
     </app-file-close-confirmation>
 </div>

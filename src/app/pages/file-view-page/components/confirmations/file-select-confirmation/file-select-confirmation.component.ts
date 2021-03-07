@@ -13,7 +13,7 @@ export class FileSelectConfirmationComponent {
   public readonly cancelClickEmitter = new EventEmitter<void>();
 
   @Output('select-click')
-  public readonly selectClickEmitter = new EventEmitter<void>(); // FIXME: output type
+  public readonly selectClickEmitter = new EventEmitter<void>();
 
   constructor(
     public readonly documentService: DocumentService,
