@@ -32,6 +32,7 @@ export class RecordBroadcastService {
   ) { }
 
   public resumeRecording(): void {
+    this.recorder.continue();
     this.doc.recordBroadcastState.next('recording');
   }
 
@@ -44,6 +45,7 @@ export class RecordBroadcastService {
   }
 
   public pauseRecording(): void {
+    this.recorder.pause();
     this.doc.recordBroadcastState.next('paused');
   }
 
