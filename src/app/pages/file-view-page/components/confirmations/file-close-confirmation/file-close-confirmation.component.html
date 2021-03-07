@@ -1,9 +1,9 @@
 <span class="title"
-    *ngIf="recordBroadcast.confirmationState.value === 'close-broadcasting'">
+    *ngIf="confirmation.state === 'close-broadcasting'">
     Файл транслируется
 </span>
 <span class="title"
-    *ngIf="recordBroadcast.confirmationState.value === 'close-recording'">
+    *ngIf="confirmation.state === 'close-recording'">
     Идет запись
 </span>
 

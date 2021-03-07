@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, } from '@angular/core';
 
-import { RecordBroadcastService } from '../../../services';
+import { ConfirmationService } from '../../../services';
 
 @Component({
   selector: 'app-file-close-confirmation',
@@ -16,7 +16,7 @@ export class FileCloseConfirmationComponent {
   public readonly cancelClickEmitter = new EventEmitter<void>();
 
   constructor(
-    public readonly recordBroadcast: RecordBroadcastService,
+    public readonly confirmation: ConfirmationService,
   ) {}
 
 }
