@@ -29,7 +29,7 @@ export class FileViewPageComponent {
   }
 
   public closeDocument(): void {
-    if (this.confirmation.state === 'stop-recording') {
+    if (this.confirmation.state === 'close-recording') {
       this.recordBroadcast.stopRecording();
     }
     this.recordBroadcast.stopBroadcasting();
