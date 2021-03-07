@@ -106,4 +106,12 @@ export class RecorderService {
       this.filepath = filepath;
     this.mediaRecorder.stop();
   }
+
+  public pause(): void {
+    this.mediaRecorder.pause();
+  }
+
+  public continue(): void {
+    this.mediaRecorder.resume();
+  }
 }

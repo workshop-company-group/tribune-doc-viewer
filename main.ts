@@ -1,10 +1,12 @@
 import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import * as path from 'path';
 import { electron } from 'process';
+import { Subject } from 'rxjs';
 import * as url from 'url';
 
 let win: BrowserWindow = null;
 let externalWin: BrowserWindow = null;
+// let isExternalWinCreated: Subject<void> = new Subject();
 
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
@@ -27,7 +29,6 @@ function createWindow(): BrowserWindow {
       enableRemoteModule : true // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular)
     },
   });
-
   win.webContents.openDevTools();
   win.loadURL(url.format({
     pathname: path.join(__dirname, 'dist/index.html'),
@@ -38,7 +39,6 @@ function createWindow(): BrowserWindow {
   win.on('closed', () => {
     app.quit();
   });
-
   return win;
 }
 
@@ -61,20 +61,21 @@ function createExternalWindow(): BrowserWindow {
         enableRemoteModule : true // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular)
       },
     });
-
+    console.log('cleared');
     externalWin.webContents.openDevTools();
     externalWin.loadURL(url.format({
       pathname: path.join(__dirname, 'src/external/external.html'),
       protocol: 'file:',
       slashes: true
-    }));
+    }))
+      // .then(() => { isExternalWinCreated.next(); });
 
     externalWin.on('closed', () => {
-      externalWin.webContents.send('reset-pdf');
+      // externalWin.webContents.send('reset-pdf');
     })
   }
 
-  return externalWin
+  return externalWin;
 }
 
 function isExternalMonitorAvailable(): boolean {
@@ -105,8 +106,16 @@ try {
   ipcMain.on('app-exit', () => app.quit());
 
   // Create new window on signal
-  ipcMain.on('external-window', () => {
+  ipcMain.handle('external-window', async (event, arg) => {
     createExternalWindow();
+    const promise1 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('foo');
+      }, 2000);
+    });
+    await promise1;
+    // await isExternalWinCreated.toPromise();
+    return true;
   });
 
   ipcMain.handle('is-external-connected', async (event, arg) => {

@@ -47,15 +47,12 @@ export class RecordBroadcastService {
       return;
     }
     this.doc = doc;
-    this.windowStateService.createExternalWindow();
-    setTimeout(() => {
-      this.external.setPdf(this.doc.doc.convertedPath);
-      this.doc.currentPage.subscribe((page) =>
-        this.external.setPage(page+1));
-
-      this.docSubscription = this.doc.recordBroadcastState.subscribe(this.state);
-      this.doc.recordBroadcastState.next('broadcasting');
-    }, 2000)
+    await this.windowStateService.createExternalWindow();
+    this.external.setPdf(this.doc.doc.convertedPath);
+    this.doc.currentPage.subscribe((page) =>
+      this.external.setPage(page+1));
+    this.docSubscription = this.doc.state.subscribe(this.state);
+    this.doc.state.next('broadcasting');
   }
 
   public async startRecording(): Promise<void> {
