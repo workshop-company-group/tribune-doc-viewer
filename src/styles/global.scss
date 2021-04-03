@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+
+  font-family: var(--base-font-family);
+}
+
+button {
+  background: transparent;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  user-select: none;
+}
