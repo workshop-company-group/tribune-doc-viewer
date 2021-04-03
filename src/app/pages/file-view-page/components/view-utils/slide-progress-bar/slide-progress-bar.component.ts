@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, } from '@angular/core';
 
 import { OpenedDocument } from '../../../models';
 
@@ -7,13 +7,11 @@ import { OpenedDocument } from '../../../models';
   templateUrl: './slide-progress-bar.component.html',
   styleUrls: ['./slide-progress-bar.component.scss']
 })
-export class SlideProgressBarComponent implements OnInit {
+export class SlideProgressBarComponent {
 
   @Input()
   public readonly doc: OpenedDocument;
 
   constructor() { }
-
-  ngOnInit(): void {}
 
 }

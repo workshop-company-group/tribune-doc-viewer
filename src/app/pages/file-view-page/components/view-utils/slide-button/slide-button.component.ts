@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-slide-button',
   templateUrl: './slide-button.component.html',
   styleUrls: ['./slide-button.component.scss']
 })
-export class SlideButtonComponent implements OnInit {
+export class SlideButtonComponent {
 
   @Output('slide-click')
   public readonly clickEmitter = new EventEmitter<void>();
@@ -17,7 +17,5 @@ export class SlideButtonComponent implements OnInit {
   public readonly iconSrc: string;
 
   constructor() { }
-
-  ngOnInit(): void { }
 
 }

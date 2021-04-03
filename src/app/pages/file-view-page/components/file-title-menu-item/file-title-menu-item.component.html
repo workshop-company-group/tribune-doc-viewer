@@ -3,14 +3,20 @@
     <div class="title">{{ doc.doc.title | documentTitle }}</div>
 
     <img class="record-icon"
-        src="assets/icons/record/record.svg"
+        [src]="doc.selected
+            ? 'assets/icons/record/record-white.svg'
+            : 'assets/icons/record/record-red.svg'"
         *ngIf="doc.recordBroadcastState.value === 'recording'
             || doc.recordBroadcastState.value === 'paused'">
     <img class="broadcast-icon"
-        src="assets/icons/broadcast/broadcast-dark.svg"
+        [src]="doc.selected
+            ? 'assets/icons/broadcast/broadcast-white.svg'
+            : 'assets/icons/broadcast/broadcast-black.svg'"
         *ngIf="doc.recordBroadcastState.value !== null">
 
     <img class="close-button" 
-        src="assets/icons/cross.svg"
+        [src]="doc.selected
+            ? 'assets/icons/crosses/cross-white.svg'
+            : 'assets/icons/crosses/cross-black.svg'"
         (click)="close()">
 </div>

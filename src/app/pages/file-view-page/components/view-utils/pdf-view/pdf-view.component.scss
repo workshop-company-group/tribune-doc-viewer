@@ -2,13 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-canvas.vertical {
-  width: 100%;
-}
+  canvas {
+    &.vertical {
+      width: 100%;
+    }
 
-canvas.horizontal {
-  height: 100%;
+    &.horizontal {
+      height: 100%;
+    }
+  }
 }
-

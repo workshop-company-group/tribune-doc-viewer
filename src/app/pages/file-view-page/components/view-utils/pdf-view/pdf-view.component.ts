@@ -39,7 +39,7 @@ export class PdfViewComponent implements AfterViewInit {
   }
 
   constructor(
-    private el: ElementRef,
+    private readonly el: ElementRef,
   ) { }
 
   ngAfterViewInit(): void {

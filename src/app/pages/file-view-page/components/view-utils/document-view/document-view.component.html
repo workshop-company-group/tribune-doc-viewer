@@ -1,20 +1,20 @@
 <div class="view-container"
-  [ngClass]="{ 'selected': doc.selected,
-               'vertical': doc.pdf.orientation === 'vertical',
-               'horizontal': doc.pdf.orientation === 'horizontal'}">
-  <app-slide-nav class="slide-nav"
-    *ngIf="doc.pdf.orientation === 'vertical'"
-    [doc]="doc">
-  </app-slide-nav>
+    [ngClass]="{ 'selected': doc.selected,
+        'vertical': doc.pdf.orientation === 'vertical',
+        'horizontal': doc.pdf.orientation === 'horizontal'}">
+    <app-slide-nav class="slide-nav"
+        *ngIf="doc.pdf.orientation === 'vertical'"
+        [doc]="doc">
+    </app-slide-nav>
 
-  <app-main-slide class="main-slide"
-    [doc]="doc">
-  </app-main-slide>
+    <app-main-slide class="main-slide"
+        [doc]="doc">
+    </app-main-slide>
 
-  <app-slide-nav class="slide-nav"
-    *ngIf="doc.pdf.orientation === 'horizontal'"
-    [ngClass]="{ 'wrap': isHalfScreen() }"
-    [wrap]="isHalfScreen()"
-    [doc]="doc">
-  </app-slide-nav>
+    <app-slide-nav class="slide-nav"
+        *ngIf="doc.pdf.orientation === 'horizontal'"
+        [ngClass]="{ 'wrap': isHalfScreen() }"
+        [wrap]="isHalfScreen()"
+        [doc]="doc">
+    </app-slide-nav>
 </div>

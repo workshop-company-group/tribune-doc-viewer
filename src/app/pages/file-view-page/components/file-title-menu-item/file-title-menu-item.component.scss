@@ -1,3 +1,5 @@
+@import '../../../../../styles/mixins';
+
 .item-container {
   height: 100%;
   padding-left: 30px;
@@ -6,19 +8,18 @@
   flex-direction: row;
   align-items: center;
 
-  background: var(--faint-light-grey-gradient);
+  color: var(--base-black-color);
+  background: var(--faint-light-grey-vertical-gradient);
 
   &.selected {
-    background: var(--accent-yellow-gradient);
+    color: var(--base-white-color);
+    background: var(--accent-blue-vertical-gradient);
   }
 
   .title {
     width: 100%;
 
-    font-size: var(--small-font-size);
-    line-height: var(--small-line-height);
-    font-weight: var(--small-font-weight);
-    text-transform: uppercase;
+    @extend %primary-regular-font;
   }
 
   .record-icon, .broadcast-icon {
@@ -31,5 +32,3 @@
     padding: 0 30px;
   }
 }
-
-
