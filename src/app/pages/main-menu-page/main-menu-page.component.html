@@ -1,29 +1,31 @@
-<div class="main-container">
-  <div class="background">
+<div class="background">
     <img src="assets/background/filled-brandbook.svg">
-  </div>
+</div>
 
-  <div class="tribune">
+<div class="tribune">
     <img src="assets/images/tribune.png">
     <span>BM Tribune</span>
-  </div>
+</div>
 
-  <span class="version">
+<span class="version">
     {{ updateService.version }}
-  </span>
+</span>
 
-  <div class="logo__container">
+<div class="logo-container">
     <img class="logo" src="assets/logos/colorful-logo.svg" alt="BM Group">
-  </div>
+</div>
 
-  <div class="buttons__container">
-    <app-normal-button
-      (click)="openFileView()">
-      {{ documentService.isEmpty() ? 'Начать работу' : 'Продолжить' }}
+<div class="buttons-container">
+    <app-normal-button class="button"
+        (button-click)="openFileView()">
+        {{ documentService.isEmpty() ? 'Начать работу' : 'Продолжить' }}
     </app-normal-button>
-    <app-normal-button
-      (click)="openSettings()">Параметры</app-normal-button>
-    <app-normal-button
-      (click)="quitApplication()">Выход</app-normal-button>
-  </div>
+    <app-normal-button class="button"
+        (button-click)="openSettings()">
+        Параметры
+    </app-normal-button>
+    <app-normal-button class="button"
+        (button-click)="quitApplication()">
+        Выход
+    </app-normal-button>
 </div>
