@@ -1,3 +1,5 @@
+@import '../../../../../../styles/mixins';
+
 :host {
   padding: 50px;
 
@@ -12,18 +14,14 @@
   .title {
     margin-bottom: 30px;
 
-    font-size: var(--normal-font-size);
-    line-height: var(--normal-line-height);
-    font-weight: var(--normal-font-weight);
+    @extend %primary-bold-font;
     text-transform: uppercase;
   }
 
   .subtitle {
     margin-bottom: 50px;
 
-    font-size: var(--small-font-size);
-    line-height: var(--small-line-height);
-    font-weight: var(--small-font-weight);
+    @extend %primary-light-font;
   }
 
   .slides-container {
@@ -60,7 +58,7 @@
     }
 
     .select-button {
-      --small-button-background: var(--accent-yellow-gradient);
+      --small-button-background: var(--accent-blue-vertical-gradient);
     }
   }
 }
