@@ -15,30 +15,30 @@ export class SettingsService {
     this.writeIniFile = window.require('write-ini-file');
   }
 
-  public async getSettings(): Promise<Settings> {
-    return this.loadIniFile('settings.ini')
+  public getSettings(): Settings {
+    return this.loadIniFile.sync('settings.ini')
   }
 
-  public async getSavePath(): Promise<string> {
-    return (await this.getSettings()).recording.savePath;
+  public getSavePath(): string {
+    return this.getSettings().recording.savePath;
   }
 
-  public async getSaveWithSource(): Promise<boolean> {
-    return (((await this.getSettings()).recording.saveWithSource) as string).toLowerCase() === 'true';
+  public getSaveWithSource(): boolean {
+    return (this.getSettings().recording.saveWithSource as string).toLowerCase() === 'true';
   }
 
-  public async setSettings(settings: Settings): Promise<void> {
-    this.writeIniFile('settings.ini', settings);
+  public setSettings(settings: Settings): void {
+    this.writeIniFile.sync('settings.ini', settings);
   }
 
-  public async setSavePath(path: string): Promise<void> {
-    const settings = await this.getSettings();
+  public setSavePath(path: string): void {
+    const settings = this.getSettings();
     settings.recording.savePath = path;
     this.setSettings(settings);
   }
 
-  public async setSaveWithSource(condition: boolean): Promise<void> {
-    const settings = await this.getSettings();
+  public setSaveWithSource(condition: boolean): void {
+    const settings = this.getSettings();
     settings.recording.saveWithSource = condition.toString();
     this.setSettings(settings);
   }
