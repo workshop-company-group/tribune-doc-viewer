@@ -3,6 +3,8 @@ import { desktopCapturer } from 'electron';
 import { ElectronService } from '../../../core/services';
 import { SettingsService } from '../'
 import * as fs from 'fs';
+import * as path from 'path';
+import { settings } from 'cluster';
 
 declare var navigator: any;
 let recordedChunks = [];
@@ -12,6 +14,7 @@ let recordedChunks = [];
 })
 export class RecorderService {
   fs: typeof fs;
+  path: typeof path;
   desktopCapturer: typeof desktopCapturer;
   recordScreen: Electron.DesktopCapturerSource;
   screenStream: MediaStream = null;
@@ -26,6 +29,7 @@ export class RecorderService {
     private settings: SettingsService) {
     if (this.electron.isElectron) {
       this.fs = window.require('fs');
+      this.path = window.require('path');
       this.desktopCapturer = window.require('electron').desktopCapturer;
     }
   }
@@ -94,7 +98,6 @@ export class RecorderService {
     //   const date = new Date().toString();
     //   this.filepath = './temp/' + date + '.webm';
     // }
-    console.log('this filepath: ', this.filepath);
     fs.writeFile(this.filepath, buffer, () => console.log('video saved successfully!'));
     recordedChunks = [];
   }
@@ -104,9 +107,10 @@ export class RecorderService {
   }
 
   public stop(filepath: string = null): void {
-    console.log('path: ', filepath);
-    if (filepath)
+    if (this.settings.withSource)
       this.filepath = filepath;
+    else
+      this.filepath = this.settings.savePath + '/' + path.basename(filepath);
     this.mediaRecorder.stop();
   }
 

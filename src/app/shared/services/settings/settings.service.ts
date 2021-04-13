@@ -15,31 +15,37 @@ export class SettingsService {
     this.writeIniFile = window.require('write-ini-file');
   }
 
-  public getSettings(): Settings {
+  public get settings(): Settings {
     return this.loadIniFile.sync('settings.ini')
   }
 
-  public getSavePath(): string {
-    return this.getSettings().recording.savePath;
+  public get savePath(): string {
+    let path = this.settings.recording.savePath;
+    if (path.substr(-1) === "/") {
+      return path.slice(0, -1);
+    }
+    else
+      return path
   }
 
-  public getSaveWithSource(): boolean {
-    return (this.getSettings().recording.saveWithSource as string).toLowerCase() === 'true';
+  public get withSource(): boolean {
+    const withSource = this.settings.recording.saveWithSource as string;
+    return withSource == 'true';
   }
 
-  public setSettings(settings: Settings): void {
+  public set settings(settings: Settings) {
     this.writeIniFile.sync('settings.ini', settings);
   }
 
-  public setSavePath(path: string): void {
-    const settings = this.getSettings();
+  public set savePath(path: string) {
+    const settings = this.settings;
     settings.recording.savePath = path;
-    this.setSettings(settings);
+    this.settings = settings;
   }
 
-  public setSaveWithSource(condition: boolean): void {
-    const settings = this.getSettings();
+  public set withSource(condition: boolean) {
+    const settings = this.settings;
     settings.recording.saveWithSource = condition.toString();
-    this.setSettings(settings);
+    this.settings = settings;
   }
 }
