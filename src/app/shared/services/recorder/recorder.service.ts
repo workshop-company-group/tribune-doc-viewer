@@ -24,12 +24,6 @@ export class RecorderService {
   constructor(
     private electron: ElectronService,
     private settings: SettingsService) {
-    settings.setSettings({
-      'recording': {
-        'savePath': 'wtfpath',
-        'saveWithSource': false
-      }
-    })
     if (this.electron.isElectron) {
       this.fs = window.require('fs');
       this.desktopCapturer = window.require('electron').desktopCapturer;
