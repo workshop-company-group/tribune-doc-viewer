@@ -1,3 +1,5 @@
+@import '../../../../../styles/mixins';
+
 :host {
   display: flex;
   flex-direction: row;
@@ -28,9 +30,7 @@
 
         color: var(--base-black-color);
 
-        font-size: var(--small-font-size);
-        line-height: var(--small-line-height);
-        font-weight: var(--small-font-weight);
+        @extend %primary-light-font;
       }
     }
   }

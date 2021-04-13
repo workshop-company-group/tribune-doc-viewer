@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, } from '@angular/core';
 
 import { OpenedDocument } from '../../../models';
 
@@ -7,19 +7,17 @@ import { OpenedDocument } from '../../../models';
   templateUrl: './document-view.component.html',
   styleUrls: ['./document-view.component.scss']
 })
-export class DocumentViewComponent implements OnInit {
+export class DocumentViewComponent {
 
   @Input()
   public readonly doc: OpenedDocument;
 
   constructor(
-    private el: ElementRef,
+    private readonly el: ElementRef,
   ) { }
 
-  ngOnInit(): void { }
-
   public isHalfScreen(): boolean {
-    return this.el.nativeElement.offsetWidth / 
+    return this.el.nativeElement.offsetWidth /
            window.innerWidth < 0.6;
   }
 

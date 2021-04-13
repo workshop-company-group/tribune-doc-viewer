@@ -1,3 +1,5 @@
+@import '../../../../../../styles/mixins';
+
 :host {
   padding: 50px;
 
@@ -12,10 +14,7 @@
   .hint {
     color: var(--base-black-color);
 
-    font-size: var(--normal-font-size);
-    line-height: var(--normal-line-height);
-    font-weight: var(--normal-font-weight);
-
+    @extend %primary-bold-font;
     text-transform: uppercase;
     text-align: center;
 
@@ -23,6 +22,6 @@
   }
 
   .confirm-button {
-    --small-button-background: var(--accent-yellow-gradient);
+    --small-button-background: var(--accent-blue-vertical-gradient);
   }
 }

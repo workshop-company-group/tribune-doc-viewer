@@ -1,8 +1,6 @@
-<div class="progress-bar-container">
-  <div class="filler" 
+<div class="filler" 
     [ngStyle]="{'width': (doc.currentPage.value + 1) * 100 / doc.pdf.numPages + '%'}">
-  </div>
-  <span class="counter">
-    {{ (doc.currentPage | async) + 1 }} из {{ doc.pdf.numPages }}
-  </span>
 </div>
+<span class="counter">
+    {{ (doc.currentPage | async) + 1 }} из {{ doc.pdf.numPages }}
+</span>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, } from '@angular/core';
 
 import { OpenedDocument } from '../../../models';
 
@@ -7,14 +7,12 @@ import { OpenedDocument } from '../../../models';
   templateUrl: './main-slide.component.html',
   styleUrls: ['./main-slide.component.scss']
 })
-export class MainSlideComponent implements OnInit {
+export class MainSlideComponent {
 
   @Input()
   public readonly doc: OpenedDocument;
 
   constructor() { }
-
-  ngOnInit(): void { }
 
   public nextSlide(): void {
     this.doc.currentPage.next(this.doc.currentPage.value + 1);

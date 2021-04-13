@@ -20,7 +20,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles/global.scss",
+              "src/styles/mixins.scss",
+              "src/styles/variables.scss"
             ],
             "scripts": [],
             "customWebpackConfig": {

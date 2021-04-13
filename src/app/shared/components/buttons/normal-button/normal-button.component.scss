@@ -1,4 +1,6 @@
-.main-container {
+@import '../../../../../styles/mixins';
+
+button {
   width: 395px;
   height: 70px;
 
@@ -6,16 +8,11 @@
   align-items: center;
   justify-content: center;
 
-  background: var(--faint-light-grey-gradient);
+  background: var(--faint-light-grey-vertical-gradient);
   color: var(--base-black-color);
-  
-  font-size: var(--normal-font-size);
-  line-height: var(--normal-line-height);
-  font-weight: var(--normal-font-weight);
-  text-transform: uppercase;
+
+  @extend %primary-regular-font;
 
   border-radius: 10px;
-
-  cursor: pointer;
-  user-select: none;
+  box-shadow: var(--base-shadow);
 }

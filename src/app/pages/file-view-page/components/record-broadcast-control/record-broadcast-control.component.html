@@ -4,7 +4,7 @@
         <span class="hint">Запись</span>
 
         <app-record-broadcast-button
-            icon="assets/icons/record/record.svg"
+            icon="assets/icons/record/record-red.svg"
             [disabled]="!recordBroadcastService.isRecordingAvailable()"
             *ngIf="recordBroadcastService.state.value === null
                 || recordBroadcastService.state.value === 'broadcasting'"
@@ -26,7 +26,7 @@
         <app-record-broadcast-button
             [disabled]="!broadcastAvailability.value"
             [icon]="recordBroadcastService.state.value === null
-                    ? 'assets/icons/broadcast/broadcast.svg'
+                    ? 'assets/icons/broadcast/broadcast-blue.svg'
                     : 'assets/icons/broadcast/broadcast-stop.svg'"
             (button-click)="broadcastClickHandler()">
         </app-record-broadcast-button>
