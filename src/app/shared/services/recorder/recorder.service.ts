@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { desktopCapturer } from 'electron';
 import { ElectronService } from '../../../core/services';
+import { SettingsService } from '../'
 import * as fs from 'fs';
 
 declare var navigator: any;
@@ -20,7 +21,15 @@ export class RecorderService {
   recordedBlobs = [];
   filepath: string = null;
 
-  constructor(private electron: ElectronService) {
+  constructor(
+    private electron: ElectronService,
+    private settings: SettingsService) {
+    settings.setSettings({
+      'recording': {
+        'savePath': 'wtfpath',
+        'saveWithSource': false
+      }
+    })
     if (this.electron.isElectron) {
       this.fs = window.require('fs');
       this.desktopCapturer = window.require('electron').desktopCapturer;
