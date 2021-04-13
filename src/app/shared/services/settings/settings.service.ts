@@ -39,7 +39,7 @@ export class SettingsService {
 
   public async setSaveWithSource(condition: boolean): Promise<void> {
     const settings = await this.getSettings();
-    settings.recording.saveWithSource = condition;
+    settings.recording.saveWithSource = condition.toString();
     this.setSettings(settings);
   }
 }
