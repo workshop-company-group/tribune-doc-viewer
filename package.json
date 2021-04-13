@@ -90,6 +90,8 @@
     "css-element-queries": "1.2.3",
     "file-loader": "6.0.0",
     "pdfjs-dist": "2.6.347",
-    "videojs-record": "4.2.0"
+    "read-ini-file": "3.0.1",
+    "videojs-record": "4.2.0",
+    "write-ini-file": "3.0.2"
   }
 }
