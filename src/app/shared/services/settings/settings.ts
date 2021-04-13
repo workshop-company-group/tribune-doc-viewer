@@ -1,6 +1,6 @@
 export interface Settings {
   recording: {
-    saveWithSource: boolean;
+    saveWithSource: boolean | string;
     savePath: string;
   }
 }

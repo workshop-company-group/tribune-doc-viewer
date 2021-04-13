@@ -24,7 +24,7 @@ export class SettingsService {
   }
 
   public async getSaveWithSource(): Promise<boolean> {
-    return Boolean((await this.getSettings()).recording.saveWithSource);
+    return (((await this.getSettings()).recording.saveWithSource) as string).toLowerCase() == 'true';
   }
 
   public async setSettings(settings: Settings): Promise<void> {
