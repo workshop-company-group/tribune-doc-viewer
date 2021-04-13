@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as fs from 'fs';
 import * as jsonfile from 'jsonfile'
-import { Auth } from './auth';
+import { Auth } from '../../models/auth';
 import * as CryptoJS from 'crypto-js';
 
 @Injectable({
