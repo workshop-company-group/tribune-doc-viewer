@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Settings } from './settings';
+import { Settings } from '../../models/settings';
 import * as loadIniFile from 'read-ini-file';
 import * as writeIniFile from 'write-ini-file';
 
