@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { desktopCapturer } from 'electron';
-import { ElectronService } from '../../core/services';
+import { ElectronService } from '../../../core/services';
 import * as fs from 'fs';
 
 declare var navigator: any;

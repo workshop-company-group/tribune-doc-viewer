@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { WindowStateService } from '../../shared/services/window-state.service';
+import { WindowStateService } from '../../shared/services/window-state/window-state.service';
 import { UpdateService } from '../../update/services/update.service';
 import { DocumentService, RecordBroadcastService, } from '../file-view-page/services';
 
