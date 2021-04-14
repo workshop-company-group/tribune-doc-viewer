@@ -42,14 +42,13 @@ export class SettingsService {
       this.writeIniFile(this.defaultPath, this.defaultSettings);
       this._settings = this.defaultSettings;
     } else {
-      const settings = this.loadIniFile(this.defaultPath);
-      this._settings = this.handleSettings(settings);
+      this.reload();
     }
   }
 
   public reload() {
     const settings = this.loadIniFile(this.defaultPath);
-    this._settings = this.handleSettings(settings);
+    this.settings = this.handleSettings(settings);
   }
 
   private handleSettings(settings: Settings) {
@@ -62,11 +61,11 @@ export class SettingsService {
   }
 
   public get settings(): Settings {
-    return this._settings;
+    return this.settings;
   }
 
   public get savePath(): string {
-    return this._settings.recording.savePath;
+    return this.settings.recording.savePath;
   }
 
   public get withSource(): boolean {
@@ -74,19 +73,19 @@ export class SettingsService {
   }
 
   public set settings(settings: Settings) {
-    this._settings = this.handleSettings(settings);
+    this.settings = this.handleSettings(settings);
     this.save()
   }
 
   public set savePath(path: string) {
     this._settings.recording.savePath = path;
-    this._settings = this.handleSettings(this._settings);
+    this.settings = this.handleSettings(this._settings);
     this.save();
   }
 
   public set withSource(condition: boolean) {
     this._settings.recording.saveWithSource = condition;
-    this._settings = this.handleSettings(this._settings);
+    this.settings = this.handleSettings(this._settings);
     this.save()
   }
 }
