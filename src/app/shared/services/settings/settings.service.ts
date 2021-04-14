@@ -16,7 +16,10 @@ export class SettingsService {
   }
 
   public get settings(): Settings {
-    return this.loadIniFile.sync('settings.ini')
+    const settings: Settings = this.loadIniFile.sync('settings.ini');
+    const withSource = settings.recording.saveWithSource as string;
+    settings.recording.saveWithSource = withSource;
+    return settings;
   }
 
   public get savePath(): string {
