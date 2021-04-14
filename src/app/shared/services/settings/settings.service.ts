@@ -53,7 +53,8 @@ export class SettingsService {
   private handleSettings(settings: Settings) {
     settings.recording.saveWithSource = (settings.recording.saveWithSource == 'true');
 
-    if (settings.recording.savePath.substr(-1) === '/')
+    if (settings.recording.savePath.substr(-1) === '/' ||
+        settings.recording.savePath.substr(-1) === '\\')
       settings.recording.savePath = settings.recording.savePath.slice(0, -1);
 
     return settings;
