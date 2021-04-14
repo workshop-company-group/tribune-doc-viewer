@@ -40,15 +40,14 @@ export class SettingsService {
   private initIni() {
     if (!this.fs.existsSync(this.defaultPath)) {
       this.writeIniFile(this.defaultPath, this.defaultSettings);
-      this._settings = this.defaultSettings;
+      this.settings = this.defaultSettings;
     } else {
       this.reload();
     }
   }
 
   public reload() {
-    const settings = this.loadIniFile(this.defaultPath);
-    this.settings = this.handleSettings(settings);
+    this.settings = this.loadIniFile(this.defaultPath);
   }
 
   private handleSettings(settings: Settings) {
@@ -78,14 +77,16 @@ export class SettingsService {
   }
 
   public set savePath(path: string) {
-    this._settings.recording.savePath = path;
-    this.settings = this.handleSettings(this._settings);
+    const settings = this.settings
+    settings.recording.savePath = path;
+    this.settings = settings;
     this.save();
   }
 
   public set withSource(condition: boolean) {
-    this._settings.recording.saveWithSource = condition;
-    this.settings = this.handleSettings(this._settings);
+    const settings = this.settings
+    settings.recording.saveWithSource = condition;
+    this.settings = settings;
     this.save()
   }
 }
