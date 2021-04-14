@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Settings } from '../../models/settings';
 import * as loadIniFile from 'read-ini-file';
 import * as writeIniFile from 'write-ini-file';
+import * as fs from 'fs';
+import { ElectronService } from '../../../core/services';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +11,34 @@ import * as writeIniFile from 'write-ini-file';
 export class SettingsService {
   loadIniFile: typeof loadIniFile;
   writeIniFile: typeof writeIniFile
+  fs: typeof fs;
 
-  constructor() {
-    this.loadIniFile = window.require('read-ini-file');
-    this.writeIniFile = window.require('write-ini-file');
+  private readonly defaultPath: string = 'settings.ini';
+  private readonly defaultSettings: Settings = {
+    recording: {
+      saveWithSource: 'true',
+      savePath: ''
+    }
+  };
+
+  constructor(private electron: ElectronService) {
+    if (this.electron.isElectron) {
+      this.loadIniFile = window.require('read-ini-file');
+      this.writeIniFile = window.require('write-ini-file');
+      this.fs = window.require('fs');
+
+      this.initInit();
+    }
+  }
+
+  private initInit() {
+    if (!this.fs.existsSync(this.defaultPath)) {
+      this.writeIniFile(this.defaultPath, this.defaultSettings);
+    }
   }
 
   public get settings(): Settings {
-    const settings: Settings = this.loadIniFile.sync('settings.ini');
+    const settings: Settings = this.loadIniFile.sync(this.defaultPath);
     const withSource = settings.recording.saveWithSource as string;
     settings.recording.saveWithSource = withSource;
     return settings;
@@ -38,7 +60,7 @@ export class SettingsService {
 
   public set settings(settings: Settings) {
     settings.recording.saveWithSource = settings.recording.saveWithSource.toString();
-    this.writeIniFile.sync('settings.ini', settings);
+    this.writeIniFile.sync(this.defaultPath, settings);
   }
 
   public set savePath(path: string) {

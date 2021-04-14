@@ -4,7 +4,6 @@ import { ElectronService } from '../../../core/services';
 import { SettingsService } from '../'
 import * as fs from 'fs';
 import * as path from 'path';
-import { settings } from 'cluster';
 
 declare var navigator: any;
 let recordedChunks = [];

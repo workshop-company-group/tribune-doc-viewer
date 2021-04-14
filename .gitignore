@@ -52,3 +52,6 @@ package-lock.json
 .DS_Store
 Thumbs.db
 *.pdf
+
+# Settings
+settings.ini
