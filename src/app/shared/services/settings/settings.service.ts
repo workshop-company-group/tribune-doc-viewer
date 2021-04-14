@@ -21,53 +21,73 @@ export class SettingsService {
     }
   };
 
+  private _settings: Settings;
+
   constructor(private electron: ElectronService) {
     if (this.electron.isElectron) {
       this.loadIniFile = window.require('read-ini-file');
       this.writeIniFile = window.require('write-ini-file');
       this.fs = window.require('fs');
 
-      this.initInit();
+      this.initIni();
     }
   }
 
-  private initInit() {
+  private save() {
+    this.writeIniFile.sync(this.defaultPath, this._settings);
+  }
+
+  private initIni() {
     if (!this.fs.existsSync(this.defaultPath)) {
       this.writeIniFile(this.defaultPath, this.defaultSettings);
+      this._settings = this.defaultSettings;
+    } else {
+      const settings = this.loadIniFile(this.defaultPath);
+      this._settings = this.handleSettings(settings);
     }
   }
 
-  public get settings(): Settings {
-    const settings: Settings = this.loadIniFile.sync(this.defaultPath);
-    const withSource = settings.recording.saveWithSource as string;
-    settings.recording.saveWithSource = withSource;
+  public reload() {
+    const settings = this.loadIniFile(this.defaultPath);
+    this._settings = this.handleSettings(settings);
+  }
+
+  private handleSettings(settings: Settings) {
+    settings.recording.saveWithSource = (settings.recording.saveWithSource == 'true');
+
+    if (settings.recording.savePath.substr(-1) === '/')
+      this._settings.recording.savePath = settings.recording.savePath.slice(0, -1);
+
     return settings;
   }
 
+  public get settings(): Settings {
+    return this._settings;
+  }
+
   public get savePath(): string {
-    let path = this.settings.recording.savePath;
-    if (path.substr(-1) === "/") {
-      return path.slice(0, -1);
-    }
-    else
-      return path
+    return this._settings.recording.savePath;
   }
 
   public get withSource(): boolean {
-    const withSource = this.settings.recording.saveWithSource as string;
-    return withSource == 'true';
+    return (this.settings.recording.saveWithSource as boolean);
   }
 
   public set settings(settings: Settings) {
-    settings.recording.saveWithSource = settings.recording.saveWithSource.toString();
-    this.writeIniFile.sync(this.defaultPath, settings);
+    this._settings = settings;
+    this._settings = this.handleSettings(this._settings);
+    this.save()
   }
 
   public set savePath(path: string) {
-    this.settings.recording.savePath = path;
+    this._settings.recording.savePath = path;
+    this._settings = this.handleSettings(this._settings);
+    this.save();
   }
 
   public set withSource(condition: boolean) {
-    this.settings.recording.saveWithSource = condition.toString();
+    this._settings.recording.saveWithSource = condition;
+    this._settings = this.handleSettings(this._settings);
+    this.save()
   }
 }
