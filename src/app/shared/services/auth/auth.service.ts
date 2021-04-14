@@ -19,7 +19,6 @@ export class AuthService {
 
   public setPassword(password: string): void {
     const encrypted = CryptoJS.AES.encrypt(password, this.salt).toString();
-    console.log(encrypted);
     const auth: Auth = { password: encrypted };
     this.jsonfile.writeFileSync('auth.json', auth);
   }
@@ -27,8 +26,6 @@ export class AuthService {
   public passwordIsValid(password: string): boolean {
     const auth: Auth = this.jsonfile.readFileSync('auth.json');
     const decrypted = CryptoJS.AES.decrypt(auth.password, this.salt);
-    console.log(decrypted)
-    console.log(decrypted.toString(CryptoJS.enc.Utf8))
     return password === decrypted;
   }
 }
