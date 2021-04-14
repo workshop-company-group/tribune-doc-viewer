@@ -61,13 +61,17 @@ export class FileSystemService {
   }
 
   public async listDisks(): Promise<Drive[]> {
-    const res: Drive[] = await this.ipcRenderer.invoke('drive-list');
-    res.forEach(element => {
+    const drives: Drive[] = await this.ipcRenderer.invoke('drive-list');
+    const result: Drive[] = [];
+    drives.forEach(drive => {
       try {
-        element.size = this.fileSize(element.size as number);
+        if (drive.mountpoints.length > 0) {
+          drive.size = this.fileSize(drive.size as number);
+          result.push(drive);
+        }
       } catch (error) {}
     });
-    return res;
+    return result;
   }
 
   public getFolderContent(path: string): FolderContent {
@@ -92,4 +96,10 @@ export class FileSystemService {
 
     return resultObject;
   }
+
+  public dirExists(path: string) {
+    return this.fs.existsSync(path);
+  }
+
+
 }
