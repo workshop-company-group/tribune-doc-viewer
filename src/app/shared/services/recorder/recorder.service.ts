@@ -108,8 +108,12 @@ export class RecorderService {
   public stop(filepath: string): void {
     if (this.settings.withSource)
       this.filepath = filepath;
-    else
-      this.filepath = this.settings.savePath + '/' + path.basename(filepath);
+    else {
+      if (process.platform === 'win32')
+        this.filepath = this.settings.savePath + '/' + path.basename(filepath);
+      else
+        this.filepath = this.settings.savePath + '\\' + path.basename(filepath);
+    }
     this.mediaRecorder.stop();
   }
 
