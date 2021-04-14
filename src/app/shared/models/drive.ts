@@ -22,5 +22,5 @@ export interface Drive {
   logicalBlockSize: number;
   mountpoints: Mountpoint[];
   raw: string;
-  size: number | null;
+  size: number | string | null;
 }

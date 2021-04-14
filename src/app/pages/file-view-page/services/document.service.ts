@@ -23,7 +23,9 @@ export class DocumentService {
     private readonly fileSystem: FileSystemService,
     private readonly pdfService: PdfService,
   ) {
-    fileSystem.listDisks().then(console.log);
+    console.log(fileSystem.getFolderContent('/Users/minish144/Desktop/TribTests/'))
+    fileSystem.listDisks().then(console.log)
+
   }
 
   public get count(): number {
