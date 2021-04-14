@@ -22,11 +22,7 @@ export class DocumentService {
     private readonly converter: ConversionService,
     private readonly fileSystem: FileSystemService,
     private readonly pdfService: PdfService,
-  ) {
-    console.log(fileSystem.getFolderContent('/Users/minish144/Desktop/TribTests/'))
-    fileSystem.listDisks().then(console.log)
-
-  }
+  ) {}
 
   public get count(): number {
     return this.opened.length;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ElectronService } from '../../../core/services';
-import { Drive, FolderContent, File } from '../../models';
+import { Drive, FolderContent, File, Folder } from '../../models';
 import { ipcRenderer } from 'electron';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -32,9 +32,9 @@ export class FileSystemService {
       const name = this.path.basename(path);
       const size = this.fileSize(stats.size);
       const type = this.getFileType(path);
-      return { name, size, type };
+      return { name, size, type, path };
     } else {
-      return { name: '', size: '', type: '' };
+      return { name: '', size: '', type: '', path };
     }
   };
 
@@ -84,12 +84,20 @@ export class FileSystemService {
       path = path.slice(0, -1);
 
     const elements: string[] = this.fs.readdirSync(path);
-    console.log(elements);
+
     elements.forEach(element => {
       const elementPath = path + delimeter + element;
-      console.log('Element: ', elementPath, 'isDir?: ', fs.statSync(elementPath).isDirectory());
-      if (fs.statSync(elementPath).isDirectory())
-        resultObject.folders.push(element);
+
+      if (fs.statSync(elementPath).isDirectory()) {
+        let folderPath = ''
+        if (process.platform === 'win32')
+          folderPath = path + '\\' + element;
+        else
+          folderPath = path + '/' + element;
+
+        const folder: Folder = { name: element, path }
+        resultObject.folders.push(folder);
+      }
       else
         resultObject.files.push(this.fileInfo(elementPath));
     });
@@ -97,9 +105,21 @@ export class FileSystemService {
     return resultObject;
   }
 
-  public dirExists(path: string) {
+  public dirExists(path: string): boolean {
     return this.fs.existsSync(path);
   }
 
+  public ifDirAboveExists(path: string): boolean {
+    if (process.platform !== 'win32') {
+      // implement
+    } else {
+      // implement
+    }
+    return true; // moq
+  }
 
+  public parentDir(path: string): string {
+    const dir = this.path.dirname(path);
+    return dir;
+  }
 }
