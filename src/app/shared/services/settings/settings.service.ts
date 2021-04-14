@@ -16,7 +16,7 @@ export class SettingsService {
   private readonly defaultPath: string = 'settings.ini';
   private readonly defaultSettings: Settings = {
     recording: {
-      saveWithSource: 'true',
+      saveWithSource: true,
       savePath: ''
     }
   };
