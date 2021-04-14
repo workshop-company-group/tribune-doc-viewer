@@ -55,7 +55,7 @@ export class SettingsService {
     settings.recording.saveWithSource = (settings.recording.saveWithSource == 'true');
 
     if (settings.recording.savePath.substr(-1) === '/')
-      this._settings.recording.savePath = settings.recording.savePath.slice(0, -1);
+      settings.recording.savePath = settings.recording.savePath.slice(0, -1);
 
     return settings;
   }
