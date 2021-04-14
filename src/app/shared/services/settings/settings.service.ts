@@ -61,7 +61,7 @@ export class SettingsService {
   }
 
   public get settings(): Settings {
-    return this.settings;
+    return this._settings;
   }
 
   public get savePath(): string {
@@ -73,7 +73,7 @@ export class SettingsService {
   }
 
   public set settings(settings: Settings) {
-    this.settings = this.handleSettings(settings);
+    this._settings = this.handleSettings(settings);
     this.save()
   }
 
