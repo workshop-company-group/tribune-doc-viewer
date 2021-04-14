@@ -105,7 +105,7 @@ export class RecorderService {
     this.mediaRecorder.start();
   }
 
-  public stop(filepath: string = null): void {
+  public stop(filepath: string): void {
     if (this.settings.withSource)
       this.filepath = filepath;
     else
