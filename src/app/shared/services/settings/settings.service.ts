@@ -37,6 +37,7 @@ export class SettingsService {
   }
 
   public set settings(settings: Settings) {
+    settings.recording.saveWithSource = settings.recording.saveWithSource.toString();
     this.writeIniFile.sync('settings.ini', settings);
   }
 
