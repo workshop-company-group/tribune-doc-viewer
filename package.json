@@ -87,8 +87,10 @@
   "dependencies": {
     "@types/pdfjs-dist": "~2.0.1",
     "@types/video.js": "7.3.15",
+    "crypto-js": "4.0.0",
     "css-element-queries": "1.2.3",
     "file-loader": "6.0.0",
+    "jsonfile": "4.0.0",
     "pdfjs-dist": "2.6.347",
     "read-ini-file": "3.0.1",
     "videojs-record": "4.2.0",
