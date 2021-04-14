@@ -74,8 +74,7 @@ export class SettingsService {
   }
 
   public set settings(settings: Settings) {
-    this._settings = settings;
-    this._settings = this.handleSettings(this._settings);
+    this._settings = this.handleSettings(settings);
     this.save()
   }
 
