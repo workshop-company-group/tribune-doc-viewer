@@ -47,7 +47,7 @@ export class SettingsService {
   }
 
   public reload() {
-    this.settings = this.loadIniFile(this.defaultPath);
+    this.settings = this.loadIniFile.sync(this.defaultPath);
   }
 
   private handleSettings(settings: Settings) {
