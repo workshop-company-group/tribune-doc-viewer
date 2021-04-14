@@ -42,14 +42,10 @@ export class SettingsService {
   }
 
   public set savePath(path: string) {
-    const settings = this.settings;
-    settings.recording.savePath = path;
-    this.settings = settings;
+    this.settings.recording.savePath = path;
   }
 
   public set withSource(condition: boolean) {
-    const settings = this.settings;
-    settings.recording.saveWithSource = condition.toString();
-    this.settings = settings;
+    this.settings.recording.saveWithSource = condition.toString();
   }
 }
