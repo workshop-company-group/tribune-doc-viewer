@@ -1,4 +1,8 @@
-export interface Disk {
+export interface Mountpoint {
+  path: string;
+  label: string | null;
+}
+export interface Drive {
   blockSize: number;
   busType: string;
   busVersion: null;
@@ -19,10 +23,4 @@ export interface Disk {
   mountpoints: Mountpoint[];
   raw: string;
   size: number | null;
-  partitionTableType: 'mbr' | 'gpt' | null;
-}
-
-export interface Mountpoint {
-  path: string;
-  label: string | null;
 }

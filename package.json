@@ -89,7 +89,7 @@
     "@types/video.js": "7.3.15",
     "crypto-js": "4.0.0",
     "css-element-queries": "1.2.3",
-    "drivelist": "9.2.4",
+    "electron-drivelist": "8.0.10",
     "file-loader": "6.0.0",
     "jsonfile": "4.0.0",
     "pdfjs-dist": "2.6.347",
