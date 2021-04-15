@@ -109,12 +109,7 @@ export class FileSystemService {
     return this.fs.existsSync(path);
   }
 
-  public ifDirAboveExists(path: string): boolean {
-    // if (process.platform !== 'win32') {
-    //   // win code
-    // } else {
-    //   // unix code
-    // }
+  public ifDirAboveExists(path: string): boolean { // TEST
     const parent = this.parentDir(path);
     return !(parent == '.' || parent == path);
   }
