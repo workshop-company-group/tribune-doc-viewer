@@ -97,9 +97,9 @@ export class FileSystemService {
 
         const folder: Folder = { name: element, path }
         resultObject.folders.push(folder);
-      }
-      else
+      } else {
         resultObject.files.push(this.fileInfo(elementPath));
+      }
     });
 
     return resultObject;
