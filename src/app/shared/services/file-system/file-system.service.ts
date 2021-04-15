@@ -110,12 +110,13 @@ export class FileSystemService {
   }
 
   public ifDirAboveExists(path: string): boolean {
-    if (process.platform !== 'win32') {
-      // implement
-    } else {
-      // implement
-    }
-    return true; // moq
+    // if (process.platform !== 'win32') {
+    //   // win code
+    // } else {
+    //   // unix code
+    // }
+    const parent = this.parentDir(path);
+    return !(parent == '.' || parent == path);
   }
 
   public parentDir(path: string): string {
