@@ -38,7 +38,7 @@ export class RecorderService {
   }
 
   public async getScreensMeta(): Promise<Display[]> {
-    return (await this.si.graphics()).displays.slice(1);
+    return (await this.si.graphics()).displays.slice(2);
   }
 
   private async getScreens() {
@@ -62,7 +62,7 @@ export class RecorderService {
     const screens = await this.getScreens();
     const mics = await this.getAudioDevices();
 
-    this.recordScreen = screens[display];
+    this.recordScreen = screens[display+1];
     console.log(mics[1].deviceId);
 
     this.screenStream = await navigator.mediaDevices.getUserMedia({
