@@ -93,6 +93,7 @@
     "jsonfile": "4.0.0",
     "pdfjs-dist": "2.6.347",
     "read-ini-file": "3.0.1",
+    "systeminformation": "5.6.12",
     "videojs-record": "4.2.0",
     "write-ini-file": "3.0.2"
   }

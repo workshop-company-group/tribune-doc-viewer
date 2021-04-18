@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { desktopCapturer } from 'electron';
 import { ElectronService } from '../../../core/services';
 import { SettingsService } from '../'
+import { Display } from '../../models';
+import * as si from 'systeminformation';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -14,6 +16,7 @@ let recordedChunks = [];
 export class RecorderService {
   fs: typeof fs;
   path: typeof path;
+  si: typeof si;
   desktopCapturer: typeof desktopCapturer;
   recordScreen: Electron.DesktopCapturerSource;
   screenStream: MediaStream = null;
@@ -29,11 +32,20 @@ export class RecorderService {
     if (this.electron.isElectron) {
       this.fs = window.require('fs');
       this.path = window.require('path');
+      this.si = window.require('systeminformation');
       this.desktopCapturer = window.require('electron').desktopCapturer;
     }
   }
 
+  public async getScreensMeta(): Promise<Display[]> {
+    return (await this.si.graphics()).displays.slice(1);
+  }
+
   private async getScreens() {
+    console.log(await this.getScreensMeta());
+    this.desktopCapturer.getSources({types: ['screen']}).then(array => {
+      console.log(array)
+    })
     return await this.desktopCapturer.getSources({types: ['screen']});
   }
 
@@ -106,10 +118,12 @@ export class RecorderService {
   }
 
   public stop(filepath: string): void {
-    if (this.settings.withSource)
+    if (this.settings.withSource) {
+      console.log('filepath: ', this.filepath)
       this.filepath = filepath;
+    }
     else {
-      if (process.platform === 'win32')
+      if (process.platform !== 'win32')
         this.filepath = this.settings.savePath + '/' + path.basename(filepath);
       else
         this.filepath = this.settings.savePath + '\\' + path.basename(filepath);
