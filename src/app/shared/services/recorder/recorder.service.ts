@@ -58,7 +58,7 @@ export class RecorderService {
     return devices;
   }
 
-  public async setExternalMonitor(display: number = 1): Promise<void> {
+  public async setExternalMonitor(display: number = 0): Promise<void> {
     const screens = await this.getScreens();
     const mics = await this.getAudioDevices();
 
