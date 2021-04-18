@@ -58,38 +58,35 @@ export class RecorderService {
     return devices;
   }
 
-  public async setExternalMonitor(): Promise<void> {
+  public async setExternalMonitor(display: number = 1): Promise<void> {
     const screens = await this.getScreens();
     const mics = await this.getAudioDevices();
-    // if (screens.length === 0) // uncomment for testing on primary monitor
-    if (screens.length === 1)
-      this.recordScreen = null;
-    else {
-      // this.recordScreen = screens[0]; // uncomment for testing on primary monitor
-      this.recordScreen = screens[1];
-      console.log(mics[1].deviceId);
-      this.screenStream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          mandatory: {
-            chromeMediaSource: 'desktop',
-            chromeMediaSourceId: this.recordScreen.id
-          }
-        }
-      });
 
-      this.micStream = await navigator.mediaDevices.getUserMedia({
-        audio: {
-          deviceId: { exact: mics[1].deviceId }
-        }
-      });
-      let tracks = [...this.screenStream.getTracks(), ...this.micStream.getAudioTracks()]
-      this.stream = new MediaStream(tracks);
-      console.log('screenStream: ', this.screenStream);
+    this.recordScreen = screens[display];
+    console.log(mics[1].deviceId);
 
-      this.mediaRecorder = new MediaRecorder(this.stream, { mimeType: 'video\/webm' });
-      this.mediaRecorder.ondataavailable = this.onDataAvailable;
-      this.mediaRecorder.onstop = (e) => { this.onStop(e) };
-    }
+    this.screenStream = await navigator.mediaDevices.getUserMedia({
+      video: {
+        mandatory: {
+          chromeMediaSource: 'desktop',
+          chromeMediaSourceId: this.recordScreen.id
+        }
+      }
+    });
+
+    this.micStream = await navigator.mediaDevices.getUserMedia({
+      audio: {
+        deviceId: { exact: mics[1].deviceId }
+      }
+    });
+
+    let tracks = [...this.screenStream.getTracks(), ...this.micStream.getAudioTracks()]
+    this.stream = new MediaStream(tracks);
+    console.log('screenStream: ', this.screenStream);
+
+    this.mediaRecorder = new MediaRecorder(this.stream, { mimeType: 'video\/webm' });
+    this.mediaRecorder.ondataavailable = this.onDataAvailable;
+    this.mediaRecorder.onstop = (e) => { this.onStop(e) };
   }
 
   private onDataAvailable(e: Event): void {
