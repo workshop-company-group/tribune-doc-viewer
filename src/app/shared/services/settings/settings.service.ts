@@ -38,10 +38,12 @@ export class SettingsService {
   }
 
   private initIni() {
+    console.log(this.fs.existsSync(this.defaultPath))
     if (!this.fs.existsSync(this.defaultPath)) {
       this.writeIniFile(this.defaultPath, this.defaultSettings);
       this.settings = this.defaultSettings;
     } else {
+      console.log('reloaded')
       this.reload();
     }
   }
@@ -51,7 +53,8 @@ export class SettingsService {
   }
 
   private handleSettings(settings: Settings) {
-    settings.recording.saveWithSource = (settings.recording.saveWithSource == 'true');
+    settings.recording.saveWithSource = (settings.recording.saveWithSource == 'true' ||
+                                         settings.recording.saveWithSource === true);
 
     if (settings.recording.savePath.substr(-1) === '/' ||
         settings.recording.savePath.substr(-1) === '\\')
