@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { WindowStateService } from '../../shared/services/window-state/window-state.service';
 import { UpdateService } from '../../update/services/update.service';
-import { DocumentService, RecordBroadcastService, } from '../file-view-page/services';
+import { DocumentService, RecordBroadcastService, } from '../file-view/services';
 
 @Component({
   selector: 'app-main-menu-page',
