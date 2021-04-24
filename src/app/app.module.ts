@@ -9,6 +9,8 @@ import { UpdateModule } from './update/update.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+// TODO: make import to page module
+import { FileSelectModule } from './components/file-select/file-select.module';
 
 import { FileTitleMenuComponent,
          FileTitleMenuItemComponent,
@@ -65,6 +67,7 @@ import { FileViewPageComponent,
     SharedModule,
     UpdateModule,
     AppRoutingModule,
+    FileSelectModule, // TODO: import to page module
   ],
   providers: [],
   bootstrap: [AppComponent]

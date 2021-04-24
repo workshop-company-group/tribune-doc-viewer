@@ -28,5 +28,10 @@
         (cancel-click)="cancelClosing()"
         (confirm-click)="closeDocument()">
     </app-file-close-confirmation>
+
+    <app-file-select-dialog class="confirmation"
+        *ngIf="confirmation.state === 'select-file'"
+        (close-click)="fileSelectedHandler()">
+    </app-file-select-dialog>
 </div>
 

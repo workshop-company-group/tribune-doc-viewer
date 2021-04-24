@@ -37,6 +37,10 @@ export class FileViewPageComponent {
     this.confirmation.state = null;
   }
 
+  public fileSelectedHandler(): void {
+    this.confirmation.state = null;
+  }
+
   public startBroadcasting(): void {
     this.confirmation.state = null;
     this.recordBroadcast.startBroadcasting(

@@ -5,6 +5,7 @@ import { BehaviorSubject, } from 'rxjs';
 type ConfirmationState = null | 'stop-recording'
                               | 'close-recording'
                               | 'close-broadcasting'
+                              | 'select-file'
                               | 'select-broadcasting';
 
 @Injectable({
