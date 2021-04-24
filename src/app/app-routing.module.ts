@@ -17,7 +17,11 @@ const routes: Routes = [
   {
     path: 'file-view',
     component: FileViewPageComponent
-  }
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsModule),
+  },
 ];
 
 @NgModule({
