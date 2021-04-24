@@ -27,6 +27,8 @@
   /* ----- Component styles ----- */
   /* Small button */
   --small-button-background: var(--faint-light-grey-gradient);
+  --normal-button-padding: 0;
+  --normal-button-justify-content: center;
   /* Record broadcast button */
   --record-broadcast-button-icon-width: 30px;
 }
