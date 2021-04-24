@@ -23,4 +23,10 @@ export class PasswordStateService {
     this.pageStateSubject.next(value);
   }
 
+  public continueWithPassword() {
+    if (this.pageState === 'settings') {
+      console.log('settings page was called');
+    }
+  }
+
 }
