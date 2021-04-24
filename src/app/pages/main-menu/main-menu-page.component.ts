@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { WindowStateService } from '../../shared/services/window-state/window-state.service';
 import { UpdateService } from '../../update/services/update.service';
 import { DocumentService, RecordBroadcastService, } from '../file-view/services';
+import { PasswordStateService, } from '../password/services';
 
 @Component({
   selector: 'app-main-menu-page',
@@ -14,9 +15,10 @@ export class MainMenuPageComponent implements OnInit {
 
   constructor(
     public readonly documentService: DocumentService,
-    private readonly stateService: WindowStateService,
-    private readonly recordBroadcast: RecordBroadcastService,
-    private readonly router: Router,
+    public readonly passwordState: PasswordStateService,
+    public readonly recordBroadcast: RecordBroadcastService,
+    public readonly router: Router,
+    public readonly stateService: WindowStateService,
     public readonly updateService: UpdateService
   ) { }
 
@@ -27,7 +29,8 @@ export class MainMenuPageComponent implements OnInit {
   }
 
   public openSettings(): void {
-    console.log('Settings page called');
+    this.passwordState.pageState = 'settings';
+    this.router.navigate(['/password']);
   }
 
   public quitApplication(): void {
