@@ -9,6 +9,9 @@ import { FileSelectDialogComponent } from './components';
   ],
   imports: [
     CommonModule,
-  ]
+  ],
+  exports: [
+    FileSelectDialogComponent,
+  ],
 })
 export class FileSelectModule { }
