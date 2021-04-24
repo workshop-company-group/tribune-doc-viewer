@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PasswordPageComponent implements OnInit {
 
+  public isPasswordWrong = false;
+
   constructor() { }
 
   ngOnInit(): void {

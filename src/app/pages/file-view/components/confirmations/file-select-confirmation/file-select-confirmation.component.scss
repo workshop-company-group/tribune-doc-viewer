@@ -58,7 +58,8 @@
     }
 
     .select-button {
-      --small-button-background: var(--accent-blue-vertical-gradient);
+      --button-background: var(--accent-blue-vertical-gradient);
+      --button-color: var(--base-white-color);
     }
   }
 }

@@ -25,8 +25,9 @@
   --dark-text-shadow: 1px 1px 10px #FFFFFF;
 
   /* ----- Component styles ----- */
-  /* Small button */
-  --small-button-background: var(--faint-light-grey-gradient);
+  /* Buttons */
+  --button-background: var(--faint-light-grey-vertical-gradient);
+  --button-color: var(--base-black-color);
   /* Record broadcast button */
   --record-broadcast-button-icon-width: 30px;
 }
