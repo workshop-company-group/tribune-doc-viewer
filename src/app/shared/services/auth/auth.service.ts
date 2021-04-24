@@ -25,7 +25,7 @@ export class AuthService {
 
   public passwordIsValid(password: string): boolean {
     const auth: Auth = this.jsonfile.readFileSync('auth.json');
-    const decrypted = CryptoJS.AES.decrypt(auth.password, this.salt);
+    const decrypted = CryptoJS.AES.decrypt(auth.password, this.salt).toString(CryptoJS.enc.Utf8);
     return password === decrypted;
   }
 }
