@@ -14,21 +14,21 @@ import { FileTitleMenuComponent,
          FileTitleMenuItemComponent,
          FileViewBackgroundComponent,
          FileViewerComponent,
-         RecordBroadcastControlComponent, } from './pages/file-view-page/components';
+         RecordBroadcastControlComponent, } from './pages/file-view/components';
 import { DocumentViewComponent,
          MainSlideComponent,
          PdfViewComponent,
          SlideButtonComponent,
          SlideNavComponent,
          SlideProgressBarComponent,
-         SlideThumbnailComponent, } from './pages/file-view-page/components/view-utils';
+         SlideThumbnailComponent, } from './pages/file-view/components/view-utils';
 import { RecordBroadcastButtonComponent,
-         RecordControlsComponent } from './pages/file-view-page/components/record-broadcast-utils';
+         RecordControlsComponent } from './pages/file-view/components/record-broadcast-utils';
 import { FileCloseConfirmationComponent,
          FileSelectConfirmationComponent,
-         FinishRecordConfirmationComponent, } from './pages/file-view-page/components/confirmations';
+         FinishRecordConfirmationComponent, } from './pages/file-view/components/confirmations';
 
-import { DocumentTitlePipe } from './pages/file-view-page/pipes';
+import { DocumentTitlePipe } from './pages/file-view/pipes';
 
 import { FileViewPageComponent,
          MainMenuPageComponent } from './pages';
