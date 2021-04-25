@@ -70,7 +70,9 @@ export class FileSystemService {
           drive.size = this.getFileSize(drive.size as number);
           result.push(drive);
         }
-      } catch (error) {}
+      } catch (error) {
+        throw new FileSystemError('Failed to get drives list');
+      }
     });
     return result;
   }
