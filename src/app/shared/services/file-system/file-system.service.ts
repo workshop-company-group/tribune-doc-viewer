@@ -26,7 +26,7 @@ export class FileSystemService {
     return path.slice(index+1);
   }
 
-  private fileInfo(path: string): File {
+  private getFileInfo(path: string): File {
     if (fs.existsSync(path)) {
       let stats = fs.statSync(path);
       const name = this.path.basename(path);
@@ -60,7 +60,7 @@ export class FileSystemService {
     });
   }
 
-  public async listDisks(): Promise<Drive[]> {
+  public async listDrives(): Promise<Drive[]> {
     const drives: Drive[] = await this.ipcRenderer.invoke('drive-list');
     const result: Drive[] = [];
     drives.forEach(drive => {
@@ -98,7 +98,7 @@ export class FileSystemService {
         const folder: Folder = { name: element, path }
         resultObject.folders.push(folder);
       } else {
-        resultObject.files.push(this.fileInfo(elementPath));
+        resultObject.files.push(this.getFileInfo(elementPath));
       }
     });
 
