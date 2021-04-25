@@ -1,0 +1,19 @@
+@import "../../../../../styles/mixins.scss";
+
+input {
+  width: 395px;
+  height: 70px;
+
+  background: var(--base-white-color);
+
+  color: var(--base-black-color);
+  text-align: center;
+  @extend %primary-regular-font;
+
+  border-radius: 10px;
+  box-shadow: var(--base-inner-shadow);
+
+  ::placeholder {
+    color: var(--faint-dark-grey-color);
+  }
+}
