@@ -42,19 +42,13 @@ export class RecorderService {
   }
 
   private async getScreens() {
-    console.log(await this.getScreensMeta());
     this.desktopCapturer.getSources({types: ['screen']}).then(array => {
-      console.log(array)
     })
     return await this.desktopCapturer.getSources({types: ['screen']});
   }
 
   private async getAudioDevices() {
     const devices = await navigator.mediaDevices.enumerateDevices()
-    devices.forEach(function(device) {
-    console.log(device.kind + ": " + device.label +
-                " id = " + device.deviceId);
-    });
     return devices;
   }
 
@@ -63,7 +57,6 @@ export class RecorderService {
     const mics = await this.getAudioDevices();
 
     this.recordScreen = screens[display+1];
-    console.log(mics[1].deviceId);
 
     this.screenStream = await navigator.mediaDevices.getUserMedia({
       video: {
@@ -82,20 +75,16 @@ export class RecorderService {
 
     let tracks = [...this.screenStream.getTracks(), ...this.micStream.getAudioTracks()]
     this.stream = new MediaStream(tracks);
-    console.log('screenStream: ', this.screenStream);
-
     this.mediaRecorder = new MediaRecorder(this.stream, { mimeType: 'video\/webm' });
     this.mediaRecorder.ondataavailable = this.onDataAvailable;
     this.mediaRecorder.onstop = (e) => { this.onStop(e) };
   }
 
   private onDataAvailable(e: Event): void {
-    console.log('video data available');
     recordedChunks.push(e['data']);
   }
 
   private async onStop(e: Event): Promise<void> {
-    console.log('onstop: ', e);
     const blob = new Blob(recordedChunks, {
       type: 'video/mp4; codecs=vp9'
     });
@@ -106,7 +95,7 @@ export class RecorderService {
     //   const date = new Date().toString();
     //   this.filepath = './temp/' + date + '.webm';
     // }
-    fs.writeFile(this.filepath, buffer, () => console.log('video saved successfully!'));
+    fs.writeFile(this.filepath, buffer, () => {});
     recordedChunks = [];
   }
 
@@ -116,7 +105,6 @@ export class RecorderService {
 
   public stop(filepath: string): void {
     if (this.settings.withSource) {
-      console.log('filepath: ', this.filepath)
       this.filepath = filepath;
     }
     else {
