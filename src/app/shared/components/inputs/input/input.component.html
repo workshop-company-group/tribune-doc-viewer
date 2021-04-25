@@ -1,0 +1,6 @@
+<input type="text"
+       [placeholder]="placeholder"
+       [(ngModel)]="value"
+       [disabled]="disabled"
+       (input)="changeHandler($event.target.value)"
+       (blur)="touchHandler()">

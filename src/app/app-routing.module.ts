@@ -17,7 +17,11 @@ const routes: Routes = [
   {
     path: 'file-view',
     component: FileViewPageComponent
-  }
+  },
+  {
+    path: 'password',
+    loadChildren: () => import('./pages/password/password.module').then(m => m.PasswordModule),
+  },
 ];
 
 @NgModule({

@@ -8,8 +8,8 @@ button {
   align-items: center;
   justify-content: center;
 
-  background: var(--faint-light-grey-vertical-gradient);
-  color: var(--base-black-color);
+  background: var(--button-background);
+  color: var(--button-color);
 
   @extend %primary-regular-font;
 
