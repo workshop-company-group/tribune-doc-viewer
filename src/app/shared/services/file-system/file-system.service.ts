@@ -110,11 +110,11 @@ export class FileSystemService {
   }
 
   public dirAboveExists(path: string): boolean { // TEST
-    const parent = this.parentDir(path);
+    const parent = this.getParentDir(path);
     return !(parent == '.' || parent == path);
   }
 
-  public parentDir(path: string): string {
+  public getParentDir(path: string): string {
     const dir = this.path.dirname(path);
     return dir;
   }
