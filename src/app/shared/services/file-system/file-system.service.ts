@@ -109,7 +109,7 @@ export class FileSystemService {
     return this.fs.existsSync(path);
   }
 
-  public ifDirAboveExists(path: string): boolean { // TEST
+  public dirAboveExists(path: string): boolean { // TEST
     const parent = this.parentDir(path);
     return !(parent == '.' || parent == path);
   }
