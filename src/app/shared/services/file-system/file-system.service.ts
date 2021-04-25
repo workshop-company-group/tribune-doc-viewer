@@ -44,7 +44,7 @@ export class FileSystemService {
     while(size >= 1024) {
         size /= 1024;
         ++i;
-    }g
+    }
     return size.toFixed(1) + ' ' + units[i];
   }
 
