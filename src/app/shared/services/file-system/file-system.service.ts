@@ -28,7 +28,7 @@ export class FileSystemService {
 
   private fileInfo(path: string): File {
     if (fs.existsSync(path)) {
-      var stats = fs.statSync(path);
+      let stats = fs.statSync(path);
       const name = this.path.basename(path);
       const size = this.fileSize(stats.size);
       const type = this.getFileType(path);
@@ -39,8 +39,8 @@ export class FileSystemService {
   };
 
   private fileSize(size: number) {
-    var units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-    var i = 0;
+    let units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    let i = 0;
     while(size >= 1024) {
         size /= 1024;
         ++i;
