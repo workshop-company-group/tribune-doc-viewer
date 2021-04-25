@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ElectronService } from '../../../core/services';
 import { Drive, FolderContent, File, Folder } from '../../models';
 import { ipcRenderer } from 'electron';
+import { FileSystemError } from '../exceptions'
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -34,7 +35,7 @@ export class FileSystemService {
       const type = this.getFileType(path);
       return { name, size, type, path };
     } else {
-      return { name: '', size: '', type: '', path };
+      throw new FileSystemError('File was not found!');
     }
   };
 
