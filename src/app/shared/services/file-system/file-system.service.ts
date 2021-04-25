@@ -30,7 +30,7 @@ export class FileSystemService {
     if (fs.existsSync(path)) {
       let stats = fs.statSync(path);
       const name = this.path.basename(path);
-      const size = this.fileSize(stats.size);
+      const size = this.getFileSize(stats.size);
       const type = this.getFileType(path);
       return { name, size, type, path };
     } else {
@@ -38,13 +38,13 @@ export class FileSystemService {
     }
   };
 
-  private fileSize(size: number) {
+  private getFileSize(size: number) {
     let units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
     let i = 0;
     while(size >= 1024) {
         size /= 1024;
         ++i;
-    }
+    }g
     return size.toFixed(1) + ' ' + units[i];
   }
 
@@ -66,7 +66,7 @@ export class FileSystemService {
     drives.forEach(drive => {
       try {
         if (drive.mountpoints.length > 0) {
-          drive.size = this.fileSize(drive.size as number);
+          drive.size = this.getFileSize(drive.size as number);
           result.push(drive);
         }
       } catch (error) {}
