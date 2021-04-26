@@ -3,6 +3,7 @@ import { desktopCapturer } from 'electron';
 import { ElectronService } from '../../../core/services';
 import { SettingsService } from '../'
 import { Display } from '../../models';
+import { RecorderError } from '../exceptions'
 import * as si from 'systeminformation';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -41,10 +42,21 @@ export class RecorderService {
   //   return (await this.si.graphics()).displays.slice(2);
   // }
 
-  private async getScreens() {
-    this.desktopCapturer.getSources({types: ['screen']}).then(array => {
-    })
-    return await this.desktopCapturer.getSources({types: ['screen']});
+  private async getCapturerSource(): Promise<Electron.DesktopCapturerSource|null> {
+    const availableDisplays = await this.settings.getAvailableDisplays()
+    let sourceNumber = -1;
+    const con = this.settings.screenConnection;
+
+    for (let i = 0; i < availableDisplays.length; i++) {
+      const display = availableDisplays[i];
+      if (display.connection === con) sourceNumber = i;
+    }
+
+    if (sourceNumber === -1)
+      throw new RecorderError('Failed to find monitor');
+
+    const sources = await this.desktopCapturer.getSources({types: ['screen']});
+    return sources[sourceNumber+1];
   }
 
   private async getAudioDevices() {
@@ -53,10 +65,9 @@ export class RecorderService {
   }
 
   public async setExternalMonitor(display: number = 0): Promise<void> {
-    const screens = await this.getScreens();
+    this.recordScreen = await this.getCapturerSource()
     const mics = await this.getAudioDevices();
 
-    this.recordScreen = screens[display+1];
 
     this.screenStream = await navigator.mediaDevices.getUserMedia({
       video: {
