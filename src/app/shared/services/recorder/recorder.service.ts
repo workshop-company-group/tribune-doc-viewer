@@ -37,9 +37,9 @@ export class RecorderService {
     }
   }
 
-  public async getScreensMeta(): Promise<Display[]> {
-    return (await this.si.graphics()).displays.slice(2);
-  }
+  // public async getScreensMeta(): Promise<Display[]> {
+  //   return (await this.si.graphics()).displays.slice(2);
+  // }
 
   private async getScreens() {
     this.desktopCapturer.getSources({types: ['screen']}).then(array => {
