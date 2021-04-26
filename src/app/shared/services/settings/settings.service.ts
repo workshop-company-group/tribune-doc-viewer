@@ -46,12 +46,10 @@ export class SettingsService {
   }
 
   private initIni() {
-    console.log(this.fs.existsSync(this.defaultPath))
     if (!this.fs.existsSync(this.defaultPath)) {
       this.writeIniFile(this.defaultPath, this.defaultSettings);
       this.settings = this.defaultSettings;
     } else {
-      console.log('reloaded')
       this.reload();
     }
   }
@@ -65,8 +63,6 @@ export class SettingsService {
       found = displays.filter(display => {
         display.connection === this.settings.screen.connection
       });
-
-    console.log(displays)
 
     if (found.length > 0) {
       return;
