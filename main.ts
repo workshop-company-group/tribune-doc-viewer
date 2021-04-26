@@ -42,11 +42,12 @@ function createWindow(): BrowserWindow {
   return win;
 }
 
-function createExternalWindow(): BrowserWindow {
+function createExternalWindow(id: number): BrowserWindow {
   const electronScreen = screen;
   const displays = electronScreen.getAllDisplays()
   const externalDisplay = displays.find((display) => {
-    return display.bounds.x !== 0 || display.bounds.y !== 0
+    // return display.bounds.x !== 0 || display.bounds.y !== 0
+    return display.id === id;
   })
 
   if (externalDisplay) {
@@ -78,13 +79,15 @@ function createExternalWindow(): BrowserWindow {
   return externalWin;
 }
 
-function isExternalMonitorAvailable(): boolean {
-  const displays = screen.getAllDisplays();
-  const externalDisplay = displays.find((display) => {
-    return display.bounds.x !== 0 || display.bounds.y !== 0
-  });
-  return externalDisplay ? true : false;
-}
+// function isExternalMonitorAvailable(): boolean {
+//   const displays = screen.getAllDisplays();
+//   console.log('all: ', displays);
+//   // console.log('requested: ');
+//   const externalDisplay = displays.find((display) => {
+//     return display.bounds.x !== 0 || display.bounds.y !== 0
+//   });
+//   return externalDisplay ? true : false;
+// }
 
 try {
   app.on('ready', () => setTimeout(createWindow, 400));
@@ -107,7 +110,8 @@ try {
 
   // Create new window on signal
   ipcMain.handle('external-window', async (event, arg) => {
-    createExternalWindow();
+
+    createExternalWindow(arg);
     const promise1 = new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve('foo');
@@ -118,9 +122,9 @@ try {
     return true;
   });
 
-  ipcMain.handle('is-external-connected', async (event, arg) => {
-    return isExternalMonitorAvailable();
-  });
+  // ipcMain.handle('is-external-connected', async (event, arg) => {
+  //   return isExternalMonitorAvailable();
+  // });
 
   // Closes the window on external monitor on signal
   ipcMain.on('close-external-window', () => {

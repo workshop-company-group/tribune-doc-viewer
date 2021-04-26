@@ -54,7 +54,7 @@ export class SettingsService {
     }
   }
 
-  private async checkDisplay(): Promise<void> {
+  public async checkDisplay(): Promise<void> {
     const displays = await this.getAvailableDisplays();
     const conn = this.screenConnection;
     let found = [];

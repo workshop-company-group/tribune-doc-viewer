@@ -42,7 +42,7 @@ export class RecorderService {
   //   return (await this.si.graphics()).displays.slice(2);
   // }
 
-  private async getCapturerSource(): Promise<Electron.DesktopCapturerSource|null> {
+  public async getCapturerSource(): Promise<Electron.DesktopCapturerSource|null> {
     const availableDisplays = await this.settings.getAvailableDisplays()
     let sourceNumber = -1;
     const con = this.settings.screenConnection;
@@ -65,7 +65,7 @@ export class RecorderService {
   }
 
   public async setExternalMonitor(display: number = 0): Promise<void> {
-    this.recordScreen = await this.getCapturerSource()
+    this.recordScreen = await this.getCapturerSource();
     const mics = await this.getAudioDevices();
 
 
