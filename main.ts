@@ -2,6 +2,7 @@ import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import * as path from 'path';
 import { electron } from 'process';
 import { Subject } from 'rxjs';
+import * as drivelist from 'electron-drivelist';
 import * as url from 'url';
 
 let win: BrowserWindow = null;
@@ -149,6 +150,11 @@ try {
   // Changes the page to one which is stated in argument
   ipcMain.on('set-page', (event, arg) => {
     externalWin.webContents.send('set-page', arg);
+  });
+
+  // Returns list of drives
+  ipcMain.handle('drive-list', async (event, arg) => {
+    return await drivelist.list();
   });
 
 } catch (e) {
