@@ -11,9 +11,9 @@ button {
   align-items: center;
   justify-content: var(--normal-button-justify-content);
 
-  background: var(--faint-light-grey-vertical-gradient);
+  background: var(--button-background);
 
-  color: var(--base-black-color);
+  color: var(--button-color);
   @extend %primary-regular-font;
 
   border-radius: 10px;

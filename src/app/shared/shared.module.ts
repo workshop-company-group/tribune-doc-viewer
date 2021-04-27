@@ -2,12 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { WebviewDirective } from './directives/';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, } from '@angular/forms';
 
 import { LargeIconButtonComponent,
          NormalButtonComponent,
          SmallButtonComponent,
          SelectableButtonComponent, } from './components/buttons';
+import { InputComponent, } from './components/inputs';
 
 @NgModule({
   declarations: [
@@ -16,10 +17,12 @@ import { LargeIconButtonComponent,
     NormalButtonComponent,
     SmallButtonComponent,
     SelectableButtonComponent,
+    InputComponent,
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     WebviewDirective,
@@ -28,6 +31,7 @@ import { LargeIconButtonComponent,
     NormalButtonComponent,
     SmallButtonComponent,
     SelectableButtonComponent,
+    InputComponent,
   ]
 })
 export class SharedModule {}

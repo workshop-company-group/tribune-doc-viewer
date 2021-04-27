@@ -2,6 +2,7 @@ import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import * as path from 'path';
 import { electron } from 'process';
 import { Subject } from 'rxjs';
+import * as drivelist from 'electron-drivelist';
 import * as url from 'url';
 
 let win: BrowserWindow = null;
@@ -42,11 +43,12 @@ function createWindow(): BrowserWindow {
   return win;
 }
 
-function createExternalWindow(): BrowserWindow {
+function createExternalWindow(id: number): BrowserWindow {
   const electronScreen = screen;
   const displays = electronScreen.getAllDisplays()
   const externalDisplay = displays.find((display) => {
-    return display.bounds.x !== 0 || display.bounds.y !== 0
+    // return display.bounds.x !== 0 || display.bounds.y !== 0
+    return display.id === id;
   })
 
   if (externalDisplay) {
@@ -78,13 +80,15 @@ function createExternalWindow(): BrowserWindow {
   return externalWin;
 }
 
-function isExternalMonitorAvailable(): boolean {
-  const displays = screen.getAllDisplays();
-  const externalDisplay = displays.find((display) => {
-    return display.bounds.x !== 0 || display.bounds.y !== 0
-  });
-  return externalDisplay ? true : false;
-}
+// function isExternalMonitorAvailable(): boolean {
+//   const displays = screen.getAllDisplays();
+//   console.log('all: ', displays);
+//   // console.log('requested: ');
+//   const externalDisplay = displays.find((display) => {
+//     return display.bounds.x !== 0 || display.bounds.y !== 0
+//   });
+//   return externalDisplay ? true : false;
+// }
 
 try {
   app.on('ready', () => setTimeout(createWindow, 400));
@@ -107,7 +111,8 @@ try {
 
   // Create new window on signal
   ipcMain.handle('external-window', async (event, arg) => {
-    createExternalWindow();
+
+    createExternalWindow(arg);
     const promise1 = new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve('foo');
@@ -118,9 +123,9 @@ try {
     return true;
   });
 
-  ipcMain.handle('is-external-connected', async (event, arg) => {
-    return isExternalMonitorAvailable();
-  });
+  // ipcMain.handle('is-external-connected', async (event, arg) => {
+  //   return isExternalMonitorAvailable();
+  // });
 
   // Closes the window on external monitor on signal
   ipcMain.on('close-external-window', () => {
@@ -145,6 +150,11 @@ try {
   // Changes the page to one which is stated in argument
   ipcMain.on('set-page', (event, arg) => {
     externalWin.webContents.send('set-page', arg);
+  });
+
+  // Returns list of drives
+  ipcMain.handle('drive-list', async (event, arg) => {
+    return await drivelist.list();
   });
 
 } catch (e) {
