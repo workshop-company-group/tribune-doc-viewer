@@ -7,7 +7,9 @@
         <span class="title">Выберите файлы</span>
     </div>
     <div class="drive-container">
-        <app-selectable-button class="drive">
+        <app-selectable-button class="drive"
+           *ngFor="let mountpoint of mountpoints | async">
+            {{ mountpoint.path }}
         </app-selectable-button>
     </div>
 </div>
