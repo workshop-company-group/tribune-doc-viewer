@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FileViewPageComponent,
-         MainMenuPageComponent } from './pages';
+import { MainMenuPageComponent } from './pages';
 
 const routes: Routes = [
   {
@@ -16,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'file-view',
-    component: FileViewPageComponent
+    loadChildren: () => import('./pages/file-view/file-view.module').then(m => m.FileViewModule),
   },
   {
     path: 'password',

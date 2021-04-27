@@ -4,7 +4,7 @@ import {
   ConfirmationService,
   DocumentService,
   RecordBroadcastService,
-} from './services';
+} from '../../services';
 
 @Component({
   selector: 'app-file-view-page',
