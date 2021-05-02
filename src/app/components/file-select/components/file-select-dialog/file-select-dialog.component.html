@@ -43,7 +43,8 @@
                 <span class="type">Папка с файлами</span>
             </div>
             <div class="file-container"
-                *ngFor="let file of fileSelect.currentDirContent.files">
+                *ngFor="let file of fileSelect.currentDirContent.files"
+                [ngClass]="{'selected': file.path === fileSelect.selectedFilePath }">
                 <div class="icon-container">
                     <img [src]="fileSelect.getFileTypeIconPath(file.type)">
                 </div>
@@ -55,6 +56,7 @@
     </div>
 
     <app-small-button class="add-button"
+        [disabled]="!fileSelect.selectedFilePath.length"
         (button-click)="openFiles()">
         Добавить
     </app-small-button>

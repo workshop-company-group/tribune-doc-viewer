@@ -14,4 +14,9 @@ button {
 
   color: var(--button-color);
   @extend %primary-light-font;
+
+  &:disabled {
+    --button-background: var(--faint-light-grey-vertical-gradient);
+    --button-color: var(--faint-dark-grey-color);
+  }
 }

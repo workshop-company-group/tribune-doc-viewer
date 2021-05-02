@@ -30,6 +30,7 @@ export class FileSelectService {
     this.currentDirContent = this.filterDirContent(
       this.fileSystem.getFolderContent(path)
     );
+    this.selectedFilePath = '';
   }
 
   public changeDirToParent() {

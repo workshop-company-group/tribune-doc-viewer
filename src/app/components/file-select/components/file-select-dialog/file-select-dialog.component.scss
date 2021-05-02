@@ -148,6 +148,10 @@
           flex-direction: row;
           align-items: center;
 
+          &.selected {
+            background: var(--faint-light-grey-color);
+          }
+
           .name {
             width: var(--name-field-width);
 

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, } from '@angular/core';
 
 import { FileSystemService, } from '../../../../shared/services';
+import { DocumentService, } from '../../../../pages/file-view/services';
 import { FileSelectService, } from '../../services';
 
 import { Drive, Mountpoint, } from '../../../../shared/models';
@@ -20,13 +21,13 @@ export class FileSelectDialogComponent {
   public currentMountpoint: Mountpoint;
 
   constructor(
+    public readonly documentService: DocumentService,
     public readonly fileSelect: FileSelectService,
     public readonly fileSystem: FileSystemService,
   ) { }
 
   public async openFiles(): Promise<void> {
-    // TODO: open files
-    // await DocumentService.open(path)
+    await this.documentService.open(this.fileSelect.selectedFilePath)
     this.closeEmitter.emit();
   }
 
