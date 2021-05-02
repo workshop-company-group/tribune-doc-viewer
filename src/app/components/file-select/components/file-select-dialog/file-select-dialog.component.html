@@ -8,7 +8,9 @@
     </div>
     <div class="drive-container">
         <app-selectable-button class="drive"
-           *ngFor="let mountpoint of mountpoints | async">
+           *ngFor="let mountpoint of fileSelect.mountpoints"
+           [selected]="fileSelect.isMountpointSelected(mountpoint)"
+           (button-click)="fileSelect.selectMountpoint(mountpoint)">
             {{ mountpoint.path }}
         </app-selectable-button>
     </div>

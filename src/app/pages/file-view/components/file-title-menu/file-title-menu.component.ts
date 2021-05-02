@@ -2,8 +2,10 @@ import { Component, } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Document } from '../../models';
+
 import { ConfirmationService,
   DocumentService } from '../../services';
+import { FileSelectService, } from '../../../../components/file-select/services';
 
 @Component({
   selector: 'app-file-title-menu',
@@ -15,10 +17,12 @@ export class FileTitleMenuComponent {
   constructor(
     public readonly confirmation: ConfirmationService,
     public readonly documentService: DocumentService,
+    public readonly fileSelect: FileSelectService,
     public readonly router: Router,
   ) { }
 
-  public openDocument(): void {
+  public async openDocument(): Promise<void> {
+    await this.fileSelect.loadMountpoints();
     this.confirmation.state = 'select-file';
   }
 

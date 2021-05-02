@@ -3,6 +3,8 @@ import { Component, } from '@angular/core';
 import { ConfirmationService,
   DocumentService } from '../../services';
 
+import { FileSelectService, } from '../../../../components/file-select/services';
+
 @Component({
   selector: 'app-file-viewer',
   templateUrl: './file-viewer.component.html',
@@ -13,9 +15,11 @@ export class FileViewerComponent {
   constructor(
     public readonly confirmation: ConfirmationService,
     public readonly documentService: DocumentService,
+    public readonly fileSelect: FileSelectService,
   ) { }
 
-  public openDocument(): void {
+  public async openDocument(): Promise<void> {
+    await this.fileSelect.loadMountpoints();
     this.confirmation.state = 'select-file';
   }
 
