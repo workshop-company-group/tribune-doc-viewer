@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { FileSystemService, } from '../../../shared/services';
 
-import { Mountpoint, } from '../../../shared/models';
+import { Mountpoint, FolderContent, File, } from '../../../shared/models';
+
+const supportedFileTypes = ['ppt', 'pptx', 'pdf'];
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +15,48 @@ export class FileSelectService {
 
   public selectedMountpoint: Mountpoint;
 
+  public currentDirPath: string;
+
+  public currentDirContent: FolderContent;
+
+  public selectedFilePath: string;
+
   constructor(
     private readonly fileSystem: FileSystemService,
   ) { }
+
+  public changeDir(path: string) {
+    this.currentDirPath = path;
+    this.currentDirContent = this.filterDirContent(
+      this.fileSystem.getFolderContent(path)
+    );
+  }
+
+  public changeDirToParent() {
+    this.changeDir(this.fileSystem.getParentDir(this.currentDirPath));
+  }
+
+  private filterDirContent(content: FolderContent): FolderContent {
+    return {
+      files: content.files.filter(file =>
+        supportedFileTypes.includes(file.type)),
+      folders: content.folders,
+    };
+  }
+
+  public getFileTypeIconPath(fileType: string): string {
+    return `assets/icons/file-formats/${fileType}.svg`;
+  }
 
   public isMountpointSelected(mountpoint: Mountpoint): boolean {
     return this.selectedMountpoint === mountpoint;
   }
 
+  public isCurrentDirRoot(): boolean {
+    return !this.fileSystem.dirAboveExists(this.currentDirPath);
+  }
+
+  // must be called before using any other methods
   public async loadMountpoints(): Promise<void> {
     this.mountpoints = [];
 
@@ -36,12 +72,17 @@ export class FileSelectService {
 
     // setting selected mountpoint and path
     if (this.mountpoints.length) {
-      this.selectedMountpoint = this.mountpoints[0];
+      this.selectMountpoint(this.mountpoints[0]);
     }
+  }
+
+  public selectFile(file: File): void {
+    this.selectedFilePath = file.path;
   }
 
   public selectMountpoint(mountpoint: Mountpoint): void {
     this.selectedMountpoint = mountpoint;
+    this.changeDir(this.selectedMountpoint.path);
   }
 
 }

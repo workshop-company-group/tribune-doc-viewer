@@ -25,26 +25,31 @@
         </div>
 
         <div class="dir-content">
-            <div class="go-back-button">
+            <div class="go-back-button"
+                *ngIf="!fileSelect.isCurrentDirRoot()"
+                (click)="fileSelect.changeDirToParent()">
                 <div class="icon-container">
                     <img src="assets/icons/arrows/left-arrow.svg">
                 </div>
                 <span class="hint">Вернуться назад</span>
             </div>
-            <div class="folder-container">
+            <div class="folder-container"
+                *ngFor="let folder of fileSelect.currentDirContent.folders"
+                (click)="fileSelect.changeDir(folder.path)">
                 <div class="icon-container">
                     <img src="assets/icons/file-formats/folder.svg">
                 </div>
-                <span class="name"></span>
+                <span class="name">{{ folder.name }}</span>
                 <span class="type">Папка с файлами</span>
             </div>
-            <div class="file-container">
+            <div class="file-container"
+                *ngFor="let file of fileSelect.currentDirContent.files">
                 <div class="icon-container">
-                    <img src="">
+                    <img [src]="fileSelect.getFileTypeIconPath(file.type)">
                 </div>
-                <span class="name"></span>
-                <span class="type"></span>
-                <span class="size"></span>
+                <span class="name">{{ file.name }}</span>
+                <span class="type">Файл "{{ file.type }}"</span>
+                <span class="size">{{ file.size }}</span>
             </div>
         </div>
     </div>
