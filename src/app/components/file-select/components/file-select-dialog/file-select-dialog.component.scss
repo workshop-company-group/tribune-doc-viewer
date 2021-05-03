@@ -139,6 +139,9 @@
           flex-direction: row;
           align-items: center;
 
+          cursor: pointer;
+          user-select: none;
+
           .hint {
             color: var(--base-black-color);
           }
@@ -153,6 +156,9 @@
           display: flex;
           flex-direction: row;
           align-items: center;
+
+          cursor: pointer;
+          user-select: none;
 
           &.selected {
             background: var(--faint-light-grey-color);
