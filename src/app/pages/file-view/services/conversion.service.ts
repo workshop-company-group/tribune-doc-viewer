@@ -66,18 +66,18 @@ export class ConversionService {
       const newConvertedPath: string = dir + '/' + name + Date.now().toString() + outputType;
 
       if (type === '.pdf') {
-        await execAsync(`cp ${path} ${newConvertedPath}`);
+        await execAsync(`cp "${path}" "${newConvertedPath}"`);
         return {
-          originPath: '"' + path + '"',
-          convertedPath: '"' + newConvertedPath + '"',
+          originPath: path,
+          convertedPath: newConvertedPath,
           title: name,
         }
       }
-      await execAsync(`soffice --headless --convert-to ${outputType.slice(1)} --outdir ${dir} ${path.replace(' ', '\\ ')}`);
+      await execAsync(`soffice --headless --convert-to ${outputType.slice(1)} --outdir "${dir}" "${path.replace(' ', '\\ ')}"`);
       this.fileRename(convertedPath, newConvertedPath);
       return {
-        originPath: '"' + path + '"',
-        convertedPath: '"' + newConvertedPath + '"',
+        originPath: path,
+        convertedPath: newConvertedPath,
         title: name,
       }
     }
