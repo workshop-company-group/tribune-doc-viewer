@@ -33,6 +33,12 @@ export class FileSystemService {
       const name = this.path.basename(path);
       const size = this.getFileSize(stats.size);
       const type = this.getFileType(path);
+
+      if (process.platform !== 'win32')
+        path += '/' + name
+      else
+        path += '\\' + name
+
       return { name, size, type, path };
     } else {
       throw new FileSystemError('File was not found!');
@@ -98,7 +104,7 @@ export class FileSystemService {
         else
           folderPath = path + '/' + element;
 
-        const folder: Folder = { name: element, path }
+        const folder: Folder = { name: element, path: folderPath }
         resultObject.folders.push(folder);
       } else {
         resultObject.files.push(this.getFileInfo(elementPath));
