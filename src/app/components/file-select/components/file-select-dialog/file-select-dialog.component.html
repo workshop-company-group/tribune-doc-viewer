@@ -44,7 +44,8 @@
             </div>
             <div class="file-container"
                 *ngFor="let file of fileSelect.currentDirContent.files"
-                [ngClass]="{'selected': file.path === fileSelect.selectedFilePath }">
+                [ngClass]="{'selected': file.path === fileSelect.selectedFilePath }"
+                (click)="fileSelect.selectFile(file)">
                 <div class="icon-container">
                     <img [src]="fileSelect.getFileTypeIconPath(file.type)">
                 </div>
