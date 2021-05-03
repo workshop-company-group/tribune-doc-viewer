@@ -1,6 +1,6 @@
-import { File, Folder } from './';
+import { FileInfo, Folder } from './';
 
 export interface FolderContent {
   folders: Folder[];
-  files: File[];
+  files: FileInfo[];
 }

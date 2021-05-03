@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ElectronService } from '../../../core/services';
-import { Drive, FolderContent, File, Folder } from '../../models';
+import { Drive, FolderContent, Folder, FileInfo } from '../../models';
 import { ipcRenderer } from 'electron';
 import { FileSystemError } from '../exceptions'
 import * as fs from 'fs';
@@ -27,7 +27,7 @@ export class FileSystemService {
     return path.slice(index+1);
   }
 
-  private getFileInfo(path: string): File {
+  private getFileInfo(path: string): FileInfo {
     if (fs.existsSync(path)) {
       let stats = fs.statSync(path);
       const name = this.path.basename(path);
@@ -83,8 +83,8 @@ export class FileSystemService {
     let delimeter = '\\';
     if (process.platform !== 'win32')
       delimeter = '/';
-    if (path.substr(-1) === '/' || path.substr(-1) === '\\')
-      path = path.slice(0, -1);
+    // if (path.substr(-1) === '/' || path.substr(-1) === '\\')
+    //   path = path.slice(0, -1);
 
     const elements: string[] = this.fs.readdirSync(path);
 

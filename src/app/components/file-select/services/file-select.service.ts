@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { FileSystemService, } from '../../../shared/services';
 
-import { Mountpoint, FolderContent, File, } from '../../../shared/models';
+import { Mountpoint, FolderContent, FileInfo } from '../../../shared/models';
 
 const supportedFileTypes = ['ppt', 'pptx', 'pdf'];
 
