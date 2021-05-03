@@ -31,7 +31,6 @@ export class FileSelectService {
       this.fileSystem.getFolderContent(path)
     );
     this.selectedFilePath = '';
-    console.log(this.currentDirPath, this.currentDirContent);
   }
 
   public changeDirToParent() {
@@ -42,7 +41,7 @@ export class FileSelectService {
     return {
       files: content.files.filter(file =>
         supportedFileTypes.includes(file.type)),
-      folders: content.folders,
+      folders: content.folders.filter(folder => folder.access),
     };
   }
 
