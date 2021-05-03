@@ -34,9 +34,6 @@ export class FileSystemService {
       const size = this.getFileSize(stats.size);
       const type = this.getFileType(path);
 
-      name = name.replace(' ', '\ ');
-      path = path.replace(' ', '\ ');
-
       return { name, size, type, path };
     } else {
       throw new FileSystemError('File was not found!');
