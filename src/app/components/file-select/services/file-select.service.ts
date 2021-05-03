@@ -31,6 +31,7 @@ export class FileSelectService {
       this.fileSystem.getFolderContent(path)
     );
     this.selectedFilePath = '';
+    console.log(this.currentDirPath, this.currentDirContent);
   }
 
   public changeDirToParent() {
@@ -54,7 +55,8 @@ export class FileSelectService {
   }
 
   public isCurrentDirRoot(): boolean {
-    return !this.fileSystem.dirAboveExists(this.currentDirPath);
+    return !this.fileSystem.dirAboveExists(this.currentDirPath)
+      || this.currentDirPath === this.selectedMountpoint.path;
   }
 
   // must be called before using any other methods
@@ -77,7 +79,7 @@ export class FileSelectService {
     }
   }
 
-  public selectFile(file: File): void {
+  public selectFile(file: FileInfo): void {
     this.selectedFilePath = file.path;
   }
 
