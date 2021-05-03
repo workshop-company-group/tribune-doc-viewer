@@ -4,7 +4,7 @@ import { FileSystemService, } from '../../../shared/services';
 
 import { Mountpoint, FolderContent, FileInfo } from '../../../shared/models';
 
-const supportedFileTypes = ['ppt', 'pptx', 'pdf'];
+const supportedFileTypes = ['doc', 'docx', 'ppt', 'pptx', 'pdf'];
 
 @Injectable({
   providedIn: 'root'

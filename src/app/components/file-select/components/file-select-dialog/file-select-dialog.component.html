@@ -50,7 +50,7 @@
                     <img [src]="fileSelect.getFileTypeIconPath(file.type)">
                 </div>
                 <span class="name">{{ file.name }}</span>
-                <span class="type">Файл "{{ file.type }}"</span>
+                <span class="type">Файл "{{ file.type | uppercase }}"</span>
                 <span class="size">{{ file.size }}</span>
             </div>
         </div>
