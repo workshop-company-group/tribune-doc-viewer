@@ -104,7 +104,7 @@ export class FileSystemService {
         else
           folderPath = path + '/' + element;
 
-        const folder: Folder = { name: element, path: folderPath }
+        const folder: Folder = { name: element, path: folderPath, access: this.ifFolderAccessible(folderPath) }
         resultObject.folders.push(folder);
       } else {
         resultObject.files.push(this.getFileInfo(elementPath));
@@ -112,6 +112,15 @@ export class FileSystemService {
     });
 
     return resultObject;
+  }
+
+  private ifFolderAccessible(path: string): boolean {
+    try {
+      fs.accessSync(path);
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 
   public dirExists(path: string): boolean {
