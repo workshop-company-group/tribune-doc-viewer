@@ -116,7 +116,7 @@ export class FileSystemService {
 
   private ifFolderAccessible(path: string): boolean {
     try {
-      fs.accessSync(path);
+      fs.accessSync(path, fs.constants.R_OK);
       return true;
     } catch (error) {
       return false;
