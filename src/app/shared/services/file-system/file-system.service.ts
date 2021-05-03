@@ -30,9 +30,12 @@ export class FileSystemService {
   private getFileInfo(path: string): FileInfo {
     if (fs.existsSync(path)) {
       let stats = fs.statSync(path);
-      const name = this.path.basename(path);
+      let name = this.path.basename(path);
       const size = this.getFileSize(stats.size);
       const type = this.getFileType(path);
+
+      name = name.replace(' ', '\ ');
+      path = path.replace(' ', '\ ');
 
       return { name, size, type, path };
     } else {
