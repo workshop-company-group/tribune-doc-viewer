@@ -34,11 +34,6 @@ export class FileSystemService {
       const size = this.getFileSize(stats.size);
       const type = this.getFileType(path);
 
-      if (process.platform !== 'win32')
-        path += '/' + name
-      else
-        path += '\\' + name
-
       return { name, size, type, path };
     } else {
       throw new FileSystemError('File was not found!');
