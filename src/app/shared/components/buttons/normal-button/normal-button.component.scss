@@ -4,13 +4,16 @@ button {
   width: 395px;
   height: 70px;
 
+  padding: var(--normal-button-padding);
+
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: var(--normal-button-justify-content);
 
   background: var(--button-background);
-  color: var(--button-color);
 
+  color: var(--button-color);
   @extend %primary-regular-font;
 
   border-radius: 10px;

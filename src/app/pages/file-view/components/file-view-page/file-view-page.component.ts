@@ -4,7 +4,7 @@ import {
   ConfirmationService,
   DocumentService,
   RecordBroadcastService,
-} from './services';
+} from '../../services';
 
 @Component({
   selector: 'app-file-view-page',
@@ -34,6 +34,10 @@ export class FileViewPageComponent {
     }
     this.recordBroadcast.stopBroadcasting();
     this.documentService.close();
+    this.confirmation.state = null;
+  }
+
+  public fileSelectedHandler(): void {
     this.confirmation.state = null;
   }
 

@@ -6,7 +6,8 @@ import { FormsModule, ReactiveFormsModule, } from '@angular/forms';
 
 import { LargeIconButtonComponent,
          NormalButtonComponent,
-         SmallButtonComponent } from './components/buttons';
+         SmallButtonComponent,
+         SelectableButtonComponent, } from './components/buttons';
 import { InputComponent, } from './components/inputs';
 
 @NgModule({
@@ -15,7 +16,8 @@ import { InputComponent, } from './components/inputs';
     LargeIconButtonComponent,
     NormalButtonComponent,
     SmallButtonComponent,
-    InputComponent
+    SelectableButtonComponent,
+    InputComponent,
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { InputComponent, } from './components/inputs';
     LargeIconButtonComponent,
     NormalButtonComponent,
     SmallButtonComponent,
-    InputComponent
+    SelectableButtonComponent,
+    InputComponent,
   ]
 })
 export class SharedModule {}

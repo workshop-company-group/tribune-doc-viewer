@@ -57,23 +57,27 @@ export class ConversionService {
   public async convertDocument(path: string, outputType: string = 'pdf'): Promise<Document> {
     outputType = '.' + outputType;
     const execAsync = util.promisify(this.childProcess.exec);
-
+    path = path.replace("//", "/")
     if (this.electron.isElectron) {
       const type: string = this.getFileType(path);
       const name: string = this.getFileName(path, type);
       const dir: string = this.getFileDir(path);
+
+      const typeIndex = path.lastIndexOf(type)
+      const filepath = path.substr(typeIndex)
+
       const convertedPath: string = dir + '/' + name + outputType;
       const newConvertedPath: string = dir + '/' + name + Date.now().toString() + outputType;
 
       if (type === '.pdf') {
-        await execAsync(`cp ${path} ${newConvertedPath}`);
+        await execAsync(`cp "${path}" "${newConvertedPath}"`);
         return {
           originPath: path,
           convertedPath: newConvertedPath,
           title: name,
         }
       }
-      await execAsync(`soffice --headless --convert-to ${outputType.slice(1)} --outdir ${dir} ${path.replace(' ', '\\ ')}`);
+      await execAsync(`soffice --headless --convert-to ${outputType.slice(1)} --outdir "${dir}" "${path}"`);
       this.fileRename(convertedPath, newConvertedPath);
       return {
         originPath: path,

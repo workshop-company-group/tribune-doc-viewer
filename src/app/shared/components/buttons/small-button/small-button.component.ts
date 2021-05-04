@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-small-button',
@@ -6,6 +6,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./small-button.component.scss']
 })
 export class SmallButtonComponent {
+
+  @Input()
+  public readonly disabled = false;
 
   @Output('button-click')
   public readonly clickEmitter = new EventEmitter<void>();

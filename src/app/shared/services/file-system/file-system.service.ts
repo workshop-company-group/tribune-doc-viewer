@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ElectronService } from '../../../core/services';
-import { Drive, FolderContent, File, Folder } from '../../models';
+import { Drive, FolderContent, Folder, FileInfo } from '../../models';
 import { ipcRenderer } from 'electron';
 import { FileSystemError } from '../exceptions'
 import * as fs from 'fs';
@@ -27,12 +27,13 @@ export class FileSystemService {
     return path.slice(index+1);
   }
 
-  private getFileInfo(path: string): File {
+  private getFileInfo(path: string): FileInfo {
     if (fs.existsSync(path)) {
       let stats = fs.statSync(path);
-      const name = this.path.basename(path);
+      let name = this.path.basename(path);
       const size = this.getFileSize(stats.size);
       const type = this.getFileType(path);
+
       return { name, size, type, path };
     } else {
       throw new FileSystemError('File was not found!');
@@ -83,8 +84,8 @@ export class FileSystemService {
     let delimeter = '\\';
     if (process.platform !== 'win32')
       delimeter = '/';
-    if (path.substr(-1) === '/' || path.substr(-1) === '\\')
-      path = path.slice(0, -1);
+    // if (path.substr(-1) === '/' || path.substr(-1) === '\\')
+    //   path = path.slice(0, -1);
 
     const elements: string[] = this.fs.readdirSync(path);
 
@@ -98,7 +99,7 @@ export class FileSystemService {
         else
           folderPath = path + '/' + element;
 
-        const folder: Folder = { name: element, path }
+        const folder: Folder = { name: element, path: folderPath, access: this.ifFolderAccessible(folderPath) }
         resultObject.folders.push(folder);
       } else {
         resultObject.files.push(this.getFileInfo(elementPath));
@@ -106,6 +107,15 @@ export class FileSystemService {
     });
 
     return resultObject;
+  }
+
+  private ifFolderAccessible(path: string): boolean {
+    try {
+      fs.accessSync(path, fs.constants.R_OK);
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 
   public dirExists(path: string): boolean {

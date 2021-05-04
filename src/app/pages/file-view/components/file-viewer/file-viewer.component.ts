@@ -1,30 +1,26 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, } from '@angular/core';
 
-import { DocumentService } from '../../services';
+import { ConfirmationService,
+  DocumentService } from '../../services';
+
+import { FileSelectService, } from '../../../../components/file-select/services';
 
 @Component({
   selector: 'app-file-viewer',
   templateUrl: './file-viewer.component.html',
   styleUrls: ['./file-viewer.component.scss']
 })
-export class FileViewerComponent implements OnInit {
-
-  @ViewChild('uploadDocumentInput')
-  public uploadDocumentInput: ElementRef;
+export class FileViewerComponent {
 
   constructor(
-    public documentService: DocumentService
+    public readonly confirmation: ConfirmationService,
+    public readonly documentService: DocumentService,
+    public readonly fileSelect: FileSelectService,
   ) { }
 
-  ngOnInit(): void { }
-
-  public async openDocument(files: FileList): Promise<void> {
-    if (files.length !== 1) {
-      console.warn('WARNING: zero or multiple files were selected for openining' + 
-                   ' :FileViewerComponent:openDocument');
-      return;
-    }
-    await this.documentService.open(files[0].path);
+  public async openDocument(): Promise<void> {
+    await this.fileSelect.loadMountpoints();
+    this.confirmation.state = 'select-file';
   }
 
 }

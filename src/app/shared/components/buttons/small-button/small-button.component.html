@@ -1,3 +1,4 @@
-<button (click)="clickEmitter.emit()">
+<button (click)="clickEmitter.emit()"
+    [disabled]="disabled">
     <ng-content></ng-content>
 </button>

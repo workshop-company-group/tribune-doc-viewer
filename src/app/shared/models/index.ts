@@ -3,6 +3,6 @@ export * from './drive';
 export * from './settings';
 export * from './display';
 
-export * from './file';
+export * from './file-info';
 export * from './folder';
 export * from './folder-content';

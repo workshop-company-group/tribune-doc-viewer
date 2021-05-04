@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { PasswordStateService, } from '../password/services';
-import { DocumentService, } from '../file-view/services';
-import { UpdateService, } from '../../update/services/update.service';
+import { PasswordStateService, } from '../../../password/services';
+import { DocumentService, } from '../../../file-view/services';
+import { UpdateService, } from '../../../../update/services/update.service';
 
 @Component({
   selector: 'app-main-menu-page',
