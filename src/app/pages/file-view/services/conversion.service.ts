@@ -77,7 +77,6 @@ export class ConversionService {
           title: name,
         }
       }
-      console.log(`soffice --headless --convert-to ${outputType.slice(1)} --outdir "${dir}" "${path}"`)
       await execAsync(`soffice --headless --convert-to ${outputType.slice(1)} --outdir "${dir}" "${path}"`);
       this.fileRename(convertedPath, newConvertedPath);
       return {
