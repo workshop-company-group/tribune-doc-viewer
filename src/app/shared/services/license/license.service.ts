@@ -29,7 +29,7 @@ export class LicenseService {
     return fs.readFileSync(this.defaultPath).toString();
   }
 
-  public async IsLicenseKeyValid(key: string): Promise<boolean> {
+  public async isLicenseKeyValid(key: string): Promise<boolean> {
     const { status } = await fetch(`http://89.178.239.84:5555/api/licenses/${key}/validate`);
     if (status === 200)
       return true
@@ -39,22 +39,22 @@ export class LicenseService {
     throw new LicenseError('Something went wrong');
   }
 
-  public async Activate(key: string): Promise<boolean> {
-    if (await this.IsLicenseKeyValid(key)) {
+  public async activate(key: string): Promise<boolean> {
+    if (await this.isLicenseKeyValid(key)) {
       await fetch(
         `http://89.178.239.84:5555/api/licenses/${key}?is_provided=true&is_activated=true`, {
         method: 'PATCH',
         headers: {
           'accept': 'application/json; charset=UTF-8'
         }
-      })
+      });
       this.saveLicenseToFile(key);
       return true;
     }
     return false;
   }
 
-  public IsLicenseKeySaved(): boolean {
+  public isLicenseKeySaved(): boolean {
     try {
       const savedKey = this.readLicenseFromFile();
       if (savedKey.length > 0)
@@ -66,11 +66,11 @@ export class LicenseService {
     }
   }
 
-  public async IsSavedKeyValid(): Promise<boolean> {
+  public async isSavedKeyValid(): Promise<boolean> {
     try {
       const savedKey = this.readLicenseFromFile();
       if (savedKey.length > 0)
-        return await this.IsLicenseKeyValid(savedKey);
+        return await this.isLicenseKeyValid(savedKey);
       else
         return false;
     } catch (error) {
