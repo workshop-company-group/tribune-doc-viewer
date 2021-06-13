@@ -35,8 +35,8 @@ export class LicenseService {
       return true
     else if (status === 403)
       return false
-
-    throw new LicenseError('Something went wrong');
+    else
+      throw new LicenseError('Something went wrong');
   }
 
   public async activate(key: string): Promise<boolean> {
@@ -57,10 +57,7 @@ export class LicenseService {
   public isLicenseKeySaved(): boolean {
     try {
       const savedKey = this.readLicenseFromFile();
-      if (savedKey.length > 0)
-        return true;
-      else
-        return false;
+      return savedKey.length > 0;
     } catch (error) {
       return false;
     }
