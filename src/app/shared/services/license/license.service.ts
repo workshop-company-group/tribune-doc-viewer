@@ -15,6 +15,14 @@ export class LicenseService {
     }
   }
 
+  private readonly defaultPath: string = 'license.key';
+
+  private saveLicenseToFile(key: string) {
+    fs.writeFile(this.defaultPath, key, {flag: 'wx'}, function (err) {
+      if (err) throw err;
+    });
+  }
+
   public async IsLicenseKeyValid(key: string): Promise<boolean> {
     const { status } = await fetch(`http://89.178.239.84:5555/api/license/validate?key=${key}`);
     if (status === 200)
@@ -27,6 +35,7 @@ export class LicenseService {
 
   public async Activate(key: string): Promise<boolean> {
     if (await this.IsLicenseKeyValid(key)) {
+      this.saveLicenseToFile(key);
       return true;
     }
     return false;
