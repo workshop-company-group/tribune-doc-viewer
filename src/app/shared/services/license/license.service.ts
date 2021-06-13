@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { LicenseError } from '../exceptions';
 import { ElectronService } from '../../../core/services';
 import * as fs from 'fs';
-import { time } from 'systeminformation';
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +24,13 @@ export class LicenseService {
   }
 
   private readLicenseFromFile(): string {
+    if (!this.fs.existsSync(this.defaultPath))
+      throw new LicenseError('License file does not exist')
     return fs.readFileSync(this.defaultPath).toString();
   }
 
   public async IsLicenseKeyValid(key: string): Promise<boolean> {
-    const { status } = await fetch(`http://89.178.239.84:5555/api/license/validate?key=${key}`);
+    const { status } = await fetch(`http://89.178.239.84:5555/api/licenses/${key}/validate`);
     if (status === 200)
       return true
     else if (status === 403)
@@ -40,10 +41,40 @@ export class LicenseService {
 
   public async Activate(key: string): Promise<boolean> {
     if (await this.IsLicenseKeyValid(key)) {
+      await fetch(
+        `http://89.178.239.84:5555/api/licenses/${key}?is_provided=true&is_activated=true`, {
+        method: 'PATCH',
+        headers: {
+          'accept': 'application/json; charset=UTF-8'
+        }
+      })
       this.saveLicenseToFile(key);
-      console.log('License: ', this.readLicenseFromFile());
       return true;
     }
     return false;
+  }
+
+  public IsLicenseKeySaved(): boolean {
+    try {
+      const savedKey = this.readLicenseFromFile();
+      if (savedKey.length > 0)
+        return true;
+      else
+        return false;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  public async IsSavedKeyValid(): Promise<boolean> {
+    try {
+      const savedKey = this.readLicenseFromFile();
+      if (savedKey.length > 0)
+        return await this.IsLicenseKeyValid(savedKey);
+      else
+        return false;
+    } catch (error) {
+      return false;
+    }
   }
 }
