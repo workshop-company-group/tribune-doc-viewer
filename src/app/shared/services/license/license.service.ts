@@ -14,6 +14,6 @@ export class LicenseService {
     else if (status === 403)
       return false
     else
-      throw new LicenseError('Invalid license key provided');
+      throw new LicenseError('Something went wrong');
   }
 }
