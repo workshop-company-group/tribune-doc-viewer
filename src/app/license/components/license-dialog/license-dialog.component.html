@@ -11,7 +11,8 @@
 </div>
 
 <div class="form">
-    <app-license-key-input class="key-input">
+    <app-license-key-input class="key-input"
+       [formControl]="keyControl">
     </app-license-key-input>
 
     <div class="buttons-container">
@@ -19,7 +20,9 @@
             (button-click)="exit()">
             Выйти
         </app-small-button>
-        <app-small-button class="activate">
+        <app-small-button class="activate"
+            [disabled]="keyControl.invalid"
+            (button-click)="activate()">
             Активировать
         </app-small-button>
     </div>

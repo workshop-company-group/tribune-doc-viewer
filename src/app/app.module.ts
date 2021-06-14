@@ -9,6 +9,8 @@ import { UpdateModule } from './update/update.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { interceptorProviders } from './core/interceptors';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +23,9 @@ import { AppComponent } from './app.component';
     UpdateModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    interceptorProviders,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
