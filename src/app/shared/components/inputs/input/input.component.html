@@ -1,6 +1,7 @@
-<input type="text"
+<input [formControl]="inputControl"
+       type="text"
+       spellcheck="false"
        [placeholder]="placeholder"
-       [(ngModel)]="value"
        [disabled]="disabled"
        (input)="changeHandler($event.target.value)"
-       (blur)="touchHandler()">
+       (blur)="touchedHandler()">

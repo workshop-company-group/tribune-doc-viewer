@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+
 import { LicenseError } from '../exceptions';
-import { ElectronService } from '../../../core/services';
-import { AppConfig } from '../../../../environments/environment';
+import { AppConfig } from '../../../environments/environment';
+
+import { ElectronService } from '../../core/services';
+import { LicenseApiService } from './license-api.service';
 
 import * as fs from 'fs';
 import * as util from 'util';
@@ -15,7 +19,10 @@ export class LicenseService {
   serverAddress: string;
   private readonly defaultPath: string = 'license.key';
 
-  constructor(private electron: ElectronService) {
+  constructor(
+    private readonly api: LicenseApiService,
+    private readonly electron: ElectronService,
+  ) {
     if (this.electron.isElectron) {
       this.fs = window.require('fs');
       this.util = window.require('util');
@@ -40,24 +47,20 @@ export class LicenseService {
   }
 
   public async isLicenseKeyValid(key: string): Promise<boolean> {
-    const { status } = await fetch(`http://${this.serverAddress}/api/licenses/${key}/validate`);
-    if (status === 200)
-      return true
-    else if (status === 403)
-      return false
-    else
-      throw new LicenseError('Something went wrong');
+    try {
+      await this.api.validate(key);
+    } catch(err) {
+      if (err.status === 403)
+        return false;
+      else
+        throw new LicenseError('Something went wrong');
+    }
+    return true;
   }
 
   public async activate(key: string): Promise<boolean> {
     if (await this.isLicenseKeyValid(key)) {
-      await fetch(
-        `http://${this.serverAddress}/api/licenses/${key}?is_provided=true&is_activated=true`, {
-        method: 'PATCH',
-        headers: {
-          'accept': 'application/json; charset=UTF-8'
-        }
-      });
+      await this.api.activate(key);
       this.saveLicenseToFile(key);
       return true;
     }
