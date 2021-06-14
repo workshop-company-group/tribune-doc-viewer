@@ -20,7 +20,7 @@ export class LicenseService {
       this.fs = window.require('fs');
       this.util = window.require('util');
 
-      this.serverAddress = AppConfig.serverURL;
+      this.serverAddress = AppConfig.serverOrigin;
     }
   }
 

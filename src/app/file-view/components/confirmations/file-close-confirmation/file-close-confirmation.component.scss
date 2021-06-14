@@ -1,0 +1,42 @@
+@import '../../../../../styles/mixins';
+
+:host {
+  padding: 50px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: var(--base-white-color);
+  color: var(--base-black-color);
+  border-radius: 10px;
+
+  .title {
+    margin-bottom: 30px;
+
+    @extend %primary-bold-font;
+    text-transform: uppercase;
+  }
+
+  .subtitle {
+    margin-bottom: 50px;
+
+    @extend %primary-light-font;
+  }
+
+  .buttons-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .confirm-button {
+      margin-right: 30px;
+    }
+
+    .cancel-button {
+      --button-background: var(--accent-blue-vertical-gradient);
+      --button-color: var(--base-white-color);
+    }
+  }
+}
