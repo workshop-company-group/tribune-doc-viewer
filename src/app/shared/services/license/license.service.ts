@@ -4,20 +4,23 @@ import { ElectronService } from '../../../core/services';
 import { ServerAddress } from '../../../../server-settings';
 
 import * as fs from 'fs';
+import * as util from 'util';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LicenseService {
   fs: typeof fs;
+  util: typeof util;
+
+  private readonly defaultPath: string = 'license.key';
 
   constructor(private electron: ElectronService) {
     if (this.electron.isElectron) {
       this.fs = window.require('fs');
+      this.util = window.require('util');
     }
   }
-
-  private readonly defaultPath: string = 'license.key';
 
   private saveLicenseToFile(key: string): void {
     this.fs.writeFile(this.defaultPath, key, {flag: 'wx'}, function (err) {
@@ -25,10 +28,13 @@ export class LicenseService {
     });
   }
 
-  private readLicenseFromFile(): string {
-    if (!this.fs.existsSync(this.defaultPath))
+  private async readLicenseFromFile(): Promise<string> {
+    const existsAsync = util.promisify(this.fs.exists);
+    const readFileAsync = util.promisify(this.fs.readFile);
+
+    if (!(await existsAsync(this.defaultPath)))
       throw new LicenseError('License file does not exist')
-    return this.fs.readFileSync(this.defaultPath).toString();
+    return (await readFileAsync(this.defaultPath)).toString();
   }
 
   public async isLicenseKeyValid(key: string): Promise<boolean> {
@@ -56,24 +62,20 @@ export class LicenseService {
     return false;
   }
 
-  public isLicenseKeySaved(): boolean {
+  public async isLicenseKeySaved(): Promise<boolean> {
     try {
-      const savedKey = this.readLicenseFromFile();
+      const savedKey = await this.readLicenseFromFile();
       return savedKey.length > 0;
     } catch (error) {
       return false;
     }
   }
 
-  public async isSavedKeyValid(): Promise<boolean> {
-    try {
-      const savedKey = this.readLicenseFromFile();
-      if (savedKey.length > 0)
-        return await this.isLicenseKeyValid(savedKey);
-      else
-        return false;
-    } catch (error) {
+  public async isSavedLicenseKeyValid(): Promise<boolean> {
+    const savedKey = await this.readLicenseFromFile();
+    if (savedKey.length > 0)
+      return await this.isLicenseKeyValid(savedKey);
+    else
       return false;
-    }
   }
 }
