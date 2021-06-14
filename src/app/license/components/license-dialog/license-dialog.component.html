@@ -1,0 +1,27 @@
+<div class="top-container">
+    <div class="header-container">
+        <h1>Активация продукта</h1>
+        <img class="logo" src="assets/logos/grey-logo-shorten.svg" alt="WS">
+    </div>
+
+    <p class="description">
+        Введите ключ активации продукта. После активации продукт будет
+        зарегистрирован на данном устройстве.
+    </p>
+</div>
+
+<div class="form">
+    <app-input class="key-input"
+        placeholder="XXXXX-XXXXX-XXXXX-XXXXX-XXXXX">
+    </app-input>
+
+    <div class="buttons-container">
+        <app-small-button class="exit"
+            (button-click)="exit()">
+            Выйти
+        </app-small-button>
+        <app-small-button class="activate">
+            Активировать
+        </app-small-button>
+    </div>
+</div>
