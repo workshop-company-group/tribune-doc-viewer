@@ -1,0 +1,199 @@
+@import "../../../../styles/mixins.scss";
+
+:host {
+  height: 1000px;
+
+  display: flex;
+  flex-direction: row;
+
+  border-radius: 10px;
+  overflow: hidden;
+
+  .left-container {
+    height: 100%;
+
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: var(--faint-light-grey-color);
+
+    .title-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .close-button {
+        padding: 10px;
+
+        img {
+          width: 30px;
+        }
+      }
+
+      .title {
+        margin-left: 20px;
+
+        color: var(--base-black-color);
+        @extend %primary-regular-font;
+      }
+    }
+
+    .drive-container {
+      margin-top: 15px;
+      padding: 10px;
+
+      display: flex;
+      flex-direction: column;
+
+      .drive {
+        margin: 15px 0;
+      }
+    }
+  }
+
+  .right-container {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    background: var(--base-white-color);
+
+    @extend %primary-light-font;
+
+    /* local variables */
+    --icon-field-width: 125px;
+    --name-field-width: 440px;
+    --type-field-width: 280px;
+    --size-field-width: 110px;
+    --field-margin: 10px;
+    --file-height: 85px;
+    --file-right-padding: 20px;
+    --file-icon-height: 30px;
+
+    .dir-content-container {
+      /* will be recalculated by flex-container
+      needed here for overflow-y: scroll to work */
+      height: 0;
+
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+
+      .title-container {
+        margin: 30px 0 10px 0;
+
+        display: flex;
+        flex-direction: row;
+
+        color: var(--faint-dark-grey-color);
+
+        .name {
+          width: var(--name-field-width);
+
+          margin-left: var(--icon-field-width);
+          margin-right: var(--field-margin);
+        }
+
+        .type {
+          width: var(--type-field-width);
+
+          margin-right: var(--field-margin);
+        }
+
+        .size {
+          width: var(--size-field-width);
+
+          margin-right: var(--file-right-padding);
+        }
+      }
+
+      .dir-content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        overflow-y: scroll;
+
+        .icon-container {
+          width: var(--icon-field-width);
+
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+
+          img {
+            height: var(--file-icon-height);
+          }
+        }
+
+        .go-back-button {
+          height: var(--file-height);
+          min-height: var(--file-height);
+
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          cursor: pointer;
+          user-select: none;
+
+          .hint {
+            color: var(--base-black-color);
+          }
+        }
+
+        .file-container, .folder-container {
+          height: var(--file-height);
+          min-height: var(--file-height);
+
+          padding-right: var(--file-right-padding);
+
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          cursor: pointer;
+          user-select: none;
+
+          &.selected {
+            background: var(--faint-light-grey-color);
+          }
+
+          .name {
+            width: var(--name-field-width);
+
+            color: var(--base-black-color);
+
+            margin-right: var(--field-margin);
+          }
+
+          .type {
+            width: var(--type-field-width);
+
+            color: var(--faint-dark-grey-color);
+
+            margin-right: var(--field-margin);
+          }
+
+          .size {
+            width: var(--size-field-width);
+
+            color: var(--faint-dark-grey-color);
+          }
+        }
+      }
+    }
+
+    .add-button {
+      margin: 15px var(--file-right-padding) 30px 0;
+
+      --button-background: var(--accent-blue-vertical-gradient);
+      --button-color: var(--base-white-color);
+    }
+  }
+}

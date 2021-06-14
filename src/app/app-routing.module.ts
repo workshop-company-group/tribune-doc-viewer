@@ -9,15 +9,15 @@ const routes: Routes = [
   },
   {
     path: 'main-menu',
-    loadChildren: () => import('./pages/main-menu/main-menu.module').then(m => m.MainMenuModule),
+    loadChildren: () => import('./main-menu/main-menu.module').then(m => m.MainMenuModule),
   },
   {
     path: 'file-view',
-    loadChildren: () => import('./pages/file-view/file-view.module').then(m => m.FileViewModule),
+    loadChildren: () => import('./file-view/file-view.module').then(m => m.FileViewModule),
   },
   {
     path: 'password',
-    loadChildren: () => import('./pages/password/password.module').then(m => m.PasswordModule),
+    loadChildren: () => import('./password/password.module').then(m => m.PasswordModule),
   },
 ];
 
