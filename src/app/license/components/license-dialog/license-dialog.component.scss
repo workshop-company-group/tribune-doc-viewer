@@ -42,6 +42,20 @@
   .form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+
+    .wrong-key {
+      margin-bottom: 10px;
+
+      color: var(--accent-red-color);
+      @extend %primary-light-font;
+
+      visibility: hidden;
+
+      &.visible {
+        visibility: visible;
+      }
+    }
 
     .key-input {
       width: 100%;
@@ -50,6 +64,8 @@
     }
 
     .buttons-container {
+      width: 100%;
+
       display: flex;
       flex-direction: row;
       justify-content: flex-end;

@@ -11,6 +11,11 @@
 </div>
 
 <div class="form">
+    <span class="wrong-key"
+        [ngClass]="{ 'visible': wrongKey }">
+        Неверный ключ активации
+    </span>
+
     <app-license-key-input class="key-input"
        [formControl]="keyControl">
     </app-license-key-input>

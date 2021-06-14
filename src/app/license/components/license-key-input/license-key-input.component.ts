@@ -1,7 +1,8 @@
-import { Component, forwardRef, Input, OnInit, } from '@angular/core';
+import { Component, forwardRef, Input, OnDestroy, OnInit, } from '@angular/core';
 import { ControlValueAccessor, FormControl,
   NG_VALUE_ACCESSOR, } from '@angular/forms';
 
+import { Subscription, } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
 @Component({
@@ -16,7 +17,8 @@ import { filter, map, tap } from 'rxjs/operators';
     }
   ],
 })
-export class LicenseKeyInputComponent implements ControlValueAccessor, OnInit {
+export class LicenseKeyInputComponent
+implements ControlValueAccessor, OnDestroy, OnInit {
 
   public readonly inputControl = new FormControl('');
 
@@ -24,17 +26,28 @@ export class LicenseKeyInputComponent implements ControlValueAccessor, OnInit {
 
   private touchedHandler: Function = () => {};
 
+  private readonly subscriptions: Subscription[] = [];
+
   constructor() { }
 
+  public ngOnDestroy(): void {
+    this.subscriptions.forEach(
+      subscription => subscription.unsubscribe()
+    );
+    this.subscriptions.length = 0;
+  }
+
   public ngOnInit(): void {
-    this.inputControl.valueChanges.pipe(
-      filter(value => !!value.length),
-      map(value => this.formatInput(value)),
-    ).subscribe(value => {
-      this.inputControl.setValue(value, { emitEvent: false });
-      this.changeHandler(value
-        .split('-').join(''));
-    });
+    this.subscriptions.push(
+      this.inputControl.valueChanges.pipe(
+        filter(value => !!value.length),
+        map(value => this.formatInput(value)),
+      ).subscribe(value => {
+        this.inputControl.setValue(value, { emitEvent: false });
+        this.changeHandler(value
+          .split('-').join(''));
+      }),
+    );
   }
 
   public writeValue(obj: string): void {
