@@ -21,7 +21,7 @@ export class LicenseService {
       this.fs = window.require('fs');
       this.util = window.require('util');
 
-      this.serverAddress = process.env.SERVER
+      this.serverAddress = process.env.SERVER;
     }
   }
 
