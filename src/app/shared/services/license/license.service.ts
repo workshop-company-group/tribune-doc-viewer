@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LicenseError } from '../exceptions';
 import { ElectronService } from '../../../core/services';
+import { AppConfig } from '../../../../environments/environment';
 
 import * as fs from 'fs';
 import * as util from 'util';
@@ -16,12 +17,10 @@ export class LicenseService {
 
   constructor(private electron: ElectronService) {
     if (this.electron.isElectron) {
-      require('dotenv').config()
-
       this.fs = window.require('fs');
       this.util = window.require('util');
 
-      this.serverAddress = process.env.SERVER;
+      this.serverAddress = AppConfig.serverURL;
     }
   }
 
@@ -32,8 +31,8 @@ export class LicenseService {
   }
 
   private async readLicenseFromFile(): Promise<string> {
-    const existsAsync = util.promisify(this.fs.exists);
-    const readFileAsync = util.promisify(this.fs.readFile);
+    const existsAsync = this.util.promisify(this.fs.exists);
+    const readFileAsync = this.util.promisify(this.fs.readFile);
 
     if (!(await existsAsync(this.defaultPath)))
       throw new LicenseError('License file does not exist')
