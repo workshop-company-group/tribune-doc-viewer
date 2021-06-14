@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LicenseError } from '../exceptions';
 import { ElectronService } from '../../../core/services';
-import { ServerAddress } from '../../../../server-settings';
 
 import * as fs from 'fs';
 import * as util from 'util';
@@ -12,13 +11,17 @@ import * as util from 'util';
 export class LicenseService {
   fs: typeof fs;
   util: typeof util;
-
+  serverAddress: string;
   private readonly defaultPath: string = 'license.key';
 
   constructor(private electron: ElectronService) {
     if (this.electron.isElectron) {
+      require('dotenv').config()
+
       this.fs = window.require('fs');
       this.util = window.require('util');
+
+      this.serverAddress = process.env.SERVER
     }
   }
 
@@ -38,7 +41,7 @@ export class LicenseService {
   }
 
   public async isLicenseKeyValid(key: string): Promise<boolean> {
-    const { status } = await fetch(`http://${ServerAddress}/api/licenses/${key}/validate`);
+    const { status } = await fetch(`http://${this.serverAddress}/api/licenses/${key}/validate`);
     if (status === 200)
       return true
     else if (status === 403)
@@ -50,7 +53,7 @@ export class LicenseService {
   public async activate(key: string): Promise<boolean> {
     if (await this.isLicenseKeyValid(key)) {
       await fetch(
-        `http://${ServerAddress}/api/licenses/${key}?is_provided=true&is_activated=true`, {
+        `http://${this.serverAddress}/api/licenses/${key}?is_provided=true&is_activated=true`, {
         method: 'PATCH',
         headers: {
           'accept': 'application/json; charset=UTF-8'
