@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LicenseError } from '../exceptions';
 import { ElectronService } from '../../../core/services';
+import { ServerAddress } from '../../../../server-settings';
+
 import * as fs from 'fs';
 
 @Injectable({
@@ -18,7 +20,7 @@ export class LicenseService {
   private readonly defaultPath: string = 'license.key';
 
   private saveLicenseToFile(key: string): void {
-    fs.writeFile(this.defaultPath, key, {flag: 'wx'}, function (err) {
+    this.fs.writeFile(this.defaultPath, key, {flag: 'wx'}, function (err) {
       if (err) throw err;
     });
   }
@@ -26,11 +28,11 @@ export class LicenseService {
   private readLicenseFromFile(): string {
     if (!this.fs.existsSync(this.defaultPath))
       throw new LicenseError('License file does not exist')
-    return fs.readFileSync(this.defaultPath).toString();
+    return this.fs.readFileSync(this.defaultPath).toString();
   }
 
   public async isLicenseKeyValid(key: string): Promise<boolean> {
-    const { status } = await fetch(`http://89.178.239.84:5555/api/licenses/${key}/validate`);
+    const { status } = await fetch(`http://${ServerAddress}/api/licenses/${key}/validate`);
     if (status === 200)
       return true
     else if (status === 403)
@@ -42,7 +44,7 @@ export class LicenseService {
   public async activate(key: string): Promise<boolean> {
     if (await this.isLicenseKeyValid(key)) {
       await fetch(
-        `http://89.178.239.84:5555/api/licenses/${key}?is_provided=true&is_activated=true`, {
+        `http://${ServerAddress}/api/licenses/${key}?is_provided=true&is_activated=true`, {
         method: 'PATCH',
         headers: {
           'accept': 'application/json; charset=UTF-8'
