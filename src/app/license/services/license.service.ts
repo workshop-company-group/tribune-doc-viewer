@@ -80,7 +80,6 @@ export class LicenseService {
     const savedKey = await this.readLicenseFromFile();
     if (savedKey.length > 0)
       return await this.isLicenseKeyValid(savedKey);
-    else
-      return false;
+    return false;
   }
 }

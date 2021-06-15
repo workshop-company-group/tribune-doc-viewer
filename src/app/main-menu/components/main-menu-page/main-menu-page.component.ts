@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { PasswordStateService, } from '../../../password/services';
 import { DocumentService, } from '../../../file-view/services';
+import { LicenseService, } from '../../../license/services';
+import { PasswordStateService, } from '../../../password/services';
 import { UpdateService, } from '../../../update/services/update.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class MainMenuPageComponent implements OnInit {
 
   constructor(
     public readonly documentService: DocumentService,
+    public readonly license: LicenseService,
     public readonly passwordState: PasswordStateService,
     public readonly router: Router,
     public readonly updateService: UpdateService,
