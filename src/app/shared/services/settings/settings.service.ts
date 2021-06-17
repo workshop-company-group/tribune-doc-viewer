@@ -25,7 +25,9 @@ export class SettingsService {
     screen: {
       connection: ''
     },
-    locale: null
+    locales: {
+      locale: null
+    }
   };
 
   private _settings: Settings;
@@ -114,7 +116,7 @@ export class SettingsService {
   }
 
   public get locale(): Locale {
-    return (this.settings.locale);
+    return (this.settings.locales.locale);
   }
 
   public set settings(settings: Settings) {
@@ -142,7 +144,7 @@ export class SettingsService {
 
   public set locale(locale: Locale) {
     const settings = this.settings
-    settings.locale = locale;
+    settings.locales.locale = locale;
     this.settings = settings;
   }
 }

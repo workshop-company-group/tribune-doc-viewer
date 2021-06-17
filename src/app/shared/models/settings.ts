@@ -8,5 +8,7 @@ export interface Settings {
   screen: {
     connection: string;
   },
-  locale: Locale
+  locales: {
+    locale: Locale
+  }
 }
