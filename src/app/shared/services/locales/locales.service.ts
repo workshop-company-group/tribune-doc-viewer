@@ -23,7 +23,6 @@ export class LocalesService {
         this.settings.locale = this.getSystemLocale();
     }
     this.localePhrases = this.readLocale()
-    console.log(this.localePhrases);
   }
 
   private getSystemLocale() {
