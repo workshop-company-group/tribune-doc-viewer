@@ -27,7 +27,11 @@ export class LocalesService {
 
   private getSystemLocale() {
     const env = process.env;
-    return (env.LC_ALL || env.LC_MESSAGES || env.LANG || env.LANGUAGE).split('_')[0];
+    const sysLanguage = env.LC_ALL || env.LC_MESSAGES || env.LANG || env.LANGUAGE || null;
+    if (sysLanguage)
+      return sysLanguage.split('_')[0];
+    else
+      return 'en';
   }
 
   private readLocale() {
