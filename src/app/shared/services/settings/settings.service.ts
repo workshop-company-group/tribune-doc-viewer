@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Settings } from '../../models/settings';
-import { Display } from '../../models';
+import { Display, Locale } from '../../models';
 import * as loadIniFile from 'read-ini-file';
 import * as writeIniFile from 'write-ini-file';
 import * as fs from 'fs';
@@ -24,7 +24,8 @@ export class SettingsService {
     },
     screen: {
       connection: ''
-    }
+    },
+    locale: null
   };
 
   private _settings: Settings;
@@ -112,6 +113,10 @@ export class SettingsService {
     return (this.settings.screen.connection);
   }
 
+  public get locale(): Locale {
+    return (this.settings.locale);
+  }
+
   public set settings(settings: Settings) {
     this._settings = this.handleSettings(settings);
     this.save()
@@ -132,6 +137,12 @@ export class SettingsService {
   public set screenConnection(connection: string) {
     const settings = this.settings
     settings.screen.connection = connection;
+    this.settings = settings;
+  }
+
+  public set locale(locale: Locale) {
+    const settings = this.settings
+    settings.locale = locale;
     this.settings = settings;
   }
 }
