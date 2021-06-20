@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { BehaviorSubject } from 'rxjs';
+
 import { LicenseError } from '../exceptions';
-import { ElectronService } from '../../../core/services';
-import { AppConfig } from '../../../../environments/environment';
+import { AppConfig } from '../../../environments/environment';
+
+import { ElectronService } from '../../core/services';
+import { LicenseApiService } from './license-api.service';
 
 import * as fs from 'fs';
 import * as util from 'util';
@@ -13,9 +19,15 @@ export class LicenseService {
   fs: typeof fs;
   util: typeof util;
   serverAddress: string;
+
+  public readonly keySubject = new BehaviorSubject<string | null>(null);
+
   private readonly defaultPath: string = 'license.key';
 
-  constructor(private electron: ElectronService) {
+  constructor(
+    private readonly api: LicenseApiService,
+    private readonly electron: ElectronService,
+  ) {
     if (this.electron.isElectron) {
       this.fs = window.require('fs');
       this.util = window.require('util');
@@ -24,13 +36,21 @@ export class LicenseService {
     }
   }
 
-  private saveLicenseToFile(key: string): void {
-    this.fs.writeFile(this.defaultPath, key, {flag: 'wx'}, function (err) {
-      if (err) throw err;
-    });
+  private async saveKey(key: string): Promise<void> {
+    const writeFileAsync = this.util.promisify(this.fs.writeFile);
+
+    this.keySubject.next(key); // save key to RAM
+    await writeFileAsync(this.defaultPath, key, {flag: 'wx'});
   }
 
-  private async readLicenseFromFile(): Promise<string> {
+  public async removeKey(): Promise<void> {
+    const unlinkAsync = this.util.promisify(this.fs.unlink);
+
+    this.keySubject.next(null);
+    await unlinkAsync(this.defaultPath);
+  }
+
+  public async readLicenseFromFile(): Promise<string> {
     const existsAsync = this.util.promisify(this.fs.exists);
     const readFileAsync = this.util.promisify(this.fs.readFile);
 
@@ -40,25 +60,21 @@ export class LicenseService {
   }
 
   public async isLicenseKeyValid(key: string): Promise<boolean> {
-    const { status } = await fetch(`http://${this.serverAddress}/api/licenses/${key}/validate`);
-    if (status === 200)
-      return true
-    else if (status === 403)
-      return false
-    else
-      throw new LicenseError('Something went wrong');
+    try {
+      await this.api.validate(key);
+    } catch(err) {
+      if (err.status === 403)
+        return false;
+      else
+        throw new LicenseError('Something went wrong');
+    }
+    return true;
   }
 
   public async activate(key: string): Promise<boolean> {
     if (await this.isLicenseKeyValid(key)) {
-      await fetch(
-        `http://${this.serverAddress}/api/licenses/${key}?is_provided=true&is_activated=true`, {
-        method: 'PATCH',
-        headers: {
-          'accept': 'application/json; charset=UTF-8'
-        }
-      });
-      this.saveLicenseToFile(key);
+      await this.api.activate(key);
+      await this.saveKey(key);
       return true;
     }
     return false;
@@ -77,7 +93,6 @@ export class LicenseService {
     const savedKey = await this.readLicenseFromFile();
     if (savedKey.length > 0)
       return await this.isLicenseKeyValid(savedKey);
-    else
-      return false;
+    return false;
   }
 }

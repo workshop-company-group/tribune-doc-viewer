@@ -1,0 +1,83 @@
+@import "../../../../styles/mixins.scss";
+
+:host {
+  width: 800px;
+  height: 500px;
+
+  padding: 50px;
+  box-sizing: border-box;
+
+  color: var(--base-black-color);
+  background: var(--faint-light-grey-color);
+
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .top-container {
+    display: flex;
+    flex-direction: column;
+
+    .header-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      margin-bottom: 50px;
+
+      h1 {
+        @extend %primary-bold-font;
+      }
+    }
+
+    .description {
+      @extend %primary-light-font;
+    }
+  }
+
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .wrong-key {
+      margin-bottom: 10px;
+
+      color: var(--accent-red-color);
+      @extend %primary-light-font;
+
+      visibility: hidden;
+
+      &.visible {
+        visibility: visible;
+      }
+    }
+
+    .key-input {
+      width: 100%;
+
+      margin-bottom: 50px;
+    }
+
+    .buttons-container {
+      width: 100%;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+
+      .exit {
+        margin-right: 30px;
+      }
+
+      .activate {
+        --button-background: var(--accent-blue-vertical-gradient);
+        --button-color: var(--base-white-color);
+      }
+    }
+  }
+}

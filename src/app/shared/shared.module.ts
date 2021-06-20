@@ -9,10 +9,12 @@ import { LargeIconButtonComponent,
          SmallButtonComponent,
          SelectableButtonComponent, } from './components/buttons';
 import { InputComponent, } from './components/inputs';
+import { BackdropComponent } from './components';
 
 @NgModule({
   declarations: [
     WebviewDirective,
+    BackdropComponent,
     LargeIconButtonComponent,
     NormalButtonComponent,
     SmallButtonComponent,
@@ -26,7 +28,7 @@ import { InputComponent, } from './components/inputs';
   ],
   exports: [
     WebviewDirective,
-    FormsModule,
+    BackdropComponent,
     LargeIconButtonComponent,
     NormalButtonComponent,
     SmallButtonComponent,
