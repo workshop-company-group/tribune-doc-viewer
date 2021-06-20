@@ -21,7 +21,9 @@ export class MainMenuPageComponent implements OnInit {
     public readonly updateService: UpdateService,
   ) { }
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {
+    this.license.keySubject.subscribe(key => console.log(key));
+  }
 
   public openFileView(): void {
     this.router.navigate(['/file-view']);

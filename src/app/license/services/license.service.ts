@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
+import { BehaviorSubject } from 'rxjs';
+
 import { LicenseError } from '../exceptions';
 import { AppConfig } from '../../../environments/environment';
 
@@ -17,6 +19,9 @@ export class LicenseService {
   fs: typeof fs;
   util: typeof util;
   serverAddress: string;
+
+  public readonly keySubject = new BehaviorSubject<string | null>(null);
+
   private readonly defaultPath: string = 'license.key';
 
   constructor(
@@ -31,13 +36,21 @@ export class LicenseService {
     }
   }
 
-  private saveLicenseToFile(key: string): void {
-    this.fs.writeFile(this.defaultPath, key, {flag: 'wx'}, function (err) {
-      if (err) throw err;
-    });
+  private async saveKey(key: string): Promise<void> {
+    const writeFileAsync = this.util.promisify(this.fs.writeFile);
+
+    this.keySubject.next(key); // save key to RAM
+    await writeFileAsync(this.defaultPath, key, {flag: 'wx'});
   }
 
-  private async readLicenseFromFile(): Promise<string> {
+  public async removeKey(): Promise<void> {
+    const unlinkAsync = this.util.promisify(this.fs.unlink);
+
+    this.keySubject.next(null);
+    await unlinkAsync(this.defaultPath);
+  }
+
+  public async readLicenseFromFile(): Promise<string> {
     const existsAsync = this.util.promisify(this.fs.exists);
     const readFileAsync = this.util.promisify(this.fs.readFile);
 
@@ -61,7 +74,7 @@ export class LicenseService {
   public async activate(key: string): Promise<boolean> {
     if (await this.isLicenseKeyValid(key)) {
       await this.api.activate(key);
-      this.saveLicenseToFile(key);
+      await this.saveKey(key);
       return true;
     }
     return false;
