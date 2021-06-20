@@ -11,7 +11,6 @@ import { LocalesError } from '../exceptions';
 })
 export class LocalesService {
   fs: typeof fs;
-  private currentLocale: Locale;
   private localePhrases: object;
 
   constructor(private electron: ElectronService,
