@@ -45,14 +45,10 @@ export class LocalesService {
   public getLocaledPhrase(phrase: string, locale?: Locale | null): string {
     const requiredLocale = locale || this.settings.locale;
     const foundPhrase = this.localePhrases[phrase];
-    let foundLocaledPhrase = '';
-    if (foundPhrase) {
-      foundLocaledPhrase = foundPhrase[requiredLocale];
-      if (foundLocaledPhrase)
-        return foundLocaledPhrase
-      else
-        throw new LocalesError('Could not found translation for required locale');
-    } else
-      throw new LocalesError('Could not found phrase');
+
+    if (!foundPhrase) throw new LocalesError('Could not found translation for required locale');
+      const foundLocaledPhrase = foundPhrase[requiredLocale];
+    if (!phrase) throw new LocalesError('Could not found phrase');
+      return foundLocaledPhrase;
   }
 }
