@@ -6,6 +6,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "types": [
       "node",
       "dom-mediacapture-record"

@@ -1,3 +1,5 @@
+import { Locale } from './';
+
 export interface Settings {
   recording: {
     saveWithSource: boolean | string;
@@ -5,5 +7,8 @@ export interface Settings {
   },
   screen: {
     connection: string;
+  },
+  locales: {
+    locale: Locale
   }
 }
