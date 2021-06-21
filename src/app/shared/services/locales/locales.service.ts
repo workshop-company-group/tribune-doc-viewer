@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Locale, Phrase, Phrases } from '../../models';
 import { SettingsService } from '../settings/settings.service';
-import * as fs from 'fs';
 import { LocalesError } from '../exceptions';
 
 import * as phrases from '../../../../assets/locale.json';
@@ -11,17 +10,10 @@ import * as phrases from '../../../../assets/locale.json';
   providedIn: 'root'
 })
 export class LocalesService {
-  fs: typeof fs;
 
   private localePhrases: Phrases = phrases;
 
-  constructor(private settings: SettingsService) {
-    this.fs = window.require('fs');
-  }
-
-  public setLocale(locale: Locale) {
-    this.settings.locale = locale;
-  }
+  constructor(private settings: SettingsService) { }
 
   public getLocaledPhrase(phrase: string, locale?: Locale | null): string {
     const requiredLocale: Locale = locale ?? this.settings.locale;
