@@ -13,30 +13,22 @@ export class LocalesService {
   fs: typeof fs;
   private localePhrases: object;
 
-  constructor(private electron: ElectronService,
-              private settings: SettingsService) {
+  constructor(private settings: SettingsService) {
     this.fs = window.require('fs');
-
-    if (!this.settings.locale) this.settings.locale = this.getSystemLocale();
     this.localePhrases = this.readLocale()
-  }
-
-  private getSystemLocale() {
-    const env = process.env;
-    const sysLanguage = env.LC_ALL || env.LC_MESSAGES || env.LANG || env.LANGUAGE || null;
-    if (sysLanguage)
-      return sysLanguage.split('_')[0];
-    else
-      return 'en';
   }
 
   private readLocale() {
     const jsonBuffer = this.fs.readFileSync('src/assets/locale.json');
-    return JSON.parse(jsonBuffer.toString())
+    return JSON.parse(jsonBuffer.toString());
+  }
+
+  public setLocale(locale: Locale) {
+    this.settings.locale = locale;
   }
 
   public getLocaledPhrase(phrase: string, locale?: Locale | null): string {
-    const requiredLocale = locale || this.settings.locale;
+    const requiredLocale = locale ?? this.settings.locale;
     const foundPhrase = this.localePhrases[phrase];
 
     if (!foundPhrase) throw new LocalesError('Could not found translation for required locale');

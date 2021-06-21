@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Settings } from '../../models/settings';
 import { Display, Locale } from '../../models';
+import { SystemService } from '../system/system.service';
 import * as loadIniFile from 'read-ini-file';
 import * as writeIniFile from 'write-ini-file';
 import * as fs from 'fs';
@@ -26,13 +27,14 @@ export class SettingsService {
       connection: ''
     },
     locales: {
-      locale: null
+      locale: this.system.getSystemLocale() ?? 'en'
     }
   };
 
   private _settings: Settings;
 
-  constructor(private electron: ElectronService) {
+  constructor(private electron: ElectronService,
+              private system: SystemService) {
     if (this.electron.isElectron) {
       this.loadIniFile = window.require('read-ini-file');
       this.writeIniFile = window.require('write-ini-file');
