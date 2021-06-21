@@ -1,26 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Locale } from '../../models';
-import { ElectronService } from '../../../core/services';
 import { SettingsService } from '../settings/settings.service';
-
 import * as fs from 'fs';
 import { LocalesError } from '../exceptions';
+
+import * as phrases from '../../../../assets/locale.json';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalesService {
   fs: typeof fs;
-  private localePhrases: object;
+
+  private localePhrases = phrases;
 
   constructor(private settings: SettingsService) {
     this.fs = window.require('fs');
-    this.localePhrases = this.readLocale()
-  }
-
-  private readLocale() {
-    const jsonBuffer = this.fs.readFileSync('src/assets/locale.json');
-    return JSON.parse(jsonBuffer.toString());
   }
 
   public setLocale(locale: Locale) {
