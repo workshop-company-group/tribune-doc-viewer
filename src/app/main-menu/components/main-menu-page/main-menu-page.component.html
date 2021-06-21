@@ -29,3 +29,8 @@
         Выход
     </app-normal-button>
 </div>
+
+<app-backdrop class="license-dialog"
+    *ngIf="!(license.keySubject | async)">
+    <app-license-dialog></app-license-dialog>
+</app-backdrop>
