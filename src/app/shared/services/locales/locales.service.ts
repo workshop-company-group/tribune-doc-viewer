@@ -15,12 +15,9 @@ export class LocalesService {
 
   constructor(private electron: ElectronService,
               private settings: SettingsService) {
-    if (this.electron.isElectron) {
-      this.fs = window.require('fs');
+    this.fs = window.require('fs');
 
-      if (!this.settings.locale)
-        this.settings.locale = this.getSystemLocale();
-    }
+    if (!this.settings.locale) this.settings.locale = this.getSystemLocale();
     this.localePhrases = this.readLocale()
   }
 
