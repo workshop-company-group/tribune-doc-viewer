@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Locale } from '../../models';
+import { Locale, Phrase, Phrases } from '../../models';
 import { SettingsService } from '../settings/settings.service';
 import * as fs from 'fs';
 import { LocalesError } from '../exceptions';
@@ -13,7 +13,7 @@ import * as phrases from '../../../../assets/locale.json';
 export class LocalesService {
   fs: typeof fs;
 
-  private localePhrases = phrases;
+  private localePhrases: Phrases = phrases;
 
   constructor(private settings: SettingsService) {
     this.fs = window.require('fs');
@@ -24,12 +24,13 @@ export class LocalesService {
   }
 
   public getLocaledPhrase(phrase: string, locale?: Locale | null): string {
-    const requiredLocale = locale ?? this.settings.locale;
-    const foundPhrase = this.localePhrases[phrase];
+    const requiredLocale: Locale = locale ?? this.settings.locale;
+    const foundPhrase: Phrase = this.localePhrases[phrase];
 
     if (!foundPhrase) throw new LocalesError('Could not found translation for required locale');
-      const foundLocaledPhrase = foundPhrase[requiredLocale];
+    const foundLocaledPhrase = foundPhrase[requiredLocale];
+
     if (!phrase) throw new LocalesError('Could not found phrase');
-      return foundLocaledPhrase;
+    return foundLocaledPhrase;
   }
 }
