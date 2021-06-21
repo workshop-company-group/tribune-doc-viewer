@@ -9,6 +9,8 @@ export class SystemService {
 
   public getSystemLocale(): string | null {
     const env = process.env;
-    return env.LC_ALL || env.LC_MESSAGES || env.LANG || env.LANGUAGE;
+    const sysLanguage = env.LC_ALL || env.LC_MESSAGES || env.LANG || env.LANGUAGE || null;
+    if (sysLanguage) return sysLanguage.split('_')[0];
+    return null;
   }
 }
