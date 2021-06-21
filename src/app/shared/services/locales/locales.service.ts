@@ -35,10 +35,6 @@ export class LocalesService {
     return JSON.parse(jsonBuffer.toString())
   }
 
-  public setLocale(locale: Locale) {
-    this.settings.locale = locale;
-  }
-
   public getLocaledPhrase(phrase: string, locale?: Locale | null): string {
     const requiredLocale = locale || this.settings.locale;
     const foundPhrase = this.localePhrases[phrase];
