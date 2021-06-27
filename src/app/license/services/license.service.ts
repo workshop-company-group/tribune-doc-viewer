@@ -11,6 +11,7 @@ import { LicenseApiService } from './license-api.service';
 
 import * as fs from 'fs';
 import * as util from 'util';
+import { LicenseAPIResponseStatus } from '../../shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -61,11 +62,9 @@ export class LicenseService {
 
   public async isLicenseKeyValid(key: string): Promise<boolean> {
     try {
-      await this.api.validate(key);
+      const validationResult = await this.api.validate(key);
+      return validationResult.status == LicenseAPIResponseStatus.OK
     } catch(err) {
-      if (err.status === 403)
-        return false;
-      else
         throw new LicenseError('Something went wrong');
     }
     return true;
