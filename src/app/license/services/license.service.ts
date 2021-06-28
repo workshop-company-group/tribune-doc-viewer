@@ -9,8 +9,11 @@ import { AppConfig } from '../../../environments/environment';
 import { ElectronService } from '../../core/services';
 import { LicenseApiService } from './license-api.service';
 
+import { LicenseApiResponseStatus } from '../models';
+
 import * as fs from 'fs';
 import * as util from 'util';
+
 
 @Injectable({
   providedIn: 'root'
@@ -61,11 +64,9 @@ export class LicenseService {
 
   public async isLicenseKeyValid(key: string): Promise<boolean> {
     try {
-      await this.api.validate(key);
+      const validationResult = await this.api.validate(key);
+      return validationResult.status === LicenseApiResponseStatus.OK
     } catch(err) {
-      if (err.status === 403)
-        return false;
-      else
         throw new LicenseError('Something went wrong');
     }
     return true;

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, } from '@angular/common/http';
+import { LicenseApiResponse } from '../models'
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,8 @@ export class LicenseApiService {
     ).toPromise();
   }
 
-  public validate(key: string): Promise<void> {
-    return this.http.get<void>(
+  public validate(key: string): Promise<LicenseApiResponse> {
+    return this.http.get<LicenseApiResponse>(
       `/api/licenses/${key}/validate`
     ).toPromise();
   }
