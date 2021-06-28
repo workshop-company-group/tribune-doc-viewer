@@ -1,6 +1,5 @@
 export * from './auth';
 export * from './drive';
-export * from './license';
 export * from './locales';
 export * from './settings';
 export * from './display';
