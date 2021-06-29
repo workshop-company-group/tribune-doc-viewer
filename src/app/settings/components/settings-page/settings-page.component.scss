@@ -36,6 +36,20 @@
     color: var(--base-black-color);
   }
 
+  .settings-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    app-selectable-button {
+      margin-right: 100px;
+
+      &:last-of-type {
+        margin: 0;
+      }
+    }
+  }
+
   .bottom-container {
     position: absolute;
     bottom: 0;

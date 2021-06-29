@@ -21,6 +21,7 @@ import {
   imports: [
     CommonModule,
     SettingsRoutingModule,
+    SharedModule,
   ]
 })
 export class SettingsModule { }

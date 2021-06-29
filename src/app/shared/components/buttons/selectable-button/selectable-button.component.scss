@@ -3,8 +3,6 @@ app-normal-button {
 
   --button-background: var(--faint-light-grey-horizontal-gradient);
 
-  --normal-button-justify-content: flex-start;
-
   &.selected {
     --button-background: var(--accent-blue-horizontal-gradient);
     --button-color: var(--base-white-color);
