@@ -1,0 +1,36 @@
+<div class="background">
+    <img src="assets/background/filled-brandbook.svg">
+</div>
+
+<div class="tribune">
+    <img src="assets/images/tribune.png">
+    <span>BM Tribune</span>
+</div>
+
+<span class="version">
+    {{ updateService.version }}
+</span>
+
+<div class="logo-container">
+    <img class="logo" src="assets/logos/colorful-logo.svg" alt="BM Group">
+</div>
+
+<div class="buttons-container">
+    <app-normal-button class="button"
+        (button-click)="openFileView()">
+        {{ documentService.isEmpty() ? 'Начать работу' : 'Продолжить' }}
+    </app-normal-button>
+    <app-normal-button class="button"
+        (button-click)="openSettings()">
+        Параметры
+    </app-normal-button>
+    <app-normal-button class="button"
+        (button-click)="quitApplication()">
+        Выход
+    </app-normal-button>
+</div>
+
+<app-backdrop class="license-dialog"
+    *ngIf="!(license.keySubject | async)">
+    <app-license-dialog></app-license-dialog>
+</app-backdrop>

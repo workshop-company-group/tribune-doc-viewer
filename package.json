@@ -89,10 +89,14 @@
     "@types/video.js": "7.3.15",
     "crypto-js": "4.0.0",
     "css-element-queries": "1.2.3",
+    "dotenv": "8.2.0",
+    "electron-drivelist": "8.0.10",
     "file-loader": "6.0.0",
+    "get-file-info": "1.0.3",
     "jsonfile": "4.0.0",
     "pdfjs-dist": "2.6.347",
     "read-ini-file": "3.0.1",
+    "systeminformation": "5.6.12",
     "videojs-record": "4.2.0",
     "write-ini-file": "3.0.2"
   }

@@ -2,6 +2,7 @@
   /* ----- Color styles ----- */
   /* Base */
   --base-black-color: #43454B;
+  --base-transparent-black-color: rgba(67, 69, 75, 0.5);
   --base-white-color: #FFFFFF;
   /* Faint */
   --faint-dark-grey-color: #CDCDCD;
@@ -25,8 +26,11 @@
   --dark-text-shadow: 1px 1px 10px #FFFFFF;
 
   /* ----- Component styles ----- */
-  /* Small button */
-  --small-button-background: var(--faint-light-grey-gradient);
+  /* Buttons */
+  --normal-button-padding: 0;
+  --normal-button-justify-content: center;
+  --button-background: var(--faint-light-grey-vertical-gradient);
+  --button-color: var(--base-black-color);
   /* Record broadcast button */
   --record-broadcast-button-icon-width: 30px;
 }

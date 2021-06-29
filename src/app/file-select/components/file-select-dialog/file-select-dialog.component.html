@@ -1,0 +1,64 @@
+<div class="left-container">
+    <div class="title-container">
+        <button class="close-button"
+            (click)="closeEmitter.emit()">
+            <img src="assets/icons/crosses/cross-black.svg" alt="close">
+        </button>
+        <span class="title">Выберите файлы</span>
+    </div>
+    <div class="drive-container">
+        <app-selectable-button class="drive"
+           *ngFor="let mountpoint of fileSelect.mountpoints"
+           [selected]="fileSelect.isMountpointSelected(mountpoint)"
+           (button-click)="fileSelect.selectMountpoint(mountpoint)">
+            {{ mountpoint.path }}
+        </app-selectable-button>
+    </div>
+</div>
+
+<div class="right-container">
+    <div class="dir-content-container">
+        <div class="title-container">
+            <span class="name">Имя</span>
+            <span class="type">Тип</span>
+            <span class="size">Размер</span>
+        </div>
+
+        <div class="dir-content">
+            <div class="go-back-button"
+                *ngIf="!fileSelect.isCurrentDirRoot()"
+                (click)="fileSelect.changeDirToParent()">
+                <div class="icon-container">
+                    <img src="assets/icons/arrows/left-arrow.svg">
+                </div>
+                <span class="hint">Вернуться назад</span>
+            </div>
+            <div class="folder-container"
+                *ngFor="let folder of fileSelect.currentDirContent.folders"
+                (click)="fileSelect.changeDir(folder.path)">
+                <div class="icon-container">
+                    <img src="assets/icons/file-formats/folder.svg">
+                </div>
+                <span class="name">{{ folder.name }}</span>
+                <span class="type">Папка с файлами</span>
+            </div>
+            <div class="file-container"
+                *ngFor="let file of fileSelect.currentDirContent.files"
+                [ngClass]="{'selected': file.path === fileSelect.selectedFilePath }"
+                (click)="fileSelect.selectFile(file)">
+                <div class="icon-container">
+                    <img [src]="fileSelect.getFileTypeIconPath(file.type)">
+                </div>
+                <span class="name">{{ file.name }}</span>
+                <span class="type">Файл "{{ file.type | uppercase }}"</span>
+                <span class="size">{{ file.size }}</span>
+            </div>
+        </div>
+    </div>
+
+    <app-small-button class="add-button"
+        [disabled]="!fileSelect.selectedFilePath.length"
+        (button-click)="openFiles()">
+        Добавить
+    </app-small-button>
+</div>

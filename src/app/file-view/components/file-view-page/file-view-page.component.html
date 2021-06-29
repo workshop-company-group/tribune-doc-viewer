@@ -1,0 +1,37 @@
+<app-file-view-background class="background">
+</app-file-view-background>
+
+<app-file-title-menu class="title-menu">
+</app-file-title-menu>
+
+<app-file-viewer class="viewer">
+</app-file-viewer>
+
+<div class="finish-record-container"
+    *ngIf="confirmation.state">
+    <div class="backdrop"></div>
+
+    <app-finish-record-confirmation class="confirmation"
+        *ngIf="confirmation.state === 'stop-recording'"
+        (confirm-click)="confirmation.state = null">
+    </app-finish-record-confirmation>
+
+    <app-file-select-confirmation class="confirmation"
+        *ngIf="confirmation.state === 'select-broadcasting'"
+        (cancel-click)="confirmation.state = null"
+        (select-click)="startBroadcasting()">
+    </app-file-select-confirmation>
+
+    <app-file-close-confirmation class="confirmation"
+        *ngIf="confirmation.state === 'close-broadcasting'
+            || confirmation.state === 'close-recording'"
+        (cancel-click)="cancelClosing()"
+        (confirm-click)="closeDocument()">
+    </app-file-close-confirmation>
+
+    <app-file-select-dialog class="confirmation"
+        *ngIf="confirmation.state === 'select-file'"
+        (close-click)="fileSelectedHandler()">
+    </app-file-select-dialog>
+</div>
+

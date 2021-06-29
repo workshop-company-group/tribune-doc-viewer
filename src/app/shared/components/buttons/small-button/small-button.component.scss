@@ -8,10 +8,15 @@ button {
   align-items: center;
   justify-content: center;
 
-  background: var(--small-button-background);
+  background: var(--button-background);
   border-radius: 10px;
   box-shadow: var(--base-shadow);
 
-  color: var(--base-black-color);
+  color: var(--button-color);
   @extend %primary-light-font;
+
+  &:disabled {
+    --button-background: var(--faint-light-grey-vertical-gradient);
+    --button-color: var(--faint-dark-grey-color);
+  }
 }

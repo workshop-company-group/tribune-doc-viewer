@@ -2,29 +2,38 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { WebviewDirective } from './directives/';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, } from '@angular/forms';
 
 import { LargeIconButtonComponent,
          NormalButtonComponent,
-         SmallButtonComponent } from './components/buttons';
+         SmallButtonComponent,
+         SelectableButtonComponent, } from './components/buttons';
+import { InputComponent, } from './components/inputs';
+import { BackdropComponent } from './components';
 
 @NgModule({
   declarations: [
     WebviewDirective,
-    LargeIconButtonComponent,
-    NormalButtonComponent,
-    SmallButtonComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule
-  ],
-  exports: [
-    WebviewDirective,
-    FormsModule,
+    BackdropComponent,
     LargeIconButtonComponent,
     NormalButtonComponent,
     SmallButtonComponent,
+    SelectableButtonComponent,
+    InputComponent,
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  exports: [
+    WebviewDirective,
+    BackdropComponent,
+    LargeIconButtonComponent,
+    NormalButtonComponent,
+    SmallButtonComponent,
+    SelectableButtonComponent,
+    InputComponent,
   ]
 })
 export class SharedModule {}

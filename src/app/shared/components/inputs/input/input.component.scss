@@ -1,0 +1,24 @@
+@import "../../../../../styles/mixins.scss";
+
+:host {
+  width: 395px;
+
+  input {
+    width: 100%;
+    height: 70px;
+
+    background: var(--base-white-color);
+
+    color: var(--base-black-color);
+    text-align: center;
+    @extend %primary-regular-font;
+
+    border-radius: 10px;
+    box-shadow: var(--base-inner-shadow);
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: var(--faint-dark-grey-color);
+    }
+  }
+}

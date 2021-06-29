@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FileViewPageComponent,
-         MainMenuPageComponent } from './pages';
+import { LicenseResolver } from './license/resolvers';
+import { LicenseGuard } from './license/guards';
 
 const routes: Routes = [
   {
@@ -12,15 +12,31 @@ const routes: Routes = [
   },
   {
     path: 'main-menu',
-    component: MainMenuPageComponent
+    loadChildren: () => import('./main-menu/main-menu.module').then(m => m.MainMenuModule),
+    resolve: {
+      license: LicenseResolver,
+    },
   },
   {
     path: 'file-view',
-    component: FileViewPageComponent
+    loadChildren: () => import('./file-view/file-view.module').then(m => m.FileViewModule),
+    canActivate: [
+      LicenseGuard,
+    ],
   },
   {
     path: 'settings',
-    loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsModule),
+    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
+    canActivate: [
+      LicenseGuard,
+    ],
+  },
+  {
+    path: 'password',
+    loadChildren: () => import('./password/password.module').then(m => m.PasswordModule),
+    canActivate: [
+      LicenseGuard,
+    ],
   },
 ];
 

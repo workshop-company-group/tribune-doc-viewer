@@ -1,0 +1,39 @@
+<div class="left-container"
+    [ngClass]="{'fullscreen': documentService.count < 2}"
+    *ngIf="documentService.count >= 0">
+
+    <div class="add-container"
+        *ngIf="documentService.count === 0">
+
+        <app-large-icon-button class="add-button"
+            src="assets/icons/plus.svg"
+            (button-click)="openDocument()">
+        </app-large-icon-button>
+
+        <span class="add-hint">
+            Добавить файлы
+        </span>
+    </div>
+
+    <app-document-view class="document-view"
+        *ngIf="documentService.count > 0"
+        [doc]="documentService.opened[0]"
+        (click)="documentService.select(0)">
+    </app-document-view>
+</div>
+
+<div class="right-container"
+    *ngIf="documentService.count > 1">
+
+    <app-document-view class="document-view"
+        [doc]="documentService.opened[1]"
+        (click)="documentService.select(1)">
+    </app-document-view>
+</div>
+
+<div class="record-broadcast-container"
+     *ngIf="documentService.count > 0">
+    <app-record-broadcast-control
+        class="record-broadcast-control">
+    </app-record-broadcast-control>
+</div>
