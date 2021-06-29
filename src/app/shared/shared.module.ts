@@ -10,6 +10,7 @@ import { LargeIconButtonComponent,
          SelectableButtonComponent, } from './components/buttons';
 import { InputComponent, } from './components/inputs';
 import { BackdropComponent } from './components';
+import { SelectComponent } from './components/selects';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { BackdropComponent } from './components';
     SmallButtonComponent,
     SelectableButtonComponent,
     InputComponent,
+    SelectComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +35,7 @@ import { BackdropComponent } from './components';
     NormalButtonComponent,
     SmallButtonComponent,
     SelectableButtonComponent,
+    SelectComponent,
     InputComponent,
   ]
 })
