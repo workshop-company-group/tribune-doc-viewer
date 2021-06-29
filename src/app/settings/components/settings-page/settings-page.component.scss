@@ -1,0 +1,54 @@
+@import "../../../../styles/mixins.scss";
+
+:host {
+  height: 100vh;
+  width: 100%;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: var(--faint-white-gradient);
+
+  .top-container {
+    width: 100%;
+
+    margin-bottom: 10%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    .close-button {
+      img {
+        height: 30px;
+        margin: 30px;
+      }
+    }
+  }
+
+  .title {
+    margin-bottom: 100px;
+
+    @extend %primary-bold-font;
+    color: var(--base-black-color);
+  }
+
+  .bottom-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    margin-bottom: 50px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    img {
+      height: 50px;
+    }
+  }
+}
