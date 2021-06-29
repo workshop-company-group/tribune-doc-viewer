@@ -5,8 +5,11 @@ import * as writeIniFile from 'write-ini-file';
 import * as fs from 'fs';
 import * as si from 'systeminformation';
 
+import { BehaviorSubject, } from 'rxjs';
+
 import { Settings } from '../models';
-import { Display, Locale } from '../../shared/models';
+import { Locale } from '../../locale/models';
+import { Display, } from '../../shared/models';
 
 import { SystemService } from '../../shared/services';
 import { ElectronService } from '../../core/services';
@@ -34,6 +37,10 @@ export class SettingsService {
     }
   };
 
+  public localeSubject = new BehaviorSubject<Locale>(
+    this.defaultSettings.locales.locale
+  );
+
   private _settings: Settings;
 
   constructor(private electron: ElectronService,
@@ -54,10 +61,8 @@ export class SettingsService {
   }
 
   private initIni() {
-    console.log('init ini');
     if (!this.fs.existsSync(this.defaultPath)) {
       this.writeIniFile(this.defaultPath, this.defaultSettings);
-      console.log('not exist');
       this.settings = this.defaultSettings;
     } else {
       this.reload();
@@ -85,6 +90,7 @@ export class SettingsService {
 
   public reload() {
     this.settings = this.loadIniFile.sync(this.defaultPath);
+    this.localeSubject.next(this.settings.locales.locale);
   }
 
   private handleSettings(settings: Settings) {
@@ -150,6 +156,7 @@ export class SettingsService {
   }
 
   public set locale(locale: Locale) {
+    this.localeSubject.next(locale);
     const settings = this.settings
     settings.locales.locale = locale;
     this.settings = settings;

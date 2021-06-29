@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit, } from '@angular/core';
+import { ChangeDetectorRef, Component,
+  OnDestroy, OnInit, } from '@angular/core';
 import { FormControl, } from '@angular/forms';
 
 import { Subscription, } from 'rxjs';
 
 import { AppConfig } from '../../../../environments/environment';
 
-import { Locale, } from '../../../shared/models';
+import { Locale, } from '../../../locale/models';
 
 import { SettingsService, } from '../../services';
 
@@ -21,13 +22,15 @@ export class GeneralPageComponent implements OnInit, OnDestroy {
   private readonly subscriptions: Subscription[] = [];
 
   constructor(
+    public readonly changeDetector: ChangeDetectorRef,
     public readonly settings: SettingsService,
   ) { }
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.localeControl.valueChanges.subscribe(locale =>
-        this.settings.locale = locale)
+      this.localeControl.valueChanges.subscribe(locale => {
+        this.settings.locale = locale;
+      })
     );
   }
 
