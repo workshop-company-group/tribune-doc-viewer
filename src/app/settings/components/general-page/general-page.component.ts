@@ -1,14 +1,13 @@
-import { ChangeDetectorRef, Component,
-  OnDestroy, OnInit, } from '@angular/core';
-import { FormControl, } from '@angular/forms';
+import { Component, OnDestroy, OnInit, } from '@angular/core';
+import { FormControl, FormGroup, } from '@angular/forms';
 
 import { Subscription, } from 'rxjs';
 
 import { AppConfig } from '../../../../environments/environment';
-
 import { Locale, } from '../../../locale/models';
 
 import { SettingsService, } from '../../services';
+import { AuthService, } from '../../../password/services';
 
 @Component({
   selector: 'app-general-page',
@@ -19,10 +18,18 @@ export class GeneralPageComponent implements OnInit, OnDestroy {
 
   public readonly localeControl = new FormControl(this.settings.locale);
 
+  public readonly passwordControl = new FormGroup({
+    current: new FormControl(''),
+    update: new FormControl(''),
+  });
+
+  public wrongPasswordHint = false;
+  public passwordControlsOpened = false;
+
   private readonly subscriptions: Subscription[] = [];
 
   constructor(
-    public readonly changeDetector: ChangeDetectorRef,
+    public readonly auth: AuthService,
     public readonly settings: SettingsService,
   ) { }
 
@@ -30,7 +37,10 @@ export class GeneralPageComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.localeControl.valueChanges.subscribe(locale => {
         this.settings.locale = locale;
-      })
+      }),
+      this.passwordControl.controls.current.valueChanges.subscribe((value) => {
+        this.wrongPasswordHint = false;
+      }),
     );
   }
 
@@ -40,6 +50,19 @@ export class GeneralPageComponent implements OnInit, OnDestroy {
 
   public get locales(): Locale[] {
     return AppConfig.supportedLangs;
+  }
+
+  public savePassword(): void {
+    const currentPassword = this.passwordControl.controls.current.value;
+    const updatePassword = this.passwordControl.controls.update.value;
+
+    if (!this.auth.passwordIsValid(currentPassword)) {
+      this.wrongPasswordHint = true;
+      return;
+    }
+
+    this.auth.setPassword(updatePassword);
+    this.passwordControlsOpened = false;
   }
 
 }

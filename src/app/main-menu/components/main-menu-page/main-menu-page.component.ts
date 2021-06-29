@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { DocumentService, } from '../../../file-view/services';
 import { LicenseService, } from '../../../license/services';
-import { PasswordStateService, } from '../../../password/services';
+import { AuthService, PasswordStateService, } from '../../../password/services';
 import { UpdateService, } from '../../../update/services/update.service';
 
 @Component({
@@ -14,6 +14,7 @@ import { UpdateService, } from '../../../update/services/update.service';
 export class MainMenuPageComponent implements OnInit {
 
   constructor(
+    public readonly auth: AuthService,
     public readonly documentService: DocumentService,
     public readonly license: LicenseService,
     public readonly passwordState: PasswordStateService,
@@ -29,12 +30,21 @@ export class MainMenuPageComponent implements OnInit {
 
   public openSettings(): void {
     this.passwordState.pageState = 'settings';
-    this.router.navigate(['/password']);
+    this.continueWithPassword();
   }
 
   public quitApplication(): void {
     this.passwordState.pageState = 'quit';
-    this.router.navigate(['/password']);
+    this.continueWithPassword();
+  }
+
+  private continueWithPassword(): void {
+    if (this.auth.hasPassword()) {
+      this.router.navigate(['/password']);
+      return;
+    }
+
+    this.passwordState.continueWithPassword();
   }
 
 }
