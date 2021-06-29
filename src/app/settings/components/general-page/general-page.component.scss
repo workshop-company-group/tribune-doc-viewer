@@ -1,0 +1,23 @@
+@import "../../../../styles/mixins.scss";
+
+:host {
+  display: flex;
+  flex-direction: row;
+
+  .part-container {
+    width: 0;
+    flex-grow: 1;
+  }
+
+  .language-container {
+    display: flex;
+    flex-direction: column;
+
+    margin-right: 100px;
+  }
+
+  .description {
+    margin-bottom: 20px;
+    @extend %primary-light-font;
+  }
+}

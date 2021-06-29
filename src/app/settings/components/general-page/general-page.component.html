@@ -1,3 +1,9 @@
-<app-select [options]="['a', 'b', 'c']"
-    [formControl]="languageControl">
-</app-select>
+<div class="language-container part-container">
+    <span class="description">Язык интерфейса</span>
+    <app-select [options]="locales"
+        [formControl]="localeControl">
+    </app-select>
+</div>
+<div class="password-container part-container">
+    <span class="description">Пароль</span>
+</div>

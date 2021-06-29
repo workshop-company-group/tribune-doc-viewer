@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Settings } from '../../models/settings';
-import { Display, Locale } from '../../models';
-import { SystemService } from '../system/system.service';
+
 import * as loadIniFile from 'read-ini-file';
 import * as writeIniFile from 'write-ini-file';
 import * as fs from 'fs';
 import * as si from 'systeminformation';
-import { ElectronService } from '../../../core/services';
+
+import { Settings } from '../models';
+import { Display, Locale } from '../../shared/models';
+
+import { SystemService } from '../../shared/services';
+import { ElectronService } from '../../core/services';
 
 @Injectable({
   providedIn: 'root'
@@ -51,8 +54,10 @@ export class SettingsService {
   }
 
   private initIni() {
+    console.log('init ini');
     if (!this.fs.existsSync(this.defaultPath)) {
       this.writeIniFile(this.defaultPath, this.defaultSettings);
+      console.log('not exist');
       this.settings = this.defaultSettings;
     } else {
       this.reload();

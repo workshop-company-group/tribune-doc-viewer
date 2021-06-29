@@ -1,4 +1,4 @@
-import { Locale } from './';
+import { Locale } from '../../shared/models';
 
 export interface Settings {
   recording: {
