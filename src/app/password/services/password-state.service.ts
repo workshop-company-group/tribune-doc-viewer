@@ -33,30 +33,32 @@ export class PasswordStateService {
   }
 
   public continueWithPassword() {
-    if (this.pageState === 'settings') {
-      this.pageState = null;
-      //this.router.navigate(['/settings']);
-      console.log('settings page was called');
+    switch(this.pageState) {
+      case 'settings':
+        this.pageState = null;
+        this.router.navigate(['/settings']);
+        break;
 
-    } else if (this.pageState === 'quit') {
-      this.pageState = null;
+      case 'quit':
+        this.pageState = null;
 
-      // stop recording and broadcasting
-      if (this.recordBroadcast.state.value) {
-        if (this.recordBroadcast.state.value === 'recording'
-          || this.recordBroadcast.state.value === 'paused') {
-          this.recordBroadcast.stopRecording();
+        // stop recording and broadcasting
+        if (this.recordBroadcast.state.value) {
+          if (this.recordBroadcast.state.value === 'recording'
+            || this.recordBroadcast.state.value === 'paused') {
+            this.recordBroadcast.stopRecording();
+          }
+          this.recordBroadcast.stopBroadcasting();
         }
-        this.recordBroadcast.stopBroadcasting();
-      }
 
-      // remove converted documents
-      for (const index in this.documentService.opened) {
-        this.documentService.close(0);
-      }
+        // remove converted documents
+        const documentsLength = this.documentService.opened.length;
+        for (let i = 0; i < documentsLength; i++) {
+          this.documentService.close(0);
+        }
 
-      this.windowState.exit();
+        this.windowState.exit();
+        break;
     }
   }
-
 }

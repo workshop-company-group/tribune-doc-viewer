@@ -1,0 +1,31 @@
+<div class="top-container">
+    <button class="close-button" routerLink="/main-menu">
+        <img src="assets/icons/crosses/cross-black.svg" alt="close">
+    </button>
+</div>
+
+<span class="title">Параметры</span>
+
+<nav class="settings-nav">
+    <app-selectable-button
+        [selected]="(routeSubject | async) === 'general'"
+        (button-click)="routeSubject.next('general')">
+        Общие
+    </app-selectable-button>
+    <app-selectable-button
+        [selected]="(routeSubject | async) === 'recording'"
+        (button-click)="routeSubject.next('recording')">
+        Запись
+    </app-selectable-button>
+    <app-selectable-button
+        [selected]="(routeSubject | async) === 'broadcasting'"
+        (button-click)="routeSubject.next('broadcasting')">
+        Трансляция
+    </app-selectable-button>
+</nav>
+
+<router-outlet></router-outlet>
+
+<div class="bottom-container">
+    <img class="logo" src="assets/logos/grey-logo.svg" alt="Workshop">
+</div>

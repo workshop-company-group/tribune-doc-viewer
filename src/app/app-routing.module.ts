@@ -25,6 +25,13 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
+    canActivate: [
+      LicenseGuard,
+    ],
+  },
+  {
     path: 'password',
     loadChildren: () => import('./password/password.module').then(m => m.PasswordModule),
     canActivate: [
