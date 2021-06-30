@@ -1,0 +1,23 @@
+@import "../../../../styles/mixins.scss";
+
+:host {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .no-device-hint {
+    margin-bottom: 10px;
+
+    @extend %primary-light-font;
+    color: var(--accent-red-color);
+
+    opacity: 0;
+    transition: .3s;
+
+    &.visible {
+      opacity: 1;
+    }
+  }
+}

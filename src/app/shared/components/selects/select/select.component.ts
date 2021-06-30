@@ -1,5 +1,5 @@
 import { Component, ElementRef, forwardRef,
-  HostListener, Input, } from '@angular/core';
+  HostBinding, HostListener, Input, } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -19,7 +19,14 @@ export class SelectComponent implements ControlValueAccessor {
   public value: string;
 
   @Input()
-  public options: string[];
+  public set options(value: string[] | null) {
+    if (!value || !value.length) {
+      this.disabled = true;
+    }
+    this.valueOptions = value;
+  }
+
+  public valueOptions: string[] = [];
 
   public opened: boolean = false;
 
@@ -27,9 +34,18 @@ export class SelectComponent implements ControlValueAccessor {
 
   public touchedHandler: () => {};
 
+  @HostBinding()
+  public disabled: boolean = false;
+
   constructor(
     private readonly element: ElementRef,
   ) { }
+
+  public get iconSrc(): string {
+    return this.disabled
+      ? "assets/icons/arrows/down-arrow-filled-disabled.svg"
+      : "assets/icons/arrows/down-arrow-filled.svg";
+  }
 
   @HostListener('document:click', ['$event'])
   public handleClick(event: any) {
@@ -47,7 +63,8 @@ export class SelectComponent implements ControlValueAccessor {
     this.touchedHandler();
   }
 
-  public changeOverlayState(opened: boolean) {
+  public changeOverlayState(opened: boolean): void {
+    if (this.disabled) return;
     this.opened = opened;
   }
 
@@ -61,6 +78,10 @@ export class SelectComponent implements ControlValueAccessor {
 
   public registerOnTouched(fn: () => {}): void {
     this.touchedHandler = fn;
+  }
+
+  public setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 
 }

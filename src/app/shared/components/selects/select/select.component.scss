@@ -6,6 +6,12 @@
 
   display: block;
 
+  &.disabled {
+    span {
+      color: var(--faint-dark-grey);
+    }
+  }
+
   .current {
     width: 100%;
     height: 70px;

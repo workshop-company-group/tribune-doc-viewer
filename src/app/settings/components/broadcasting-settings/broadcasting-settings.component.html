@@ -1,1 +1,9 @@
-<p>broadcasting-page works!</p>
+<app-settings-section title="Устройство трансляции">
+    <span class="no-device-hint"
+          [ngClass]="{ 'visible': !!(devicesSubject | async) }">
+        Не найдено устройств для трансляции
+    </span>
+    <app-select [options]="devicesSubject | async"
+        [formControl]="deviceControl">
+    </app-select>
+</app-settings-section>
