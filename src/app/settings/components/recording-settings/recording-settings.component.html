@@ -1,1 +1,13 @@
-<p>recording-page works!</p>
+<app-settings-section title="Сохранение">
+    <div class="path-container">
+        <app-input [formControl]="pathControl">
+        </app-input>
+        <app-normal-button>Обзор</app-normal-button>
+    </div>
+    <div class="save-toggle">
+        <app-toggle [formControl]="saveToggle">
+        </app-toggle>
+
+        Сохранять в директорию документа
+    </div>
+</app-settings-section>

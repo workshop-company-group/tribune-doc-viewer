@@ -1,0 +1,34 @@
+@import "../../../../styles/mixins.scss";
+
+.path-container {
+  margin-bottom: 70px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  app-input {
+    width: 600px;
+
+    margin-right: 30px;
+
+    --input-text-align: left;
+  }
+
+  app-normal-button {
+    width: 200px;
+  }
+}
+
+.save-toggle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  color: var(--base-black-color);
+  @extend %primary-regular-font;
+
+  app-toggle {
+    margin-right: 30px;
+  }
+}
