@@ -1,4 +1,4 @@
-import { Locale } from './';
+import { Locale } from '../../locale/models';
 
 export interface Settings {
   recording: {

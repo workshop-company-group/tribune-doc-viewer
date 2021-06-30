@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ipcRenderer } from 'electron';
 import { ElectronService } from '../../../core/services';
 import { RecorderService } from '../recorder/recorder.service';
-import { SettingsService } from '../settings/settings.service';
+import { SettingsService } from '../../../settings/services';
 
 @Injectable({
   providedIn: 'root'

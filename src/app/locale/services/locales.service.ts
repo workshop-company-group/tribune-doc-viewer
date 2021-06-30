@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Locale, Phrase, Phrases } from '../../models';
-import { SettingsService } from '../settings/settings.service';
+
+import { Locale, Phrase, Phrases } from '../models';
+import { SettingsService } from '../../settings/services';
 import { LocalesError } from '../exceptions';
 
-import * as phrases from '../../../../assets/locale.json';
+import * as phrases from '../../../assets/locale.json';
 
 
 @Injectable({

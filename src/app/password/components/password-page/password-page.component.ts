@@ -2,8 +2,7 @@ import { Location, } from '@angular/common';
 import { Component, } from '@angular/core';
 import { FormControl, } from '@angular/forms';
 
-import { AuthService, } from '../../../shared/services';
-import { PasswordStateService, } from '../../services';
+import { AuthService, PasswordStateService, } from '../../services';
 
 @Component({
   selector: 'app-password-page',

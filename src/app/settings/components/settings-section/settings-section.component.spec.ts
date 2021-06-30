@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BroadcastingPageComponent } from './broadcasting-page.component';
+import { SettingsSectionComponent } from './settings-section.component';
 
-describe('BroadcastingPageComponent', () => {
-  let component: BroadcastingPageComponent;
-  let fixture: ComponentFixture<BroadcastingPageComponent>;
+describe('SettingsSectionComponent', () => {
+  let component: SettingsSectionComponent;
+  let fixture: ComponentFixture<SettingsSectionComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BroadcastingPageComponent ]
+      declarations: [ SettingsSectionComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BroadcastingPageComponent);
+    fixture = TestBed.createComponent(SettingsSectionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

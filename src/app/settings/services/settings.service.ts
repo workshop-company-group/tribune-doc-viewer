@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Settings } from '../../models/settings';
-import { Display, Locale } from '../../models';
-import { SystemService } from '../system/system.service';
+
 import * as loadIniFile from 'read-ini-file';
 import * as writeIniFile from 'write-ini-file';
 import * as fs from 'fs';
 import * as si from 'systeminformation';
-import { ElectronService } from '../../../core/services';
+
+import { BehaviorSubject, } from 'rxjs';
+
+import { Settings } from '../models';
+import { Locale } from '../../locale/models';
+import { Display, } from '../../shared/models';
+
+import { SystemService } from '../../shared/services';
+import { ElectronService } from '../../core/services';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +36,10 @@ export class SettingsService {
       locale: this.system.getSystemLocale() ?? 'en'
     }
   };
+
+  public localeSubject = new BehaviorSubject<Locale>(
+    this.defaultSettings.locales.locale
+  );
 
   private _settings: Settings;
 
@@ -80,6 +90,7 @@ export class SettingsService {
 
   public reload() {
     this.settings = this.loadIniFile.sync(this.defaultPath);
+    this.localeSubject.next(this.settings.locales.locale);
   }
 
   private handleSettings(settings: Settings) {
@@ -145,6 +156,7 @@ export class SettingsService {
   }
 
   public set locale(locale: Locale) {
+    this.localeSubject.next(locale);
     const settings = this.settings
     settings.locales.locale = locale;
     this.settings = settings;

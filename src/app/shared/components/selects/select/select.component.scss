@@ -1,0 +1,82 @@
+@import "../../../../../styles/mixins.scss";
+
+:host {
+  position: relative;
+  width: 395px;
+
+  display: block;
+
+  .current {
+    width: 100%;
+    height: 70px;
+
+    padding: 0 30px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--faint-light-grey-vertical-gradient);
+    border-radius: 10px;
+    box-shadow: var(--base-shadow);
+
+    img {
+      width: 25px;
+
+      transition: .3s;
+    }
+
+    &.opened {
+      background: var(--base-white-color);
+      box-shadow: var(--base-inner-shadow);
+      border-radius: 10px 10px 0 0;
+
+      img {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .overlay {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: calc(3 * 70px);
+
+    overflow: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 0 0 10px 10px;
+
+    .option {
+      width: 100%;
+      height: 70px;
+
+      padding: 0 30px;
+      box-sizing: border-box;
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      background: var(--base-white-color);
+
+      &.selected {
+        background: var(--accent-blue-color);
+
+        span {
+          color: var(--base-white-color);
+        }
+      }
+    }
+  }
+
+  span {
+    color: var(--base-black-color);
+    @extend %primary-regular-font;
+  }
+}
