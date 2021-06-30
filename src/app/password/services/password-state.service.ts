@@ -52,7 +52,8 @@ export class PasswordStateService {
         }
 
         // remove converted documents
-        for (const index in this.documentService.opened) {
+        const documentsLength = this.documentService.opened.length;
+        for (let i = 0; i < documentsLength; i++) {
           this.documentService.close(0);
         }
 
