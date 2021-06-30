@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GeneralPageComponent } from './general-page.component';
+import { RecordingSettingsComponent } from './recording-settings.component';
 
-describe('GeneralPageComponent', () => {
-  let component: GeneralPageComponent;
-  let fixture: ComponentFixture<GeneralPageComponent>;
+describe('RecordingSettingsComponent', () => {
+  let component: RecordingSettingsComponent;
+  let fixture: ComponentFixture<RecordingSettingsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GeneralPageComponent ]
+      declarations: [ RecordingSettingsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GeneralPageComponent);
+    fixture = TestBed.createComponent(RecordingSettingsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

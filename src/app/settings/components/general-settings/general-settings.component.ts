@@ -10,11 +10,11 @@ import { SettingsService, } from '../../services';
 import { AuthService, } from '../../../password/services';
 
 @Component({
-  selector: 'app-general-page',
-  templateUrl: './general-page.component.html',
-  styleUrls: ['./general-page.component.scss']
+  selector: 'app-general-settings',
+  templateUrl: './general-settings.component.html',
+  styleUrls: ['./general-settings.component.scss']
 })
-export class GeneralPageComponent implements OnInit, OnDestroy {
+export class GeneralSettingsComponent implements OnInit, OnDestroy {
 
   public readonly localeControl = new FormControl(this.settings.locale);
 

@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import {
-  BroadcastingPageComponent,
-  GeneralPageComponent,
-  RecordingPageComponent,
+  BroadcastingSettingsComponent,
+  GeneralSettingsComponent,
+  RecordingSettingsComponent,
   SettingsPageComponent,
 } from './components';
 
@@ -20,15 +20,15 @@ const routes: Routes = [
       },
       {
         path: 'broadcasting',
-        component: BroadcastingPageComponent,
+        component: BroadcastingSettingsComponent,
       },
       {
         path: 'general',
-        component: GeneralPageComponent,
+        component: GeneralSettingsComponent,
       },
       {
         path: 'recording',
-        component: RecordingPageComponent,
+        component: RecordingSettingsComponent,
       },
     ]
   },

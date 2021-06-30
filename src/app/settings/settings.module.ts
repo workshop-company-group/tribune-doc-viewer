@@ -7,17 +7,17 @@ import { LocaleModule } from '../locale/locale.module';
 import { SharedModule } from '../shared/shared.module';
 
 import {
-  BroadcastingPageComponent,
-  GeneralPageComponent,
-  RecordingPageComponent,
+  BroadcastingSettingsComponent,
+  GeneralSettingsComponent,
+  RecordingSettingsComponent,
   SettingsPageComponent,
 } from './components';
 
 @NgModule({
   declarations: [
-    BroadcastingPageComponent,
-    GeneralPageComponent,
-    RecordingPageComponent,
+    BroadcastingSettingsComponent,
+    GeneralSettingsComponent,
+    RecordingSettingsComponent,
     SettingsPageComponent,
   ],
   imports: [
