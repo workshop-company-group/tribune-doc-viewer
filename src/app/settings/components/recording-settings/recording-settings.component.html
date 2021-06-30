@@ -1,8 +1,13 @@
 <app-settings-section title="Сохранение">
     <div class="path-container">
-        <app-input [formControl]="pathControl">
+        <app-input [formControl]="pathControl"
+            placeholder="Путь к директории сохранения"
+            [disabled]="saveToggle.value">
         </app-input>
-        <app-normal-button>Обзор</app-normal-button>
+        <app-normal-button
+            [disabled]="saveToggle.value">
+            Обзор
+        </app-normal-button>
     </div>
     <div class="save-toggle">
         <app-toggle [formControl]="saveToggle">

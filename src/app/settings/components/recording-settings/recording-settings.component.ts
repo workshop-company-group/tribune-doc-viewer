@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, } from '@angular/core';
 import { FormControl, } from '@angular/forms';
+
+import { Subscription, } from 'rxjs';
+
+import { SettingsService } from '../../services';
 
 @Component({
   selector: 'app-recording-settings',
@@ -12,9 +16,19 @@ export class RecordingSettingsComponent implements OnInit {
 
   public readonly saveToggle = new FormControl();
 
-  constructor() { }
+  private readonly subscriptions: Subscription[] = [];
 
-  ngOnInit(): void {
+  constructor(
+    public readonly settings: SettingsService,
+  ) { }
+
+  public ngOnInit(): void {
+    this.subscriptions.push(
+    );
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
 }
