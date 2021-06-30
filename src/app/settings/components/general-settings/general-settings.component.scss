@@ -1,6 +1,8 @@
 @import "../../../../styles/mixins.scss";
 
 :host {
+  width: 100%;
+
   display: flex;
   flex-direction: row;
 
@@ -14,10 +16,5 @@
     flex-direction: column;
 
     margin-right: 100px;
-  }
-
-  .description {
-    margin-bottom: 20px;
-    @extend %primary-light-font;
   }
 }

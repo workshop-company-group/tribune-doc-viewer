@@ -18,4 +18,10 @@ button {
 
   border-radius: 10px;
   box-shadow: var(--base-shadow);
+  transition: .3s;
+
+  &:disabled {
+    --button-background: var(--faint-light-grey-vertical-gradient);
+    --button-color: var(--faint-dark-grey-color);
+  }
 }

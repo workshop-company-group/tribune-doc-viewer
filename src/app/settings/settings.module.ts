@@ -11,6 +11,10 @@ import {
   GeneralSettingsComponent,
   RecordingSettingsComponent,
   SettingsPageComponent,
+
+  LocaleSettingsSectionComponent,
+  PasswordSettingsSectionComponent,
+  SettingsSectionComponent,
 } from './components';
 
 @NgModule({
@@ -19,6 +23,9 @@ import {
     GeneralSettingsComponent,
     RecordingSettingsComponent,
     SettingsPageComponent,
+    LocaleSettingsSectionComponent,
+    PasswordSettingsSectionComponent,
+    SettingsSectionComponent,
   ],
   imports: [
     CommonModule,

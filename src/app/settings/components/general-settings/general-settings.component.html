@@ -1,43 +1,8 @@
 <div class="language-container part-container">
-    <span class="description">Язык интерфейса</span>
-    <app-select [options]="locales"
-        [formControl]="localeControl">
-    </app-select>
+    <app-locale-settings-section>
+    </app-locale-settings-section>
 </div>
 <div class="password-container part-container">
-    <span class="description">Пароль</span>
-
-    <div class="closed controls-container"
-        *ngIf="!passwordControlsOpened">
-        <app-normal-button *ngIf="!(auth.passwordObservable | async).length"
-            (click)="passwordControlsOpened = true">
-            Создать
-        </app-normal-button>
-        <app-normal-button *ngIf="(auth.passwordObservable | async).length"
-            (click)="passwordControlsOpened = true">
-            Изменить
-        </app-normal-button>
-        <app-normal-button *ngIf="(auth.passwordObservable | async).length"
-            (click)="auth.clearPassword()">
-            Удалить
-        </app-normal-button>
-    </div>
-
-    <div class="opened controls-container"
-        *ngIf="passwordControlsOpened"
-        [formGroup]="passwordControl">
-        <div class="input-container">
-            <span class="wrong-hint"
-                *ngIf="wrongPasswordHint">Неверный пароль</span>
-            <app-input formControlName="current"></app-input>
-        </div>
-        <app-input *ngIf="(auth.passwordObservable | async).length"
-            formControlName="update"></app-input>
-        <app-normal-button (click)="passwordControlsOpened = false">
-            Отмена
-        </app-normal-button>
-        <app-normal-button (click)="savePassword()">
-            Применить
-        </app-normal-button>
-    </div>
+    <app-password-settings-section>
+    </app-password-settings-section>
 </div>

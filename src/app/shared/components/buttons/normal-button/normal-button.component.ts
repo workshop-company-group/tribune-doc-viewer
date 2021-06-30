@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, } from '@angular/core';
+import { Component, EventEmitter, Input, Output, } from '@angular/core';
 
 @Component({
   selector: 'app-normal-button',
@@ -6,6 +6,9 @@ import { Component, EventEmitter, Output, } from '@angular/core';
   styleUrls: ['./normal-button.component.scss']
 })
 export class NormalButtonComponent {
+
+  @Input()
+  public readonly disabled = false;
 
   @Output('button-click')
   public clickEmitter = new EventEmitter<void>();
