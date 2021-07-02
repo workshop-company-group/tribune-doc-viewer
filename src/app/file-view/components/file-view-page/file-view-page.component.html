@@ -30,8 +30,10 @@
     </app-file-close-confirmation>
 
     <app-file-select-dialog class="confirmation"
+        open-button="Добавить"
         *ngIf="confirmation.state === 'select-file'"
-        (close-click)="fileSelectedHandler()">
+        (close-click)="confirmation.state = null"
+        (open-click)="fileSelectedHandler($event)">
     </app-file-select-dialog>
 </div>
 

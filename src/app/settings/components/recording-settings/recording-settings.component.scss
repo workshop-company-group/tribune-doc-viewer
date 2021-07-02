@@ -5,18 +5,47 @@
 
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
 
-  app-input {
-    width: 600px;
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    margin-right: 30px;
+    .not-found {
+      @extend %primary-light-font;
+      color: var(--accent-red-color);
 
-    --input-text-align: left;
+      margin-bottom: 10px;
+
+      opacity: 0;
+      transition: .3s;
+
+      &.visible {
+        opacity: 1;
+      }
+    }
+
+    app-input {
+      width: 600px;
+
+      margin-right: 30px;
+
+      --input-text-align: left;
+    }
   }
 
-  app-normal-button {
+  .browse-button {
     width: 200px;
+
+    margin-right: 30px;
+  }
+
+  .apply-button {
+    width: 200px;
+
+    --button-background: var(--accent-blue-vertical-gradient);
+    --button-color: var(--base-white-color);
   }
 }
 
@@ -30,5 +59,16 @@
 
   app-toggle {
     margin-right: 30px;
+  }
+}
+
+.file-select-dialog {
+  opacity: 0;
+  pointer-events: none;
+  transition: .3s;
+
+  &.opened {
+    opacity: 1;
+    pointer-events: auto;
   }
 }

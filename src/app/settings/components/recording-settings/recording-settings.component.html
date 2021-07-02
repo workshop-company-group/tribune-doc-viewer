@@ -1,14 +1,28 @@
 <app-settings-section title="Сохранение">
     <div class="path-container">
-        <app-input [formControl]="pathControl"
-            placeholder="Путь к директории сохранения"
-            [disabled]="saveToggle.value">
-        </app-input>
-        <app-normal-button
-            [disabled]="saveToggle.value">
+        <div class="input-container"><span class="not-found"
+                  [ngClass]="{ 'visible': pathDoesNotExist }">
+                Директория не существует
+            </span><app-input [formControl]="pathControl"
+                placeholder="Путь к директории сохранения"
+                [disabled]="saveToggle.value">
+            </app-input></div>
+
+        <app-normal-button class="browse-button"
+            [disabled]="saveToggle.value"
+            (button-click)="fileSelectDialogOpened = true">
             Обзор
         </app-normal-button>
+
+        <app-normal-button class="apply-button"
+            [disabled]="saveToggle.value 
+                || settings.savePath === pathControl.value
+                || pathDoesNotExist"
+            (button-click)="applyPath()">
+            Применить
+        </app-normal-button>
     </div>
+
     <div class="save-toggle">
         <app-toggle [formControl]="saveToggle">
         </app-toggle>
@@ -16,3 +30,13 @@
         Сохранять в директорию документа
     </div>
 </app-settings-section>
+
+<app-backdrop class="file-select-dialog"
+              *ngIf="fileSelect.selectedMountpoint"
+              [ngClass]="{ 'opened': fileSelectDialogOpened }">
+    <app-file-select-dialog
+        [folderSelect]="true"
+        (close-click)="fileSelectDialogOpened = false"
+        (open-click)="selectFolder($event)">
+    </app-file-select-dialog>
+</app-backdrop>

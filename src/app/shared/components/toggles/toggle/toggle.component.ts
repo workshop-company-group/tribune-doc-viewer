@@ -15,7 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, } from '@angular/forms';
 })
 export class ToggleComponent implements ControlValueAccessor {
 
-  public value: boolean = false;
+  public value: boolean;
 
   public changeHandler: (obj: boolean) => {};
 

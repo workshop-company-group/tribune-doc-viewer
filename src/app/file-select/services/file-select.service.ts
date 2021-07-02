@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { FileSystemService, } from '../../shared/services';
 
-import { Mountpoint, FolderContent, FileInfo } from '../../shared/models';
+import { Mountpoint, FolderContent,
+  FileInfo, Folder, } from '../../shared/models';
 
 const supportedFileTypes = ['doc', 'docx', 'ppt', 'pptx', 'pdf'];
 
@@ -19,7 +20,7 @@ export class FileSelectService {
 
   public currentDirContent: FolderContent;
 
-  public selectedFilePath: string;
+  public selectedPath: string;
 
   constructor(
     private readonly fileSystem: FileSystemService,
@@ -30,7 +31,7 @@ export class FileSelectService {
     this.currentDirContent = this.filterDirContent(
       this.fileSystem.getFolderContent(path)
     );
-    this.selectedFilePath = '';
+    this.selectedPath = '';
   }
 
   public changeDirToParent() {
@@ -78,8 +79,12 @@ export class FileSelectService {
     }
   }
 
-  public selectFile(file: FileInfo): void {
-    this.selectedFilePath = file.path;
+  public select(fileLike: FileInfo | Folder | null): void {
+    if (!fileLike) {
+      this.selectedPath = '';
+      return;
+    }
+    this.selectedPath = fileLike.path;
   }
 
   public selectMountpoint(mountpoint: Mountpoint): void {

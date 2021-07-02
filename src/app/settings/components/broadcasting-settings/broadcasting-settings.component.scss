@@ -10,6 +10,8 @@
   .no-device-hint {
     margin-bottom: 10px;
 
+    display: block;
+
     @extend %primary-light-font;
     color: var(--accent-red-color);
 
