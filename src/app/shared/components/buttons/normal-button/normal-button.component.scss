@@ -22,11 +22,15 @@
 
     border-radius: 10px;
     box-shadow: var(--base-shadow);
-    transition: .3s;
+    transition: var(--base-transition);
 
     &:disabled {
       --button-background: var(--faint-light-grey-vertical-gradient);
       --button-color: var(--faint-dark-grey-color);
+    }
+
+    &:active {
+      transform: var(--button-active-transform);
     }
   }
 }

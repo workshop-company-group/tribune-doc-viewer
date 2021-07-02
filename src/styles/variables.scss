@@ -26,11 +26,13 @@
   --dark-text-shadow: 1px 1px 10px #FFFFFF;
 
   /* ----- Component styles ----- */
+  --base-transition: .3s;
   /* Buttons */
   --normal-button-padding: 0;
   --normal-button-justify-content: center;
   --button-background: var(--faint-light-grey-vertical-gradient);
   --button-color: var(--base-black-color);
+  --button-active-transform: scale(0.97);
   /* Record broadcast button */
   --record-broadcast-button-icon-width: 30px;
   /* Inputs */

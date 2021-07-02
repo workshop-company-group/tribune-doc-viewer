@@ -11,6 +11,7 @@ button {
   background: var(--button-background);
   border-radius: 10px;
   box-shadow: var(--base-shadow);
+  transition: var(--base-transition);
 
   color: var(--button-color);
   @extend %primary-light-font;
@@ -18,5 +19,9 @@ button {
   &:disabled {
     --button-background: var(--faint-light-grey-vertical-gradient);
     --button-color: var(--faint-dark-grey-color);
+  }
+
+  &:active {
+    transform: var(--button-active-transform);
   }
 }
