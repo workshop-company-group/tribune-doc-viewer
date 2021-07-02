@@ -37,7 +37,8 @@ export class FileViewPageComponent {
     this.confirmation.state = null;
   }
 
-  public fileSelectedHandler(): void {
+  public async fileSelectedHandler(path: string): Promise<void> {
+    await this.documentService.open(path);
     this.confirmation.state = null;
   }
 

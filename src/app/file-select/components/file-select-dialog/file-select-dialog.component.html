@@ -4,7 +4,7 @@
             (click)="closeEmitter.emit()">
             <img src="assets/icons/crosses/cross-black.svg" alt="close">
         </button>
-        <span class="title">Выберите файлы</span>
+        <span class="title">Выберите {{ folderSelect ? 'директорию' : 'файл' }}</span>
     </div>
     <div class="drive-container">
         <app-selectable-button class="drive"
@@ -35,7 +35,8 @@
             </div>
             <div class="folder-container"
                 *ngFor="let folder of fileSelect.currentDirContent.folders"
-                (click)="fileSelect.changeDir(folder.path)">
+                [ngClass]="{'selected': folder.path === fileSelect.selectedPath }"
+                (click)="onFolderClick(folder)">
                 <div class="icon-container">
                     <img src="assets/icons/file-formats/folder.svg">
                 </div>
@@ -43,9 +44,9 @@
                 <span class="type">Папка с файлами</span>
             </div>
             <div class="file-container"
-                *ngFor="let file of fileSelect.currentDirContent.files"
-                [ngClass]="{'selected': file.path === fileSelect.selectedFilePath }"
-                (click)="fileSelect.selectFile(file)">
+                *ngFor="let file of currentDirFiles"
+                [ngClass]="{'selected': file.path === fileSelect.selectedPath }"
+                (click)="fileSelect.select(file)">
                 <div class="icon-container">
                     <img [src]="fileSelect.getFileTypeIconPath(file.type)">
                 </div>
@@ -57,8 +58,8 @@
     </div>
 
     <app-small-button class="add-button"
-        [disabled]="!fileSelect.selectedFilePath.length"
-        (button-click)="openFiles()">
-        Добавить
+        [disabled]="!fileSelect.selectedPath.length"
+        (button-click)="openEmitter.emit(fileSelect.selectedPath)">
+        {{ openButtonText }}
     </app-small-button>
 </div>

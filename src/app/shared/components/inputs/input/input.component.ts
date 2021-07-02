@@ -21,7 +21,12 @@ export class InputComponent implements ControlValueAccessor {
 
   public readonly inputControl = new FormControl('');
 
-  public disabled: boolean = false;
+  @Input()
+  public set disabled(value: boolean) {
+    value ?
+      this.inputControl.disable() :
+      this.inputControl.enable();
+  }
 
   public changeHandler: Function = () => {};
 
