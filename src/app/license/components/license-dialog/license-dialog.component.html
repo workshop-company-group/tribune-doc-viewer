@@ -1,19 +1,18 @@
 <div class="top-container">
     <div class="header-container">
-        <h1>Активация продукта</h1>
+        <h1>{{ 'product-activation' | locale | async }}</h1>
         <img class="logo" src="assets/logos/grey-logo-shorten.svg" alt="WS">
     </div>
 
     <p class="description">
-        Введите ключ активации продукта. После активации продукт будет
-        зарегистрирован на данном устройстве.
+        {{ 'enter-activation-key' | locale | async }}
     </p>
 </div>
 
 <div class="form">
     <span class="wrong-key"
         [ngClass]="{ 'visible': wrongKey }">
-        Неверный ключ активации
+        {{ 'wrong-activation-key' | locale | async }}
     </span>
 
     <app-license-key-input class="key-input"
@@ -23,12 +22,12 @@
     <div class="buttons-container">
         <app-small-button class="exit"
             (button-click)="exit()">
-            Выйти
+            {{ 'activation-exit' | locale | async }}
         </app-small-button>
         <app-small-button class="activate"
             [disabled]="keyControl.invalid"
             (button-click)="activate()">
-            Активировать
+            {{ 'activate' | locale | async }}
         </app-small-button>
     </div>
 </div>

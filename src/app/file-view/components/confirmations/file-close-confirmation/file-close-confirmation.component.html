@@ -1,23 +1,23 @@
 <span class="title"
     *ngIf="confirmation.state === 'close-broadcasting'">
-    Файл транслируется
+    {{ 'file-broadcasting' | locale | async }}
 </span>
 <span class="title"
     *ngIf="confirmation.state === 'close-recording'">
-    Идет запись
+    {{ 'recording-in-progress' | locale | async }}
 </span>
 
 <span class="subtitle">
-    Вы действительно хотите закрыть данный файл?
+    {{ 'file-close-prompt' | locale | async }}
 </span>
 
 <div class="buttons-container">
     <app-small-button class="confirm-button"
         (button-click)="confirmClickEmitter.emit()">
-        Закрыть
+        {{ 'close' | locale | async }}
     </app-small-button>
     <app-small-button class="cancel-button"
         (button-click)="cancelClickEmitter.emit()">
-        Отмена
+        {{ 'cancel' | locale | async }}
     </app-small-button>
 </div>

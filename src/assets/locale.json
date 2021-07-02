@@ -79,7 +79,7 @@
     "en": "Ignore",
     "kz": "Елемеу"
   },
-  "license-exit": {
+  "activation-exit": {
     "ru": "Выйти",
     "en": "Exit",
     "kz": "Шығу"
@@ -99,6 +99,11 @@
     "en": "Enter your activation key. Activation will register the product to this computer.",
     "kz": "Өнімді белсендіру кілтін енгізіңіз. Белсендіруден кейін өнім осы құрылғыда тіркеледі."
   },
+  "wrong-activation-key": {
+    "ru": "Неверный ключ активации",
+    "en": "Wrong activation key",
+    "kz": "NO TRANSLATION FOR THIS PHRASE"
+  },
   "add-files": {
     "ru": "Добавить файлы",
     "en": "Add files",
@@ -114,10 +119,15 @@
     "en": "Are you sure you want to close this file?",
     "kz": "Бұл файлды шынымен жапқыңыз келе ме?"
   },
-  "select-files": {
-    "ru": "Выберите файлы",
-    "en": "Select files",
-    "kz": "Файлдарды таңдаңыз"
+  "select-file": {
+    "ru": "Выберите файл",
+    "en": "Select file",
+    "kz": "NO TRANSLATION FOR THIS PHRASE"
+  },
+  "select-folder": {
+    "ru": "Выберите папку",
+    "en": "Select folder",
+    "kz": "NO TRANSLATION FOR THIS PHRASE"
   },
   "name": {
     "ru": "Имя",
@@ -189,6 +199,11 @@
     "en": "Broadcast device",
     "kz": "Тарату құрылғысы"
   },
+  "no-broadcast-device": {
+    "ru": "Не найдено устройств для трансляции",
+    "en": "No broadcast device found",
+    "kz": "NO TRANSLATION FOR THIS PHRASE"
+  },
   "file-broadcasting": {
     "ru": "Файл транслируется",
     "en": "The file is being broadcast",
@@ -199,4 +214,64 @@
     "en": "Select file to broadcast",
     "kz": "Тарату үшін файлды таңдаңыз"
   },
-
+  "enter-password": {
+    "ru": "Введите пароль администратора",
+    "en": "Enter admin password",
+    "kz": "Әкімші құпия сөзін енгізіңіз"
+  },
+  "wrong-password": {
+    "ru": "Неверный пароль",
+    "en": "Wrong password",
+    "kz": "Құпия сөз дұрыс емес"
+  },
+  "password": {
+    "ru": "Пароль",
+    "en": "Password",
+    "kz": "Құпия сөз"
+  },
+  "old-password": {
+    "ru": "Старый пароль",
+    "en": "Old password",
+    "kz": "Ескі Құпия сөз"
+  },
+  "new-password": {
+    "ru": "Новый пароль",
+    "en": "New password",
+    "kz": "Жаңа Құпия Сөз"
+  },
+  "general": {
+    "ru": "Общие",
+    "en": "General",
+    "kz": "Жалпы"
+  },
+  "interface-language": {
+    "ru": "Язык интерфейса",
+    "en": "Interface language",
+    "kz": "Интерфейс тілі"
+  },
+  "saving": {
+    "ru": "Сохранение",
+    "en": "Saving",
+    "kz": "NO TRANSLATION FOR THIS PHRASE"
+  },
+  "save-to": {
+    "ru": "Сохранять в",
+    "en": "Save to",
+    "kz": "Сақтауға"
+  },
+  "path-to-directory": {
+    "ru": "Путь к директории сохранения",
+    "en": "Path to saving folder",
+    "kz": "NO TRANSLATION FOR THIS PHRASE"
+  },
+  "directory-not-exist": {
+    "ru": "Директория не существует",
+    "en": "Incorrect path to folder",
+    "kz": "NO TRANSLATION FOR THIS PHRASE"
+  },
+  "save-to-document-directory": {
+    "ru": "Сохранять в директорию документа",
+    "en": "Save to document directory",
+    "kz": "Құжаттар каталогына сақтаңыз"
+  }
+}

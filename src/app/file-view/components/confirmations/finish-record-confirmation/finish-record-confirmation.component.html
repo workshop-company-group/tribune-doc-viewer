@@ -1,6 +1,6 @@
-<span class="hint">Запись завершена</span>
+<span class="hint">{{ 'recording-completed' | locale | async }}</span>
 <app-small-button class="confirm-button"
     (button-click)="confirmClickEmitter.emit()">
-    Ок
+    {{ 'ok' | locale | async }}
 </app-small-button>
 

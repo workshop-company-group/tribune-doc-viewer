@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { LocaleModule, } from '../locale/locale.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { FileSelectDialogComponent } from './components';
@@ -11,6 +12,7 @@ import { FileSelectDialogComponent } from './components';
   ],
   imports: [
     CommonModule,
+    LocaleModule,
     SharedModule,
   ],
   exports: [

@@ -1,4 +1,4 @@
-<app-settings-section title="Язык интерфейса">
+<app-settings-section [title]="'interface-language' | locale | async">
     <app-select [options]="locales"
         [formControl]="localeControl">
     </app-select>

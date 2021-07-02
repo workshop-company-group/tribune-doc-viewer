@@ -1,7 +1,7 @@
-<app-settings-section title="Устройство трансляции">
+<app-settings-section [title]="'broadcast-device' | locale | async">
     <span class="no-device-hint"
           [ngClass]="{ 'visible': !!(devicesSubject | async) }">
-        Не найдено устройств для трансляции
+        {{ 'no-broadcast-device' | locale | async }}
     </span>
     <app-select [options]="devicesSubject | async"
         [formControl]="deviceControl">

@@ -16,7 +16,7 @@ import { Drive, Mountpoint,
 export class FileSelectDialogComponent {
 
   @Input('open-button')
-  public openButtonText = 'Выбрать';
+  public openButtonText = '';
 
   @Output('close-click')
   public readonly closeEmitter = new EventEmitter<void>();
