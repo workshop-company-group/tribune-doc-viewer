@@ -54,7 +54,7 @@
                 </div>
                 <span class="name">{{ file.name }}</span>
                 <span class="type">
-                    {{ 'file-extension' | (locale : (file.type | uppercase)) | async "
+                    {{ ('file-extension' | locale : (file.type | uppercase)) | async }}
                 </span>
                 <span class="size">{{ file.size }}</span>
             </div>
