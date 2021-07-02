@@ -39,5 +39,11 @@
     width: 25px;
 
     padding: 20px;
+
+    transition: var(--base-transition);
+
+    &.wrapped {
+      transform: rotate(180deg);
+    }
   }
 }
