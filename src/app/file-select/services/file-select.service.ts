@@ -4,8 +4,7 @@ import { FileSystemService, } from '../../shared/services';
 
 import { Mountpoint, FolderContent,
   FileInfo, Folder, } from '../../shared/models';
-
-const supportedFileTypes = ['doc', 'docx', 'ppt', 'pptx', 'pdf'];
+import { AppConfig, } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +40,7 @@ export class FileSelectService {
   private filterDirContent(content: FolderContent): FolderContent {
     return {
       files: content.files.filter(file =>
-        supportedFileTypes.includes(file.type)),
+        AppConfig.supportedFileTypes.includes(file.type)),
       folders: content.folders.filter(folder => folder.access),
     };
   }
