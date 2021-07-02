@@ -1,6 +1,6 @@
-<span class="title">Запись/трансляция</span>
+<span class="title">{{ 'recording-broadcasting' | locale | async }}</span>
 
-<span class="subtitle">Выберите файл для трансляции</span>
+<span class="subtitle">{{ 'select-file-to-broadcast' | locale | async }}</span>
 
 <div class="slides-container">
     <app-slide-thumbnail class="slide first"
@@ -23,12 +23,12 @@
 <div class="buttons-container">
     <app-small-button class="cancel-button"
         (button-click)="cancelClickEmitter.emit()">
-        Отмена
+        {{ 'cancel' | locale | async }}
     </app-small-button>
 
     <app-small-button class="select-button"
         (button-click)="selectClickEmitter.emit()">
-        Выбрать
+        {{ 'select' | locale | async }}
     </app-small-button>
 </div>
 

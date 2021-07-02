@@ -1,7 +1,7 @@
 <div class="record-broadcast-container"
     *ngIf="!wrapped">
     <div class="record-container">
-        <span class="hint">Запись</span>
+        <span class="hint">{{ 'recording' | locale | async }}</span>
 
         <app-record-broadcast-button
             icon="assets/icons/record/record-red.svg"
@@ -21,7 +21,7 @@
     </div>
 
     <div class="broadcast-container">
-        <span class="hint">Трансляция</span>
+        <span class="hint">{{ 'broadcasting' | locale | async }}</span>
 
         <app-record-broadcast-button
             [disabled]="!broadcastAvailability.value"

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule, } from '../shared/shared.module';
+import { LocaleModule, } from '../locale/locale.module';
 
 import { LicenseDialogComponent,
   LicenseKeyInputComponent, } from './components';
@@ -18,6 +19,7 @@ import { LicenseDialogComponent,
   ],
   imports: [
     CommonModule,
+    LocaleModule,
     ReactiveFormsModule,
     SharedModule,
   ]

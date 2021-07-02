@@ -3,10 +3,13 @@ import { FormControl, } from '@angular/forms';
 
 import { AppConfig } from '../../../../environments/environment';
 import { Locale, } from '../../../locale/models';
+import Languages from '../../../../assets/languages.json';
 
 import { Subscription, } from 'rxjs';
+import { map, } from 'rxjs/operators';
 
 import { SettingsService, } from '../../services';
+
 
 @Component({
   selector: 'app-locale-settings-section',
@@ -15,7 +18,12 @@ import { SettingsService, } from '../../services';
 })
 export class LocaleSettingsSectionComponent implements OnInit, OnDestroy {
 
-  public readonly localeControl = new FormControl(this.settings.locale);
+  public readonly localeControl = new FormControl(
+    Languages[this.settings.locale]
+  );
+
+  public readonly languages =
+    AppConfig.supportedLangs.map(lang => Languages[lang]);
 
   private readonly subscriptions: Subscription[] = [];
 
@@ -25,7 +33,15 @@ export class LocaleSettingsSectionComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.localeControl.valueChanges.subscribe(locale => {
+      this.localeControl.valueChanges.pipe(
+        map(language => {
+          for (const locale of Object.keys(Languages)) {
+            if (language === Languages[locale]) {
+              return locale;
+            }
+          }
+        }),
+      ).subscribe(locale => {
         this.settings.locale = locale;
       }),
     );
@@ -33,10 +49,6 @@ export class LocaleSettingsSectionComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
-  }
-
-  public get locales(): Locale[] {
-    return AppConfig.supportedLangs;
   }
 
 }

@@ -18,15 +18,15 @@
 <div class="buttons-container">
     <app-normal-button class="button"
         (button-click)="openFileView()">
-        {{ documentService.isEmpty() ? 'Начать работу' : 'Продолжить' }}
+        {{ (documentService.isEmpty() ? 'start' : 'continue') | locale | async }}
     </app-normal-button>
     <app-normal-button class="button"
         (button-click)="openSettings()">
-        Параметры
+        {{ 'settings' | locale | async }}
     </app-normal-button>
     <app-normal-button class="button"
         (button-click)="quitApplication()">
-        Выход
+        {{ 'exit' | locale | async }}
     </app-normal-button>
 </div>
 

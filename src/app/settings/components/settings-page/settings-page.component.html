@@ -4,23 +4,23 @@
     </button>
 </div>
 
-<span class="title">Параметры</span>
+<span class="title">{{ 'settings' | locale | async }}</span>
 
 <nav class="settings-nav">
     <app-selectable-button
         [selected]="(routeSubject | async) === 'general'"
         (button-click)="routeSubject.next('general')">
-        Общие
+        {{ 'general' | locale | async }}
     </app-selectable-button>
     <app-selectable-button
         [selected]="(routeSubject | async) === 'recording'"
         (button-click)="routeSubject.next('recording')">
-        Запись
+        {{ 'recording' | locale | async }}
     </app-selectable-button>
     <app-selectable-button
         [selected]="(routeSubject | async) === 'broadcasting'"
         (button-click)="routeSubject.next('broadcasting')">
-        Трансляция
+        {{ 'broadcasting' | locale | async }}
     </app-selectable-button>
 </nav>
 

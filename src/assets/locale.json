@@ -1,7 +1,277 @@
 {
-    "mock": {
-        "en": "https://youtu.be/dQw4w9WgXcQ",
-        "ru": "https://youtu.be/z5o_szQBRAY",
-        "kz": "https://youtu.be/oOU82PGx6rY"
-    }
+  "continue": {
+    "ru": "Продолжить",
+    "en": "Continue",
+    "kz": "Жалғастыру"
+  },
+  "close": {
+    "ru": "Закрыть",
+    "en": "Close",
+    "kz": "Жабық"
+  },
+  "cancel": {
+    "ru": "Отмена",
+    "en": "Cancel",
+    "kz": "Бас тарту / күшін жою"
+  },
+  "ok": {
+    "ru": "Ок",
+    "en": "Ok",
+    "kz": "Ок"
+  },
+  "select": {
+    "ru": "Выбрать",
+    "en": "Select",
+    "kz": "Таңдау"
+  },
+  "browse": {
+    "ru": "Обзор",
+    "en": "Browse",
+    "kz": "Шолу"
+  },
+  "create": {
+    "ru": "Создать",
+    "en": "Create",
+    "kz": "Жасаңыз"
+  },
+  "edit": {
+    "ru": "Изменить",
+    "en": "Edit",
+    "kz": "Өңдеу"
+  },
+  "delete": {
+    "ru": "Удалить",
+    "en": "Delete",
+    "kz": "Жою"
+  },
+  "apply": {
+    "ru": "Применить",
+    "en": "Apply",
+    "kz": "Өтініш"
+  },
+  "start": {
+    "ru": "Начать работу",
+    "en": "Start",
+    "kz": "Бастау"
+  },
+  "settings": {
+    "ru": "Параметры",
+    "en": "Settings",
+    "kz": "Баптаулар"
+  },
+  "exit": {
+    "ru": "Выход",
+    "en": "Exit",
+    "kz": "Шығу"
+  },
+  "update-is-available": {
+    "ru": "Доступно обновление приложения",
+    "en": "Update is available",
+    "kz": "Жаңарту қол жетімді"
+  },
+  "download": {
+    "ru": "Загрузить",
+    "en": "Download",
+    "kz": "жүктеу"
+  },
+  "ignore": {
+    "ru": "Отклонить",
+    "en": "Ignore",
+    "kz": "Елемеу"
+  },
+  "activation-exit": {
+    "ru": "Выйти",
+    "en": "Exit",
+    "kz": "Шығу"
+  },
+  "activate": {
+    "ru": "Активировать",
+    "en": "Activate",
+    "kz": "Белсендіру"
+  },
+  "product-activation": {
+    "ru": "Активация продукта",
+    "en": "Product activation",
+    "kz": "өнімді жандандыру"
+  },
+  "enter-activation-key": {
+    "ru": "Введите ключ активации продукта. После активации продукт будет зарегистрирован на данном устройстве.",
+    "en": "Enter your activation key. Activation will register the product to this computer.",
+    "kz": "Өнімді белсендіру кілтін енгізіңіз. Белсендіруден кейін өнім осы құрылғыда тіркеледі."
+  },
+  "wrong-activation-key": {
+    "ru": "Неверный ключ активации",
+    "en": "Wrong activation key",
+    "kz": "NO TRANSLATION FOR THIS PHRASE"
+  },
+  "add-files": {
+    "ru": "Добавить файлы",
+    "en": "Add files",
+    "kz": "Файлдарды қосу"
+  },
+  "number-of-all": {
+    "ru": "{} из {}",
+    "en": "{} of {}",
+    "kz": "{}-дан {}-i"
+  },
+  "file-close-prompt": {
+    "ru": "Вы действительно хотите закрыть данный файл?",
+    "en": "Are you sure you want to close this file?",
+    "kz": "Бұл файлды шынымен жапқыңыз келе ме?"
+  },
+  "select-file": {
+    "ru": "Выберите файл",
+    "en": "Select file",
+    "kz": "NO TRANSLATION FOR THIS PHRASE"
+  },
+  "select-folder": {
+    "ru": "Выберите папку",
+    "en": "Select folder",
+    "kz": "NO TRANSLATION FOR THIS PHRASE"
+  },
+  "name": {
+    "ru": "Имя",
+    "en": "Name",
+    "kz": "Аты-жөні"
+  },
+  "type": {
+    "ru": "Тип",
+    "en": "Type",
+    "kz": "Түрі"
+  },
+  "size": {
+    "ru": "Размер",
+    "en": "Size",
+    "kz": "Өлшемі"
+  },
+  "return": {
+    "ru": "Вернуться назад",
+    "en": "Return",
+    "kz": "Қайту"
+  },
+  "folder": {
+    "ru": "Папка с файлами",
+    "en": "File folder",
+    "kz": "Папка"
+  },
+  "file-extension": {
+    "ru": "Файл \"{}\"",
+    "en": "File \"{}\"",
+    "kz": "«{}» файлы"
+  },
+  "add": {
+    "ru": "Добавить",
+    "en": "Add",
+    "kz": "Қосу"
+  },
+  "recording": {
+    "ru": "Запись",
+    "en": "Recording",
+    "kz": "Жазу"
+  },
+  "recording-in-progress": {
+    "ru": "Идет запись",
+    "en": "Recording in progress",
+    "kz": "Жазу орындалуда"
+  },
+  "recording-completed": {
+    "ru": "Запись завершена",
+    "en": "Recording completed",
+    "kz": "Жазу аяқталды"
+  },
+  "recording-broadcasting": {
+    "ru": "Запись/Трансляция",
+    "en": "Recording/Broadcasting",
+    "kz": "Жазу / Хабар тарату"
+  },
+  "select-file-to-record": {
+    "ru": "Выберите файл для записи",
+    "en": "Select file to record",
+    "kz": "Жазу үшін файлды таңдаңыз"
+  },
+  "broadcasting": {
+    "ru": "Трансляция",
+    "en": "Broadcasting",
+    "kz": "Хабар тарату"
+  },
+  "broadcast-device": {
+    "ru": "Устройство трансляции",
+    "en": "Broadcast device",
+    "kz": "Тарату құрылғысы"
+  },
+  "no-broadcast-device": {
+    "ru": "Не найдено устройств для трансляции",
+    "en": "No broadcast device found",
+    "kz": "NO TRANSLATION FOR THIS PHRASE"
+  },
+  "file-broadcasting": {
+    "ru": "Файл транслируется",
+    "en": "The file is being broadcast",
+    "kz": "Файл таратылуда"
+  },
+  "select-file-to-broadcast": {
+    "ru": "Выберите файл для трансляции",
+    "en": "Select file to broadcast",
+    "kz": "Тарату үшін файлды таңдаңыз"
+  },
+  "enter-password": {
+    "ru": "Введите пароль администратора",
+    "en": "Enter admin password",
+    "kz": "Әкімші құпия сөзін енгізіңіз"
+  },
+  "wrong-password": {
+    "ru": "Неверный пароль",
+    "en": "Wrong password",
+    "kz": "Құпия сөз дұрыс емес"
+  },
+  "password": {
+    "ru": "Пароль",
+    "en": "Password",
+    "kz": "Құпия сөз"
+  },
+  "old-password": {
+    "ru": "Старый пароль",
+    "en": "Old password",
+    "kz": "Ескі Құпия сөз"
+  },
+  "new-password": {
+    "ru": "Новый пароль",
+    "en": "New password",
+    "kz": "Жаңа Құпия Сөз"
+  },
+  "general": {
+    "ru": "Общие",
+    "en": "General",
+    "kz": "Жалпы"
+  },
+  "interface-language": {
+    "ru": "Язык интерфейса",
+    "en": "Interface language",
+    "kz": "Интерфейс тілі"
+  },
+  "saving": {
+    "ru": "Сохранение",
+    "en": "Saving",
+    "kz": "NO TRANSLATION FOR THIS PHRASE"
+  },
+  "save-to": {
+    "ru": "Сохранять в",
+    "en": "Save to",
+    "kz": "Сақтауға"
+  },
+  "path-to-directory": {
+    "ru": "Путь к директории сохранения",
+    "en": "Path to saving folder",
+    "kz": "NO TRANSLATION FOR THIS PHRASE"
+  },
+  "directory-not-exist": {
+    "ru": "Директория не существует",
+    "en": "Incorrect path to folder",
+    "kz": "NO TRANSLATION FOR THIS PHRASE"
+  },
+  "save-to-document-directory": {
+    "ru": "Сохранять в директорию документа",
+    "en": "Save to document directory",
+    "kz": "Құжаттар каталогына сақтаңыз"
+  }
 }

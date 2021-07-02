@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, } from '@angular/forms';
 
 import { PasswordRoutingModule } from './password-routing.module';
+
+import { LocaleModule, } from '../locale/locale.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { PasswordPageComponent } from './components';
@@ -13,6 +15,7 @@ import { PasswordPageComponent } from './components';
   ],
   imports: [
     CommonModule,
+    LocaleModule,
     PasswordRoutingModule,
     ReactiveFormsModule,
     SharedModule,
