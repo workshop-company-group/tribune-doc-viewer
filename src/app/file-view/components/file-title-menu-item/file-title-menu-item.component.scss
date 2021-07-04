@@ -1,6 +1,19 @@
 @import '../../../../styles/mixins';
 
+@keyframes blinking {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .item-container {
+  position: relative;
   height: 100%;
   padding-left: 30px;
 
@@ -11,27 +24,71 @@
   color: var(--base-black-color);
   background: var(--faint-light-grey-vertical-gradient);
 
+  transition: var(--base-transition);
+
+  overflow: hidden;
+
   &.selected {
     color: var(--base-white-color);
-    background: var(--accent-blue-vertical-gradient);
+
+    .selected-background {
+      transform: none;
+    }
 
     .close-button {
       --icon-button-active-background: var(--base-white-color);
     }
   }
 
+  .selected-background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+
+    background: var(--accent-blue-vertical-gradient);
+    transform: translateY(100%);
+    transition: var(--base-transition);
+  }
+
   .title {
     width: 100%;
+    z-index: 2;
 
     @extend %primary-regular-font;
   }
 
-  .record-icon, .broadcast-icon {
+  .broadcast-icon {
     height: 20px;
+    z-index: 2;
+
     padding-left: 20px;
+
+    opacity: 0;
+    transition: var(--base-transition);
+
+    &.visible {
+      opacity: 1;
+    }
+  }
+
+  .record-icon {
+    height: 20px;
+    z-index: 2;
+
+    padding-left: 20px;
+
+    opacity: 0;
+
+    &.visible {
+      animation: blinking calc(10 * var(--base-transition)) linear infinite;
+    }
   }
 
   .close-button {
+    z-index: 2;
     --icon-button-icon-width: 20px;
 
     margin: 0 15px;

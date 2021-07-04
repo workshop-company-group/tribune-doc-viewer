@@ -1,18 +1,20 @@
 <div class="item-container"
     [ngClass]="{ 'selected': doc.selected }">
+    <div class="selected-background"></div>
+
     <div class="title">{{ doc.doc.title | documentTitle }}</div>
 
-    <img class="record-icon"
-        [src]="doc.selected
+    <img class="record-icon visible"
+         [src]="doc.selected
             ? 'assets/icons/record/record-white.svg'
             : 'assets/icons/record/record-red.svg'"
-        *ngIf="doc.recordBroadcastState.value === 'recording'
-            || doc.recordBroadcastState.value === 'paused'">
-    <img class="broadcast-icon"
-        [src]="doc.selected
+         [ngClass]="{ 'visible': doc.recordBroadcastState.value === 'recording'
+                    || doc.recordBroadcastState.value === 'paused' }">
+    <img class="broadcast-icon visible"
+         [src]="doc.selected
             ? 'assets/icons/broadcast/broadcast-white.svg'
             : 'assets/icons/broadcast/broadcast-black.svg'"
-        *ngIf="doc.recordBroadcastState.value !== null">
+         [ngClass]="{ 'visible': doc.recordBroadcastState.value !== null }">
 
     <app-icon-button class="close-button" 
         [src]="doc.selected
