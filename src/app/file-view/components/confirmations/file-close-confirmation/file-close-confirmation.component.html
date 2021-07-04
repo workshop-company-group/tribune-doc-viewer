@@ -17,6 +17,7 @@
         {{ 'close' | locale | async }}
     </app-small-button>
     <app-small-button class="cancel-button"
+        [accent]="true"
         (button-click)="cancelClickEmitter.emit()">
         {{ 'cancel' | locale | async }}
     </app-small-button>

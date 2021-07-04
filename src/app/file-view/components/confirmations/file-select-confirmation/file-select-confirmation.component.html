@@ -27,6 +27,7 @@
     </app-small-button>
 
     <app-small-button class="select-button"
+        [accent]="true"
         (button-click)="selectClickEmitter.emit()">
         {{ 'select' | locale | async }}
     </app-small-button>

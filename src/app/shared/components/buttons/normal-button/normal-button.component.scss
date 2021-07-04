@@ -5,6 +5,7 @@
   display: block;
 
   button {
+    position: relative;
     width: 100%;
     height: 70px;
 
@@ -24,6 +25,8 @@
     box-shadow: var(--base-shadow);
     transition: var(--base-transition);
 
+    overflow: hidden;
+
     &:disabled {
       --button-background: var(--faint-light-grey-vertical-gradient);
       --button-color: var(--faint-dark-grey-color);
@@ -31,6 +34,32 @@
 
     &:active {
       transform: var(--button-active-transform);
+    }
+
+    &.accent:not(:disabled) {
+      color: var(--button-accent-color);
+
+      .accent-background {
+        transform: none;
+      }
+    }
+
+    .accent-background {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+
+      background: var(--button-accent-background);
+
+      transition: var(--base-transition);
+      transform: var(--button-accent-background-transform);
+    }
+
+    span {
+      z-index: 2;
     }
   }
 }

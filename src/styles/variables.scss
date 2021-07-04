@@ -36,8 +36,12 @@
   /* Buttons */
   --normal-button-padding: 0;
   --normal-button-justify-content: center;
-  --button-background: var(--faint-light-grey-vertical-gradient);
+
   --button-color: var(--base-black-color);
+  --button-background: var(--faint-light-grey-vertical-gradient);
+  --button-accent-color: var(--base-white-color);
+  --button-accent-background: var(--accent-blue-vertical-gradient);
+  --button-accent-background-transform: translateY(calc(100% + 1px));
   --button-active-transform: scale(0.97);
   /* Record broadcast button */
   --record-broadcast-button-icon-width: 30px;

@@ -1,4 +1,9 @@
 <button (click)="clickEmitter.emit()"
-    [disabled]="disabled">
-    <ng-content></ng-content>
+    [disabled]="disabled"
+    [ngClass]="{ 'accent': accent }">
+    <div class="accent-background"></div>
+
+    <span>
+        <ng-content></ng-content>
+    </span>
 </button>

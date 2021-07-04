@@ -25,6 +25,7 @@
             {{ 'activation-exit' | locale | async }}
         </app-small-button>
         <app-small-button class="activate"
+            [accent]="true"
             [disabled]="keyControl.invalid"
             (button-click)="activate()">
             {{ 'activate' | locale | async }}

@@ -15,6 +15,7 @@
         </app-normal-button>
 
         <app-normal-button class="apply-button"
+            [accent]="true"
             [disabled]="saveToggle.value 
                 || settings.savePath === pathControl.value
                 || pathDoesNotExist"

@@ -1,5 +1,6 @@
 <span class="hint">{{ 'recording-completed' | locale | async }}</span>
 <app-small-button class="confirm-button"
+    [accent]="true"
     (button-click)="confirmClickEmitter.emit()">
     {{ 'ok' | locale | async }}
 </app-small-button>

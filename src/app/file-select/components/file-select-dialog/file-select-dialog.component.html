@@ -62,6 +62,7 @@
     </div>
 
     <app-small-button class="add-button"
+        [accent]="true"
         [disabled]="!fileSelect.selectedPath.length"
         (button-click)="openEmitter.emit(fileSelect.selectedPath)">
         {{ openButtonText }}

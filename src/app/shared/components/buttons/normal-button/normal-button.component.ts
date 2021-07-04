@@ -10,6 +10,9 @@ export class NormalButtonComponent {
   @Input()
   public readonly disabled = false;
 
+  @Input()
+  public readonly accent = false;
+
   @Output('button-click')
   public clickEmitter = new EventEmitter<void>();
 
