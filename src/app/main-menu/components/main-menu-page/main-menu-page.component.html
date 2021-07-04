@@ -31,6 +31,6 @@
 </div>
 
 <app-backdrop class="license-dialog"
-    *ngIf="!(license.keySubject | async)">
+    [opened]="!(license.keySubject | async)">
     <app-license-dialog></app-license-dialog>
 </app-backdrop>

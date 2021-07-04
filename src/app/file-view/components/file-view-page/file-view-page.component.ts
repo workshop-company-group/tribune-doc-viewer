@@ -5,6 +5,7 @@ import {
   DocumentService,
   RecordBroadcastService,
 } from '../../services';
+import { FileSelectService } from '../../../file-select/services';
 
 @Component({
   selector: 'app-file-view-page',
@@ -15,8 +16,9 @@ export class FileViewPageComponent {
 
   constructor(
     public readonly confirmation: ConfirmationService,
-    private readonly documentService: DocumentService,
-    private readonly recordBroadcast: RecordBroadcastService,
+    public readonly documentService: DocumentService,
+    public readonly fileSelect: FileSelectService,
+    public readonly recordBroadcast: RecordBroadcastService,
   ) { }
 
   public cancelClosing(): void {

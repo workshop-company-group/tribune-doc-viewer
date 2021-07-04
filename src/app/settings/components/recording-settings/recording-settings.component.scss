@@ -58,14 +58,3 @@
     margin-right: 30px;
   }
 }
-
-.file-select-dialog {
-  opacity: 0;
-  pointer-events: none;
-  transition: .3s;
-
-  &.opened {
-    opacity: 1;
-    pointer-events: auto;
-  }
-}
