@@ -19,7 +19,7 @@
       margin-bottom: 10px;
 
       opacity: 0;
-      transition: .3s;
+      transition: var(--base-transition);
 
       &.visible {
         opacity: 1;
