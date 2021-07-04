@@ -22,10 +22,9 @@
     justify-content: flex-end;
 
     .close-button {
-      img {
-        height: 30px;
-        margin: 30px;
-      }
+      --icon-button-icon-width: 30px;
+
+      margin: 10px;
     }
   }
 

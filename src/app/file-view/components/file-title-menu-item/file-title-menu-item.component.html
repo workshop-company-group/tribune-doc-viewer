@@ -14,9 +14,10 @@
             : 'assets/icons/broadcast/broadcast-black.svg'"
         *ngIf="doc.recordBroadcastState.value !== null">
 
-    <img class="close-button" 
+    <app-icon-button class="close-button" 
         [src]="doc.selected
             ? 'assets/icons/crosses/cross-white.svg'
             : 'assets/icons/crosses/cross-black.svg'"
-        (click)="close()">
+        (button-click)="close()">
+    </app-icon-button>
 </div>

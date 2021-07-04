@@ -25,15 +25,11 @@
       align-items: center;
 
       .close-button {
-        padding: 10px;
-
-        img {
-          width: 30px;
-        }
+        --icon-button-icon-width: 25px;
       }
 
       .title {
-        margin-left: 20px;
+        margin-left: 10px;
 
         color: var(--base-black-color);
         @extend %primary-regular-font;

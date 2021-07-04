@@ -1,0 +1,41 @@
+:host {
+  button {
+    position: relative;
+    width: calc(2.3 * var(--icon-button-icon-width));
+    height: calc(2.3 * var(--icon-button-icon-width));
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:active:not(:disabled) {
+      .active-background {
+        opacity: .15;
+      }
+    }
+
+    &:disabled {
+      img {
+        opacity: .5;
+      }
+    }
+
+    .active-background {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+      background: var(--icon-button-active-background);
+      border-radius: 50%;
+
+      transition: var(--base-transition);
+      opacity: 0;
+    }
+
+    img {
+      width: var(--icon-button-icon-width);
+    }
+  }
+}

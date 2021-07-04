@@ -33,7 +33,8 @@
     </div>
 </div>
 
-<img class="wrap-control"
+<app-icon-button class="wrap-control"
      [ngClass]="{ 'wrapped': wrapped }"
      src="assets/icons/arrows/down-arrow.svg"
-     (click)="wrapped = !wrapped">
+     (button-click)="wrapped = !wrapped">
+</app-icon-button>

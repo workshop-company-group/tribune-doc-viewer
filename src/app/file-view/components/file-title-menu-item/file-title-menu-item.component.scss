@@ -14,6 +14,10 @@
   &.selected {
     color: var(--base-white-color);
     background: var(--accent-blue-vertical-gradient);
+
+    .close-button {
+      --icon-button-active-background: var(--base-white-color);
+    }
   }
 
   .title {
@@ -28,7 +32,8 @@
   }
 
   .close-button {
-    height: 20px;
-    padding: 0 30px;
+    --icon-button-icon-width: 20px;
+
+    margin: 0 15px;
   }
 }
