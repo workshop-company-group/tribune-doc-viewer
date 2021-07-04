@@ -102,17 +102,17 @@
   "wrong-activation-key": {
     "ru": "Неверный ключ активации",
     "en": "Wrong activation key",
-    "kz": "NO TRANSLATION FOR THIS PHRASE"
+    "kz": "Қате белсендіру кілті"
   },
-  "add-files": {
-    "ru": "Добавить файлы",
-    "en": "Add files",
-    "kz": "Файлдарды қосу"
+  "add-file": {
+    "ru": "Добавить файл",
+    "en": "Add file",
+    "kz": "Файл қосу"
   },
   "number-of-all": {
-    "ru": "{} из {}",
-    "en": "{} of {}",
-    "kz": "{}-дан {}-i"
+    "ru": "{0} из {1}",
+    "en": "{0} of {1}",
+    "kz": "{1}-дан {0}-i"
   },
   "file-close-prompt": {
     "ru": "Вы действительно хотите закрыть данный файл?",
@@ -122,12 +122,12 @@
   "select-file": {
     "ru": "Выберите файл",
     "en": "Select file",
-    "kz": "NO TRANSLATION FOR THIS PHRASE"
+    "kz": "Файлды таңдаңыз"
   },
   "select-folder": {
     "ru": "Выберите папку",
     "en": "Select folder",
-    "kz": "NO TRANSLATION FOR THIS PHRASE"
+    "kz": "Қалтаны таңдаңыз"
   },
   "name": {
     "ru": "Имя",
@@ -155,9 +155,9 @@
     "kz": "Папка"
   },
   "file-extension": {
-    "ru": "Файл \"{}\"",
-    "en": "File \"{}\"",
-    "kz": "«{}» файлы"
+    "ru": "Файл \"{0}\"",
+    "en": "File \"{0}\"",
+    "kz": "«{0}» файлы"
   },
   "add": {
     "ru": "Добавить",
@@ -202,7 +202,7 @@
   "no-broadcast-device": {
     "ru": "Не найдено устройств для трансляции",
     "en": "No broadcast device found",
-    "kz": "NO TRANSLATION FOR THIS PHRASE"
+    "kz": "Тарату құрылғысы табылмады"
   },
   "file-broadcasting": {
     "ru": "Файл транслируется",
@@ -252,7 +252,7 @@
   "saving": {
     "ru": "Сохранение",
     "en": "Saving",
-    "kz": "NO TRANSLATION FOR THIS PHRASE"
+    "kz": "Сақтау"
   },
   "save-to": {
     "ru": "Сохранять в",
@@ -262,12 +262,12 @@
   "path-to-directory": {
     "ru": "Путь к директории сохранения",
     "en": "Path to saving folder",
-    "kz": "NO TRANSLATION FOR THIS PHRASE"
+    "kz": "Қалтаны сақтау жолы"
   },
   "directory-not-exist": {
     "ru": "Директория не существует",
     "en": "Incorrect path to folder",
-    "kz": "NO TRANSLATION FOR THIS PHRASE"
+    "kz": "Қапшыққа жол дұрыс емес"
   },
   "save-to-document-directory": {
     "ru": "Сохранять в директорию документа",

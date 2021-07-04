@@ -20,8 +20,8 @@ export class LocalePipe implements PipeTransform {
     return this.settings.localeSubject.pipe(
       map((locale) => this.locales.getLocaledPhrase(phrase, locale)),
       map((phrase) => {
-        for (const arg of args) {
-          phrase = phrase.replace('{}', arg);
+        for (const index in args) {
+          phrase = phrase.replace(`{${index}}`, args[index]);
         }
         return phrase;
       }),
