@@ -16,6 +16,9 @@ const routes: Routes = [
     resolve: {
       license: LicenseResolver,
     },
+    data: {
+      animationState: 'main-menu',
+    },
   },
   {
     path: 'file-view',
@@ -23,6 +26,9 @@ const routes: Routes = [
     canActivate: [
       LicenseGuard,
     ],
+    data: {
+      animationState: 'file-view',
+    },
   },
   {
     path: 'settings',
@@ -30,6 +36,9 @@ const routes: Routes = [
     canActivate: [
       LicenseGuard,
     ],
+    data: {
+      animationState: 'settings',
+    },
   },
   {
     path: 'password',
@@ -37,6 +46,9 @@ const routes: Routes = [
     canActivate: [
       LicenseGuard,
     ],
+    data: {
+      animationState: 'password',
+    },
   },
 ];
 

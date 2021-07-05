@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { RouterOutlet, } from '@angular/router';
+
 import { ElectronService } from './core/services';
 import { AppConfig } from '../environments/environment';
 
@@ -8,6 +10,7 @@ import { AppConfig } from '../environments/environment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   constructor(private electronService: ElectronService) {
     // console.log('AppConfig', AppConfig);
 
@@ -19,5 +22,11 @@ export class AppComponent {
     } else {
       // console.log('Run in browser');
     }
+  }
+
+  public prepareRoute(outlet: RouterOutlet): string {
+    return outlet
+      && outlet.activatedRouteData
+      && outlet.activatedRouteData.animationState;
   }
 }

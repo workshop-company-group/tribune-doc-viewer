@@ -1,1 +1,4 @@
-<router-outlet></router-outlet>
+<main [@triggerName]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet">
+    </router-outlet>
+</main>
