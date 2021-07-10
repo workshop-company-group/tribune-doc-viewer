@@ -67,8 +67,8 @@ export class ConversionService {
       const typeIndex = path.lastIndexOf(type)
       const filepath = path.substr(typeIndex)
 
-      const convertedPath: string = dir + '/' + name + outputType;
-      const newConvertedPath: string = dir + '/' + name + Date.now().toString() + outputType;
+      const convertedPath: string = this.path.join(dir, name + outputType);
+      const newConvertedPath: string = this.path.join(dir, name + Date.now().toString() + outputType);
 
       if (type === '.pdf') {
         await execAsync(`cp "${path}" "${newConvertedPath}"`);

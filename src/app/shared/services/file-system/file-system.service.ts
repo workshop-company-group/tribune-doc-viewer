@@ -80,29 +80,17 @@ export class FileSystemService {
 
   public getFolderContent(path: string): FolderContent {
     const resultObject: FolderContent = { folders: [], files: [] };
-
-    let delimeter = '\\';
-    if (process.platform !== 'win32')
-      delimeter = '/';
-    // if (path.substr(-1) === '/' || path.substr(-1) === '\\')
-    //   path = path.slice(0, -1);
-
     const elements: string[] = this.fs.readdirSync(path);
-
     elements.forEach(element => {
-      const elementPath = path + delimeter + element;
-
-      if (fs.statSync(elementPath).isDirectory()) {
-        let folderPath = ''
-        if (process.platform === 'win32')
-          folderPath = path + '\\' + element;
-        else
-          folderPath = path + '/' + element;
-
+      const elementPath = this.path.join(path, element);
+      let isDirectory = false
+      try { isDirectory = fs.statSync(elementPath).isDirectory() } catch (error) {}
+      if (isDirectory) {
+        let folderPath = this.path.join(path, element);
         const folder: Folder = { name: element, path: folderPath, access: this.ifFolderAccessible(folderPath) }
         resultObject.folders.push(folder);
       } else {
-        resultObject.files.push(this.getFileInfo(elementPath));
+        try { resultObject.files.push(this.getFileInfo(elementPath)); } catch (error) {}
       }
     });
 
@@ -122,7 +110,7 @@ export class FileSystemService {
     return this.fs.existsSync(path);
   }
 
-  public dirAboveExists(path: string): boolean { // TEST
+  public dirAboveExists(path: string): boolean {
     const parent = this.getParentDir(path);
     return !(parent == '.' || parent == path);
   }

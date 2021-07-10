@@ -119,10 +119,7 @@ export class RecorderService {
       this.filepath = filepath;
     }
     else {
-      if (process.platform !== 'win32')
-        this.filepath = this.settings.savePath + '/' + path.basename(filepath);
-      else
-        this.filepath = this.settings.savePath + '\\' + path.basename(filepath);
+      this.filepath = this.path.join(this.settings.savePath, path.basename(filepath));
     }
     this.mediaRecorder.stop();
   }
