@@ -6,7 +6,7 @@ import { distinctUntilChanged, switchMap, tap, map } from 'rxjs/operators';
 
 import { SettingsService, } from '../../services';
 
-const DISPLAY_RELOAD_PERIOD = 7000;
+const DISPLAY_RELOAD_PERIOD = 2000;
 
 @Component({
   selector: 'app-broadcasting-settings',
