@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Install') {
             steps {
-                sh 'npm install -g @angular/cli'
                 sh 'npm set progress=false'
                 sh 'npm install'
                 sh 'ng --version'
