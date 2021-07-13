@@ -10,6 +10,7 @@ pipeline {
                 sh 'npm i --force'
                 sh 'npm set progress=false'
                 sh 'npm install'
+                sh 'npm -g config set user root'
                 sh 'npm install --quiet --no-progress --unsafe-perm -g @angular/cli@latest firebase-tools'
             }
         }
