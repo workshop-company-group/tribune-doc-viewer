@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        DISPLAY=:99.0
-    }
-
     stages {
         stage('Install') {
             steps {
