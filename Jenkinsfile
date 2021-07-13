@@ -10,6 +10,7 @@ pipeline {
                 sh 'npm i --force'
                 sh 'npm set progress=false'
                 sh 'npm install'
+                sh 'npm install -g @angular/cli'
             }
         }
         stage('Tests') {
