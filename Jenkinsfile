@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:latest' }
+    }
 
     stages {
         stage('Install') {
@@ -7,11 +9,6 @@ pipeline {
                 sh 'npm set progress=false'
                 sh 'npm install'
                 sh 'ng --version'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'make build'
             }
         }
         stage('Tests') {
