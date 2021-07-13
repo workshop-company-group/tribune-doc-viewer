@@ -6,7 +6,6 @@ pipeline {
     stages {
         stage('Install') {
             steps {
-                sh 'rm -rf node_modules'
                 sh 'npm cache clean --force'
                 sh 'npm i --force'
                 sh 'npm set progress=false'
