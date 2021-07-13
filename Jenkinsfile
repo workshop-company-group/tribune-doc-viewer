@@ -4,7 +4,7 @@ pipeline {
     }
 
     environment {
-        DEBUG=electron-builder 
+        DEBUG = 'electron-builder'
     }
 
     stages {
