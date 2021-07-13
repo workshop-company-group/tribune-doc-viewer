@@ -11,7 +11,6 @@ pipeline {
                 sh 'npm i --force'
                 sh 'npm set progress=false'
                 sh 'npm install'
-                sh 'ng --version'
             }
         }
         stage('Tests') {
