@@ -3,6 +3,10 @@ pipeline {
         docker { image 'node:latest' }
     }
 
+    environment {
+        DEBUG=electron-builder 
+    }
+
     stages {
         stage('Install') {
             steps {
