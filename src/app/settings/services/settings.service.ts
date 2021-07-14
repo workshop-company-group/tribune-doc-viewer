@@ -76,7 +76,7 @@ export class SettingsService {
 
     if (conn !== '')
       for(const display of displays)
-        if (display.connection == this.settings.screen.connection)
+        if (display.connection === this.settings.screen.connection)
           return;
 
     if (displays.length > 0) {
