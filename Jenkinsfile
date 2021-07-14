@@ -1,26 +1,62 @@
+properties([
+    disableConcurrentBuilds()
+])
+
 pipeline {
-    agent {
-        docker { image 'node:latest' }
+    agent any
+
+    triggers {
+        pollSCM('* * * * *')
     }
 
     environment {
-        DEBUG = 'electron-builder'
+        GITHUB_TOKEN = credentials('ghpersonal')
     }
 
     stages {
-        stage('Install') {
+        stage('Test') {
             steps {
-                sh 'npm cache clean --force'
-                sh 'npm i --force'
-                sh 'npm set progress=false'
-                sh 'npm install'
+                sh 'make test'
             }
-        }  
-        stage('Electron Build') {
+        }
+        stage('PreBuild') {
             steps {
-                sh 'npm run build:prod'
-                sh 'electron-builder build'
+                sh 'make before'
             }
+        }
+        stage('Install & Run') {
+            steps {
+                sh 'make build'
+                sh 'make run'
+            }
+        }
+        stage('NodeJS Build') {
+            steps {
+                sh 'make node-build'
+            }
+        }
+        stage('Release') {
+            steps {
+                sh 'make electron-build'
+            }
+        }
+    }
+
+    post {
+        success {
+            sh 'make post-success'
+        }
+        unstable {
+            sh 'make post-failure'
+        }
+        failure {
+            sh 'make post-failure'
+        }
+        changed {
+            sh 'make post-success'
+        }
+        always {
+            sh 'make after'
         }
     }
 }
