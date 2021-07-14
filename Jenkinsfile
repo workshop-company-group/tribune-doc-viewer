@@ -14,11 +14,6 @@ pipeline {
     }
 
     stages {
-        stage('Test') {
-            steps {
-                sh 'make test'
-            }
-        }
         stage('PreBuild') {
             steps {
                 sh 'make before'
@@ -28,6 +23,11 @@ pipeline {
             steps {
                 sh 'make build'
                 sh 'make run'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'make test'
             }
         }
         stage('NodeJS Build') {

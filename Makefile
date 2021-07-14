@@ -3,6 +3,7 @@ NAME=tribune-doc-viewer
 before:
 	@echo ":::starting CI/CD pipeline.."
 	curl "https://api.GitHub.com/repos/Tribunes/tribune-doc-viewer/statuses/$(GIT_COMMIT)?access_token=$(GITHUB_TOKEN)" \
+		-s \
 		-H "Content-Type: application/json" \
 		-X POST \
 		-d "{\"state\": \"pending\", \"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"${BUILD_URL}console\"}"
@@ -10,6 +11,7 @@ before:
 post-success:
 	@echo ":::finishing..."
 	curl "https://api.GitHub.com/repos/Tribunes/tribune-doc-viewer/statuses/$(GIT_COMMIT)?access_token=$(GITHUB_TOKEN)" \
+		-s \
 		-H "Content-Type: application/json" \
 		-X POST \
 		-d "{\"state\": \"success\", \"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"${BUILD_URL}console\"}"
@@ -17,6 +19,7 @@ post-success:
 post-failure:
 	@echo ":::finishing..."
 	curl "https://api.GitHub.com/repos/Tribunes/tribune-doc-viewer/statuses/$(GIT_COMMIT)?access_token=$(GITHUB_TOKEN)" \
+		-s \
 		-H "Content-Type: application/json" \
 		-X POST \
 		-d "{\"state\": \"failure\", \"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"${BUILD_URL}console\"}"
@@ -34,11 +37,9 @@ build:
 
 stop-container:
 	docker stop $(NAME)
-	docker rmi $(NAME):$(BUILD_NUMBER)
 
 run:
 	@echo ":::running dev environment.."
-	make stop-container --ignore-errors
 	docker run --rm -d --name $(NAME)$(BUILD_NUMBER) $(NAME):$(BUILD_NUMBER)
 
 node-build:
