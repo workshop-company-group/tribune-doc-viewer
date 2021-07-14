@@ -44,7 +44,7 @@ run:
 
 node-build:
 	@echo ":::testing npm build.."
-	docker exec -it $(NAME)$(BUILD_NUMBER) npm run build
+	docker exec -i $(NAME)$(BUILD_NUMBER) npm run build
 
 electron-build:
 	@echo ":::testing electron release build.."
