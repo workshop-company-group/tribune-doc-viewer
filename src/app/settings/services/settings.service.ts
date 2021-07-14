@@ -75,7 +75,9 @@ export class SettingsService {
     let found = [];
 
     if (conn !== '')
-      displays.forEach(display => { if (display.connection == this.settings.screen.connection) return; });
+      for(const display of displays)
+        if (display.connection == this.settings.screen.connection)
+          return;
 
     if (displays.length > 0) {
       this.screenConnection = displays[0].connection;
