@@ -91,13 +91,16 @@ function createExternalWindow(id: number): BrowserWindow {
 // }
 
 try {
+  app.disableHardwareAcceleration();
+  app.commandLine.appendSwitch('js-flags', '--max-old-space-size=4096');
   app.on('ready', () => setTimeout(createWindow, 400));
 
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-      app.quit();
-    }
+    // if (process.platform !== 'darwin') {
+    //   app.quit();
+    // }
+    app.quit();
   });
 
   app.on('activate', () => {
@@ -122,10 +125,6 @@ try {
     // await isExternalWinCreated.toPromise();
     return true;
   });
-
-  // ipcMain.handle('is-external-connected', async (event, arg) => {
-  //   return isExternalMonitorAvailable();
-  // });
 
   // Closes the window on external monitor on signal
   ipcMain.on('close-external-window', () => {
