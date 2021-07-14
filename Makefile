@@ -37,10 +37,12 @@ build:
 
 stop-container:
 	docker stop $(NAME)
+	docker rm $(NAME)$(BUILD_NUMBER)
+	docker rmi $(NAME):$(BUILD_NUMBER)
 
 run:
 	@echo ":::running dev environment.."
-	docker run --rm --name $(NAME)$(BUILD_NUMBER) $(NAME):$(BUILD_NUMBER)
+	docker run --rm -d --name $(NAME)$(BUILD_NUMBER) $(NAME):$(BUILD_NUMBER)
 
 node-build:
 	@echo ":::testing npm build.."
