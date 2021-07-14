@@ -85,6 +85,7 @@
     "chrome 83"
   ],
   "dependencies": {
+    "@angular/animations": "12.1.1",
     "@types/pdfjs-dist": "~2.0.1",
     "@types/video.js": "7.3.15",
     "crypto-js": "4.0.0",
