@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { desktopCapturer } from 'electron';
 import { SettingsService } from '../../../settings/services'
-import { Display } from '../../models';
 import { RecorderError } from '../exceptions'
 import * as si from 'systeminformation';
 import * as fs from 'fs';
