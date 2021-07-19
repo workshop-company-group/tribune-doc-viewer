@@ -7,6 +7,7 @@ import { BehaviorSubject, } from 'rxjs';
 import { Auth } from '../models';
 
 const EMPTY_PASSWORD = '';
+const FILENAME = 'auth.json'
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class AuthService {
   public setPassword(password: string): void {
     const encrypted = CryptoJS.AES.encrypt(password, this.salt).toString();
     const auth: Auth = { password: encrypted };
-    this.jsonfile.writeFileSync('auth.json', auth);
+    this.jsonfile.writeFileSync(FILENAME, auth);
 
     this.passwordSubject.next(password);
   }
@@ -47,7 +48,7 @@ export class AuthService {
   }
 
   private readPassword(): string {
-    const auth: Auth = this.jsonfile.readFileSync('auth.json');
+    const auth: Auth = this.jsonfile.readFileSync(FILENAME);
     const decrypted = CryptoJS.AES.decrypt(auth.password, this.salt).toString(CryptoJS.enc.Utf8);
     return decrypted;
   }
