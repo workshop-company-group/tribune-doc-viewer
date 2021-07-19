@@ -51,7 +51,6 @@ export class RecordBroadcastService {
 
   public async startBroadcasting(doc: OpenedDocument): Promise<void> {
     if (!(await this.isBroadcastingAvailable)) {
-      console.error('ERROR: broadcasting is not available');
       return;
     }
     this.doc = doc;
