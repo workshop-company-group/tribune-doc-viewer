@@ -28,8 +28,9 @@ export class RecorderService {
   filepath: string = null;
 
   constructor(
-    private electron: ElectronService,
-    private settings: SettingsService) {
+    private readonly electron: ElectronService,
+    private readonly settings: SettingsService
+  ) {
     if (this.electron.isElectron) {
       this.fs = window.require('fs');
       this.path = window.require('path');

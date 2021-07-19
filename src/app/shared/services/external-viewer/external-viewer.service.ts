@@ -8,7 +8,9 @@ import { ElectronService } from '../../../core/services';
 export class ExternalViewerService {
   ipcRenderer: typeof ipcRenderer;
 
-  constructor(private electron: ElectronService) {
+  constructor(
+    private readonly electron: ElectronService
+  ) {
     this.ipcRenderer = window.require('electron').ipcRenderer;
   }
 

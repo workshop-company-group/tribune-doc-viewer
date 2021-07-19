@@ -14,7 +14,9 @@ export class FileSystemService {
   path: typeof path;
   ipcRenderer: typeof ipcRenderer;
 
-  constructor(private electron: ElectronService) {
+  constructor(
+    private readonly electron: ElectronService
+  ) {
     if (this.electron.isElectron) {
       this.fs = window.require('fs');
       this.path = window.require('path');

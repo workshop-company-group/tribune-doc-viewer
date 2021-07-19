@@ -11,9 +11,10 @@ export class WindowStateService {
   ipcRenderer: typeof ipcRenderer;
 
   constructor(
-    private electron: ElectronService,
-    private settings: SettingsService,
-    private recorder: RecorderService) {
+    private readonly electron: ElectronService,
+    private readonly settings: SettingsService,
+    private readonly recorder: RecorderService
+  ) {
     if (this.electron.isElectron) {
       this.ipcRenderer = window.require('electron').ipcRenderer;
     }
