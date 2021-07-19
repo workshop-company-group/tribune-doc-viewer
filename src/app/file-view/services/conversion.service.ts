@@ -6,6 +6,7 @@ import * as childProcess from 'child_process';
 import * as util from 'util';
 
 import { Document } from '../models';
+import { ElectronService } from '../../core/services';
 
 const TEST = '/Users/minish144/Desktop/test.pptx';
 
@@ -17,12 +18,16 @@ export class ConversionService {
   fs: typeof fs;
   childProcess: typeof childProcess;
   util: typeof util;
+  sofficeCommand: string;
 
-  constructor() {
+  constructor(
+    private readonly electron: ElectronService
+  ) {
     this.path = window.require('path');
     this.fs = window.require('fs');
     this.childProcess = window.require('child_process');
     this.util = window.require('util');
+    this.sofficeCommand = process.platform === 'win32' ? 'soffice' : 'libreoffice'
   }
 
   private getFileType(path: string): string {
@@ -63,7 +68,7 @@ export class ConversionService {
         title: name,
       }
     }
-    await execAsync(`soffice --headless --convert-to ${outputType.slice(1)} --outdir "${dir}" "${path}"`);
+    await execAsync(`${this.sofficeCommand} --headless --convert-to ${outputType.slice(1)} --outdir "${dir}" "${path}"`);
     this.fileRename(convertedPath, newConvertedPath);
     return {
       originPath: path,
