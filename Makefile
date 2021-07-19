@@ -1,4 +1,5 @@
 NAME=tribune-doc-viewer
+HASH=${shell git rev-parse --short HEAD}
 
 before:
 	@echo ":::starting CI/CD pipeline.."
@@ -33,20 +34,20 @@ test:
 
 build:
 	@echo ":::building image.."
-	docker build --rm -t $(NAME):$(BUILD_NUMBER) .
+	docker build --rm -t $(NAME):$(HASH) .
 
 stop-container:
-	docker stop $(NAME)$(BUILD_NUMBER)
-	docker rm $(NAME)$(BUILD_NUMBER)
-	docker rmi $(NAME):$(BUILD_NUMBER)
+	docker stop $(NAME)$(HASH)
+	docker rm $(NAME)$(HASH)
+	docker rmi $(NAME):$(HASH)
 
 run:
 	@echo ":::running dev environment.."
-	docker run --rm -d --name $(NAME)$(BUILD_NUMBER) $(NAME):$(BUILD_NUMBER)
+	docker run --rm -d --name $(NAME)$(HASH) $(NAME):$(HASH)
 
 node-build:
 	@echo ":::testing npm build.."
-	docker exec -i $(NAME)$(BUILD_NUMBER) npm run build
+	docker exec -i $(NAME)$(HASH) npm run build
 
 electron-build:
 	@echo ":::testing electron release build.."
