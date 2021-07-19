@@ -39,20 +39,18 @@ export class ConversionService {
 
   private fileRename(oldPath: string, newPath: string): void {
     this.fs.rename(oldPath, newPath, function(err) {
-      if (err) console.error('ERROR: ' + err);
     });
   }
 
   public async convertDocument(path: string, outputType: string = 'pdf'): Promise<Document> {
-    outputType = '.' + outputType;
     const execAsync = util.promisify(this.childProcess.exec);
+
+    outputType = '.' + outputType.replace('.', '');
     path = path.replace("//", "/")
+
     const type: string = this.getFileType(path);
     const name: string = this.getFileName(path, type);
     const dir: string = this.getFileDir(path);
-
-    const typeIndex = path.lastIndexOf(type)
-    const filepath = path.substr(typeIndex)
 
     const convertedPath: string = this.path.join(dir, name + outputType);
     const newConvertedPath: string = this.path.join(dir, name + Date.now().toString() + outputType);
