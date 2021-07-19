@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { desktopCapturer } from 'electron';
-import { ElectronService } from '../../../core/services';
 import { SettingsService } from '../../../settings/services'
 import { Display } from '../../models';
 import { RecorderError } from '../exceptions'
@@ -28,15 +27,12 @@ export class RecorderService {
   filepath: string = null;
 
   constructor(
-    private readonly electron: ElectronService,
     private readonly settings: SettingsService
   ) {
-    if (this.electron.isElectron) {
-      this.fs = window.require('fs');
-      this.path = window.require('path');
-      this.si = window.require('systeminformation');
-      this.desktopCapturer = window.require('electron').desktopCapturer;
-    }
+    this.fs = window.require('fs');
+    this.path = window.require('path');
+    this.si = window.require('systeminformation');
+    this.desktopCapturer = window.require('electron').desktopCapturer;
   }
 
   public async getCapturerSource(): Promise<Electron.DesktopCapturerSource|null> {

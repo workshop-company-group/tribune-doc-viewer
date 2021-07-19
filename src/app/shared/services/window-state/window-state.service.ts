@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ipcRenderer } from 'electron';
-import { ElectronService } from '../../../core/services';
 import { RecorderService } from '../recorder/recorder.service';
 import { SettingsService } from '../../../settings/services';
 
@@ -11,19 +10,14 @@ export class WindowStateService {
   ipcRenderer: typeof ipcRenderer;
 
   constructor(
-    private readonly electron: ElectronService,
     private readonly settings: SettingsService,
     private readonly recorder: RecorderService
   ) {
-    if (this.electron.isElectron) {
-      this.ipcRenderer = window.require('electron').ipcRenderer;
-    }
+    this.ipcRenderer = window.require('electron').ipcRenderer;
   }
 
   public exit(): void {
-    if (this.electron.isElectron) {
-      this.ipcRenderer.send('app-exit');
-    }
+    this.ipcRenderer.send('app-exit');
   }
 
   public async isExternalConnected(): Promise<boolean> {
@@ -38,8 +32,6 @@ export class WindowStateService {
   }
 
   public closeExternalWindow(): void {
-    if (this.electron.isElectron) {
-      this.ipcRenderer.send('close-external-window');
-    }
+    this.ipcRenderer.send('close-external-window');
   }
 }

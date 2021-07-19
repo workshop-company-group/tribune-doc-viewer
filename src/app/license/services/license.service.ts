@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs';
 import { LicenseError } from '../exceptions';
 import { AppConfig } from '../../../environments/environment';
 
-import { ElectronService } from '../../core/services';
 import { LicenseApiService } from './license-api.service';
 
 import { LicenseApiResponseStatus } from '../models';
@@ -28,15 +27,11 @@ export class LicenseService {
   private readonly defaultPath: string = 'license.key';
 
   constructor(
-    private readonly api: LicenseApiService,
-    private readonly electron: ElectronService,
+    private readonly api: LicenseApiService
   ) {
-    if (this.electron.isElectron) {
-      this.fs = window.require('fs');
-      this.util = window.require('util');
-
-      this.serverAddress = AppConfig.serverOrigin;
-    }
+    this.fs = window.require('fs');
+    this.util = window.require('util');
+    this.serverAddress = AppConfig.serverOrigin;
   }
 
   private async saveKey(key: string): Promise<void> {

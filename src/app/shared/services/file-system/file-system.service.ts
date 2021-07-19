@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { ElectronService } from '../../../core/services';
 import { Drive, FolderContent, Folder, FileInfo } from '../../models';
 import { ipcRenderer } from 'electron';
 import { FileSystemError } from '../exceptions'
@@ -14,14 +13,10 @@ export class FileSystemService {
   path: typeof path;
   ipcRenderer: typeof ipcRenderer;
 
-  constructor(
-    private readonly electron: ElectronService
-  ) {
-    if (this.electron.isElectron) {
-      this.fs = window.require('fs');
-      this.path = window.require('path');
-      this.ipcRenderer = window.require('electron').ipcRenderer;
-    }
+  constructor() {
+    this.fs = window.require('fs');
+    this.path = window.require('path');
+    this.ipcRenderer = window.require('electron').ipcRenderer;
   }
 
   private getFileType(path: string): string {

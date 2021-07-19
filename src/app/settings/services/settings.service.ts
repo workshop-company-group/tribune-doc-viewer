@@ -12,7 +12,6 @@ import { Locale } from '../../locale/models';
 import { Display, } from '../../shared/models';
 
 import { SystemService } from '../../shared/services';
-import { ElectronService } from '../../core/services';
 
 @Injectable({
   providedIn: 'root'
@@ -43,17 +42,16 @@ export class SettingsService {
 
   private _settings: Settings;
 
-  constructor(private electron: ElectronService,
-              private system: SystemService) {
-    if (this.electron.isElectron) {
-      this.loadIniFile = window.require('read-ini-file');
-      this.writeIniFile = window.require('write-ini-file');
-      this.fs = window.require('fs');
-      this.si = window.require('systeminformation');
+  constructor(
+    private readonly system: SystemService
+  ) {
+    this.loadIniFile = window.require('read-ini-file');
+    this.writeIniFile = window.require('write-ini-file');
+    this.fs = window.require('fs');
+    this.si = window.require('systeminformation');
 
-      this.initIni();
-      this.checkDisplay();
-    }
+    this.initIni();
+    this.checkDisplay();
   }
 
   private save() {
