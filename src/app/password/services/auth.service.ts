@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import * as jsonfile from 'jsonfile'
 import * as CryptoJS from 'crypto-js';
-import { BehaviorSubject, } from 'rxjs';
+import * as fs from 'fs';
+import { BehaviorSubject, Observable, } from 'rxjs';
 
 import { Auth } from '../models';
 import { AppConfig } from '../../../environments/environment';
@@ -19,13 +20,19 @@ export class AuthService {
 
   private readonly salt = AppConfig.salt;
 
-  private readonly passwordSubject = new BehaviorSubject<string>(
-    this.readPassword()
-  );
+  private passwordSubject: BehaviorSubject<string>
 
-  public readonly passwordObservable = this.passwordSubject.asObservable();
+  public passwordObservable: Observable<string>
 
-  constructor() {}
+  constructor() {
+    if (!fs.existsSync(FILENAME)) {
+      const encrypted = CryptoJS.AES.encrypt(EMPTY_PASSWORD, this.salt).toString();
+      const auth: Auth = { password: encrypted };
+      this.jsonfile.writeFileSync(FILENAME, auth);
+    }
+    this.passwordSubject= new BehaviorSubject<string>(this.readPassword());
+    this.passwordObservable = this.passwordSubject.asObservable();
+  }
 
   public clearPassword(): void {
     this.setPassword(EMPTY_PASSWORD);
@@ -39,7 +46,6 @@ export class AuthService {
     const encrypted = CryptoJS.AES.encrypt(password, this.salt).toString();
     const auth: Auth = { password: encrypted };
     this.jsonfile.writeFileSync(FILENAME, auth);
-
     this.passwordSubject.next(password);
   }
 
@@ -49,7 +55,8 @@ export class AuthService {
 
   private readPassword(): string {
     const auth: Auth = this.jsonfile.readFileSync(FILENAME);
-    const decrypted = CryptoJS.AES.decrypt(auth.password, this.salt).toString(CryptoJS.enc.Utf8);
+    const decrypted = CryptoJS.AES.decrypt(auth.password, this.salt)
+      .toString(CryptoJS.enc.Utf8);
     return decrypted;
   }
 
