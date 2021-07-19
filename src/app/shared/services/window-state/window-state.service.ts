@@ -27,7 +27,6 @@ export class WindowStateService {
   }
 
   public async isExternalConnected(): Promise<boolean> {
-    // const result: boolean = await this.ipcRenderer.invoke('is-external-connected');
     await this.settings.checkDisplay();
     return (this.settings.screenConnection !== '') ? true : false;
   }

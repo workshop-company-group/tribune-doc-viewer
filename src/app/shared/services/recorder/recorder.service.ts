@@ -39,10 +39,6 @@ export class RecorderService {
     }
   }
 
-  // public async getScreensMeta(): Promise<Display[]> {
-  //   return (await this.si.graphics()).displays.slice(2);
-  // }
-
   public async getCapturerSource(): Promise<Electron.DesktopCapturerSource|null> {
     const availableDisplays = await this.settings.getAvailableDisplays()
     let sourceNumber = -1;
@@ -103,10 +99,6 @@ export class RecorderService {
 
     const buffer = Buffer.from(await blob.arrayBuffer());
 
-    // if (!this.filepath) {
-    //   const date = new Date().toString();
-    //   this.filepath = './temp/' + date + '.webm';
-    // }
     fs.writeFile(this.filepath, buffer, () => {});
     recordedChunks = [];
   }
