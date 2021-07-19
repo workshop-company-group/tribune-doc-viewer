@@ -5,6 +5,7 @@ import * as CryptoJS from 'crypto-js';
 import { BehaviorSubject, } from 'rxjs';
 
 import { Auth } from '../models';
+import { AppConfig } from '../../../environments/environment';
 
 const EMPTY_PASSWORD = '';
 const FILENAME = 'auth.json'
@@ -16,8 +17,7 @@ export class AuthService {
 
   jsonfile: typeof jsonfile = window.require('jsonfile');
 
-  private readonly salt =
-    '2q~hYC?d[3=#-5-*Yx,~lamrX0nMssNT12I[XVT{L91ovoRnE8F%m%3%&H+!oRlq';
+  private readonly salt = AppConfig.salt;
 
   private readonly passwordSubject = new BehaviorSubject<string>(
     this.readPassword()
