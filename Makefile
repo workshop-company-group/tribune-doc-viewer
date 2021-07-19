@@ -36,7 +36,7 @@ build:
 	docker build --rm -t $(NAME):$(BUILD_NUMBER) .
 
 stop-container:
-	docker stop $(NAME)
+	docker stop $(NAME)$(BUILD_NUMBER)
 	docker rm $(NAME)$(BUILD_NUMBER)
 	docker rmi $(NAME):$(BUILD_NUMBER)
 
