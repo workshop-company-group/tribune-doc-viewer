@@ -5,7 +5,6 @@
   },
     "files": [
         "**/*",
-        "auth.json",
         "!**/*.ts",
         "!*.code-workspace",
         "!LICENSE.md",
