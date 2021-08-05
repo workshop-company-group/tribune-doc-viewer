@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
+import { remote } from 'electron';
+const { app } = remote;
 
 import * as jsonfile from 'jsonfile'
 import * as CryptoJS from 'crypto-js';
 import * as fs from 'fs';
+import * as path from 'path';
+
 import { BehaviorSubject, Observable, } from 'rxjs';
 
 import { Auth } from '../models';
 import { AppConfig } from '../../../environments/environment';
 
 const EMPTY_PASSWORD = '';
-const FILENAME = 'auth.json'
+const FILENAME = path.join(app.getPath('userData'), 'auth.json');
 
 @Injectable({
   providedIn: 'root'

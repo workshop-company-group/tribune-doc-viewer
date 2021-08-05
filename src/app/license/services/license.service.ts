@@ -7,10 +7,12 @@ import { LicenseError } from '../exceptions';
 import { AppConfig } from '../../../environments/environment';
 
 import { LicenseApiService } from './license-api.service';
-
 import { LicenseApiResponseStatus } from '../models';
+import { remote } from 'electron';
+const { app } = remote;
 
 import * as fs from 'fs';
+import * as path from 'path';
 import * as util from 'util';
 
 
@@ -24,7 +26,7 @@ export class LicenseService {
 
   public readonly keySubject = new BehaviorSubject<string | null>(null);
 
-  private readonly defaultPath: string = 'license.key';
+  private readonly defaultPath: string = path.join(app.getPath('userData'), 'license.key');
 
   constructor(
     private readonly api: LicenseApiService

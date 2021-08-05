@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
+import { remote } from 'electron';
+const { app } = remote;
 
 import * as loadIniFile from 'read-ini-file';
 import * as writeIniFile from 'write-ini-file';
 import * as fs from 'fs';
+import * as path from 'path';
 import * as si from 'systeminformation';
 
 import { BehaviorSubject, } from 'rxjs';
@@ -22,7 +25,7 @@ export class SettingsService {
   fs: typeof fs;
   si: typeof si;
 
-  private readonly defaultPath: string = 'settings.ini';
+  private readonly defaultPath: string = path.join(app.getPath('userData'), 'settings.ini');
   private readonly defaultSettings: Settings = {
     recording: {
       saveWithSource: true,
