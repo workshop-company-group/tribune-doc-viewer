@@ -1,60 +1,67 @@
 @import "../../../../styles/mixins.scss";
 
-.path-container {
-  margin-bottom: 70px;
+:host {
+  width: 100%;
 
   display: flex;
-  flex-direction: row;
-  align-items: flex-end;
+  justify-content: center;
 
-  .input-container {
+  .path-container {
+    margin-bottom: 70px;
+
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-end;
 
-    .not-found {
-      @extend %primary-light-font;
-      color: var(--accent-red-color);
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-      margin-bottom: 10px;
+      .not-found {
+        @extend %primary-light-font;
+        color: var(--accent-red-color);
 
-      opacity: 0;
-      transition: var(--base-transition);
+        margin-bottom: 10px;
 
-      &.visible {
-        opacity: 1;
+        opacity: 0;
+        transition: var(--base-transition);
+
+        &.visible {
+          opacity: 1;
+        }
+      }
+
+      app-input {
+        width: 600px;
+
+        margin-right: 30px;
+
+        --input-text-align: left;
       }
     }
 
-    app-input {
-      width: 600px;
+    .browse-button {
+      width: 200px;
 
       margin-right: 30px;
+    }
 
-      --input-text-align: left;
+    .apply-button {
+      width: 200px;
     }
   }
 
-  .browse-button {
-    width: 200px;
+  .save-toggle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
-    margin-right: 30px;
-  }
+    color: var(--base-black-color);
+    @extend %primary-regular-font;
 
-  .apply-button {
-    width: 200px;
-  }
-}
-
-.save-toggle {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  color: var(--base-black-color);
-  @extend %primary-regular-font;
-
-  app-toggle {
-    margin-right: 30px;
+    app-toggle {
+      margin-right: 30px;
+    }
   }
 }

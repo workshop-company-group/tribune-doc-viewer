@@ -21,14 +21,23 @@ const routes: Routes = [
       {
         path: 'broadcasting',
         component: BroadcastingSettingsComponent,
+        data: {
+          animationState: 'broadcasting',
+        },
       },
       {
         path: 'general',
         component: GeneralSettingsComponent,
+        data: {
+          animationState: 'general',
+        },
       },
       {
         path: 'recording',
         component: RecordingSettingsComponent,
+        data: {
+          animationState: 'recording',
+        },
       },
     ]
   },

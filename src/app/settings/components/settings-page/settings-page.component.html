@@ -25,7 +25,10 @@
     </app-selectable-button>
 </nav>
 
-<router-outlet></router-outlet>
+<div class="router-container"
+    [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+</div>
 
 <div class="bottom-container">
     <img class="logo" src="assets/logos/grey-logo.svg" alt="Workshop">
