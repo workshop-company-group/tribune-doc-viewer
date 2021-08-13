@@ -7,6 +7,7 @@
   },
   "overrides": [
     {
+      "files": ["*.ts"],
       "parser": "@typescript-eslint/parser",
       "plugins": [
         "@typescript-eslint",
@@ -17,7 +18,6 @@
         "plugin:@typescript-eslint/recommended",
         "plugin:@typescript-eslint/recommended-requiring-type-checking"
       ],
-      "files": ["*.ts"],
       "parserOptions": {
         "ecmaVersion": 10,
         "project": [
@@ -75,7 +75,6 @@
         "no-sequences": "error",
         "no-tabs": "error",
         "no-template-curly-in-string": "warn",
-        "no-trailing-spaces": "error",
         "no-undef-init": "error",
         "no-unneeded-ternary": "error",
         "no-useless-concat": "error",
@@ -143,8 +142,19 @@
         "@typescript-eslint/switch-exhaustiveness-check": "warn",
         "@typescript-eslint/type-annotation-spacing": "warn",
 
-        "@angular-eslint/use-injectable-provided-in": "error",
-        "@angular-eslint/no-attribute-decorator": "error"
+        "@angular-eslint/component-class-suffix": "error",
+        "@angular-eslint/contextual-lifecycle": "error",
+        "@angular-eslint/directive-class-suffix": "error",
+        "@angular-eslint/no-conflicting-lifecycle": "error",
+        "@angular-eslint/no-input-prefix": "error",
+        "@angular-eslint/no-input-rename": "error",
+        "@angular-eslint/no-lifecycle-call": "error",
+        "@angular-eslint/no-output-native": "error",
+        "@angular-eslint/prefer-on-push-component-change-detection": "error",
+        "@angular-eslint/relative-url-prefix": "error",
+        "@angular-eslint/use-component-selector": "error",
+        "@angular-eslint/use-lifecycle-interface": "error",
+        "@angular-eslint/use-pipe-transform-interface": "error"
       }
     },
     {
@@ -152,7 +162,10 @@
       "parser": "@angular-eslint/template-parser",
       "plugins": ["@angular-eslint/template"],
       "rules": {
+          "@angular-eslint/template/accessibility-elements-content": "error",
           "@angular-eslint/template/banana-in-box": "error",
+          "@angular-eslint/template/no-any": "error",
+          "@angular-eslint/template/no-call-expression": "error",
           "@angular-eslint/template/no-negated-async": "error"
       }
     }
