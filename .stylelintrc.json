@@ -76,7 +76,7 @@
     "rule-empty-line-before": ["always", {
       "except": [
         "after-single-line-comment",
-        "first-nexted"
+        "first-nested"
       ]
     }],
     "selector-attribute-brackets-space-inside": "never",
