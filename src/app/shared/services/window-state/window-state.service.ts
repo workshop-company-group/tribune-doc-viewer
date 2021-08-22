@@ -22,7 +22,7 @@ export class WindowStateService {
 
   public async isExternalConnected(): Promise<boolean> {
     await this.settings.checkDisplay();
-    return (this.settings.screenConnection !== '') ? true : false;
+    return this.settings.screenConnection !== '';
   }
 
   public async createExternalWindow(): Promise<void> {
