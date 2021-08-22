@@ -21,6 +21,11 @@ pipeline {
                 sh 'make before'
             }
         }
+        stage('Linter') {
+            steps {
+                sh 'make lint'
+            }
+        }
         stage('Install & Run') {
             steps {
                 sh 'make build'
