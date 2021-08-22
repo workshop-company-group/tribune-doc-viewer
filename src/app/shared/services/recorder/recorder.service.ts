@@ -12,14 +12,14 @@ let recordedChunks = [];
   providedIn: 'root'
 })
 export class RecorderService {
-  desktopCapturer: typeof desktopCapturer;
-  recordScreen: Electron.DesktopCapturerSource;
-  screenStream: MediaStream = null;
-  micStream: MediaStream = null;
-  mediaRecorder: MediaRecorder = null;
-  stream: MediaStream = null;
-  recordedBlobs = [];
-  filepath: string = null;
+  private desktopCapturer: typeof desktopCapturer;
+  private recordScreen: Electron.DesktopCapturerSource;
+
+  private screenStream?: MediaStream;
+  private micStream?: MediaStream;
+  private mediaRecorder?: MediaRecorder;
+  private stream?: MediaStream;
+  private filepath?: string;
 
   constructor(
     private readonly settings: SettingsService

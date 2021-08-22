@@ -4,6 +4,7 @@ const { app } = remote;
 
 import * as fs from 'fs';
 import * as path from 'path';
+import * as jsonfile from 'jsonfile'
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +16,13 @@ export class UpdateService {
 
   constructor() {
     if (fs.existsSync(this.defaultPath)) {
-      const data = fs.readFileSync(this.defaultPath).toString('utf8');
-      const json = JSON.parse(data);
+      const json = jsonfile.readFileSync(this.defaultPath);
       this.version = json.version;
     } else {
       const versionJson = {
         version: "dev"
       }
-      fs.writeFileSync(this.defaultPath, versionJson.toString());
+      jsonfile.writeFileSync(this.defaultPath, versionJson);
       this.version = versionJson.version;
     }
   }
