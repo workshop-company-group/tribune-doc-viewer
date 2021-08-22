@@ -20,12 +20,8 @@ import { SystemService } from '../../shared/services';
   providedIn: 'root'
 })
 export class SettingsService {
-  loadIniFile: typeof loadIniFile;
-  writeIniFile: typeof writeIniFile
-  fs: typeof fs;
-  si: typeof si;
-
   private readonly defaultPath: string = path.join(app.getPath('userData'), 'settings.ini');
+
   private readonly defaultSettings: Settings = {
     recording: {
       saveWithSource: true,
@@ -48,22 +44,17 @@ export class SettingsService {
   constructor(
     private readonly system: SystemService
   ) {
-    this.loadIniFile = window.require('read-ini-file');
-    this.writeIniFile = window.require('write-ini-file');
-    this.fs = window.require('fs');
-    this.si = window.require('systeminformation');
-
     this.initIni();
     this.checkDisplay();
   }
 
   private save() {
-    this.writeIniFile.sync(this.defaultPath, this._settings);
+    writeIniFile.sync(this.defaultPath, this._settings);
   }
 
   private initIni() {
-    if (!this.fs.existsSync(this.defaultPath)) {
-      this.writeIniFile(this.defaultPath, this.defaultSettings);
+    if (!fs.existsSync(this.defaultPath)) {
+      writeIniFile(this.defaultPath, this.defaultSettings);
       this.settings = this.defaultSettings;
     } else {
       this.reload();
@@ -88,7 +79,7 @@ export class SettingsService {
   }
 
   public reload() {
-    this.settings = this.loadIniFile.sync(this.defaultPath);
+    this.settings = loadIniFile.sync(this.defaultPath);
     this.localeSubject.next(this.settings.locales.locale);
   }
 
@@ -104,7 +95,7 @@ export class SettingsService {
   }
 
   public async getAvailableDisplays(): Promise<Display[]> {
-    const displays = (await this.si.graphics()).displays;
+    const displays = (await si.graphics()).displays;
     if (displays.length < 3)
       return [];
     else

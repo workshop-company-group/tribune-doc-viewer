@@ -3,19 +3,15 @@ import { Drive, FolderContent, Folder, FileInfo } from '../../models';
 import { ipcRenderer } from 'electron';
 import { FileSystemError } from '../exceptions'
 import * as fs from 'fs';
-import * as path from 'path';
+import * as jspath from 'path';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileSystemService {
-  fs: typeof fs;
-  path: typeof path;
   ipcRenderer: typeof ipcRenderer;
 
   constructor() {
-    this.fs = window.require('fs');
-    this.path = window.require('path');
     this.ipcRenderer = window.require('electron').ipcRenderer;
   }
 
@@ -27,7 +23,7 @@ export class FileSystemService {
   private getFileInfo(path: string): FileInfo {
     if (fs.existsSync(path)) {
       let stats = fs.statSync(path);
-      let name = this.path.basename(path);
+      let name = jspath.basename(path);
       const size = this.getFileSize(stats.size);
       const type = this.getFileType(path);
 
@@ -49,7 +45,7 @@ export class FileSystemService {
 
   public async removeFile(path: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      this.fs.unlink(path, (err) => {
+      fs.unlink(path, (err) => {
         if (err !== null) {
           reject(err);
         } else {
@@ -77,13 +73,13 @@ export class FileSystemService {
 
   public getFolderContent(path: string): FolderContent {
     const resultObject: FolderContent = { folders: [], files: [] };
-    const elements: string[] = this.fs.readdirSync(path);
+    const elements: string[] = fs.readdirSync(path);
     elements.forEach(element => {
-      const elementPath = this.path.join(path, element);
+      const elementPath = jspath.join(path, element);
       let isDirectory = false
       try { isDirectory = fs.statSync(elementPath).isDirectory() } catch (error) {}
       if (isDirectory) {
-        let folderPath = this.path.join(path, element);
+        let folderPath = jspath.join(path, element);
         const folder: Folder = { name: element, path: folderPath, access: this.ifFolderAccessible(folderPath) }
         resultObject.folders.push(folder);
       } else {
@@ -104,7 +100,7 @@ export class FileSystemService {
   }
 
   public dirExists(path: string): boolean {
-    return this.fs.existsSync(path);
+    return fs.existsSync(path);
   }
 
   public dirAboveExists(path: string): boolean {
@@ -113,7 +109,7 @@ export class FileSystemService {
   }
 
   public getParentDir(path: string): string {
-    const dir = this.path.dirname(path);
+    const dir = jspath.dirname(path);
     return dir;
   }
 }

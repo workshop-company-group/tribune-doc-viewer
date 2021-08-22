@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { desktopCapturer } from 'electron';
 import { SettingsService } from '../../../settings/services'
 import { RecorderError } from '../exceptions'
-import * as si from 'systeminformation';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -13,9 +12,6 @@ let recordedChunks = [];
   providedIn: 'root'
 })
 export class RecorderService {
-  fs: typeof fs;
-  path: typeof path;
-  si: typeof si;
   desktopCapturer: typeof desktopCapturer;
   recordScreen: Electron.DesktopCapturerSource;
   screenStream: MediaStream = null;
@@ -28,9 +24,6 @@ export class RecorderService {
   constructor(
     private readonly settings: SettingsService
   ) {
-    this.fs = window.require('fs');
-    this.path = window.require('path');
-    this.si = window.require('systeminformation');
     this.desktopCapturer = window.require('electron').desktopCapturer;
   }
 
@@ -107,7 +100,7 @@ export class RecorderService {
       this.filepath = filepath;
     }
     else {
-      this.filepath = this.path.join(this.settings.savePath, path.basename(filepath));
+      this.filepath = path.join(this.settings.savePath, path.basename(filepath));
     }
     this.mediaRecorder.stop();
   }

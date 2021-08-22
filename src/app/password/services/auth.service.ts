@@ -19,20 +19,15 @@ const FILENAME = path.join(app.getPath('userData'), 'auth.json');
   providedIn: 'root'
 })
 export class AuthService {
-
-  jsonfile: typeof jsonfile = window.require('jsonfile');
-
   private readonly salt = AppConfig.salt;
-
   private passwordSubject: BehaviorSubject<string>
-
   public passwordObservable: Observable<string>
 
   constructor() {
     if (!fs.existsSync(FILENAME)) {
       const encrypted = CryptoJS.AES.encrypt(EMPTY_PASSWORD, this.salt).toString();
       const auth: Auth = { password: encrypted };
-      this.jsonfile.writeFileSync(FILENAME, auth);
+      jsonfile.writeFileSync(FILENAME, auth);
     }
     this.passwordSubject= new BehaviorSubject<string>(this.readPassword());
     this.passwordObservable = this.passwordSubject.asObservable();
@@ -49,7 +44,7 @@ export class AuthService {
   public setPassword(password: string): void {
     const encrypted = CryptoJS.AES.encrypt(password, this.salt).toString();
     const auth: Auth = { password: encrypted };
-    this.jsonfile.writeFileSync(FILENAME, auth);
+    jsonfile.writeFileSync(FILENAME, auth);
     this.passwordSubject.next(password);
   }
 
@@ -58,7 +53,7 @@ export class AuthService {
   }
 
   private readPassword(): string {
-    const auth: Auth = this.jsonfile.readFileSync(FILENAME);
+    const auth: Auth = jsonfile.readFileSync(FILENAME);
     const decrypted = CryptoJS.AES.decrypt(auth.password, this.salt)
       .toString(CryptoJS.enc.Utf8);
     return decrypted;

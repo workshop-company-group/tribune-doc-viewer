@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import * as fs from 'fs';
-import * as path from 'path';
+import * as jspath from 'path';
 import * as childProcess from 'child_process';
 import * as util from 'util';
 
@@ -14,41 +14,33 @@ const TEST = '/Users/minish144/Desktop/test.pptx';
   providedIn: 'root'
 })
 export class ConversionService {
-  path: typeof path;
-  fs: typeof fs;
-  childProcess: typeof childProcess;
-  util: typeof util;
   sofficeCommand: string;
 
   constructor(
     private readonly electron: ElectronService
   ) {
-    this.path = window.require('path');
-    this.fs = window.require('fs');
-    this.childProcess = window.require('child_process');
-    this.util = window.require('util');
     this.sofficeCommand = process.platform === 'win32' ? 'soffice' : 'libreoffice'
   }
 
   private getFileType(path: string): string {
-    return this.path.extname(path);
+    return jspath.extname(path);
   }
 
   private getFileDir(path: string): string {
-    return this.path.dirname(path);
+    return jspath.dirname(path);
   }
 
   private getFileName(path: string, type: string = ''): string {
-    return this.path.basename(path, type);
+    return jspath.basename(path, type);
   }
 
   private fileRename(oldPath: string, newPath: string): void {
-    this.fs.rename(oldPath, newPath, function(err) {
+    fs.rename(oldPath, newPath, function(err) {
     });
   }
 
   public async convertDocument(path: string, outputType: string = 'pdf'): Promise<Document> {
-    const execAsync = util.promisify(this.childProcess.exec);
+    const execAsync = util.promisify(childProcess.exec);
 
     outputType = '.' + outputType.replace('.', '');
     path = path.replace("//", "/")
@@ -57,8 +49,8 @@ export class ConversionService {
     const name: string = this.getFileName(path, type);
     const dir: string = this.getFileDir(path);
 
-    const convertedPath: string = this.path.join(dir, name + outputType);
-    const newConvertedPath: string = this.path.join(dir, name + Date.now().toString() + outputType);
+    const convertedPath: string = jspath.join(dir, name + outputType);
+    const newConvertedPath: string = jspath.join(dir, name + Date.now().toString() + outputType);
 
     if (type === '.pdf') {
       await execAsync(`cp "${path}" "${newConvertedPath}"`);
