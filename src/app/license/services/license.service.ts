@@ -19,17 +19,13 @@ import * as util from 'util';
   providedIn: 'root'
 })
 export class LicenseService {
-  serverAddress: string;
-
   public readonly keySubject = new BehaviorSubject<string | null>(null);
 
   private readonly defaultPath: string = path.join(app.getPath('userData'), 'license.key');
 
   constructor(
     private readonly api: LicenseApiService
-  ) {
-    this.serverAddress = AppConfig.serverOrigin;
-  }
+  ) {}
 
   private async saveKey(key: string): Promise<void> {
     const writeFileAsync = util.promisify(fs.writeFile);
