@@ -13,7 +13,7 @@ import { Auth } from '../models';
 import { AppConfig } from '../../../environments/environment';
 
 const EMPTY_PASSWORD = '';
-const FILENAME = path.join(app.getPath('userData'), 'auth.json');
+const AUTH_FILENAME = path.join(app.getPath('userData'), 'auth.json');
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +23,10 @@ export class AuthService {
   public passwordObservable: Observable<string>
 
   constructor() {
-    if (!fs.existsSync(FILENAME)) {
+    if (!fs.existsSync(AUTH_FILENAME)) {
       const encrypted = CryptoJS.AES.encrypt(EMPTY_PASSWORD, AppConfig.salt).toString();
       const auth: Auth = { password: encrypted };
-      jsonfile.writeFileSync(FILENAME, auth);
+      jsonfile.writeFileSync(AUTH_FILENAME, auth);
     }
     this.passwordSubject= new BehaviorSubject<string>(this.readPassword());
     this.passwordObservable = this.passwordSubject.asObservable();
@@ -43,7 +43,7 @@ export class AuthService {
   public setPassword(password: string): void {
     const encrypted = CryptoJS.AES.encrypt(password, AppConfig.salt).toString();
     const auth: Auth = { password: encrypted };
-    jsonfile.writeFileSync(FILENAME, auth);
+    jsonfile.writeFileSync(AUTH_FILENAME, auth);
     this.passwordSubject.next(password);
   }
 
@@ -52,7 +52,7 @@ export class AuthService {
   }
 
   private readPassword(): string {
-    const auth: Auth = jsonfile.readFileSync(FILENAME);
+    const auth: Auth = jsonfile.readFileSync(AUTH_FILENAME);
     const decrypted = CryptoJS.AES.decrypt(auth.password, AppConfig.salt)
       .toString(CryptoJS.enc.Utf8);
     return decrypted;
