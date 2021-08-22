@@ -50,7 +50,7 @@ export class RecordBroadcastService {
   }
 
   public async startBroadcasting(doc: OpenedDocument): Promise<void> {
-    if (!(await this.isBroadcastingAvailable)) {
+    if (!(await this.isBroadcastingAvailable())) {
       return;
     }
     this.doc = doc;
