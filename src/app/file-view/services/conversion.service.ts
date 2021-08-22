@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ConversionError } from './conversion-error';
 
 import * as fs from 'fs';
 import * as jspath from 'path';
@@ -36,6 +37,7 @@ export class ConversionService {
 
   private fileRename(oldPath: string, newPath: string): void {
     fs.rename(oldPath, newPath, function(err) {
+      if (err) throw new ConversionError('Failed to rename file:' + err);
     });
   }
 
