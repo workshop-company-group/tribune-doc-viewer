@@ -8,10 +8,15 @@ button {
 
   background: var(--accent-blue-vertical-gradient);
   box-shadow: var(--base-shadow);
+  transition: var(--base-transition);
 
   border-radius: 10px;
 
   img {
     width: 40px;
+  }
+
+  &:active {
+    transform: var(--button-active-transform);
   }
 }

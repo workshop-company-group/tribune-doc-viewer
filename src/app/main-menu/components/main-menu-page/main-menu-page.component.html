@@ -1,10 +1,5 @@
-<div class="background">
-    <img src="assets/background/filled-brandbook.svg">
-</div>
-
 <div class="tribune">
-    <img src="assets/images/tribune.png">
-    <span>BM Tribune</span>
+    <img src="assets/images/tribune.svg">
 </div>
 
 <span class="version">
@@ -31,6 +26,6 @@
 </div>
 
 <app-backdrop class="license-dialog"
-    *ngIf="!(license.keySubject | async)">
+    [opened]="!(license.keySubject | async)">
     <app-license-dialog></app-license-dialog>
 </app-backdrop>

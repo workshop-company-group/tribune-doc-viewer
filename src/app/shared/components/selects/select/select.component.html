@@ -1,13 +1,17 @@
 <div class="current" [ngClass]="{ 'opened': opened }"
     (click)="changeOverlayState(!opened)">
+    <div class="background"></div>
     <span>{{ value }}</span>
     <img [src]="iconSrc" 
         [alt]="opened ? 'close' : 'open'">
 </div>
-<div class="overlay" *ngIf="opened">
-    <div class="option" *ngFor="let option of valueOptions"
-        (click)="select(option)"
-        [ngClass]="{ 'selected': option === value }">
-        <span>{{ option }}</span>
+
+<div class="overlay-container">
+    <div class="overlay" [ngClass]="{ 'opened': opened }">
+        <div class="option" *ngFor="let option of valueOptions"
+            (click)="select(option)"
+            [ngClass]="{ 'selected': option === value }">
+            <span>{{ option }}</span>
+        </div>
     </div>
 </div>

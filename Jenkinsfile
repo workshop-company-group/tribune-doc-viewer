@@ -3,7 +3,9 @@ properties([
 ])
 
 pipeline {
-    agent any
+    agent {
+        label 'Node'
+    }
 
     triggers {
         pollSCM('* * * * *')

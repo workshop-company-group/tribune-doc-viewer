@@ -19,12 +19,12 @@
     border-radius: 10px;
     box-shadow: var(--base-inner-shadow);
 
-    transition: .3s;
+    transition: var(--base-transition);
 
     &::placeholder {
       color: var(--faint-dark-grey-color);
 
-      transition: .3s;
+      transition: var(--base-transition);
     }
 
     &:disabled {
@@ -33,6 +33,10 @@
       &::placeholder {
         color: var(--faint-light-grey-color);
       }
+    }
+
+    &:focus {
+      box-shadow: var(--strong-inner-shadow);
     }
   }
 }

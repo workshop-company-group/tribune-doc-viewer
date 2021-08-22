@@ -15,6 +15,7 @@
         </app-normal-button>
 
         <app-normal-button class="apply-button"
+            [accent]="true"
             [disabled]="saveToggle.value 
                 || settings.savePath === pathControl.value
                 || pathDoesNotExist"
@@ -31,9 +32,9 @@
     </div>
 </app-settings-section>
 
-<app-backdrop class="file-select-dialog"
-              *ngIf="fileSelect.selectedMountpoint"
-              [ngClass]="{ 'opened': fileSelectDialogOpened }">
+<app-backdrop class="file-dialog-backdrop"
+    [opened]="fileSelectDialogOpened"
+    *ngIf="fileSelect.selectedMountpoint">
     <app-file-select-dialog
         [folderSelect]="true"
         [open-button]="'select' | locale | async"

@@ -1,14 +1,17 @@
 import { Component, OnDestroy, OnInit, } from '@angular/core';
-import { Router, } from '@angular/router';
+import { Router, RouterOutlet, } from '@angular/router';
 
 import { BehaviorSubject, Subscription, } from 'rxjs';
 
 import { SettingsRoute, } from '../../models';
 
+import { routeAnimations, } from '../../animations/route-animations';
+
 @Component({
   selector: 'app-settings-page',
   templateUrl: './settings-page.component.html',
-  styleUrls: ['./settings-page.component.scss']
+  styleUrls: ['./settings-page.component.scss'],
+  animations: [ routeAnimations, ],
 })
 export class SettingsPageComponent implements OnInit, OnDestroy {
 
@@ -30,6 +33,12 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
+  public prepareRoute(outlet: RouterOutlet): string {
+    return outlet
+      && outlet.activatedRouteData
+      && outlet.activatedRouteData.animationState;
   }
 
 }

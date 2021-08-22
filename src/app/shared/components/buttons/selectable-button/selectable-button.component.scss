@@ -3,8 +3,10 @@ app-normal-button {
 
   --button-background: var(--faint-light-grey-horizontal-gradient);
 
-  &.selected {
-    --button-background: var(--accent-blue-horizontal-gradient);
-    --button-color: var(--base-white-color);
-  }
+  // accent
+  --button-accent-background: var(--accent-blue-horizontal-gradient);
+  --button-accent-background-transform: translateX(calc(-100% - 1px));
+
+  // active
+  --button-active-transform: none;
 }

@@ -1,8 +1,8 @@
 <div class="left-container">
-    <button class="menu-button"
-        [routerLink]="['/main-menu']">
-        <img src="assets/icons/menu.svg">
-    </button>
+    <app-icon-button class="menu-button"
+        src="assets/icons/menu.svg"
+        (button-click)="router.navigateByUrl('/main-menu')">
+    </app-icon-button>
 
     <app-file-title-menu-item 
       class="left-item"
@@ -23,10 +23,13 @@
             (close)="documentService.close(1)">
         </app-file-title-menu-item>
 
-        <div class="add-document-button"
+        <div class="button-container"
             *ngIf="documentService.count === 1"
             (click)="openDocument()">
-            <img src="assets/icons/plus.svg">
+            <app-icon-button class="add-document-button"
+                src="assets/icons/plus.svg"
+                (button-click)="openDocument()">
+            </app-icon-button>
         </div>
     </div>
 

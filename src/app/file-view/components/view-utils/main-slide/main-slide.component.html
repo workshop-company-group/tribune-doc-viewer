@@ -1,19 +1,19 @@
-<app-slide-button class="previous-button"
+<app-icon-button class="previous-button"
     [disabled]="doc.currentPage.value <= 0"
-    icon="assets/icons/arrows/left-arrow.svg"
-    (slide-click)="previousSlide()">
-</app-slide-button>
+    src="assets/icons/arrows/left-arrow.svg"
+    (button-click)="previousSlide()">
+</app-icon-button>
 
 <app-pdf-view class="pdf-content"
     [pdf]="doc.pdf"
     [page]="doc.currentPage.value">
 </app-pdf-view>
 
-<app-slide-button class="next-button"
+<app-icon-button class="next-button"
     [disabled]="doc.currentPage.value >= (doc.pdf.numPages - 1)"
-    icon="assets/icons/arrows/right-arrow.svg"
-    (slide-click)="nextSlide()">
-</app-slide-button>
+    src="assets/icons/arrows/right-arrow.svg"
+    (button-click)="nextSlide()">
+</app-icon-button>
 
 <div class="grid-item"></div>
 <app-slide-progress-bar class="progress-bar"
