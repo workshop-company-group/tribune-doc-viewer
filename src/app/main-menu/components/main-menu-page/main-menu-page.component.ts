@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { DocumentService, } from '../../../file-view/services';
-import { LicenseService, } from '../../../license/services';
-import { AuthService, PasswordStateService, } from '../../../password/services';
-import { UpdateService, } from '../../../update/services/update.service';
+import { DocumentService } from '../../../file-view/services';
+import { LicenseService } from '../../../license/services';
+import { AuthService, PasswordStateService } from '../../../password/services';
+import { UpdateService } from '../../../update/services/update.service';
 
 @Component({
   selector: 'app-main-menu-page',
   templateUrl: './main-menu-page.component.html',
-  styleUrls: ['./main-menu-page.component.scss']
+  styleUrls: ['./main-menu-page.component.scss'],
 })
 export class MainMenuPageComponent implements OnInit {
 
@@ -22,10 +22,12 @@ export class MainMenuPageComponent implements OnInit {
     public readonly updateService: UpdateService,
   ) { }
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void {
+    // empty
+  }
 
   public openFileView(): void {
-    this.router.navigate(['/file-view']);
+    void this.router.navigate(['/file-view']);
   }
 
   public openSettings(): void {
@@ -40,7 +42,7 @@ export class MainMenuPageComponent implements OnInit {
 
   private continueWithPassword(): void {
     if (this.auth.hasPassword()) {
-      this.router.navigate(['/password']);
+      void this.router.navigate(['/password']);
       return;
     }
 

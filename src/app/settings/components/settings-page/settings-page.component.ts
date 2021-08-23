@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit, } from '@angular/core';
-import { Router, RouterOutlet, } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 
-import { BehaviorSubject, Subscription, } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
-import { SettingsRoute, } from '../../models';
+import { SettingsRoute } from '../../models';
 
-import { routeAnimations, } from '../../animations/route-animations';
+import { routeAnimations } from '../../animations/route-animations';
 
 @Component({
   selector: 'app-settings-page',

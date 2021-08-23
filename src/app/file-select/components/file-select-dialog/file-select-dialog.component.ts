@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input,
-  Output, } from '@angular/core';
+  Output } from '@angular/core';
 
-import { FileSystemService, } from '../../../shared/services';
-import { DocumentService, } from '../../../file-view/services';
-import { FileSelectService, } from '../../services';
+import { FileSystemService } from '../../../shared/services';
+import { DocumentService } from '../../../file-view/services';
+import { FileSelectService } from '../../services';
 
 import { Drive, Mountpoint,
-  FileInfo, Folder, } from '../../../shared/models';
+  FileInfo, Folder } from '../../../shared/models';
 
 @Component({
   selector: 'app-file-select-dialog',

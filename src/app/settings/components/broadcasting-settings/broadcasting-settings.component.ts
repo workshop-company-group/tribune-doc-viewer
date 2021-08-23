@@ -1,21 +1,22 @@
-import { Component, OnDestroy, OnInit, } from '@angular/core';
-import { FormControl, } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 import { interval, Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged, switchMap, tap, map } from 'rxjs/operators';
 
-import { SettingsService, } from '../../services';
+import { SettingsService } from '../../services';
 
 const DISPLAY_RELOAD_PERIOD = 2000;
 
 @Component({
   selector: 'app-broadcasting-settings',
   templateUrl: './broadcasting-settings.component.html',
-  styleUrls: ['./broadcasting-settings.component.scss']
+  styleUrls: ['./broadcasting-settings.component.scss'],
 })
 export class BroadcastingSettingsComponent implements OnDestroy, OnInit {
 
-  public readonly deviceControl = new FormControl(this.settings.screenConnection);
+  public readonly deviceControl =
+    new FormControl(this.settings.screenConnection);
 
   public readonly devicesSubject = new Subject<string[]>();
 
@@ -37,9 +38,9 @@ export class BroadcastingSettingsComponent implements OnDestroy, OnInit {
         switchMap(() => this.settings.getAvailableDisplays()),
         map(displays => displays.map(display => display.connection)),
         distinctUntilChanged((curr, next) =>
-          JSON.stringify(curr.sort()) === JSON.stringify(next.sort())
+          JSON.stringify(curr.sort()) === JSON.stringify(next.sort()),
         ),
-      ).subscribe(this.devicesSubject)
+      ).subscribe(this.devicesSubject),
     );
   }
 

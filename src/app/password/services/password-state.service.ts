@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { BehaviorSubject, } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 import { WindowStateService } from '../../shared/services';
-import { DocumentService, RecordBroadcastService, } from '../../file-view/services';
+import { DocumentService, RecordBroadcastService } from '../../file-view/services';
 
 type PasswordPageState = null | 'quit' | 'settings';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PasswordStateService {
 
-  private pageStateSubject = new BehaviorSubject<PasswordPageState>(null);
+  private readonly pageStateSubject =
+  new BehaviorSubject<PasswordPageState>(null);
 
   public pageStateObservable = this.pageStateSubject.asObservable();
 
@@ -33,32 +34,32 @@ export class PasswordStateService {
   }
 
   public continueWithPassword() {
-    switch(this.pageState) {
-      case 'settings':
-        this.pageState = null;
-        this.router.navigate(['/settings']);
-        break;
+    switch (this.pageState) {
+    case 'settings':
+      this.pageState = null;
+      this.router.navigate(['/settings']);
+      break;
 
-      case 'quit':
-        this.pageState = null;
+    case 'quit':
+      this.pageState = null;
 
-        // stop recording and broadcasting
-        if (this.recordBroadcast.state.value) {
-          if (this.recordBroadcast.state.value === 'recording'
+      // stop recording and broadcasting
+      if (this.recordBroadcast.state.value) {
+        if (this.recordBroadcast.state.value === 'recording'
             || this.recordBroadcast.state.value === 'paused') {
-            this.recordBroadcast.stopRecording();
-          }
-          this.recordBroadcast.stopBroadcasting();
+          this.recordBroadcast.stopRecording();
         }
+        this.recordBroadcast.stopBroadcasting();
+      }
 
-        // remove converted documents
-        const documentsLength = this.documentService.opened.length;
-        for (let i = 0; i < documentsLength; i++) {
-          this.documentService.close(0);
-        }
+      // remove converted documents
+      const documentsLength = this.documentService.opened.length;
+      for (let i = 0; i < documentsLength; i++) {
+        void this.documentService.close(0);
+      }
 
-        this.windowState.exit();
-        break;
+      this.windowState.exit();
+      break;
     }
   }
 }

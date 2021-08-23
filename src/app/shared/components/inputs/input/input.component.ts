@@ -1,6 +1,6 @@
-import { Component, forwardRef, Input, } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, FormControl,
-  NG_VALUE_ACCESSOR, } from '@angular/forms';
+  NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
@@ -17,7 +17,7 @@ import { ControlValueAccessor, FormControl,
 export class InputComponent implements ControlValueAccessor {
 
   @Input()
-  public placeholder: string = '';
+  public placeholder = '';
 
   public readonly inputControl = new FormControl('');
 
@@ -28,9 +28,13 @@ export class InputComponent implements ControlValueAccessor {
       this.inputControl.enable();
   }
 
-  public changeHandler: Function = () => {};
+  public changeHandler: Function = () => {
+    // empty
+  };
 
-  public touchedHandler: Function = () => {};
+  public touchedHandler: Function = () => {
+    // empty
+  };
 
   constructor() { }
 

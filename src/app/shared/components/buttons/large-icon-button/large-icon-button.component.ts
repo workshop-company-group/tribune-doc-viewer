@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, Output, } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-large-icon-button',
   templateUrl: './large-icon-button.component.html',
-  styleUrls: ['./large-icon-button.component.scss']
+  styleUrls: ['./large-icon-button.component.scss'],
 })
 export class LargeIconButtonComponent {
 

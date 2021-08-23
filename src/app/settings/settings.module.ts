@@ -35,6 +35,6 @@ import {
     ReactiveFormsModule,
     SettingsRoutingModule,
     SharedModule,
-  ]
+  ],
 })
 export class SettingsModule { }

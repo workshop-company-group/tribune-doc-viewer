@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { FileSystemService, } from '../../shared/services';
+import { FileSystemService } from '../../shared/services';
 
 import { Mountpoint, FolderContent,
-  FileInfo, Folder, } from '../../shared/models';
-import { AppConfig, } from '../../../environments/environment';
+  FileInfo, Folder } from '../../shared/models';
+import { AppConfig } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
 import { Component, ElementRef, forwardRef,
-  HostBinding, HostListener, Input, } from '@angular/core';
+  HostBinding, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -29,14 +29,18 @@ export class SelectComponent implements ControlValueAccessor {
 
   public valueOptions: string[] = [];
 
-  public opened: boolean = false;
+  public opened = false;
 
-  public changeHandler: (obj: string) => {};
+  public changeHandler: (obj: string) => {
+    // empty
+  };
 
-  public touchedHandler: () => {};
+  public touchedHandler: () => {
+    // empty
+  };
 
   @HostBinding()
-  public disabled: boolean = false;
+  public disabled = false;
 
   constructor(
     private readonly element: ElementRef,
@@ -73,11 +77,15 @@ export class SelectComponent implements ControlValueAccessor {
     this.value = obj;
   }
 
-  public registerOnChange(fn: (obj: string) => {}): void {
+  public registerOnChange(fn: (obj: string) => {
+    // empty
+  }): void {
     this.changeHandler = fn;
   }
 
-  public registerOnTouched(fn: () => {}): void {
+  public registerOnTouched(fn: () => {
+    // empty
+  }): void {
     this.touchedHandler = fn;
   }
 

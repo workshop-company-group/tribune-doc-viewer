@@ -9,16 +9,14 @@ import * as util from 'util';
 import { Document } from '../models';
 import { ElectronService } from '../../core/services';
 
-const TEST = '/Users/minish144/Desktop/test.pptx';
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConversionService {
   private readonly sofficeCommand = process.platform === 'win32' ? 'soffice' : 'libreoffice';
 
   constructor(
-    private readonly electron: ElectronService
+    private readonly electron: ElectronService,
   ) {}
 
   private getFileType(path: string): string {
@@ -29,29 +27,31 @@ export class ConversionService {
     return jspath.dirname(path);
   }
 
-  private getFileName(path: string, type: string = ''): string {
+  private getFileName(path: string, type = ''): string {
     return jspath.basename(path, type);
   }
 
   private fileRename(oldPath: string, newPath: string): void {
     fs.rename(oldPath, newPath, function(err) {
       if (err)
-        throw new ConversionError('Failed to rename file:' + err);
+        throw new ConversionError('Failed to rename file');
     });
   }
 
-  public async convertDocument(path: string, outputType: string = 'pdf'): Promise<Document> {
+  public async convertDocument(_path: string, _outputType = 'pdf'): Promise<Document> {
     const execAsync = util.promisify(childProcess.exec);
 
-    outputType = '.' + outputType.replace('.', '');
-    path = path.replace("//", "/")
+    const outputType = `.${_outputType.replace('.', '')}`;
+    const path = _path;
 
     const type: string = this.getFileType(path);
     const name: string = this.getFileName(path, type);
     const dir: string = this.getFileDir(path);
 
-    const convertedPath: string = jspath.join(dir, name + outputType);
-    const newConvertedPath: string = jspath.join(dir, name + Date.now().toString() + outputType);
+    const convertedPath: string =
+      jspath.join(dir, name + outputType);
+    const newConvertedPath: string =
+      jspath.join(dir, name + Date.now().toString() + outputType);
 
     if (type === '.pdf') {
       await execAsync(`cp "${path}" "${newConvertedPath}"`);
@@ -59,15 +59,19 @@ export class ConversionService {
         originPath: path,
         convertedPath: newConvertedPath,
         title: name,
-      }
+      };
     }
+
+    // eslint-disable-next-line max-len
     await execAsync(`${this.sofficeCommand} --headless --convert-to ${outputType.slice(1)} --outdir "${dir}" "${path}"`);
+
     this.fileRename(convertedPath, newConvertedPath);
+
     return {
       originPath: path,
       convertedPath: newConvertedPath,
       title: name,
-    }
+    };
   }
 }
 

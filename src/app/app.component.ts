@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 
 import { ElectronService } from './core/services';
 import { AppConfig } from '../environments/environment';
 
-import { routeAnimations, } from './animations';
+import { routeAnimations } from './animations';
 
 @Component({
   selector: 'app-root',

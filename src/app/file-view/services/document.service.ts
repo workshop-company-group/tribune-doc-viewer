@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Document,
          OpenedDocument,
          PdfDocument,
-         RecordBroadcastState, } from '../models'
+         RecordBroadcastState } from '../models'
 
 import { ConversionService } from './conversion.service';
 import { PdfService } from './pdf.service';

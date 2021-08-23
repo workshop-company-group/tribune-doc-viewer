@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { FileViewRoutingModule } from './file-view-routing.module';
 import { FileSelectModule } from '../file-select/file-select.module';
-import { LocaleModule, } from '../locale/locale.module';
+import { LocaleModule } from '../locale/locale.module';
 import { SharedModule } from '../shared/shared.module';
 
-import { FileViewPageComponent, } from './components';
+import { FileViewPageComponent } from './components';
 
 import { FileTitleMenuComponent,
   FileTitleMenuItemComponent,
   FileViewBackgroundComponent,
   FileViewerComponent,
-  RecordBroadcastControlComponent, } from './components';
+  RecordBroadcastControlComponent } from './components';
 
 import { DocumentViewComponent,
   MainSlideComponent,
@@ -20,16 +20,16 @@ import { DocumentViewComponent,
   SlideButtonComponent,
   SlideNavComponent,
   SlideProgressBarComponent,
-  SlideThumbnailComponent, } from './components/view-utils';
+  SlideThumbnailComponent } from './components/view-utils';
 
 import { RecordBroadcastButtonComponent,
-  RecordControlsComponent, } from './components/record-broadcast-utils';
+  RecordControlsComponent } from './components/record-broadcast-utils';
 
 import { FileCloseConfirmationComponent,
   FileSelectConfirmationComponent,
-  FinishRecordConfirmationComponent, } from './components/confirmations';
+  FinishRecordConfirmationComponent } from './components/confirmations';
 
-import { DocumentTitlePipe, } from './pipes';
+import { DocumentTitlePipe } from './pipes';
 
 @NgModule({
   declarations: [
