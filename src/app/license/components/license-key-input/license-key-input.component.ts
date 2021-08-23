@@ -71,7 +71,7 @@ implements ControlValueAccessor, OnDestroy, OnInit {
 
     const splitted = uppercasedNonsplited.match(/.{1,5}/g);
 
-    return splitted?.join('-') ?? uppercasedNonsplited;
+    return splitted?.join('-') || uppercasedNonsplited;
   }
 
 }

@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import packageInfo from '../../../../package.json';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UpdateService {
   public version: string;
-z
+
   constructor() {
     if (packageInfo.version) {
       this.version = packageInfo.version;
     } else {
-      this.version = "dev";
+      this.version = 'dev';
     }
   }
 }

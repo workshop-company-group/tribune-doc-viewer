@@ -1,0 +1,7 @@
+**/*.spec.ts
+**/*test.ts
+
+/src/polyfills.ts
+/src/typings.d.ts
+
+**/*environment.*

@@ -47,7 +47,7 @@
         "key-spacing": "error",
         "linebreak-style": "error",
         "max-classes-per-file": ["error", 1],
-        "max-len": ["error", {
+        "max-len": ["warn", {
           "ignoreUrls": true,
           "ignoreStrings": true,
           "ignoreRegExpLiterals": true

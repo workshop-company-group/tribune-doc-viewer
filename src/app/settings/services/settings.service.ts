@@ -25,24 +25,24 @@ export class SettingsService {
   private readonly defaultSettings: Settings = {
     recording: {
       saveWithSource: true,
-      savePath: ''
+      savePath: '',
     },
     screen: {
-      connection: ''
+      connection: '',
     },
     locales: {
-      locale: this.system.getSystemLocale() ?? 'en'
-    }
+      locale: this.system.getSystemLocale() ?? 'en',
+    },
   };
 
   public localeSubject = new BehaviorSubject<Locale>(
-    this.defaultSettings.locales.locale
+    this.defaultSettings.locales.locale,
   );
 
   private _settings: Settings;
 
   constructor(
-    private readonly system: SystemService
+    private readonly system: SystemService,
   ) {
     this.initIni();
     this.checkDisplay();
@@ -52,7 +52,7 @@ export class SettingsService {
     writeIniFile.sync(this.defaultPath, this._settings);
   }
 
-  private initIni() {
+  private initIni(): void {
     if (!fs.existsSync(this.defaultPath)) {
       writeIniFile(this.defaultPath, this.defaultSettings);
       this.settings = this.defaultSettings;
@@ -84,8 +84,8 @@ export class SettingsService {
   }
 
   private handleSettings(settings: Settings) {
-    settings.recording.saveWithSource = (settings.recording.saveWithSource == 'true' ||
-                                         settings.recording.saveWithSource === true);
+    settings.recording.saveWithSource = (settings.recording.saveWithSource === 'true' ||
+                                         settings.recording.saveWithSource);
 
     if (settings.recording.savePath.substr(-1) === '/' ||
         settings.recording.savePath.substr(-1) === '\\')
