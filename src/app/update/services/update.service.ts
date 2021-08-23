@@ -12,16 +12,18 @@ import * as jsonfile from 'jsonfile'
   providedIn: 'root'
 })
 export class UpdateService {
+  public version: string;
+
   private readonly defaultPath: string = path.join(app.getPath('userData'), 'config.json');
 
   constructor() {
-    if (fs.existsSync(this.defaultPath)) {
-      const json = jsonfile.readFileSync(this.defaultPath);
+    if (version) {
+      this.version = version;
     } else {
       const versionJson = {
         version: "dev"
       }
-      jsonfile.writeFileSync(this.defaultPath, versionJson);
+      this.version = versionJson.version;
     }
   }
 }
