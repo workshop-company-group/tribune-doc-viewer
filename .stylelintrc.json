@@ -18,7 +18,7 @@
     "block-closing-brace-space-before": "always-single-line",
     "block-opening-brace-newline-after": "always-multi-line",
     "block-opening-brace-space-after": "always-single-line",
-    "color-function-notation": "modern",
+    "color-function-notation": "legacy",
     "color-hex-case": "upper",
     "color-hex-length": "long",
     "color-named": null,
