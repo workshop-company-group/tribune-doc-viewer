@@ -15,7 +15,7 @@ const TEST = '/Users/minish144/Desktop/test.pptx';
   providedIn: 'root'
 })
 export class ConversionService {
-  readonly sofficeCommand = process.platform === 'win32' ? 'soffice' : 'libreoffice';
+  private readonly sofficeCommand = process.platform === 'win32' ? 'soffice' : 'libreoffice';
 
   constructor(
     private readonly electron: ElectronService
