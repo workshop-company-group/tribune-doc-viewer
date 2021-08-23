@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
+import { remote } from 'electron';
+const { app } = remote;
 
 import * as loadIniFile from 'read-ini-file';
 import * as writeIniFile from 'write-ini-file';
 import * as fs from 'fs';
+import * as path from 'path';
 import * as si from 'systeminformation';
 
 import { BehaviorSubject, } from 'rxjs';
@@ -12,18 +15,13 @@ import { Locale } from '../../locale/models';
 import { Display, } from '../../shared/models';
 
 import { SystemService } from '../../shared/services';
-import { ElectronService } from '../../core/services';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsService {
-  loadIniFile: typeof loadIniFile;
-  writeIniFile: typeof writeIniFile
-  fs: typeof fs;
-  si: typeof si;
+  private readonly defaultPath: string = path.join(app.getPath('userData'), 'settings.ini');
 
-  private readonly defaultPath: string = 'settings.ini';
   private readonly defaultSettings: Settings = {
     recording: {
       saveWithSource: true,
@@ -43,26 +41,20 @@ export class SettingsService {
 
   private _settings: Settings;
 
-  constructor(private electron: ElectronService,
-              private system: SystemService) {
-    if (this.electron.isElectron) {
-      this.loadIniFile = window.require('read-ini-file');
-      this.writeIniFile = window.require('write-ini-file');
-      this.fs = window.require('fs');
-      this.si = window.require('systeminformation');
-
-      this.initIni();
-      this.checkDisplay();
-    }
+  constructor(
+    private readonly system: SystemService
+  ) {
+    this.initIni();
+    this.checkDisplay();
   }
 
   private save() {
-    this.writeIniFile.sync(this.defaultPath, this._settings);
+    writeIniFile.sync(this.defaultPath, this._settings);
   }
 
   private initIni() {
-    if (!this.fs.existsSync(this.defaultPath)) {
-      this.writeIniFile(this.defaultPath, this.defaultSettings);
+    if (!fs.existsSync(this.defaultPath)) {
+      writeIniFile(this.defaultPath, this.defaultSettings);
       this.settings = this.defaultSettings;
     } else {
       this.reload();
@@ -87,7 +79,7 @@ export class SettingsService {
   }
 
   public reload() {
-    this.settings = this.loadIniFile.sync(this.defaultPath);
+    this.settings = loadIniFile.sync(this.defaultPath);
     this.localeSubject.next(this.settings.locales.locale);
   }
 
@@ -103,7 +95,7 @@ export class SettingsService {
   }
 
   public async getAvailableDisplays(): Promise<Display[]> {
-    const displays = (await this.si.graphics()).displays;
+    const displays = (await si.graphics()).displays;
     if (displays.length < 3)
       return [];
     else
