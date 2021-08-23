@@ -6,7 +6,7 @@ import { ExternalViewerService,
          RecorderService,
          WindowStateService, } from '../../shared/services';
 import { OpenedDocument, RecordBroadcastState } from '../models';
-
+import { BroadcastError } from './broadcast-error';
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +51,7 @@ export class RecordBroadcastService {
 
   public async startBroadcasting(doc: OpenedDocument): Promise<void> {
     if (!(await this.isBroadcastingAvailable())) {
-      return;
+      throw new BroadcastError('broadcasting is not available')
     }
     this.doc = doc;
     await this.windowStateService.createExternalWindow();
