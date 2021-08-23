@@ -7,17 +7,13 @@ import { SettingsService } from '../../../settings/services';
   providedIn: 'root'
 })
 export class WindowStateService {
-  ipcRenderer: typeof ipcRenderer;
-
   constructor(
     private readonly settings: SettingsService,
     private readonly recorder: RecorderService
-  ) {
-    this.ipcRenderer = window.require('electron').ipcRenderer;
-  }
+  ) {}
 
   public exit(): void {
-    this.ipcRenderer.send('app-exit');
+    ipcRenderer.send('app-exit');
   }
 
   public async isExternalConnected(): Promise<boolean> {
@@ -28,10 +24,10 @@ export class WindowStateService {
   public async createExternalWindow(): Promise<void> {
     const source = await this.recorder.getCapturerSource();
     const id = Number(source.id.slice(7, -2));
-    const result = await this.ipcRenderer.invoke('external-window', id);
+    await ipcRenderer.invoke('external-window', id);
   }
 
   public closeExternalWindow(): void {
-    this.ipcRenderer.send('close-external-window');
+    ipcRenderer.send('close-external-window');
   }
 }

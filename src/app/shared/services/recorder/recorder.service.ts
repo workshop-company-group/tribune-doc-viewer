@@ -12,7 +12,6 @@ let recordedChunks = [];
   providedIn: 'root'
 })
 export class RecorderService {
-  private desktopCapturer: typeof desktopCapturer;
   private recordScreen: Electron.DesktopCapturerSource;
 
   private screenStream?: MediaStream;
@@ -23,9 +22,7 @@ export class RecorderService {
 
   constructor(
     private readonly settings: SettingsService
-  ) {
-    this.desktopCapturer = window.require('electron').desktopCapturer;
-  }
+  ) {}
 
   public async getCapturerSource(): Promise<Electron.DesktopCapturerSource|null> {
     const availableDisplays = await this.settings.getAvailableDisplays()
@@ -40,7 +37,7 @@ export class RecorderService {
     if (sourceNumber === -1)
       throw new RecorderError('Failed to find monitor');
 
-    const sources = await this.desktopCapturer.getSources({types: ['screen']});
+    const sources = await desktopCapturer.getSources({types: ['screen']});
     return sources[sourceNumber+1];
   }
 

@@ -9,11 +9,7 @@ import * as jspath from 'path';
   providedIn: 'root'
 })
 export class FileSystemService {
-  ipcRenderer: typeof ipcRenderer;
-
-  constructor() {
-    this.ipcRenderer = window.require('electron').ipcRenderer;
-  }
+  constructor() {}
 
   private getFileType(path: string): string {
     const index = path.lastIndexOf('.');
@@ -56,7 +52,7 @@ export class FileSystemService {
   }
 
   public async listDrives(): Promise<Drive[]> {
-    const drives: Drive[] = await this.ipcRenderer.invoke('drive-list');
+    const drives: Drive[] = await ipcRenderer.invoke('drive-list');
     const result: Drive[] = [];
     drives.forEach(drive => {
       try {

@@ -7,7 +7,6 @@ import * as url from 'url';
 
 let win: BrowserWindow = null;
 let externalWin: BrowserWindow = null;
-// let isExternalWinCreated: Subject<void> = new Subject();
 
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');

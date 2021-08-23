@@ -6,27 +6,23 @@ import { ElectronService } from '../../../core/services';
   providedIn: 'root'
 })
 export class ExternalViewerService {
-  ipcRenderer: typeof ipcRenderer;
-
   constructor(
     private readonly electron: ElectronService
-  ) {
-    this.ipcRenderer = window.require('electron').ipcRenderer;
-  }
+  ) {}
 
   public setPdf(path: string): void {
-    this.ipcRenderer.send('set-pdf', path);
+    ipcRenderer.send('set-pdf', path);
   }
 
   public nextPage(): void {
-    this.ipcRenderer.send('next-page');
+    ipcRenderer.send('next-page');
   }
 
   public previousPage(): void {
-    this.ipcRenderer.send('previous-page');
+    ipcRenderer.send('previous-page');
   }
 
   public setPage(pageNumber: number): void {
-    this.ipcRenderer.send('set-page', pageNumber);
+    ipcRenderer.send('set-page', pageNumber);
   }
 }
