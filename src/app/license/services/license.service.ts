@@ -6,56 +6,44 @@ import { BehaviorSubject } from 'rxjs';
 import { LicenseError } from '../exceptions';
 import { AppConfig } from '../../../environments/environment';
 
-import { ElectronService } from '../../core/services';
 import { LicenseApiService } from './license-api.service';
-
 import { LicenseApiResponseStatus } from '../models';
+import { remote } from 'electron';
+const { app } = remote;
 
 import * as fs from 'fs';
+import * as path from 'path';
 import * as util from 'util';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class LicenseService {
-  fs: typeof fs;
-  util: typeof util;
-  serverAddress: string;
-
   public readonly keySubject = new BehaviorSubject<string | null>(null);
 
-  private readonly defaultPath: string = 'license.key';
+  private readonly defaultPath: string = path.join(app.getPath('userData'), 'license.key');
 
   constructor(
-    private readonly api: LicenseApiService,
-    private readonly electron: ElectronService,
-  ) {
-    if (this.electron.isElectron) {
-      this.fs = window.require('fs');
-      this.util = window.require('util');
-
-      this.serverAddress = AppConfig.serverOrigin;
-    }
-  }
+    private readonly api: LicenseApiService
+  ) {}
 
   private async saveKey(key: string): Promise<void> {
-    const writeFileAsync = this.util.promisify(this.fs.writeFile);
+    const writeFileAsync = util.promisify(fs.writeFile);
 
     this.keySubject.next(key); // save key to RAM
     await writeFileAsync(this.defaultPath, key, {flag: 'wx'});
   }
 
   public async removeKey(): Promise<void> {
-    const unlinkAsync = this.util.promisify(this.fs.unlink);
+    const unlinkAsync = util.promisify(fs.unlink);
 
     this.keySubject.next(null);
     await unlinkAsync(this.defaultPath);
   }
 
   public async readLicenseFromFile(): Promise<string> {
-    const existsAsync = this.util.promisify(this.fs.exists);
-    const readFileAsync = this.util.promisify(this.fs.readFile);
+    const existsAsync = util.promisify(fs.exists);
+    const readFileAsync = util.promisify(fs.readFile);
 
     if (!(await existsAsync(this.defaultPath)))
       throw new LicenseError('License file does not exist')

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
+import { ConversionError } from './conversion-error';
 
 import * as fs from 'fs';
-import * as path from 'path';
+import * as jspath from 'path';
 import * as childProcess from 'child_process';
 import * as util from 'util';
 
-import { ElectronService } from '../../core/services';
-
 import { Document } from '../models';
+import { ElectronService } from '../../core/services';
 
 const TEST = '/Users/minish144/Desktop/test.pptx';
 
@@ -15,76 +15,57 @@ const TEST = '/Users/minish144/Desktop/test.pptx';
   providedIn: 'root'
 })
 export class ConversionService {
-  path: typeof path;
-  fs: typeof fs;
-  childProcess: typeof childProcess;
-  util: typeof util;
+  private readonly sofficeCommand = process.platform === 'win32' ? 'soffice' : 'libreoffice';
 
-  constructor(private electron: ElectronService) {
-    if (this.electron.isElectron) {
-      this.path = window.require('path');
-      this.fs = window.require('fs');
-      this.childProcess = window.require('child_process');
-      this.util = window.require('util');
-    }
-  }
+  constructor(
+    private readonly electron: ElectronService
+  ) {}
 
   private getFileType(path: string): string {
-    if (this.electron.isElectron) {
-      return this.path.extname(path);
-    }
+    return jspath.extname(path);
   }
 
   private getFileDir(path: string): string {
-    if (this.electron.isElectron) {
-      return this.path.dirname(path);
-    }
+    return jspath.dirname(path);
   }
 
   private getFileName(path: string, type: string = ''): string {
-    if (this.electron.isElectron) {
-      return this.path.basename(path, type);
-    }
+    return jspath.basename(path, type);
   }
 
   private fileRename(oldPath: string, newPath: string): void {
-    if (this.electron.isElectron) {
-      this.fs.rename(oldPath, newPath, function(err) {
-        if (err) console.error('ERROR: ' + err);
-      });
-    }
+    fs.rename(oldPath, newPath, function(err) {
+      throw new ConversionError('Failed to rename file:' + err.toString());
+    });
   }
 
   public async convertDocument(path: string, outputType: string = 'pdf'): Promise<Document> {
-    outputType = '.' + outputType;
-    const execAsync = util.promisify(this.childProcess.exec);
+    const execAsync = util.promisify(childProcess.exec);
+
+    outputType = '.' + outputType.replace('.', '');
     path = path.replace("//", "/")
-    if (this.electron.isElectron) {
-      const type: string = this.getFileType(path);
-      const name: string = this.getFileName(path, type);
-      const dir: string = this.getFileDir(path);
 
-      const typeIndex = path.lastIndexOf(type)
-      const filepath = path.substr(typeIndex)
+    const type: string = this.getFileType(path);
+    const name: string = this.getFileName(path, type);
+    const dir: string = this.getFileDir(path);
 
-      const convertedPath: string = this.path.join(dir, name + outputType);
-      const newConvertedPath: string = this.path.join(dir, name + Date.now().toString() + outputType);
+    const convertedPath: string = jspath.join(dir, name + outputType);
+    const newConvertedPath: string = jspath.join(dir, name + Date.now().toString() + outputType);
 
-      if (type === '.pdf') {
-        await execAsync(`cp "${path}" "${newConvertedPath}"`);
-        return {
-          originPath: path,
-          convertedPath: newConvertedPath,
-          title: name,
-        }
-      }
-      await execAsync(`soffice --headless --convert-to ${outputType.slice(1)} --outdir "${dir}" "${path}"`);
-      this.fileRename(convertedPath, newConvertedPath);
+    if (type === '.pdf') {
+      await execAsync(`cp "${path}" "${newConvertedPath}"`);
       return {
         originPath: path,
         convertedPath: newConvertedPath,
         title: name,
       }
+    }
+    await execAsync(`${this.sofficeCommand} --headless --convert-to ${outputType.slice(1)} --outdir "${dir}" "${path}"`);
+    this.fileRename(convertedPath, newConvertedPath);
+    return {
+      originPath: path,
+      convertedPath: newConvertedPath,
+      title: name,
     }
   }
 }

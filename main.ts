@@ -7,7 +7,6 @@ import * as url from 'url';
 
 let win: BrowserWindow = null;
 let externalWin: BrowserWindow = null;
-// let isExternalWinCreated: Subject<void> = new Subject();
 
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
@@ -63,7 +62,6 @@ function createExternalWindow(id: number): BrowserWindow {
         enableRemoteModule : true // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular)
       },
     });
-    console.log('cleared');
     externalWin.webContents.openDevTools();
     externalWin.loadURL(url.format({
       pathname: path.join(__dirname, 'src/external/external.html'),
@@ -79,16 +77,6 @@ function createExternalWindow(id: number): BrowserWindow {
 
   return externalWin;
 }
-
-// function isExternalMonitorAvailable(): boolean {
-//   const displays = screen.getAllDisplays();
-//   console.log('all: ', displays);
-//   // console.log('requested: ');
-//   const externalDisplay = displays.find((display) => {
-//     return display.bounds.x !== 0 || display.bounds.y !== 0
-//   });
-//   return externalDisplay ? true : false;
-// }
 
 try {
   app.disableHardwareAcceleration();
