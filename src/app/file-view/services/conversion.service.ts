@@ -15,13 +15,11 @@ const TEST = '/Users/minish144/Desktop/test.pptx';
   providedIn: 'root'
 })
 export class ConversionService {
-  sofficeCommand: string;
+  readonly sofficeCommand = process.platform === 'win32' ? 'soffice' : 'libreoffice';
 
   constructor(
     private readonly electron: ElectronService
-  ) {
-    this.sofficeCommand = process.platform === 'win32' ? 'soffice' : 'libreoffice'
-  }
+  ) {}
 
   private getFileType(path: string): string {
     return jspath.extname(path);
