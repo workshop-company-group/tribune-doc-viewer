@@ -6,8 +6,14 @@
     width: 40px;
     height: 40px;
 
+    transition: var(--base-transition);
+
     &.pause {
       margin-right: 15px;
+    }
+
+    &:active {
+      transform: var(--button-active-transform);
     }
 
     img {

@@ -1,3 +1,4 @@
+export { IconButtonComponent } from './icon-button/icon-button.component';
 export { LargeIconButtonComponent } from './large-icon-button/large-icon-button.component';
 export { NormalButtonComponent } from './normal-button/normal-button.component';
 export { SelectableButtonComponent } from './selectable-button/selectable-button.component';

@@ -4,6 +4,8 @@
 
   display: flex;
 
+  transition: var(--base-transition);
+
   &.vertical {
     flex-direction: row;
 

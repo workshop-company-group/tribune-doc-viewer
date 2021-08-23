@@ -50,10 +50,11 @@
       color: var(--accent-red-color);
       @extend %primary-light-font;
 
-      visibility: hidden;
+      opacity: 0;
+      transition: var(--base-transition);
 
       &.visible {
-        visibility: visible;
+        opacity: 1;
       }
     }
 

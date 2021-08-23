@@ -20,17 +20,32 @@
   --accent-yellow-color: #FDCA40;
 
   /* ----- Effect styles ----- */
+  /* Outer */
+  --weak-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
   --base-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
-  --base-inner-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.2);
   --strong-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  --dark-text-shadow: 1px 1px 10px #FFFFFF;
+  /* Inner */
+  --weak-inner-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.2);
+  --base-inner-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.2);
+  --strong-inner-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.4);
+  /* Other */
+  --dark-text-shadow: 0px 0px 5px #FFFFFF;
 
   /* ----- Component styles ----- */
+  --base-transition: .3s;
   /* Buttons */
   --normal-button-padding: 0;
   --normal-button-justify-content: center;
-  --button-background: var(--faint-light-grey-vertical-gradient);
+
+  --icon-button-active-background: var(--base-black-color);
+  --icon-button-icon-width: 20px;
+
   --button-color: var(--base-black-color);
+  --button-background: var(--faint-light-grey-vertical-gradient);
+  --button-accent-color: var(--base-white-color);
+  --button-accent-background: var(--accent-blue-vertical-gradient);
+  --button-accent-background-transform: translateY(calc(100% + 1px));
+  --button-active-transform: scale(0.97);
   /* Record broadcast button */
   --record-broadcast-button-icon-width: 30px;
   /* Inputs */

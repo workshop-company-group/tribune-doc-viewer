@@ -10,6 +10,8 @@
   border-radius: 10px;
   box-shadow: var(--base-shadow);
 
+  transition: var(--base-transition);
+
   &.selected {
     background: var(--accent-blue-color);
   }

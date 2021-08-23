@@ -11,6 +11,8 @@
   }
 
   .previous-button {
+    --icon-button-active-background: var(--base-black-color);
+    --icon-button-icon-width: 25px;
     margin-right: 15px;
 
     align-self: center;
@@ -18,6 +20,9 @@
   }
 
   .next-button {
+    --icon-button-active-background: var(--base-black-color);
+    --icon-button-icon-width: 25px;
+
     margin-left: 15px;
 
     align-self: center;

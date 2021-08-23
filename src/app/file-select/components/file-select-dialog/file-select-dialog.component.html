@@ -1,9 +1,9 @@
 <div class="left-container">
     <div class="title-container">
-        <button class="close-button"
-            (click)="closeEmitter.emit()">
-            <img src="assets/icons/crosses/cross-black.svg" alt="close">
-        </button>
+        <app-icon-button class="close-button"
+            src="assets/icons/crosses/cross-black.svg" 
+            (button-click)="closeEmitter.emit()">
+        </app-icon-button>
         <span class="title">
             {{ (folderSelect ? 'select-folder' : 'select-file') | locale | async }}
         </span>
@@ -62,6 +62,7 @@
     </div>
 
     <app-small-button class="add-button"
+        [accent]="true"
         [disabled]="!fileSelect.selectedPath.length"
         (button-click)="openEmitter.emit(fileSelect.selectedPath)">
         {{ openButtonText }}

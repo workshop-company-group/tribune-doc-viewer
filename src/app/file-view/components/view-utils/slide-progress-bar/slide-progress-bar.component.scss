@@ -12,6 +12,7 @@
 
   background: var(--base-white-color);
   border-radius: 10px;
+  overflow: hidden;
 
   .filler {
     height: 100%;
@@ -22,7 +23,8 @@
     z-index: 1;
 
     background: var(--accent-blue-horizontal-gradient);
-    border-radius: 10px;
+
+    transition: var(--base-transition);
   }
 
   .counter {

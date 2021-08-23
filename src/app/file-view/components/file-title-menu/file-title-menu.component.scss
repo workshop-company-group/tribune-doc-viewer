@@ -19,10 +19,9 @@
     align-items: center;
 
     .menu-button {
-      img {
-        width: 25px;
-        padding: 0 30px;
-      }
+      --icon-button-icon-width: 25px;
+
+      margin: 0 10px;
     }
 
     .left-item {
@@ -55,7 +54,7 @@
         display: none;
       }
 
-      .add-document-button {
+      .button-container {
         width: 65px;
         height: 100%;
 
@@ -65,8 +64,9 @@
 
         background: var(--accent-blue-vertical-gradient);
 
-        img {
-          width: 20px;
+        .add-document-button {
+          --icon-button-icon-width: 20px;
+          --icon-button-active-background: var(--base-white-color);
         }
       }
     }
