@@ -55,5 +55,4 @@ electron-build:
 lint:
 	@echo ":::code linting.."
 	docker exec -i $(NAME)$(HASH) npm run lint
-	docker exec -i $(NAME)$(HASH) lint:styles
-	docker exec -i $(NAME)$(HASH) lint:fix
+	docker exec -i $(NAME)$(HASH) npm run lint:styles
