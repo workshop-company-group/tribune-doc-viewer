@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { AppConfig } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiOriginInterceptor implements HttpInterceptor {
 

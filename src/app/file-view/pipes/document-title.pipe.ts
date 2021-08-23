@@ -1,16 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+const MAX_LENGTH = 30;
+
 @Pipe({
-  name: 'documentTitle'
+  name: 'documentTitle',
 })
 export class DocumentTitlePipe implements PipeTransform {
 
-  private maxLength: number = 30;
-
-  transform(value: string): string {
+  public transform(value: string): string {
     let newValue = value;
-    if (value.length > this.maxLength) {
-      newValue = newValue.slice(0, this.maxLength) + '...';
+    if (value.length > MAX_LENGTH) {
+      newValue = `${newValue.slice(0, MAX_LENGTH)}...`;
     }
 
     return newValue;

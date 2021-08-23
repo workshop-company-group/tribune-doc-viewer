@@ -2,14 +2,13 @@ import { AfterViewInit, Component, Input, ElementRef, ViewChild } from '@angular
 
 import { ResizeSensor } from 'css-element-queries';
 
-import { PdfService } from '../../../services';
 import { PdfDocument,
-         PdfOrientation } from '../../../models';
+  PdfOrientation } from '../../../models';
 
 @Component({
   selector: 'app-pdf-view',
   templateUrl: './pdf-view.component.html',
-  styleUrls: ['./pdf-view.component.scss']
+  styleUrls: ['./pdf-view.component.scss'],
 })
 export class PdfViewComponent implements AfterViewInit {
 
@@ -27,14 +26,14 @@ export class PdfViewComponent implements AfterViewInit {
 
   @Input()
   private set page(value: number) {
-    this.pdf.getPage(value).then((page) => {
+    void this.pdf.getPage(value).then(page => {
       this.sideRatio = page.width / page.height;
 
       if (this.orientation === 'undefined') {
         this.calculateOrientation();
       }
 
-      page.renderScaled(this.canvas.nativeElement);
+      void page.renderScaled(this.canvas.nativeElement);
     });
   }
 

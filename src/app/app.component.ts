@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { ElectronService } from './core/services';
-import { AppConfig } from '../environments/environment';
 
 import { routeAnimations } from './animations';
 
@@ -10,11 +9,11 @@ import { routeAnimations } from './animations';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [ routeAnimations, ],
+  animations: [ routeAnimations ],
 })
 export class AppComponent {
 
-  constructor(private electronService: ElectronService) {
+  constructor(private readonly electronService: ElectronService) {
     // console.log('AppConfig', AppConfig);
 
     if (electronService.isElectron) {

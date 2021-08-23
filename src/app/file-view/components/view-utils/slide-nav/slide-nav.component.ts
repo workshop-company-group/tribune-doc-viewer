@@ -5,7 +5,7 @@ import { OpenedDocument } from '../../../models';
 @Component({
   selector: 'app-slide-nav',
   templateUrl: './slide-nav.component.html',
-  styleUrls: ['./slide-nav.component.scss']
+  styleUrls: ['./slide-nav.component.scss'],
 })
 export class SlideNavComponent implements OnInit {
 
@@ -19,7 +19,7 @@ export class SlideNavComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.pageIterable = new Array(this.doc.pdf.numPages);
   }
 

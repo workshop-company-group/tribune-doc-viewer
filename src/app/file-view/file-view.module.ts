@@ -6,10 +6,9 @@ import { FileSelectModule } from '../file-select/file-select.module';
 import { LocaleModule } from '../locale/locale.module';
 import { SharedModule } from '../shared/shared.module';
 
-import { FileViewPageComponent } from './components';
-
 import { FileTitleMenuComponent,
   FileTitleMenuItemComponent,
+  FileViewPageComponent,
   FileViewBackgroundComponent,
   FileViewerComponent,
   RecordBroadcastControlComponent } from './components';
@@ -59,6 +58,6 @@ import { DocumentTitlePipe } from './pipes';
     FileSelectModule,
     LocaleModule,
     SharedModule,
-  ]
+  ],
 })
 export class FileViewModule { }

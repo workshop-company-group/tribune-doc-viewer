@@ -5,7 +5,7 @@ import { ConfirmationService } from '../../../services';
 @Component({
   selector: 'app-file-close-confirmation',
   templateUrl: './file-close-confirmation.component.html',
-  styleUrls: ['./file-close-confirmation.component.scss']
+  styleUrls: ['./file-close-confirmation.component.scss'],
 })
 export class FileCloseConfirmationComponent {
 

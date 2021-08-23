@@ -20,7 +20,8 @@ export class SlideThumbnailComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    // empty
   }
 
 }

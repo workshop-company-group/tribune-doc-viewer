@@ -7,7 +7,7 @@ import { Mountpoint, FolderContent,
 import { AppConfig } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FileSelectService {
 
@@ -25,15 +25,15 @@ export class FileSelectService {
     private readonly fileSystem: FileSystemService,
   ) { }
 
-  public changeDir(path: string) {
+  public changeDir(path: string): void {
     this.currentDirPath = path;
     this.currentDirContent = this.filterDirContent(
-      this.fileSystem.getFolderContent(path)
+      this.fileSystem.getFolderContent(path),
     );
     this.selectedPath = '';
   }
 
-  public changeDirToParent() {
+  public changeDirToParent(): void {
     this.changeDir(this.fileSystem.getParentDir(this.currentDirPath));
   }
 
@@ -67,8 +67,8 @@ export class FileSelectService {
     for (const drive of drives) {
       this.mountpoints = this.mountpoints.concat(
         drive.mountpoints.filter(
-          mountpoint => this.fileSystem.dirExists(mountpoint.path)
-        )
+          mountpoint => this.fileSystem.dirExists(mountpoint.path),
+        ),
       );
     }
 

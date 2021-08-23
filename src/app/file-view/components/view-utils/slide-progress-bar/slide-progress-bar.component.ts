@@ -5,7 +5,7 @@ import { OpenedDocument } from '../../../models';
 @Component({
   selector: 'app-slide-progress-bar',
   templateUrl: './slide-progress-bar.component.html',
-  styleUrls: ['./slide-progress-bar.component.scss']
+  styleUrls: ['./slide-progress-bar.component.scss'],
 })
 export class SlideProgressBarComponent {
 

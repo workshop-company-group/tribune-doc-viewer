@@ -10,7 +10,7 @@ import { FileSelectService } from '../../../file-select/services';
 @Component({
   selector: 'app-file-view-page',
   templateUrl: './file-view-page.component.html',
-  styleUrls: ['./file-view-page.component.scss']
+  styleUrls: ['./file-view-page.component.scss'],
 })
 export class FileViewPageComponent {
 
@@ -23,7 +23,7 @@ export class FileViewPageComponent {
 
   public cancelClosing(): void {
     for (const doc of this.documentService.opened) {
-      if (doc.closingState.value === true) {
+      if (doc.closingState.value) {
         doc.closingState.next(false);
       }
     }
@@ -35,7 +35,7 @@ export class FileViewPageComponent {
       this.recordBroadcast.stopRecording();
     }
     this.recordBroadcast.stopBroadcasting();
-    this.documentService.close();
+    void this.documentService.close();
     this.confirmation.state = null;
   }
 
@@ -46,7 +46,7 @@ export class FileViewPageComponent {
 
   public startBroadcasting(): void {
     this.confirmation.state = null;
-    this.recordBroadcast.startBroadcasting(
+    void this.recordBroadcast.startBroadcasting(
       this.documentService.selected);
   }
 

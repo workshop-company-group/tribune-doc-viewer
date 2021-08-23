@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { ExternalViewerService,
-         RecorderService,
-         WindowStateService } from '../../shared/services';
+  RecorderService,
+  WindowStateService } from '../../shared/services';
 import { OpenedDocument, RecordBroadcastState } from '../models';
 import { BroadcastError } from './broadcast-error';
 

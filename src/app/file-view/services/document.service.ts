@@ -3,16 +3,16 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { Document,
-         OpenedDocument,
-         PdfDocument,
-         RecordBroadcastState } from '../models'
+  OpenedDocument,
+  PdfDocument,
+  RecordBroadcastState } from '../models'
 
 import { ConversionService } from './conversion.service';
 import { PdfService } from './pdf.service';
 import { FileSystemService } from '../../shared/services';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DocumentService {
 
@@ -33,9 +33,10 @@ export class DocumentService {
   }
 
   private findClosingIndex(): number {
-    const closingDocumentIndex = this.opened.findIndex(doc => doc.closingState.value);
+    const closingDocumentIndex =
+      this.opened.findIndex(doc => doc.closingState.value);
     if (closingDocumentIndex === -1) {
-      throw new Error("Error: failed to find closing index");
+      throw new Error('Error: failed to find closing index');
     }
     return closingDocumentIndex;
   }

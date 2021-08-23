@@ -3,7 +3,7 @@ import { PdfOrientation } from './pdf-orientation';
 // wrapper for PDFPageProxy class from pdf.js
 export class PdfPage {
 
-  private pageProxy; // typeof pageProxy === PDFPageProxy
+  private readonly pageProxy; // typeof pageProxy === PDFPageProxy
 
   public orientation: PdfOrientation;
 
@@ -28,7 +28,7 @@ export class PdfPage {
   public async render(canvasContext: CanvasRenderingContext2D): Promise<void> {
     await this.pageProxy.render({
       canvasContext,
-      viewport: this.pageProxy.getViewport({ scale: 1 })
+      viewport: this.pageProxy.getViewport({ scale: 1 }),
     });
   }
 
@@ -42,7 +42,7 @@ export class PdfPage {
 
     await this.pageProxy.render({
       canvasContext: canvas.getContext('2d'),
-      viewport
+      viewport,
     });
   }
 
