@@ -34,14 +34,13 @@ export class LocaleSettingsSectionComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.subscriptions.push(
       this.localeControl.valueChanges.pipe(
-        map(language => {
-          for (const locale of Object.keys(Languages)) {
-            if (language === Languages[locale]) {
-              return locale;
-            }
-          }
-        }),
+        map(language =>
+          Object.keys(Languages)
+          .find(lang => Languages[lang] === language)),
       ).subscribe(locale => {
+        if (!locale) {
+          throw new Error('Error: Failed to set language. Unknown language.');
+        }
         this.settings.locale = locale;
       }),
     );

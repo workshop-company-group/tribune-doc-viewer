@@ -13,16 +13,16 @@ import { BroadcastError } from './broadcast-error';
 })
 export class RecordBroadcastService {
 
-  private doc: OpenedDocument = null;
+  private doc?: OpenedDocument;
 
   public state = new BehaviorSubject<RecordBroadcastState>(null);
 
   private docSubscription: {
-    state: Subscription,
-    page: Subscription
+    state: Subscription | undefined,
+    page: Subscription | undefined,
   } = {
-    state: null,
-    page: null
+    state: undefined,
+    page: undefined,
   };
 
   constructor(
@@ -32,6 +32,10 @@ export class RecordBroadcastService {
   ) { }
 
   public resumeRecording(): void {
+    if (!this.doc) {
+      throw new Error("Error: Failed to resume recording. Document is unavailable.");
+    }
+
     this.recorder.continue();
     this.doc.recordBroadcastState.next('recording');
   }
@@ -41,10 +45,14 @@ export class RecordBroadcastService {
   }
 
   public isRecordingAvailable(): boolean {
-    return this.doc !== null;
+    return this.doc !== undefined;
   }
 
   public pauseRecording(): void {
+    if (!this.doc) {
+      throw new Error("Error: Failed to pause recording. Document is unavailable.");
+    }
+
     this.recorder.pause();
     this.doc.recordBroadcastState.next('paused');
   }
@@ -63,6 +71,10 @@ export class RecordBroadcastService {
   }
 
   public async startRecording(): Promise<void> {
+    if (!this.doc) {
+      throw new Error("Error: Failed to start recording. Document is unavailable.");
+    }
+
     await this.recorder.setExternalMonitor();
     this.recorder.start();
 
@@ -70,15 +82,21 @@ export class RecordBroadcastService {
   }
 
   public stopBroadcasting(): void {
+    if (!this.doc) {
+      throw new Error("Error: Failed to stop broadcasting. Document is unavailable.");
+    }
     this.windowStateService.closeExternalWindow();
 
     this.doc.recordBroadcastState.next(null);
-    this.doc = null
-    this.docSubscription.state.unsubscribe();
-    this.docSubscription.page.unsubscribe();
+    this.doc = undefined;
+    this.docSubscription.state?.unsubscribe();
+    this.docSubscription.page?.unsubscribe();
   }
 
   public stopRecording(): void {
+    if (!this.doc) {
+      throw new Error("Error: Failed to stop recording. Document is unavailable.");
+    }
     this.recorder.stop(this.doc.doc.convertedPath + '.webm');
     this.doc.recordBroadcastState.next('broadcasting');
   }

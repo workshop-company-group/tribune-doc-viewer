@@ -63,12 +63,15 @@ implements ControlValueAccessor, OnDestroy, OnInit {
   }
 
   private formatInput(value: string): string {
-    const formatted = value
+    const uppercasedNonsplited = value
       .split('-').join('')
       .slice(0, 25)
       .replace(/[^0-9a-z]/gi, '')
       .toUpperCase();
-    return formatted.length ? formatted.match(/.{1,5}/g).join('-') : formatted;
+
+    const splitted = uppercasedNonsplited.match(/.{1,5}/g);
+
+    return splitted?.join('-') ?? uppercasedNonsplited;
   }
 
 }
