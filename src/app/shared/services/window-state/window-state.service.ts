@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ipcRenderer } from 'electron';
-import { ElectronService } from '../../../core/services';
 import { RecorderService } from '../recorder/recorder.service';
 import { SettingsService } from '../../../settings/services';
 
@@ -8,38 +7,27 @@ import { SettingsService } from '../../../settings/services';
   providedIn: 'root'
 })
 export class WindowStateService {
-  ipcRenderer: typeof ipcRenderer;
-
   constructor(
-    private electron: ElectronService,
-    private settings: SettingsService,
-    private recorder: RecorderService) {
-    if (this.electron.isElectron) {
-      this.ipcRenderer = window.require('electron').ipcRenderer;
-    }
-  }
+    private readonly settings: SettingsService,
+    private readonly recorder: RecorderService
+  ) {}
 
   public exit(): void {
-    if (this.electron.isElectron) {
-      this.ipcRenderer.send('app-exit');
-    }
+    ipcRenderer.send('app-exit');
   }
 
   public async isExternalConnected(): Promise<boolean> {
-    // const result: boolean = await this.ipcRenderer.invoke('is-external-connected');
     await this.settings.checkDisplay();
-    return (this.settings.screenConnection !== '') ? true : false;
+    return this.settings.screenConnection !== '';
   }
 
   public async createExternalWindow(): Promise<void> {
     const source = await this.recorder.getCapturerSource();
     const id = Number(source.id.slice(7, -2));
-    const result = await this.ipcRenderer.invoke('external-window', id);
+    await ipcRenderer.invoke('external-window', id);
   }
 
   public closeExternalWindow(): void {
-    if (this.electron.isElectron) {
-      this.ipcRenderer.send('close-external-window');
-    }
+    ipcRenderer.send('close-external-window');
   }
 }

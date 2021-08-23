@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { desktopCapturer } from 'electron';
-import { ElectronService } from '../../../core/services';
 import { SettingsService } from '../../../settings/services'
-import { Display } from '../../models';
 import { RecorderError } from '../exceptions'
-import * as si from 'systeminformation';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -15,32 +12,17 @@ let recordedChunks = [];
   providedIn: 'root'
 })
 export class RecorderService {
-  fs: typeof fs;
-  path: typeof path;
-  si: typeof si;
-  desktopCapturer: typeof desktopCapturer;
-  recordScreen: Electron.DesktopCapturerSource;
-  screenStream: MediaStream = null;
-  micStream: MediaStream = null;
-  mediaRecorder: MediaRecorder = null;
-  stream: MediaStream = null;
-  recordedBlobs = [];
-  filepath: string = null;
+  private recordScreen: Electron.DesktopCapturerSource;
+
+  private screenStream?: MediaStream;
+  private micStream?: MediaStream;
+  private mediaRecorder?: MediaRecorder;
+  private stream?: MediaStream;
+  private filepath?: string;
 
   constructor(
-    private electron: ElectronService,
-    private settings: SettingsService) {
-    if (this.electron.isElectron) {
-      this.fs = window.require('fs');
-      this.path = window.require('path');
-      this.si = window.require('systeminformation');
-      this.desktopCapturer = window.require('electron').desktopCapturer;
-    }
-  }
-
-  // public async getScreensMeta(): Promise<Display[]> {
-  //   return (await this.si.graphics()).displays.slice(2);
-  // }
+    private readonly settings: SettingsService
+  ) {}
 
   public async getCapturerSource(): Promise<Electron.DesktopCapturerSource|null> {
     const availableDisplays = await this.settings.getAvailableDisplays()
@@ -55,7 +37,7 @@ export class RecorderService {
     if (sourceNumber === -1)
       throw new RecorderError('Failed to find monitor');
 
-    const sources = await this.desktopCapturer.getSources({types: ['screen']});
+    const sources = await desktopCapturer.getSources({types: ['screen']});
     return sources[sourceNumber+1];
   }
 
@@ -102,10 +84,6 @@ export class RecorderService {
 
     const buffer = Buffer.from(await blob.arrayBuffer());
 
-    // if (!this.filepath) {
-    //   const date = new Date().toString();
-    //   this.filepath = './temp/' + date + '.webm';
-    // }
     fs.writeFile(this.filepath, buffer, () => {});
     recordedChunks = [];
   }
@@ -119,7 +97,7 @@ export class RecorderService {
       this.filepath = filepath;
     }
     else {
-      this.filepath = this.path.join(this.settings.savePath, path.basename(filepath));
+      this.filepath = path.join(this.settings.savePath, path.basename(filepath));
     }
     this.mediaRecorder.stop();
   }
