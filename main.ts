@@ -23,11 +23,10 @@ function createWindow(): BrowserWindow {
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: !!(serve),
-      // eslint-disable-next-line max-len
       // false if you want to run 2e2 test with Spectron
       contextIsolation: false,
-      // eslint-disable-next-line max-len
-      // true if you want to run 2e2 test with Spectron or use remote module in renderer context (ie. Angular)
+      // true if you want to run 2e2 test with
+      // Spectron or use remote module in renderer context (ie. Angular)
       enableRemoteModule: true,
     },
   });
