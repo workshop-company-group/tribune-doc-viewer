@@ -77,7 +77,7 @@ export class FileSystemService {
       try {
         isDirectory = fs.statSync(elementPath).isDirectory();
       } catch (error) {
-        // empty
+        // empty for symlink skipping
       }
       if (isDirectory) {
         const folderPath = jspath.join(path, element);
