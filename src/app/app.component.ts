@@ -18,9 +18,10 @@ export class AppComponent {
   ) { }
 
   public prepareRoute(outlet: RouterOutlet): string {
-    return outlet
-      && outlet.activatedRouteData
-      && outlet.activatedRouteData.animationState;
+    if (!outlet.activatedRouteData.animationState) {
+      throw new Error('Error: Animation state is not defined');
+    }
+    return outlet.activatedRouteData.animationState as string;
   }
 
 }
