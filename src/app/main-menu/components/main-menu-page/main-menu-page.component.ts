@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DocumentService } from '../../../file-view/services';
@@ -10,6 +10,7 @@ import { UpdateService } from '../../../update/services/update.service';
   selector: 'app-main-menu-page',
   templateUrl: './main-menu-page.component.html',
   styleUrls: ['./main-menu-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainMenuPageComponent {
 
