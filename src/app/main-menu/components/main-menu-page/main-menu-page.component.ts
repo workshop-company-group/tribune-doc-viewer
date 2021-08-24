@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DocumentService } from '../../../file-view/services';
@@ -11,7 +11,7 @@ import { UpdateService } from '../../../update/services/update.service';
   templateUrl: './main-menu-page.component.html',
   styleUrls: ['./main-menu-page.component.scss'],
 })
-export class MainMenuPageComponent implements OnInit {
+export class MainMenuPageComponent {
 
   constructor(
     public readonly auth: AuthService,
@@ -21,10 +21,6 @@ export class MainMenuPageComponent implements OnInit {
     public readonly router: Router,
     public readonly updateService: UpdateService,
   ) { }
-
-  public ngOnInit(): void {
-    // empty
-  }
 
   public openFileView(): void {
     void this.router.navigate(['/file-view']);

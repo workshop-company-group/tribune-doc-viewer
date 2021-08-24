@@ -25,9 +25,7 @@ export class LicenseDialogComponent implements OnInit {
   constructor(
     public readonly license: LicenseService,
     public readonly windowState: WindowStateService,
-  ) {
-    // empty
-  }
+  ) { }
 
   public ngOnDestroy(): void {
     this.subscriptions.forEach(
@@ -49,7 +47,7 @@ export class LicenseDialogComponent implements OnInit {
 
     this.wrongKey = !result;
     if (result) {
-      // empty
+      // TODO
     }
   }
 
