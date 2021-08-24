@@ -38,11 +38,10 @@ export class ConversionService {
     });
   }
 
-  public async convertDocument(_path: string, _outputType = 'pdf'): Promise<Document> {
+  public async convertDocument(path: string, _outputType = 'pdf'): Promise<Document> {
     const execAsync = util.promisify(childProcess.exec);
 
     const outputType = `.${_outputType.replace('.', '')}`;
-    const path = _path;
 
     const type: string = this.getFileType(path);
     const name: string = this.getFileName(path, type);
