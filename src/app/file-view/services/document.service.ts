@@ -29,13 +29,19 @@ export class DocumentService {
   }
 
   public get selected(): OpenedDocument {
-    return this.opened.filter(doc => doc.selected)[0];
+    const selectedDocument = this.opened.find(doc => doc.selected);
+    if (!selectedDocument) {
+      throw new Error('Error: Failed to find selected document.');
+    }
+    return selectedDocument;
   }
 
   private findClosingIndex(): number {
-    const closingDocumentIndex = this.opened.findIndex(doc => doc.closingState.value);
+    const closingDocumentIndex = this.opened.findIndex(
+      doc => doc.closingState.value,
+    );
     if (closingDocumentIndex === -1) {
-      throw new Error("Error: failed to find closing index");
+      throw new Error('Error: Failed to find closing index.');
     }
     return closingDocumentIndex;
   }
