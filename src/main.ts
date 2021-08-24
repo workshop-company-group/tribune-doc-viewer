@@ -9,10 +9,13 @@ import * as fs from 'fs';
 import { remote } from 'electron';
 const { app } = remote;
 
+const userDataPath = app.getPath('userData');
+
 if (AppConfig.production) {
-  try { fs.mkdirSync(app.getPath('userData')); } catch (error) {
-    // empty
+  if (!fs.existsSync(userDataPath)) {
+    fs.mkdirSync(userDataPath);
   }
+
   enableProdMode();
 }
 

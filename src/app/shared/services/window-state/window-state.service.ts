@@ -4,8 +4,8 @@ import { RecorderService } from '../recorder/recorder.service';
 import { SettingsService } from '../../../settings/services';
 import { WindowError } from '../exceptions';
 
-const ID_SLICE_START = 7;
-const ID_SLICE_END = -2;
+const SCREEN_ID_SLICE_START = 7;
+const SCREEN_ID_SLICE_END = -2;
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,9 @@ export class WindowStateService {
     if (!source)
       throw new WindowError('Failed to create external window');
 
-    const id = Number(source.id.slice(ID_SLICE_START, ID_SLICE_END));
+    const id = Number(
+      source.id.slice(SCREEN_ID_SLICE_START, SCREEN_ID_SLICE_END),
+    );
     await ipcRenderer.invoke('external-window', id);
   }
 

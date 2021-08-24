@@ -1,21 +1,23 @@
-@import "../../../../styles/mixins.scss";
+@import '../../../../styles/mixins';
 
 :host {
+  display: flex;
   width: 100%;
 
-  display: flex;
   flex-direction: column;
   align-items: center;
 
   .no-device-hint {
-    margin-bottom: 10px;
+    @extend %primary-light-font;
 
     display: block;
 
-    @extend %primary-light-font;
+    margin-bottom: 10px;
+
     color: var(--accent-red-color);
 
     opacity: 0;
+
     transition: var(--base-transition);
 
     &.visible {

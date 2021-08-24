@@ -2,7 +2,7 @@
   /* ----- Color styles ----- */
   /* Base */
   --base-black-color: #43454B;
-  --base-transparent-black-color: rgba(67, 69, 75, 0.5);
+  --base-transparent-black-color: rgba(67, 69, 75, .5);
   --base-white-color: #FFFFFF;
   /* Faint */
   --faint-dark-grey-color: #CDCDCD;
@@ -13,7 +13,7 @@
   --faint-white-gradient: linear-gradient(180deg, #FFFFFF 0%, #E5E5E5 100%);
   /* Accent */
   --accent-blue-color: #00B9F2;
-  --accent-dim-blue-color: rgba(0, 105, 242, 0.05);
+  --accent-dim-blue-color: rgba(0, 105, 242, .05);
   --accent-blue-vertical-gradient: linear-gradient(0deg, #0A7BB3 0%, #1EC7F4 100%);
   --accent-blue-horizontal-gradient: linear-gradient(270deg, #0A7BB3 0%, #1EC7F4 100%);
   --accent-red-color: #DD2D4A;
@@ -21,15 +21,15 @@
 
   /* ----- Effect styles ----- */
   /* Outer */
-  --weak-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
-  --base-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
-  --strong-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  --weak-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+  --base-shadow: 0 2px 2px rgba(0, 0, 0, .2);
+  --strong-shadow: 0 4px 4px rgba(0, 0, 0, .25);
   /* Inner */
-  --weak-inner-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.2);
-  --base-inner-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.2);
-  --strong-inner-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.4);
+  --weak-inner-shadow: inset 0 1px 1px rgba(0, 0, 0, .2);
+  --base-inner-shadow: inset 0 2px 2px rgba(0, 0, 0, .2);
+  --strong-inner-shadow: inset 0 2px 2px rgba(0, 0, 0, .4);
   /* Other */
-  --dark-text-shadow: 0px 0px 5px #FFFFFF;
+  --dark-text-shadow: 0 0 5px #FFFFFF;
 
   /* ----- Component styles ----- */
   --base-transition: .3s;
@@ -45,7 +45,7 @@
   --button-accent-color: var(--base-white-color);
   --button-accent-background: var(--accent-blue-vertical-gradient);
   --button-accent-background-transform: translateY(calc(100% + 1px));
-  --button-active-transform: scale(0.97);
+  --button-active-transform: scale(.97);
   /* Record broadcast button */
   --record-broadcast-button-icon-width: 30px;
   /* Inputs */

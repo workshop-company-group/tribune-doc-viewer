@@ -23,10 +23,11 @@ function createWindow(): BrowserWindow {
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: !!(serve),
-      // eslint-disable-next-line max-len
-      contextIsolation: false,  // false if you want to run 2e2 test with Spectron
-      // eslint-disable-next-line max-len
-      enableRemoteModule: true, // true if you want to run 2e2 test with Spectron or use remote module in renderer context (ie. Angular)
+      // false if you want to run 2e2 test with Spectron
+      contextIsolation: false,
+      // true if you want to run 2e2 test with
+      // Spectron or use remote module in renderer context (ie. Angular)
+      enableRemoteModule: true,
     },
   });
   win.webContents.openDevTools();
@@ -57,9 +58,11 @@ function createExternalWindow(id: number): BrowserWindow {
       webPreferences: {
         nodeIntegration: true,
         allowRunningInsecureContent: !!(serve),
-        contextIsolation: false,  // false for 2e2 test with Spectron
-        enableRemoteModule: true, // true for 2e2 test with Spectron
+        // false for 2e2 test with Spectron
+        contextIsolation: false,
+        // true for 2e2 test with Spectron
         // or use remote module in renderer context (ie. Angular)
+        enableRemoteModule: true,
       },
     });
     externalWin.webContents.openDevTools();
@@ -143,8 +146,7 @@ try {
   });
 
   // Returns list of drives
-  // eslint-disable-next-line no-return-await
-  ipcMain.handle('drive-list', async () => await drivelist.list());
+  ipcMain.handle('drive-list', () => drivelist.list());
 
 } catch (e) {
   // Catch Error

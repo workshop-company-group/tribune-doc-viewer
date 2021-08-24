@@ -4,12 +4,11 @@
   position: relative;
 
   display: flex;
-  flex-direction: row;
-
+  overflow: hidden;
   width: 100%;
   height: 100vh;
 
-  overflow: hidden;
+  flex-direction: row;
 
   background: var(--base-white-color);
 
@@ -24,12 +23,13 @@
   }
 
   .version {
+    @extend %secondary-regular-font;
+
     position: absolute;
     right: 5px;
     bottom: 5px;
 
     color: var(--faint-dark-grey-color);
-    @extend %secondary-regular-font;
   }
 
   .logo-container {
@@ -44,18 +44,17 @@
   }
 
   .buttons-container {
+    display: flex;
     width: 50%;
     height: 100%;
 
-    margin: 16% 12%;
-
-    display: flex;
     flex-direction: column;
     align-items: flex-end;
+
+    margin: 16% 12%;
 
     .button {
       margin-bottom: 70px;
     }
   }
 }
-

@@ -1,16 +1,15 @@
 button {
+  display: flex;
   width: 60px;
   height: 60px;
-
-  background: var(--base-white-color);
-
-  border-radius: 30px;
-  box-shadow: var(--base-shadow);
   box-sizing: border-box;
 
-  display: flex;
   align-items: center;
   justify-content: center;
+
+  background: var(--base-white-color);
+  border-radius: 30px;
+  box-shadow: var(--base-shadow);
 
   transition: var(--base-transition);
 
