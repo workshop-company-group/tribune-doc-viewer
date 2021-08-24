@@ -62,10 +62,9 @@ export class ConversionService {
     }
 
     await execAsync(
-      `${this.sofficeCommand}
-      --headless
-      --convert-to ${outputType.slice(1)}
-      --outdir "${dir}" "${path}"`,
+      `${this.sofficeCommand} --headless ` +
+      `--convert-to ${outputType.slice(1)} ` +
+      `--outdir "${dir}" "${path}"`,
     );
 
     this.fileRename(convertedPath, newConvertedPath);
