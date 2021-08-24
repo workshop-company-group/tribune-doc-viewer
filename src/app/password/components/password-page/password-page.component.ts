@@ -11,7 +11,7 @@ import { AuthService, PasswordStateService } from '../../services';
 })
 export class PasswordPageComponent {
 
-  public password = new FormControl('');
+  public readonly password = new FormControl('');
 
   public isPasswordWrong = false;
 
@@ -20,13 +20,15 @@ export class PasswordPageComponent {
     public readonly location: Location,
     public readonly passwordState: PasswordStateService,
   ) {
-    this.password.valueChanges.subscribe(() => this.isPasswordWrong = false);
+    this.password.valueChanges.subscribe(
+      () => { this.isPasswordWrong = false; },
+    );
   }
 
-  public continueWithPassword(): void {
+  public async continueWithPassword(): Promise<void> {
     const isValid: boolean = this.auth.passwordIsValid(this.password.value);
     if (isValid) {
-      this.passwordState.continueWithPassword();
+      await this.passwordState.continueWithPassword();
     } else {
       this.isPasswordWrong = true;
     }
