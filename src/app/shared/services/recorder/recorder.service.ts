@@ -1,9 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */ //
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-// because of unstable navigator work with mandatory
-
 import { Injectable } from '@angular/core';
 import { desktopCapturer } from 'electron';
 import { SettingsService } from '../../../settings/services';
@@ -12,6 +6,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 // the only working way is using any here
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare let navigator: any;
 let recordedChunks: BlobPart[] = [];
 
@@ -63,6 +58,8 @@ export class RecorderService {
     this.recordScreen = await this.getCapturerSource();
     const mics = await this.getAudioDevices();
 
+    // eslint-disable-next-line max-len
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
     this.screenStream = await navigator.mediaDevices.getUserMedia({
       video: {
         mandatory: {
