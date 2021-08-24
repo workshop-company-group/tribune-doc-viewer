@@ -16,7 +16,7 @@ const DOUBLE_CLICK_TIME = 500;
 })
 export class FileSelectDialogComponent {
 
-  @Input('open-button')
+  @Input()
   public openButtonText = '';
 
   @Output('close-click')
@@ -58,7 +58,7 @@ export class FileSelectDialogComponent {
   }
 
   public onFolderDoubleClick(folder: Folder): void {
-    if (!this.fileSelect) return;
+    if (!this.folderSelect) return;
     this.fileSelect.select(null);
     this.lastClickTime = null;
     this.fileSelect.changeDir(folder.path);

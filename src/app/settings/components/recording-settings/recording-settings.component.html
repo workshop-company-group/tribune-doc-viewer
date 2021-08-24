@@ -37,7 +37,7 @@
     *ngIf="fileSelect.selectedMountpoint">
     <app-file-select-dialog
         [folderSelect]="true"
-        [open-button]="'select' | locale | async"
+        [openButtonText]="'select' | locale | async"
         (close-click)="fileSelectDialogOpened = false"
         (open-click)="selectFolder($event)">
     </app-file-select-dialog>
