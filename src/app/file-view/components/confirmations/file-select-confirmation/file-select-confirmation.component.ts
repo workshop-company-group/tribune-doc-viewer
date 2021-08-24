@@ -5,7 +5,7 @@ import { DocumentService } from '../../../services';
 @Component({
   selector: 'app-file-select-confirmation',
   templateUrl: './file-select-confirmation.component.html',
-  styleUrls: ['./file-select-confirmation.component.scss']
+  styleUrls: ['./file-select-confirmation.component.scss'],
 })
 export class FileSelectConfirmationComponent {
 

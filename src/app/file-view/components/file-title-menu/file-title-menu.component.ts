@@ -1,16 +1,14 @@
-import { Component, } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { Document } from '../../models';
 
 import { ConfirmationService,
   DocumentService } from '../../services';
-import { FileSelectService, } from '../../../file-select/services';
+import { FileSelectService } from '../../../file-select/services';
 
 @Component({
   selector: 'app-file-title-menu',
   templateUrl: './file-title-menu.component.html',
-  styleUrls: ['./file-title-menu.component.scss']
+  styleUrls: ['./file-title-menu.component.scss'],
 })
 export class FileTitleMenuComponent {
 

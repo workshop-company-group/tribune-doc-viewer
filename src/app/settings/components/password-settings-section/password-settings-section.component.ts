@@ -1,14 +1,14 @@
-import { Component, OnDestroy, OnInit, } from '@angular/core';
-import { FormControl, FormGroup, } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
-import { Subscription, } from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { AuthService, } from '../../../password/services';
+import { AuthService } from '../../../password/services';
 
 @Component({
   selector: 'app-password-settings-section',
   templateUrl: './password-settings-section.component.html',
-  styleUrls: ['./password-settings-section.component.scss']
+  styleUrls: ['./password-settings-section.component.scss'],
 })
 export class PasswordSettingsSectionComponent implements OnDestroy, OnInit {
 

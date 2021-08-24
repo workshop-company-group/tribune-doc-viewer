@@ -1,11 +1,13 @@
-import { Component, ElementRef, Input, } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 
 import { OpenedDocument } from '../../../models';
+
+const HALF_SCREEN_WIDTH_RATIO = 0.6;
 
 @Component({
   selector: 'app-document-view',
   templateUrl: './document-view.component.html',
-  styleUrls: ['./document-view.component.scss']
+  styleUrls: ['./document-view.component.scss'],
 })
 export class DocumentViewComponent {
 
@@ -18,7 +20,7 @@ export class DocumentViewComponent {
 
   public isHalfScreen(): boolean {
     return this.el.nativeElement.offsetWidth /
-           window.innerWidth < 0.6;
+           window.innerWidth < HALF_SCREEN_WIDTH_RATIO;
   }
 
 }

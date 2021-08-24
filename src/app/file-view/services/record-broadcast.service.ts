@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { ExternalViewerService,
-         RecorderService,
-         WindowStateService, } from '../../shared/services';
+  RecorderService,
+  WindowStateService } from '../../shared/services';
 import { OpenedDocument, RecordBroadcastState } from '../models';
 import { BroadcastError } from './broadcast-error';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecordBroadcastService {
 
@@ -18,8 +18,8 @@ export class RecordBroadcastService {
   public state = new BehaviorSubject<RecordBroadcastState>(null);
 
   private docSubscription: {
-    state: Subscription | undefined,
-    page: Subscription | undefined,
+    state: Subscription | undefined;
+    page: Subscription | undefined;
   } = {
     state: undefined,
     page: undefined,
@@ -33,7 +33,7 @@ export class RecordBroadcastService {
 
   public resumeRecording(): void {
     if (!this.doc) {
-      throw new Error("Error: Failed to resume recording. Document is unavailable.");
+      throw new Error('Error: Failed to resume recording. Document is unavailable.');
     }
 
     this.recorder.continue();
@@ -41,7 +41,7 @@ export class RecordBroadcastService {
   }
 
   public async isBroadcastingAvailable(): Promise<boolean> {
-    return await this.windowStateService.isExternalConnected();
+    return this.windowStateService.isExternalConnected();
   }
 
   public isRecordingAvailable(): boolean {
@@ -50,7 +50,7 @@ export class RecordBroadcastService {
 
   public pauseRecording(): void {
     if (!this.doc) {
-      throw new Error("Error: Failed to pause recording. Document is unavailable.");
+      throw new Error('Error: Failed to pause recording. Document is unavailable.');
     }
 
     this.recorder.pause();
@@ -59,20 +59,21 @@ export class RecordBroadcastService {
 
   public async startBroadcasting(doc: OpenedDocument): Promise<void> {
     if (!(await this.isBroadcastingAvailable())) {
-      throw new BroadcastError('broadcasting is not available')
+      throw new BroadcastError('broadcasting is not available');
     }
     this.doc = doc;
     await this.windowStateService.createExternalWindow();
     this.external.setPdf(this.doc.doc.convertedPath);
-    this.docSubscription.page = this.doc.currentPage.subscribe((page) =>
+    this.docSubscription.page = this.doc.currentPage.subscribe(page =>
       this.external.setPage(page + 1));
-    this.docSubscription.state = this.doc.recordBroadcastState.subscribe(this.state);
+    this.docSubscription.state =
+      this.doc.recordBroadcastState.subscribe(this.state);
     this.doc.recordBroadcastState.next('broadcasting');
   }
 
   public async startRecording(): Promise<void> {
     if (!this.doc) {
-      throw new Error("Error: Failed to start recording. Document is unavailable.");
+      throw new Error('Error: Failed to start recording. Document is unavailable.');
     }
 
     await this.recorder.setExternalMonitor();
@@ -83,7 +84,7 @@ export class RecordBroadcastService {
 
   public stopBroadcasting(): void {
     if (!this.doc) {
-      throw new Error("Error: Failed to stop broadcasting. Document is unavailable.");
+      throw new Error('Error: Failed to stop broadcasting. Document is unavailable.');
     }
     this.windowStateService.closeExternalWindow();
 
@@ -95,9 +96,9 @@ export class RecordBroadcastService {
 
   public stopRecording(): void {
     if (!this.doc) {
-      throw new Error("Error: Failed to stop recording. Document is unavailable.");
+      throw new Error('Error: Failed to stop recording. Document is unavailable.');
     }
-    this.recorder.stop(this.doc.doc.convertedPath + '.webm');
+    this.recorder.stop(`${this.doc.doc.convertedPath}.webm`);
     this.doc.recordBroadcastState.next('broadcasting');
   }
 

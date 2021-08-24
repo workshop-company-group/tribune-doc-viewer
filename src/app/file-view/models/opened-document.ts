@@ -14,4 +14,4 @@ export interface OpenedDocument {
    * State that indicates that file is closing at the moment.
    */
   closingState: BehaviorSubject<boolean>;
-};
+}

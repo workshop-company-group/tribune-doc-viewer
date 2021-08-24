@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { PasswordRoutingModule } from './password-routing.module';
 
-import { LocaleModule, } from '../locale/locale.module';
+import { LocaleModule } from '../locale/locale.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { PasswordPageComponent } from './components';
 
 @NgModule({
   declarations: [
-    PasswordPageComponent
+    PasswordPageComponent,
   ],
   imports: [
     CommonModule,
@@ -19,6 +19,6 @@ import { PasswordPageComponent } from './components';
     PasswordRoutingModule,
     ReactiveFormsModule,
     SharedModule,
-  ]
+  ],
 })
 export class PasswordModule { }

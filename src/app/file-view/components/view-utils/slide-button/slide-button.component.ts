@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-slide-button',
   templateUrl: './slide-button.component.html',
-  styleUrls: ['./slide-button.component.scss']
+  styleUrls: ['./slide-button.component.scss'],
 })
 export class SlideButtonComponent {
 

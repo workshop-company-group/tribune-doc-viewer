@@ -1,4 +1,4 @@
-import { Component, } from '@angular/core';
+import { Component } from '@angular/core';
 
 import {
   ConfirmationService,
@@ -10,7 +10,7 @@ import { FileSelectService } from '../../../file-select/services';
 @Component({
   selector: 'app-file-view-page',
   templateUrl: './file-view-page.component.html',
-  styleUrls: ['./file-view-page.component.scss']
+  styleUrls: ['./file-view-page.component.scss'],
 })
 export class FileViewPageComponent {
 
@@ -23,19 +23,21 @@ export class FileViewPageComponent {
 
   public cancelClosing(): void {
     for (const doc of this.documentService.opened) {
-      if (doc.closingState.value === true) {
+      if (doc.closingState.value) {
         doc.closingState.next(false);
       }
     }
+    // TODO: Move to ConfirmationService method
+    // Code is duplicating
     this.confirmation.state = null;
   }
 
-  public closeDocument(): void {
+  public async closeDocument(): Promise<void> {
     if (this.confirmation.state === 'close-recording') {
       this.recordBroadcast.stopRecording();
     }
     this.recordBroadcast.stopBroadcasting();
-    this.documentService.close();
+    await this.documentService.close();
     this.confirmation.state = null;
   }
 
@@ -44,10 +46,11 @@ export class FileViewPageComponent {
     this.confirmation.state = null;
   }
 
-  public startBroadcasting(): void {
+  public startBroadcasting(): Promise<void> {
     this.confirmation.state = null;
-    this.recordBroadcast.startBroadcasting(
-      this.documentService.selected);
+    return this.recordBroadcast.startBroadcasting(
+      this.documentService.selected,
+    );
   }
 
 }

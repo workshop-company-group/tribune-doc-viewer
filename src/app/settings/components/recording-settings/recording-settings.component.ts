@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit, } from '@angular/core';
-import { FormControl, } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
-import { Subscription, } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { SettingsService } from '../../services';
 import { FileSystemService } from '../../../shared/services';

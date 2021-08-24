@@ -9,7 +9,7 @@ export class PdfDocument {
   private docProxy; // typeof docProxy === PDFDocumentProxy
 
   public orientation: PdfOrientation;
-  
+
   constructor() {}
 
   public get numPages(): number {
@@ -18,11 +18,11 @@ export class PdfDocument {
 
   // index of first page is 0
   public async getPage(index: number): Promise<PdfPage> {
-    return new PdfPage(await this.docProxy.getPage(index + 1))
+    return new PdfPage(await this.docProxy.getPage(index + 1));
   }
 
   public async init(path: string): Promise<void> {
-    this.docProxy = await pdfjs.getDocument(path).promise; 
+    this.docProxy = await pdfjs.getDocument(path).promise;
 
     // document orientation bases on first page orientation
     this.orientation = (await this.getPage(0)).orientation;

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { PdfDocument } from '../../../models';
 
@@ -7,7 +7,7 @@ import { PdfDocument } from '../../../models';
   templateUrl: './slide-thumbnail.component.html',
   styleUrls: ['./slide-thumbnail.component.scss']
 })
-export class SlideThumbnailComponent implements OnInit {
+export class SlideThumbnailComponent {
 
   @Input()
   public readonly pdf: PdfDocument;
@@ -19,8 +19,5 @@ export class SlideThumbnailComponent implements OnInit {
   public readonly selected: boolean = false;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

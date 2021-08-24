@@ -1,13 +1,13 @@
-import { Location, } from '@angular/common';
-import { Component, } from '@angular/core';
-import { FormControl, } from '@angular/forms';
+import { Location } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
-import { AuthService, PasswordStateService, } from '../../services';
+import { AuthService, PasswordStateService } from '../../services';
 
 @Component({
   selector: 'app-password-page',
   templateUrl: './password-page.component.html',
-  styleUrls: ['./password-page.component.scss']
+  styleUrls: ['./password-page.component.scss'],
 })
 export class PasswordPageComponent {
 

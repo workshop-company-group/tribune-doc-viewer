@@ -3,11 +3,11 @@ import { ipcRenderer } from 'electron';
 import { ElectronService } from '../../../core/services';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ExternalViewerService {
   constructor(
-    private readonly electron: ElectronService
+    private readonly electron: ElectronService,
   ) {}
 
   public setPdf(path: string): void {

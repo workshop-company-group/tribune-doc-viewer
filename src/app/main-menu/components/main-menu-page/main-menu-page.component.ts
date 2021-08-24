@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { DocumentService, } from '../../../file-view/services';
-import { LicenseService, } from '../../../license/services';
-import { AuthService, PasswordStateService, } from '../../../password/services';
-import { UpdateService, } from '../../../update/services/update.service';
+import { DocumentService } from '../../../file-view/services';
+import { LicenseService } from '../../../license/services';
+import { AuthService, PasswordStateService } from '../../../password/services';
+import { UpdateService } from '../../../update/services/update.service';
 
 @Component({
   selector: 'app-main-menu-page',
   templateUrl: './main-menu-page.component.html',
-  styleUrls: ['./main-menu-page.component.scss']
+  styleUrls: ['./main-menu-page.component.scss'],
 })
-export class MainMenuPageComponent implements OnInit {
+export class MainMenuPageComponent {
 
   constructor(
     public readonly auth: AuthService,
@@ -22,29 +22,27 @@ export class MainMenuPageComponent implements OnInit {
     public readonly updateService: UpdateService,
   ) { }
 
-  public ngOnInit(): void {}
-
-  public openFileView(): void {
-    this.router.navigate(['/file-view']);
+  public async openFileView(): Promise<void> {
+    await this.router.navigate(['/file-view']);
   }
 
-  public openSettings(): void {
+  public openSettings(): Promise<void> {
     this.passwordState.pageState = 'settings';
-    this.continueWithPassword();
+    return this.continueWithPassword();
   }
 
-  public quitApplication(): void {
+  public quitApplication(): Promise<void> {
     this.passwordState.pageState = 'quit';
-    this.continueWithPassword();
+    return this.continueWithPassword();
   }
 
-  private continueWithPassword(): void {
+  private async continueWithPassword(): Promise<void> {
     if (this.auth.hasPassword()) {
-      this.router.navigate(['/password']);
+      await this.router.navigate(['/password']);
       return;
     }
 
-    this.passwordState.continueWithPassword();
+    return this.passwordState.continueWithPassword();
   }
 
 }

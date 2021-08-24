@@ -1,9 +1,9 @@
-import { Component, forwardRef, Input, OnDestroy, OnInit, } from '@angular/core';
+import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormControl,
-  NG_VALUE_ACCESSOR, } from '@angular/forms';
+  NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { Subscription, } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-license-key-input',
@@ -14,7 +14,7 @@ import { filter, map, tap } from 'rxjs/operators';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => LicenseKeyInputComponent),
       multi: true,
-    }
+    },
   ],
 })
 export class LicenseKeyInputComponent
@@ -22,9 +22,13 @@ implements ControlValueAccessor, OnDestroy, OnInit {
 
   public readonly inputControl = new FormControl('');
 
-  private changeHandler: Function = () => {};
+  private changeHandler: Function = () => {
+    // empty
+  };
 
-  private touchedHandler: Function = () => {};
+  private touchedHandler: Function = () => {
+    // empty
+  };
 
   private readonly subscriptions: Subscription[] = [];
 
@@ -32,7 +36,7 @@ implements ControlValueAccessor, OnDestroy, OnInit {
 
   public ngOnDestroy(): void {
     this.subscriptions.forEach(
-      subscription => subscription.unsubscribe()
+      subscription => subscription.unsubscribe(),
     );
     this.subscriptions.length = 0;
   }
