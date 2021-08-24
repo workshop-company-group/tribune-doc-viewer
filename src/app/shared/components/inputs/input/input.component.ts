@@ -28,11 +28,11 @@ export class InputComponent implements ControlValueAccessor {
       this.inputControl.enable();
   }
 
-  public changeHandler: Function = () => {
+  public changeHandler: (obj: string) => void = () => {
     // empty
   };
 
-  public touchedHandler: Function = () => {
+  public touchedHandler: (obj: string) => void = () => {
     // empty
   };
 
@@ -42,11 +42,11 @@ export class InputComponent implements ControlValueAccessor {
     this.inputControl.setValue(obj, { emitEvent: false });
   }
 
-  public registerOnChange(fn: Function): void {
+  public registerOnChange(fn: (obj: string) => void): void {
     this.changeHandler = fn;
   }
 
-  public registerOnTouched(fn: Function): void {
+  public registerOnTouched(fn: () => void): void {
     this.touchedHandler = fn;
   }
 

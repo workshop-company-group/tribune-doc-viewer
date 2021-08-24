@@ -31,13 +31,9 @@ export class SelectComponent implements ControlValueAccessor {
 
   public opened = false;
 
-  public changeHandler: (obj: string) => {
-    // empty
-  };
+  public changeHandler: (obj: string) => void;
 
-  public touchedHandler: () => {
-    // empty
-  };
+  public touchedHandler: () => void;
 
   @HostBinding()
   public disabled = false;
@@ -77,15 +73,11 @@ export class SelectComponent implements ControlValueAccessor {
     this.value = obj;
   }
 
-  public registerOnChange(fn: (obj: string) => {
-    // empty
-  }): void {
+  public registerOnChange(fn: (obj: string) => void): void {
     this.changeHandler = fn;
   }
 
-  public registerOnTouched(fn: () => {
-    // empty
-  }): void {
+  public registerOnTouched(fn: () => void): void {
     this.touchedHandler = fn;
   }
 

@@ -17,13 +17,9 @@ export class ToggleComponent implements ControlValueAccessor {
 
   public value: boolean;
 
-  public changeHandler: (obj: boolean) => {
-    // empty
-  };
+  public changeHandler: (obj: boolean) => void;
 
-  public touchedHandler: () => {
-    // empty
-  };
+  public touchedHandler: () => void;
 
   constructor() { }
 
@@ -37,15 +33,11 @@ export class ToggleComponent implements ControlValueAccessor {
     this.value = obj;
   }
 
-  public registerOnChange(fn: (obj: boolean) => {
-    //empty
-  }): void {
+  public registerOnChange(fn: (obj: boolean) => void): void {
     this.changeHandler = fn;
   }
 
-  public registerOnTouched(fn: () => {
-    // empty
-  }): void {
+  public registerOnTouched(fn: () => void): void {
     this.touchedHandler = fn;
   }
 
