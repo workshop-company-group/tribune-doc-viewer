@@ -11,12 +11,12 @@ import { routeAnimations } from '../../animations/route-animations';
   selector: 'app-settings-page',
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.scss'],
-  animations: [ routeAnimations, ],
+  animations: [ routeAnimations ],
 })
 export class SettingsPageComponent implements OnInit, OnDestroy {
 
-  public readonly routeSubject =
-    new BehaviorSubject<SettingsRoute>('general');
+  public readonly routeSubject = new
+  BehaviorSubject<SettingsRoute>('general');
 
   private readonly subscriptions: Subscription[] = [];
 
@@ -27,7 +27,8 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.subscriptions.push(
       this.routeSubject.subscribe(route =>
-        this.router.navigateByUrl(`/settings/${route}`))
+        void this.router.navigateByUrl(`/settings/${route}`),
+      ),
     );
   }
 
@@ -36,9 +37,10 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
   }
 
   public prepareRoute(outlet: RouterOutlet): string {
-    return outlet
-      && outlet.activatedRouteData
-      && outlet.activatedRouteData.animationState;
+    if (!outlet.activatedRouteData.animationState) {
+      throw new Error('Error: Animation state is not defined');
+    }
+    return outlet.activatedRouteData.animationState as string;
   }
 
 }

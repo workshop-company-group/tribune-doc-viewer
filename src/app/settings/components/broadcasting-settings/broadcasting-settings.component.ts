@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { interval, Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged, switchMap, tap, map } from 'rxjs/operators';
+import { distinctUntilChanged, switchMap, map } from 'rxjs/operators';
 
 import { SettingsService } from '../../services';
 
@@ -15,8 +15,8 @@ const DISPLAY_RELOAD_PERIOD = 2000;
 })
 export class BroadcastingSettingsComponent implements OnDestroy, OnInit {
 
-  public readonly deviceControl =
-    new FormControl(this.settings.screenConnection);
+  public readonly deviceControl = new
+  FormControl(this.settings.screenConnection);
 
   public readonly devicesSubject = new Subject<string[]>();
 
@@ -32,8 +32,9 @@ export class BroadcastingSettingsComponent implements OnDestroy, OnInit {
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.deviceControl.valueChanges.subscribe(device =>
-        this.settings.screenConnection = device),
+      this.deviceControl.valueChanges.subscribe((device: string) => {
+        this.settings.screenConnection = device;
+      }),
       interval(DISPLAY_RELOAD_PERIOD).pipe(
         switchMap(() => this.settings.getAvailableDisplays()),
         map(displays => displays.map(display => display.connection)),

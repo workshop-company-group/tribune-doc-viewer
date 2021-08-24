@@ -15,7 +15,7 @@ const initialRouteStyles = query(':enter, :leave', [
     position: 'absolute',
     top: 0,
     left: 0,
-  })
+  }),
 ]);
 
 const moveLeftAnimation: AnimationMetadata[] = [

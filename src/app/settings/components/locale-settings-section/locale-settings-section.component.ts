@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { AppConfig } from '../../../../environments/environment';
-import { Locale } from '../../../locale/models';
 import Languages from '../../../../assets/languages.json';
 
 import { Subscription } from 'rxjs';
@@ -19,11 +18,12 @@ import { SettingsService } from '../../services';
 export class LocaleSettingsSectionComponent implements OnInit, OnDestroy {
 
   public readonly localeControl = new FormControl(
-    Languages[this.settings.locale]
+    Languages[this.settings.locale],
   );
 
-  public readonly languages =
-    AppConfig.supportedLangs.map(lang => Languages[lang]);
+  public readonly languages = AppConfig.supportedLangs.map(
+    lang => Languages[lang] as string,
+  );
 
   private readonly subscriptions: Subscription[] = [];
 
@@ -35,8 +35,7 @@ export class LocaleSettingsSectionComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.localeControl.valueChanges.pipe(
         map(language =>
-          Object.keys(Languages)
-          .find(lang => Languages[lang] === language)),
+          Object.keys(Languages).find(lang => Languages[lang] === language)),
       ).subscribe(locale => {
         if (!locale) {
           throw new Error('Error: Failed to set language. Unknown language.');
