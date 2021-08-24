@@ -91,7 +91,7 @@ export class FileSystemService {
         try {
           resultObject.files.push(this.getFileInfo(elementPath));
         } catch (error) {
-          // empty
+          // symlinks skipping
         }
       }
     });
