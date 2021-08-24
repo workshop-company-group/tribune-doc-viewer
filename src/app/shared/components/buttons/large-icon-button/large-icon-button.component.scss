@@ -1,16 +1,16 @@
 button {
+  display: flex;
   width: 210px;
   height: 110px;
 
-  display: flex;
   align-items: center;
   justify-content: center;
 
   background: var(--accent-blue-vertical-gradient);
-  box-shadow: var(--base-shadow);
-  transition: var(--base-transition);
-
   border-radius: 10px;
+  box-shadow: var(--base-shadow);
+
+  transition: var(--base-transition);
 
   img {
     width: 40px;

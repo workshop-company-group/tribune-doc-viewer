@@ -9,8 +9,8 @@
     overflow-y: scroll;
 
     .thumbnail {
-      margin: 15px 0;
       width: 155px;
+      margin: 15px 0;
     }
   }
 
@@ -21,15 +21,15 @@
     overflow-x: scroll;
 
     .thumbnail {
-      margin: 0 15px;
       height: 155px;
+      margin: 0 15px;
     }
 
     &.wrap {
       height: 100%;
 
-      justify-content: center;
       flex-wrap: wrap;
+      justify-content: center;
 
       overflow-x: auto;
       overflow-y: scroll;

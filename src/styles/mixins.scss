@@ -1,42 +1,42 @@
 %primary-font {
-  font-family: Proxima Nova, sans-serif;
+  font-family: 'Proxima Nova', sans-serif;
 }
 
 %secondary-font {
-  font-family: PT Sans, sans-serif;
+  font-family: 'PT Sans', sans-serif;
 }
 
 %primary-bold-font {
   @extend %primary-font;
-  font-weight: bold;
   font-size: 36px;
+  font-weight: bold;
   line-height: 40px;
 }
 
 %primary-regular-font {
   @extend %primary-font;
-  font-weight: normal;
   font-size: 30px;
+  font-weight: normal;
   line-height: 32px;
 }
 
 %primary-light-font {
   @extend %primary-font;
-  font-weight: normal;
   font-size: 24px;
+  font-weight: normal;
   line-height: 26px;
 }
 
 %secondary-bold-font {
   @extend %secondary-font;
-  font-weight: bold;
   font-size: 25px;
+  font-weight: bold;
   line-height: 34px;
 }
 
 %secondary-regular-font {
   @extend %secondary-font;
-  font-weight: normal;
   font-size: 14px;
+  font-weight: normal;
   line-height: 19px;
 }

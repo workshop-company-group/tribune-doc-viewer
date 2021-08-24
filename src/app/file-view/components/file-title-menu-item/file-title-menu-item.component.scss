@@ -4,9 +4,11 @@
   0% {
     opacity: 0;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
@@ -14,59 +16,54 @@
 
 .item-container {
   position: relative;
-  height: 100%;
-  padding-left: 30px;
 
   display: flex;
+  overflow: hidden;
+  height: 100%;
+
   flex-direction: row;
   align-items: center;
 
-  color: var(--base-black-color);
+  padding-left: 30px;
+
   background: var(--faint-light-grey-vertical-gradient);
+
+  color: var(--base-black-color);
 
   transition: var(--base-transition);
 
-  overflow: hidden;
-
-  &.selected {
-    color: var(--base-white-color);
-
-    .selected-background {
-      transform: none;
-    }
-
-    .close-button {
-      --icon-button-active-background: var(--base-white-color);
-    }
-  }
-
   .selected-background {
     position: absolute;
-    left: 0;
-    top: 0;
     z-index: 1;
+    top: 0;
+    left: 0;
+
     width: 100%;
     height: 100%;
 
     background: var(--accent-blue-vertical-gradient);
+
     transform: translateY(100%);
     transition: var(--base-transition);
   }
 
   .title {
-    width: 100%;
+    @extend %primary-regular-font;
+
     z-index: 2;
 
-    @extend %primary-regular-font;
+    width: 100%;
   }
 
   .broadcast-icon {
-    height: 20px;
     z-index: 2;
+
+    height: 20px;
 
     padding-left: 20px;
 
     opacity: 0;
+
     transition: var(--base-transition);
 
     &.visible {
@@ -75,8 +72,9 @@
   }
 
   .record-icon {
-    height: 20px;
     z-index: 2;
+
+    height: 20px;
 
     padding-left: 20px;
 
@@ -88,9 +86,22 @@
   }
 
   .close-button {
-    z-index: 2;
     --icon-button-icon-width: 20px;
 
+    z-index: 2;
+
     margin: 0 15px;
+  }
+
+  &.selected {
+    color: var(--base-white-color);
+
+    .selected-background {
+      transform: none;
+    }
+
+    .close-button {
+      --icon-button-active-background: var(--base-white-color);
+    }
   }
 }
