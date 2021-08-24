@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+import { ElectronService } from './core/services';
+
 import { routeAnimations } from './animations';
 
 @Component({
@@ -12,6 +14,7 @@ import { routeAnimations } from './animations';
 export class AppComponent {
 
   constructor(
+    private readonly electron: ElectronService,
   ) { }
 
   public prepareRoute(outlet: RouterOutlet): string {
