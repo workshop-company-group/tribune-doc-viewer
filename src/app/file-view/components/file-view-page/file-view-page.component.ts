@@ -27,15 +27,17 @@ export class FileViewPageComponent {
         doc.closingState.next(false);
       }
     }
+    // TODO: Move to ConfirmationService method
+    // Code is duplicating
     this.confirmation.state = null;
   }
 
-  public closeDocument(): void {
+  public async closeDocument(): Promise<void> {
     if (this.confirmation.state === 'close-recording') {
       this.recordBroadcast.stopRecording();
     }
     this.recordBroadcast.stopBroadcasting();
-    void this.documentService.close();
+    await this.documentService.close();
     this.confirmation.state = null;
   }
 
@@ -44,10 +46,11 @@ export class FileViewPageComponent {
     this.confirmation.state = null;
   }
 
-  public startBroadcasting(): void {
+  public startBroadcasting(): Promise<void> {
     this.confirmation.state = null;
-    void this.recordBroadcast.startBroadcasting(
-      this.documentService.selected);
+    return this.recordBroadcast.startBroadcasting(
+      this.documentService.selected,
+    );
   }
 
 }
