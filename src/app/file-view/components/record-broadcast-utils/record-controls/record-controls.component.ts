@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-record-controls',
   templateUrl: './record-controls.component.html',
-  styleUrls: ['./record-controls.component.scss']
+  styleUrls: ['./record-controls.component.scss'],
 })
 export class RecordControlsComponent {
 

@@ -1,4 +1,4 @@
-import { Component, } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { BehaviorSubject, interval } from 'rxjs';
 
@@ -11,11 +11,11 @@ import {
 @Component({
   selector: 'app-record-broadcast-control',
   templateUrl: './record-broadcast-control.component.html',
-  styleUrls: ['./record-broadcast-control.component.scss']
+  styleUrls: ['./record-broadcast-control.component.scss'],
 })
 export class RecordBroadcastControlComponent {
 
-  public wrapped: boolean = true;
+  public wrapped = true;
 
   public readonly broadcastAvailability = new BehaviorSubject<boolean>(false);
 
@@ -25,7 +25,7 @@ export class RecordBroadcastControlComponent {
     public readonly recordBroadcastService: RecordBroadcastService,
   ) {
     interval(500).subscribe(() =>
-      this.recordBroadcastService.isBroadcastingAvailable().then((value) =>
+      this.recordBroadcastService.isBroadcastingAvailable().then(value =>
         this.broadcastAvailability.next(value)));
   }
 
@@ -52,7 +52,9 @@ export class RecordBroadcastControlComponent {
     }
 
     if (this.documentService.count === 1) {
-      await this.recordBroadcastService.startBroadcasting(this.documentService.opened[0]);
+      await this.recordBroadcastService.startBroadcasting(
+        this.documentService.opened[0],
+      );
     } else {
       this.confirmation.state = 'select-broadcasting';
     }

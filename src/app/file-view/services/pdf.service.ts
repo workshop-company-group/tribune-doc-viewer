@@ -4,11 +4,11 @@ import { PdfDocument } from '../models';
 
 import * as pdfjs from 'pdfjs-dist';
 
-pdfjs.GlobalWorkerOptions.workerSrc = 
+pdfjs.GlobalWorkerOptions.workerSrc =
   require('!!file-loader!pdfjs-dist/build/pdf.worker.min.js').default;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PdfService {
 

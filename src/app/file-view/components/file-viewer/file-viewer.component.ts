@@ -1,14 +1,14 @@
-import { Component, } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ConfirmationService,
   DocumentService } from '../../services';
 
-import { FileSelectService, } from '../../../file-select/services';
+import { FileSelectService } from '../../../file-select/services';
 
 @Component({
   selector: 'app-file-viewer',
   templateUrl: './file-viewer.component.html',
-  styleUrls: ['./file-viewer.component.scss']
+  styleUrls: ['./file-viewer.component.scss'],
 })
 export class FileViewerComponent {
 

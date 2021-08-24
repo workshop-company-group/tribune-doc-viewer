@@ -1,9 +1,12 @@
+/* eslint-disable camelcase */
+// because api case is set by golang api
+
 import { Injectable } from '@angular/core';
-import { HttpClient, } from '@angular/common/http';
-import { LicenseApiResponse } from '../models'
+import { HttpClient } from '@angular/common/http';
+import { LicenseApiResponse } from '../models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LicenseApiService {
 
@@ -17,14 +20,14 @@ export class LicenseApiService {
         params: {
           is_provided: 'true',
           is_activated: 'true',
-        }
-      }
+        },
+      },
     ).toPromise();
   }
 
   public validate(key: string): Promise<LicenseApiResponse> {
     return this.http.get<LicenseApiResponse>(
-      `/api/licenses/${key}/validate`
+      `/api/licenses/${key}/validate`,
     ).toPromise();
   }
 

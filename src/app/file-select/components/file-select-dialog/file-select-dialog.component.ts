@@ -1,17 +1,18 @@
 import { Component, EventEmitter, Input,
-  Output, } from '@angular/core';
+  Output } from '@angular/core';
 
-import { FileSystemService, } from '../../../shared/services';
-import { DocumentService, } from '../../../file-view/services';
-import { FileSelectService, } from '../../services';
+import { FileSystemService } from '../../../shared/services';
+import { DocumentService } from '../../../file-view/services';
+import { FileSelectService } from '../../services';
 
-import { Drive, Mountpoint,
-  FileInfo, Folder, } from '../../../shared/models';
+import { Mountpoint, FileInfo, Folder } from '../../../shared/models';
+
+const DOUBLE_CLICK_TIME = 500;
 
 @Component({
   selector: 'app-file-select-dialog',
   templateUrl: './file-select-dialog.component.html',
-  styleUrls: ['./file-select-dialog.component.scss']
+  styleUrls: ['./file-select-dialog.component.scss'],
 })
 export class FileSelectDialogComponent {
 
@@ -25,13 +26,13 @@ export class FileSelectDialogComponent {
   public readonly openEmitter = new EventEmitter<string>();
 
   @Input()
-  public folderSelect: boolean = false;
+  public folderSelect = false;
 
   public mountpoints: Mountpoint[];
+
   public currentMountpoint: Mountpoint;
 
   private lastClickTime: number | null = null;
-  private readonly doubleClickTime = 500;
 
   constructor(
     public readonly documentService: DocumentService,
@@ -42,12 +43,12 @@ export class FileSelectDialogComponent {
   public onFolderClick(folder: Folder): void {
     if (!this.folderSelect) {
       this.fileSelect.changeDir(folder.path);
-      return
+      return;
     }
 
     // folder was selected and clicked again not later than doubleClickTime
     if (this.lastClickTime
-      && Date.now() - this.lastClickTime <= this.doubleClickTime
+      && Date.now() - this.lastClickTime <= DOUBLE_CLICK_TIME
       && this.fileSelect.selectedPath === folder.path) {
       this.onFolderDoubleClick(folder);
     } else {
@@ -60,7 +61,7 @@ export class FileSelectDialogComponent {
     if (!this.fileSelect) return;
     this.fileSelect.select(null);
     this.lastClickTime = null;
-    this.fileSelect.changeDir(folder.path)
+    this.fileSelect.changeDir(folder.path);
   }
 
   public get currentDirFiles(): FileInfo[] {

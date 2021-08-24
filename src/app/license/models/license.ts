@@ -3,8 +3,8 @@ export interface LicenseApiResponse {
 }
 
 export enum LicenseApiResponseStatus {
-  OK = "OK",
-  Activated = "ACTIVATED",
-  Expires = "EXPIRED",
-  Failed = "FAILED"
+  OK = 'OK',
+  Activated = 'ACTIVATED',
+  Expires = 'EXPIRED',
+  Failed = 'FAILED',
 }

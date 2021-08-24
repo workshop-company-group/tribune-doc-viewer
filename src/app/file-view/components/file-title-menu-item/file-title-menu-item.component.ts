@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { OpenedDocument } from '../../models';
 import { ConfirmationService } from '../../services';
@@ -6,7 +6,7 @@ import { ConfirmationService } from '../../services';
 @Component({
   selector: 'app-file-title-menu-item',
   templateUrl: './file-title-menu-item.component.html',
-  styleUrls: ['./file-title-menu-item.component.scss']
+  styleUrls: ['./file-title-menu-item.component.scss'],
 })
 export class FileTitleMenuItemComponent {
 

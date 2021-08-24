@@ -10,12 +10,14 @@ import { remote } from 'electron';
 const { app } = remote;
 
 if (AppConfig.production) {
-  try { fs.mkdirSync(app.getPath('userData')); } catch (error) {}
+  try { fs.mkdirSync(app.getPath('userData')); } catch (error) {
+    // empty
+  }
   enableProdMode();
 }
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule, {
-    preserveWhitespaces: false
+    preserveWhitespaces: false,
   })
   .catch(err => console.error(err));

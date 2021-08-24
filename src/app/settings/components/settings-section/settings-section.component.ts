@@ -1,9 +1,9 @@
-import { Component, Input, } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-settings-section',
   templateUrl: './settings-section.component.html',
-  styleUrls: ['./settings-section.component.scss']
+  styleUrls: ['./settings-section.component.scss'],
 })
 export class SettingsSectionComponent {
 

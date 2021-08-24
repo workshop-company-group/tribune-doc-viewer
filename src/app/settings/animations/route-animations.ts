@@ -1,7 +1,6 @@
 import {
   animate,
   AnimationMetadata,
-  AnimationQueryMetadata,
   group,
   style,
   transition,

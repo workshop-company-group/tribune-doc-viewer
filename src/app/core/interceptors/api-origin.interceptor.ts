@@ -1,5 +1,5 @@
 import { HttpEvent, HttpHandler,
-  HttpInterceptor, HttpRequest, } from '@angular/common/http';
+  HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { AppConfig } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiOriginInterceptor implements HttpInterceptor {
 
