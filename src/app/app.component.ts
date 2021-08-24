@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { ElectronService } from './core/services';
-
 import { routeAnimations } from './animations';
 
 @Component({
@@ -13,18 +11,8 @@ import { routeAnimations } from './animations';
 })
 export class AppComponent {
 
-  constructor(private readonly electronService: ElectronService) {
-    // console.log('AppConfig', AppConfig);
-
-    if (electronService.isElectron) {
-      // console.log(process.env);
-      // console.log('Run in electron');
-      // console.log('Electron ipcRenderer', this.electronService.ipcRenderer);
-      // console.log('NodeJS childProcess', this.electronService.childProcess);
-    } else {
-      // console.log('Run in browser');
-    }
-  }
+  constructor(
+  ) { }
 
   public prepareRoute(outlet: RouterOutlet): string {
     return outlet
