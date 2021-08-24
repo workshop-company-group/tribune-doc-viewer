@@ -22,27 +22,27 @@ export class MainMenuPageComponent {
     public readonly updateService: UpdateService,
   ) { }
 
-  public openFileView(): void {
-    void this.router.navigate(['/file-view']);
+  public async openFileView(): Promise<void> {
+    await this.router.navigate(['/file-view']);
   }
 
-  public openSettings(): void {
+  public openSettings(): Promise<void> {
     this.passwordState.pageState = 'settings';
-    this.continueWithPassword();
+    return this.continueWithPassword();
   }
 
-  public quitApplication(): void {
+  public quitApplication(): Promise<void> {
     this.passwordState.pageState = 'quit';
-    this.continueWithPassword();
+    return this.continueWithPassword();
   }
 
-  private continueWithPassword(): void {
+  private async continueWithPassword(): Promise<void> {
     if (this.auth.hasPassword()) {
-      void this.router.navigate(['/password']);
+      await this.router.navigate(['/password']);
       return;
     }
 
-    this.passwordState.continueWithPassword();
+    return this.passwordState.continueWithPassword();
   }
 
 }
