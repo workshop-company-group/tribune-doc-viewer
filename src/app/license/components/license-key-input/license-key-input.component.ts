@@ -5,6 +5,8 @@ import { ControlValueAccessor, FormControl,
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
+import { KEY_LENGTH } from '../../services';
+
 @Component({
   selector: 'app-license-key-input',
   templateUrl: './license-key-input.component.html',
@@ -22,11 +24,11 @@ implements ControlValueAccessor, OnDestroy, OnInit {
 
   public readonly inputControl = new FormControl('');
 
-  private changeHandler: Function = () => {
+  private changeHandler: (obj: string) => void = () => {
     // empty
   };
 
-  private touchedHandler: Function = () => {
+  private touchedHandler: () => void = () => {
     // empty
   };
 
@@ -44,7 +46,7 @@ implements ControlValueAccessor, OnDestroy, OnInit {
   public ngOnInit(): void {
     this.subscriptions.push(
       this.inputControl.valueChanges.pipe(
-        filter(value => !!value.length),
+        filter((value: string) => !!value.length),
         map(value => this.formatInput(value)),
       ).subscribe(value => {
         this.inputControl.setValue(value, { emitEvent: false });
@@ -58,18 +60,18 @@ implements ControlValueAccessor, OnDestroy, OnInit {
     this.inputControl.setValue(this.formatInput(obj));
   }
 
-  public registerOnChange(fn: Function): void {
+  public registerOnChange(fn: (obj: string) => void): void {
     this.changeHandler = fn;
   }
 
-  public registerOnTouched(fn: Function): void {
+  public registerOnTouched(fn: () => void): void {
     this.touchedHandler = fn;
   }
 
   private formatInput(value: string): string {
     const uppercasedNonsplited = value
       .split('-').join('')
-      .slice(0, 25)
+      .slice(0, KEY_LENGTH)
       .replace(/[^0-9a-z]/gi, '')
       .toUpperCase();
 

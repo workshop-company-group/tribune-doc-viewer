@@ -7,7 +7,7 @@ import { ActivatedRouteSnapshot,
 import { LicenseService } from '../services/license.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LicenseResolver implements Resolve<void> {
 
@@ -16,8 +16,12 @@ export class LicenseResolver implements Resolve<void> {
   ) { }
 
   public async resolve(
+    // Angular interface Resolve syntax
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    // Angular interface Resolve syntax
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    state: RouterStateSnapshot,
   ): Promise<void> {
     if (!await this.license.isLicenseKeySaved()) return;
 
