@@ -21,9 +21,7 @@ export class MainMenuPageComponent {
     public readonly passwordState: PasswordStateService,
     public readonly router: Router,
     public readonly updateService: UpdateService,
-  ) {
-    this.license.keySubject.subscribe(console.log);
-  }
+  ) { }
 
   public async openFileView(): Promise<void> {
     await this.router.navigate(['/file-view']);
