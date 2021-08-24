@@ -13,7 +13,7 @@ export class SlideButtonComponent {
   @Input()
   public readonly disabled: boolean = false;
 
-  @Input('icon')
+  @Input()
   public readonly iconSrc: string;
 
   constructor() { }

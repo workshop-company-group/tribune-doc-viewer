@@ -3,14 +3,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-record-broadcast-button',
   templateUrl: './record-broadcast-button.component.html',
-  styleUrls: ['./record-broadcast-button.component.scss']
+  styleUrls: ['./record-broadcast-button.component.scss'],
 })
 export class RecordBroadcastButtonComponent {
 
   @Input()
   public readonly disabled: boolean = false;
 
-  @Input('icon')
+  @Input()
   public readonly iconSrc: string;
 
   @Output('button-click')

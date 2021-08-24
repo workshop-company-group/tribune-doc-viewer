@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Document,
   OpenedDocument,
   PdfDocument,
-  RecordBroadcastState } from '../models'
+  RecordBroadcastState } from '../models';
 
 import { ConversionService } from './conversion.service';
 import { PdfService } from './pdf.service';
@@ -65,15 +65,12 @@ export class DocumentService {
   }
 
   public async close(index?: number): Promise<void> {
-    if (index === undefined) {
-      index = this.findClosingIndex();
-    }
-    if (index === undefined) {
-      return;
-    }
+    const closingIndex = index ?? this.findClosingIndex();
 
-    await this.fileSystem.removeFile(this.opened[index].doc.convertedPath);
-    this.opened.splice(index, 1);
+    await this.fileSystem.removeFile(
+      this.opened[closingIndex].doc.convertedPath,
+    );
+    this.opened.splice(closingIndex, 1);
 
     if (this.opened.length > 0) {
       this.select(0);

@@ -24,6 +24,8 @@ export class PdfViewComponent implements AfterViewInit {
   // page width / page height
   private sideRatio: number;
 
+  private resizeSensor: ResizeSensor;
+
   @Input()
   private set page(value: number) {
     void this.pdf.getPage(value).then(page => {
@@ -38,12 +40,13 @@ export class PdfViewComponent implements AfterViewInit {
   }
 
   constructor(
-    private readonly el: ElementRef,
+    private readonly el: ElementRef<HTMLElement>,
   ) { }
 
-  ngAfterViewInit(): void {
-    const sensor = new ResizeSensor(this.el.nativeElement,
-      () => this.calculateOrientation());
+  public ngAfterViewInit(): void {
+    this.resizeSensor = new ResizeSensor(
+      this.el.nativeElement, () => this.calculateOrientation(),
+    );
   }
 
   private calculateOrientation(): void {

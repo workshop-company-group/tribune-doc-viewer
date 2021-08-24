@@ -5,7 +5,7 @@ import { PdfDocument } from '../../../models';
 @Component({
   selector: 'app-slide-thumbnail',
   templateUrl: './slide-thumbnail.component.html',
-  styleUrls: ['./slide-thumbnail.component.scss']
+  styleUrls: ['./slide-thumbnail.component.scss'],
 })
 export class SlideThumbnailComponent {
 

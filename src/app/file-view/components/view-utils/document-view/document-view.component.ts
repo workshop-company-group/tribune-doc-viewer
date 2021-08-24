@@ -15,7 +15,7 @@ export class DocumentViewComponent {
   public readonly doc: OpenedDocument;
 
   constructor(
-    private readonly el: ElementRef,
+    private readonly el: ElementRef<HTMLElement>,
   ) { }
 
   public isHalfScreen(): boolean {

@@ -27,9 +27,7 @@ export class FileViewPageComponent {
         doc.closingState.next(false);
       }
     }
-    // TODO: Move to ConfirmationService method
-    // Code is duplicating
-    this.confirmation.state = null;
+    this.confirmation.clearConfirmation();
   }
 
   public async closeDocument(): Promise<void> {
@@ -38,16 +36,16 @@ export class FileViewPageComponent {
     }
     this.recordBroadcast.stopBroadcasting();
     await this.documentService.close();
-    this.confirmation.state = null;
+    this.confirmation.clearConfirmation();
   }
 
   public async fileSelectedHandler(path: string): Promise<void> {
     await this.documentService.open(path);
-    this.confirmation.state = null;
+    this.confirmation.clearConfirmation();
   }
 
   public startBroadcasting(): Promise<void> {
-    this.confirmation.state = null;
+    this.confirmation.clearConfirmation();
     return this.recordBroadcast.startBroadcasting(
       this.documentService.selected,
     );

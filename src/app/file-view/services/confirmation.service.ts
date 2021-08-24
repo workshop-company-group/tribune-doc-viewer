@@ -9,7 +9,7 @@ type ConfirmationState = null | 'stop-recording'
 | 'select-broadcasting';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConfirmationService {
 
@@ -18,12 +18,16 @@ export class ConfirmationService {
 
   constructor() { }
 
-  get state(): ConfirmationState {
+  public get state(): ConfirmationState {
     return this.stateObservable.value;
   }
 
-  set state(value: ConfirmationState) {
+  public set state(value: ConfirmationState) {
     this.stateObservable.next(value);
+  }
+
+  public clearConfirmation(): void {
+    this.state = null;
   }
 
 }

@@ -10,11 +10,11 @@ import { ConfirmationService } from '../../services';
 })
 export class FileTitleMenuItemComponent {
 
-  @Input('document')
+  @Input()
   public doc: OpenedDocument;
 
-  @Output('close')
-  public closeEvent = new EventEmitter<void>();
+  @Output('close-click')
+  public readonly closeEvent = new EventEmitter<void>();
 
   constructor(
     private readonly confirmation: ConfirmationService,

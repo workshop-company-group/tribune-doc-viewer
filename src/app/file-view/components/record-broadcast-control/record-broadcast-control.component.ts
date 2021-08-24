@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
-import { BehaviorSubject, interval } from 'rxjs';
+import { BehaviorSubject, interval, Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import {
   ConfirmationService,
@@ -8,25 +9,35 @@ import {
   RecordBroadcastService,
 } from '../../services';
 
+const BROADCASTING_AVAILABILITY_CHECK_INTERVAL = 500;
+
 @Component({
   selector: 'app-record-broadcast-control',
   templateUrl: './record-broadcast-control.component.html',
   styleUrls: ['./record-broadcast-control.component.scss'],
 })
-export class RecordBroadcastControlComponent {
+export class RecordBroadcastControlComponent implements OnDestroy {
 
   public wrapped = true;
 
   public readonly broadcastAvailability = new BehaviorSubject<boolean>(false);
+
+  private readonly subscriptions: Subscription[] = [];
 
   constructor(
     private readonly confirmation: ConfirmationService,
     private readonly documentService: DocumentService,
     public readonly recordBroadcastService: RecordBroadcastService,
   ) {
-    interval(500).subscribe(() =>
-      this.recordBroadcastService.isBroadcastingAvailable().then(value =>
-        this.broadcastAvailability.next(value)));
+    this.subscriptions.push(
+      interval(BROADCASTING_AVAILABILITY_CHECK_INTERVAL).pipe(
+        switchMap(() => this.recordBroadcastService.isBroadcastingAvailable()),
+      ).subscribe(value => this.broadcastAvailability.next(value)),
+    );
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   public pauseClickHandler(): void {

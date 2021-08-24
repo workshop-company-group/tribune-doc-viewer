@@ -32,7 +32,7 @@ export class InputComponent implements ControlValueAccessor {
     // empty
   };
 
-  public touchedHandler: (obj: string) => void = () => {
+  public touchedHandler: () => void = () => {
     // empty
   };
 
