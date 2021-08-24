@@ -2,7 +2,7 @@ import { Component, ElementRef, Input } from '@angular/core';
 
 import { OpenedDocument } from '../../../models';
 
-const MAX_INNER_WIDTH = 0.6;
+const HALF_SCREEN_WIDTH_RATIO = 0.6;
 
 @Component({
   selector: 'app-document-view',
@@ -20,7 +20,7 @@ export class DocumentViewComponent {
 
   public isHalfScreen(): boolean {
     return this.el.nativeElement.offsetWidth /
-           window.innerWidth < MAX_INNER_WIDTH;
+           window.innerWidth < HALF_SCREEN_WIDTH_RATIO;
   }
 
 }
