@@ -1,6 +1,6 @@
 <app-icon-button class="previous-button"
     [disabled]="doc.currentPage.value <= 0"
-    src="assets/icons/arrows/left-arrow.svg"
+    iconSrc="assets/icons/arrows/left-arrow.svg"
     (button-click)="previousSlide()">
 </app-icon-button>
 
@@ -11,7 +11,7 @@
 
 <app-icon-button class="next-button"
     [disabled]="doc.currentPage.value >= (doc.pdf.numPages - 1)"
-    src="assets/icons/arrows/right-arrow.svg"
+    iconSrc="assets/icons/arrows/right-arrow.svg"
     (button-click)="nextSlide()">
 </app-icon-button>
 

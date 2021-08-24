@@ -7,8 +7,8 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
 })
 export class IconButtonComponent {
 
-  @Input('src')
-  public iconSource: string;
+  @Input()
+  public iconSrc: string;
 
   @Input()
   public readonly disabled = false;

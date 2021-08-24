@@ -23,9 +23,11 @@ export class InputComponent implements ControlValueAccessor {
 
   @Input()
   public set disabled(value: boolean) {
-    value ?
-      this.inputControl.disable() :
+    if (value) {
+      this.inputControl.disable();
+    } else {
       this.inputControl.enable();
+    }
   }
 
   public changeHandler: (obj: string) => void = () => {

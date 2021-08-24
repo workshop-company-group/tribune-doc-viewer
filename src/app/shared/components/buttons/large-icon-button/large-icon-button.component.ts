@@ -7,8 +7,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class LargeIconButtonComponent {
 
-  @Input('src')
-  public iconSource: string;
+  @Input()
+  public iconSrc: string;
 
   @Output('button-click')
   public clickEmitter = new EventEmitter<void>();

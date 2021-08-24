@@ -39,21 +39,21 @@ export class SelectComponent implements ControlValueAccessor {
   public disabled = false;
 
   constructor(
-    private readonly element: ElementRef,
+    private readonly el: ElementRef<HTMLElement>,
   ) { }
 
   public get iconSrc(): string {
     return this.disabled
-      ? "assets/icons/arrows/down-arrow-filled-disabled.svg"
-      : "assets/icons/arrows/down-arrow-filled.svg";
+      ? 'assets/icons/arrows/down-arrow-filled-disabled.svg'
+      : 'assets/icons/arrows/down-arrow-filled.svg';
   }
 
   @HostListener('document:click', ['$event'])
-  public handleClick(event: any) {
-    if (!this.element.nativeElement.contains(event.target)) {
-      this.changeOverlayState(false);
-    } else {
+  public handleClick(event: Event): void {
+    if (event.target && this.el.nativeElement.contains(event.target as Node)) {
       event.stopImmediatePropagation();
+    } else {
+      this.changeOverlayState(false);
     }
   }
 

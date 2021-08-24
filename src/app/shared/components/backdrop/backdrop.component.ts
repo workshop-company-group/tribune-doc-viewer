@@ -8,7 +8,7 @@ import { Component, Input } from '@angular/core';
 export class BackdropComponent {
 
   @Input()
-  public opened: boolean = false;
+  public opened = false;
 
   constructor() { }
 

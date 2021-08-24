@@ -1,6 +1,6 @@
 <div class="left-container">
     <app-icon-button class="menu-button"
-        src="assets/icons/menu.svg"
+        iconSrc="assets/icons/menu.svg"
         (button-click)="router.navigateByUrl('/main-menu')">
     </app-icon-button>
 
@@ -27,7 +27,7 @@
             *ngIf="documentService.count === 1"
             (click)="openDocument()">
             <app-icon-button class="add-document-button"
-                src="assets/icons/plus.svg"
+                iconSrc="assets/icons/plus.svg"
                 (button-click)="openDocument()">
             </app-icon-button>
         </div>
