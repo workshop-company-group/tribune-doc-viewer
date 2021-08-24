@@ -146,7 +146,7 @@ try {
   });
 
   // Returns list of drives
-  ipcMain.handle('drive-list', async () => drivelist.list());
+  ipcMain.handle('drive-list', () => drivelist.list());
 
 } catch (e) {
   // Catch Error
