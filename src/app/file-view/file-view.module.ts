@@ -9,7 +9,6 @@ import { SharedModule } from '../shared/shared.module';
 import { FileTitleMenuComponent,
   FileTitleMenuItemComponent,
   FileViewPageComponent,
-  FileViewBackgroundComponent,
   FileViewerComponent,
   RecordBroadcastControlComponent } from './components';
 
@@ -35,7 +34,6 @@ import { DocumentTitlePipe } from './pipes';
     FileViewPageComponent,
     FileTitleMenuComponent,
     FileTitleMenuItemComponent,
-    FileViewBackgroundComponent,
     FileViewerComponent,
     RecordBroadcastControlComponent,
     DocumentViewComponent,

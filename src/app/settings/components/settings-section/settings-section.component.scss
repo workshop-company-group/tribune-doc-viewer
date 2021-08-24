@@ -1,13 +1,14 @@
-@import "../../../../styles/mixins.scss";
+@import '../../../../styles/mixins';
 
 :host {
   display: flex;
   flex-direction: column;
 
   .title {
+    @extend %primary-light-font;
+
     margin-bottom: 20px;
 
-    @extend %primary-light-font;
     color: var(--base-black-color);
   }
 }
