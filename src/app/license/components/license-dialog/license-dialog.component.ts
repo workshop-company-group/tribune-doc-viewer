@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
@@ -10,6 +15,7 @@ import { LicenseService, KEY_LENGTH } from '../../services';
   selector: 'app-license-dialog',
   templateUrl: './license-dialog.component.html',
   styleUrls: ['./license-dialog.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LicenseDialogComponent implements OnDestroy, OnInit {
 

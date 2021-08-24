@@ -1,4 +1,10 @@
-import { Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { ControlValueAccessor, FormControl,
   NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -18,6 +24,7 @@ import { KEY_LENGTH } from '../../services';
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LicenseKeyInputComponent
 implements ControlValueAccessor, OnDestroy, OnInit {
@@ -40,7 +47,6 @@ implements ControlValueAccessor, OnDestroy, OnInit {
     this.subscriptions.forEach(
       subscription => subscription.unsubscribe(),
     );
-    this.subscriptions.length = 0;
   }
 
   public ngOnInit(): void {
@@ -50,8 +56,7 @@ implements ControlValueAccessor, OnDestroy, OnInit {
         map(value => this.formatInput(value)),
       ).subscribe(value => {
         this.inputControl.setValue(value, { emitEvent: false });
-        this.changeHandler(value
-          .split('-').join(''));
+        this.changeHandler(value.split('-').join(''));
       }),
     );
   }

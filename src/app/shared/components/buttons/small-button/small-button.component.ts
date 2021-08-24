@@ -1,9 +1,16 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-small-button',
   templateUrl: './small-button.component.html',
   styleUrls: ['./small-button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SmallButtonComponent {
 
