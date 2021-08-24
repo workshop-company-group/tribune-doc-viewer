@@ -62,8 +62,12 @@ export class ConversionService {
       };
     }
 
-    // eslint-disable-next-line max-len
-    await execAsync(`${this.sofficeCommand} --headless --convert-to ${outputType.slice(1)} --outdir "${dir}" "${path}"`);
+    await execAsync(
+      `${this.sofficeCommand}
+      --headless
+      --convert-to ${outputType.slice(1)}
+      --outdir "${dir}" "${path}"`,
+    );
 
     this.fileRename(convertedPath, newConvertedPath);
 

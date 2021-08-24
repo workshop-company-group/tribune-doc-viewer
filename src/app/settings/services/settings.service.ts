@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-// disabling because of read- and write-ini-file
-
 import { Injectable } from '@angular/core';
 import { remote } from 'electron';
 const { app } = remote;
@@ -55,6 +50,8 @@ export class SettingsService {
   }
 
   private save(): void {
+    // eslint-disable-next-line max-len
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
     writeIniFile.sync(this.defaultPath, this._settings);
   }
 
@@ -62,6 +59,8 @@ export class SettingsService {
     if (fs.existsSync(this.defaultPath)) {
       this.reload();
     } else {
+      // eslint-disable-next-line max-len
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       writeIniFile(this.defaultPath, this.defaultSettings);
       this.settings = this.defaultSettings;
     }
@@ -84,6 +83,8 @@ export class SettingsService {
   }
 
   public reload(): void {
+    // eslint-disable-next-line max-len
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment
     this.settings = loadIniFile.sync(this.defaultPath);
     this.localeSubject.next(this.settings.locales.locale);
   }

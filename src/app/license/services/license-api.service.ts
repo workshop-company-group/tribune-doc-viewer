@@ -1,6 +1,3 @@
-/* eslint-disable camelcase */
-// because api case is set by golang api
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LicenseApiResponse } from '../models';
@@ -18,7 +15,9 @@ export class LicenseApiService {
     return this.http.patch<void>(
       `/api/licenses/${key}`, {}, {
         params: {
+          // eslint-disable-next-line camelcase
           is_provided: 'true',
+          // eslint-disable-next-line camelcase
           is_activated: 'true',
         },
       },

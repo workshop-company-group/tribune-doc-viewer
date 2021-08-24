@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
+// as angular cannot import jsonfile and crypto-js correctly
+
 import { Injectable } from '@angular/core';
 import { remote } from 'electron';
 const { app } = remote;
