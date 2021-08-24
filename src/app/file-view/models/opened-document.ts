@@ -10,5 +10,8 @@ export interface OpenedDocument {
   selected: boolean;
   currentPage: BehaviorSubject<number>;
   recordBroadcastState: BehaviorSubject<RecordBroadcastState>;
+  /**
+   * State that indicates that file is closing at the moment.
+   */
   closingState: BehaviorSubject<boolean>;
 };

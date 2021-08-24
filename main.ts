@@ -5,8 +5,8 @@ import { Subject } from 'rxjs';
 import * as drivelist from 'electron-drivelist';
 import * as url from 'url';
 
-let win: BrowserWindow = null;
-let externalWin: BrowserWindow = null;
+let win: BrowserWindow;
+let externalWin: BrowserWindow;
 
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
@@ -92,7 +92,7 @@ try {
   });
 
   app.on('activate', () => {
-    if (win === null) {
+    if (!win) {
       createWindow();
     }
   });

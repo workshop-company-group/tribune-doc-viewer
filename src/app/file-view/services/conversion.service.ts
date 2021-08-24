@@ -35,7 +35,7 @@ export class ConversionService {
 
   private fileRename(oldPath: string, newPath: string): void {
     fs.rename(oldPath, newPath, function(err) {
-      throw new ConversionError('Failed to rename file:' + err.toString());
+        throw new ConversionError('Failed to rename file:' + err);
     });
   }
 

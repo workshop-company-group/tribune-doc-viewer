@@ -3,7 +3,7 @@
 </div>
 <span class="counter">
     {{ ('number-of-all' | locale 
-            : ((doc.currentPage | async) + 1).toString()
+            : (doc.currentPage.value + 1).toString()
             : doc.pdf.numPages.toString()
        ) | async }}
 </span>

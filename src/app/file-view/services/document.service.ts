@@ -29,20 +29,21 @@ export class DocumentService {
   }
 
   public get selected(): OpenedDocument {
-    for (const doc of this.opened) {
-      if (doc.selected) {
-        return doc;
-      }
+    const selectedDocument = this.opened.find(doc => doc.selected);
+    if (!selectedDocument) {
+      throw new Error('Error: Failed to find selected document.');
     }
+    return selectedDocument;
   }
 
   private findClosingIndex(): number {
-    for (const index in this.opened) {
-      if (this.opened[index].closingState.value) {
-        return Number(index);
-      }
+    const closingDocumentIndex = this.opened.findIndex(
+      doc => doc.closingState.value,
+    );
+    if (closingDocumentIndex === -1) {
+      throw new Error('Error: Failed to find closing index.');
     }
-    return null;
+    return closingDocumentIndex;
   }
 
   public async open(path: string): Promise<void> {

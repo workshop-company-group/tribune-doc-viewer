@@ -6,19 +6,19 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 declare var navigator: any;
-let recordedChunks = [];
+let recordedChunks: BlobPart[] = [];
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecorderService {
-  private recordScreen: Electron.DesktopCapturerSource;
+  private recordScreen: Electron.DesktopCapturerSource | null;
 
   private screenStream?: MediaStream;
   private micStream?: MediaStream;
   private mediaRecorder?: MediaRecorder;
   private stream?: MediaStream;
-  private filepath?: string;
+  private filepath: string;
 
   constructor(
     private readonly settings: SettingsService
@@ -55,7 +55,7 @@ export class RecorderService {
       video: {
         mandatory: {
           chromeMediaSource: 'desktop',
-          chromeMediaSourceId: this.recordScreen.id
+          chromeMediaSourceId: this.recordScreen?.id
         }
       }
     });
@@ -65,6 +65,9 @@ export class RecorderService {
         deviceId: { exact: mics[1].deviceId }
       }
     });
+
+    if (!this.screenStream || !this.micStream)
+      throw new RecorderError('Failed to create external window')
 
     let tracks = [...this.screenStream.getTracks(), ...this.micStream.getAudioTracks()]
     this.stream = new MediaStream(tracks);
@@ -89,7 +92,10 @@ export class RecorderService {
   }
 
   public start(): void {
-    this.mediaRecorder.start();
+    if (this.mediaRecorder)
+      this.mediaRecorder.start();
+    else
+      throw new RecorderError('Failed to start recording')
   }
 
   public stop(filepath: string): void {
@@ -99,14 +105,24 @@ export class RecorderService {
     else {
       this.filepath = path.join(this.settings.savePath, path.basename(filepath));
     }
-    this.mediaRecorder.stop();
+
+    if (this.mediaRecorder)
+      this.mediaRecorder.stop();
+    else
+      throw new RecorderError('Failed to stop recording')
   }
 
   public pause(): void {
+    if (this.mediaRecorder)
     this.mediaRecorder.pause();
+  else
+    throw new RecorderError('Failed to pause recording')
   }
 
   public continue(): void {
-    this.mediaRecorder.resume();
+    if (this.mediaRecorder)
+      this.mediaRecorder.resume();
+    else
+      throw new RecorderError('Failed to resume recording')
   }
 }

@@ -22,6 +22,7 @@ export class SelectComponent implements ControlValueAccessor {
   public set options(value: string[] | null) {
     if (!value || !value.length) {
       this.disabled = true;
+      return;
     }
     this.valueOptions = value;
   }
