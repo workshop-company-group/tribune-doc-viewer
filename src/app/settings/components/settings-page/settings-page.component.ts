@@ -36,11 +36,8 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  public prepareRoute(outlet: RouterOutlet): string {
-    if (!outlet.activatedRouteData.animationState) {
-      throw new Error('Error: Animation state is not defined');
-    }
-    return outlet.activatedRouteData.animationState as string;
+  public prepareRoute(outlet: RouterOutlet): string | undefined {
+    return outlet.activatedRouteData.animationState as string | undefined;
   }
 
 }

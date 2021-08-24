@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { PdfDocument } from '../models';
 
-import pdfjs from 'pdfjs-dist';
+import * as pdfjs from 'pdfjs-dist';
 
 // Very hard to set worker in pdfjs, only this way works
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
