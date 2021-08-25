@@ -1,8 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { interval, Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged, switchMap, map } from 'rxjs/operators';
+import { List } from 'immutable';
 
 import { SettingsService } from '../../services';
 
@@ -12,13 +18,14 @@ const DISPLAY_RELOAD_PERIOD = 2000;
   selector: 'app-broadcasting-settings',
   templateUrl: './broadcasting-settings.component.html',
   styleUrls: ['./broadcasting-settings.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BroadcastingSettingsComponent implements OnDestroy, OnInit {
 
   public readonly deviceControl = new
   FormControl(this.settings.screenConnection);
 
-  public readonly devicesSubject = new Subject<string[]>();
+  public readonly devicesSubject = new Subject<List<string>>();
 
   private readonly subscriptions: Subscription[] = [];
 
@@ -41,7 +48,7 @@ export class BroadcastingSettingsComponent implements OnDestroy, OnInit {
         distinctUntilChanged((curr, next) =>
           JSON.stringify(curr.sort()) === JSON.stringify(next.sort()),
         ),
-      ).subscribe(this.devicesSubject),
+      ).subscribe(devices => this.devicesSubject.next(List(devices))),
     );
   }
 

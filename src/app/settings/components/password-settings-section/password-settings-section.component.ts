@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
@@ -9,6 +14,7 @@ import { AuthService } from '../../../password/services';
   selector: 'app-password-settings-section',
   templateUrl: './password-settings-section.component.html',
   styleUrls: ['./password-settings-section.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasswordSettingsSectionComponent implements OnDestroy, OnInit {
 

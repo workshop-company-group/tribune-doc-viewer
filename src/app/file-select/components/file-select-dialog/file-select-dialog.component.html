@@ -8,7 +8,11 @@
             {{ (folderSelect ? 'select-folder' : 'select-file') | locale | async }}
         </span>
     </div>
+
     <div class="drive-container">
+        <app-selectable-button class="filler-drive drive"
+            *ngIf="!fileSelect.isLoaded()">
+        </app-selectable-button>
         <app-selectable-button class="drive"
            *ngFor="let mountpoint of fileSelect.mountpoints"
            [selected]="fileSelect.isMountpointSelected(mountpoint)"
@@ -26,7 +30,8 @@
             <span class="size">{{ 'size' | locale | async }}</span>
         </div>
 
-        <div class="dir-content">
+        <div class="dir-content"
+            *ngIf="fileSelect.currentDirContent as dirContent">
             <div class="go-back-button"
                 *ngIf="!fileSelect.isCurrentDirRoot()"
                 (click)="fileSelect.changeDirToParent()">
@@ -35,8 +40,9 @@
                 </div>
                 <span class="hint">{{ 'return' | locale | async }}</span>
             </div>
+
             <div class="folder-container"
-                *ngFor="let folder of fileSelect.currentDirContent.folders"
+                *ngFor="let folder of dirContent.folders"
                 [ngClass]="{'selected': folder.path === fileSelect.selectedPath }"
                 (click)="onFolderClick(folder)">
                 <div class="icon-container">
@@ -45,25 +51,28 @@
                 <span class="name">{{ folder.name }}</span>
                 <span class="type">{{ 'folder' | locale | async }}</span>
             </div>
-            <div class="file-container"
-                *ngFor="let file of currentDirFiles"
-                [ngClass]="{'selected': file.path === fileSelect.selectedPath }"
-                (click)="fileSelect.select(file)">
-                <div class="icon-container">
-                    <img [src]="fileSelect.getFileTypeIconPath(file.type)">
+
+            <ng-container *ngIf="!folderSelect">
+                <div class="file-container"
+                    *ngFor="let file of dirContent.files"
+                    [ngClass]="{'selected': file.path === fileSelect.selectedPath }"
+                    (click)="fileSelect.select(file)">
+                    <div class="icon-container">
+                        <img [src]="fileSelect.getFileTypeIconPath(file.type)">
+                    </div>
+                    <span class="name">{{ file.name }}</span>
+                    <span class="type">
+                        {{ ('file-extension' | locale : (file.type | uppercase)) | async }}
+                    </span>
+                    <span class="size">{{ file.size }}</span>
                 </div>
-                <span class="name">{{ file.name }}</span>
-                <span class="type">
-                    {{ ('file-extension' | locale : (file.type | uppercase)) | async }}
-                </span>
-                <span class="size">{{ file.size }}</span>
-            </div>
+            </ng-container>
         </div>
     </div>
 
     <app-small-button class="add-button"
         [accent]="true"
-        [disabled]="!fileSelect.selectedPath.length"
+        [disabled]="!fileSelect.selectedPath"
         (button-click)="openEmitter.emit(fileSelect.selectedPath)">
         {{ openButtonText }}
     </app-small-button>

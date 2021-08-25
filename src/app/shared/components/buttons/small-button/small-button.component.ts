@@ -15,10 +15,10 @@ import {
 export class SmallButtonComponent {
 
   @Input()
-  public readonly disabled = false;
+  public disabled = false;
 
   @Input()
-  public readonly accent = false;
+  public accent = false;
 
   @Output('button-click')
   public readonly clickEmitter = new EventEmitter<void>();

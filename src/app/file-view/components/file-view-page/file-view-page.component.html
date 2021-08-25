@@ -27,8 +27,7 @@
     </app-file-close-confirmation>
 </app-backdrop>
 
-<app-backdrop [opened]="confirmation.state === 'select-file'"
-    *ngIf="fileSelect.selectedMountpoint">
+<app-backdrop [opened]="confirmation.state === 'select-file'">
     <app-file-select-dialog class="confirmation"
         [openButtonText]="'add' | locale | async"
         (close-click)="confirmation.state = null"

@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
@@ -12,8 +17,11 @@ import { routeAnimations } from '../../animations/route-animations';
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.scss'],
   animations: [ routeAnimations ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsPageComponent implements OnInit, OnDestroy {
+
+  public readonly navigationRoutes = ['general', 'recording', 'broadcasting'];
 
   public readonly routeSubject = new
   BehaviorSubject<SettingsRoute>('general');

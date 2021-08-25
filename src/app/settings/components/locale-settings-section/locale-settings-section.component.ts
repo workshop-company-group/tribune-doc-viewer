@@ -1,19 +1,25 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
+
+import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { List } from 'immutable';
 
 import { AppConfig } from '../../../../environments/environment';
 import Languages from '../../../../assets/languages.json';
 
-import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-
 import { SettingsService } from '../../services';
-
 
 @Component({
   selector: 'app-locale-settings-section',
   templateUrl: './locale-settings-section.component.html',
   styleUrls: ['./locale-settings-section.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LocaleSettingsSectionComponent implements OnInit, OnDestroy {
 
@@ -21,8 +27,8 @@ export class LocaleSettingsSectionComponent implements OnInit, OnDestroy {
     Languages[this.settings.locale],
   );
 
-  public readonly languages = AppConfig.supportedLangs.map(
-    lang => Languages[lang] as string,
+  public readonly languages = List(
+    AppConfig.supportedLangs.map(lang => Languages[lang] as string),
   );
 
   private readonly subscriptions: Subscription[] = [];

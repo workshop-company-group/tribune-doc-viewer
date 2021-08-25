@@ -1,16 +1,21 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 
 import { SettingsService } from '../../services';
 import { FileSystemService } from '../../../shared/services';
-import { FileSelectService } from '../../../file-select/services';
 
 @Component({
   selector: 'app-recording-settings',
   templateUrl: './recording-settings.component.html',
   styleUrls: ['./recording-settings.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecordingSettingsComponent implements OnDestroy, OnInit {
 
@@ -25,15 +30,13 @@ export class RecordingSettingsComponent implements OnDestroy, OnInit {
   private readonly subscriptions: Subscription[] = [];
 
   constructor(
-    public readonly fileSelect: FileSelectService,
     public readonly fileSystem: FileSystemService,
     public readonly settings: SettingsService,
   ) { }
 
-  public async ngOnInit(): Promise<void> {
+  public ngOnInit(): void {
     this.pathControl.setValue(this.settings.savePath);
     this.saveToggle.setValue(this.settings.withSource);
-    await this.fileSelect.loadMountpoints();
 
     this.subscriptions.push(
       this.pathControl.valueChanges.subscribe(value => {

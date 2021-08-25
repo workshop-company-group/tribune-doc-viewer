@@ -33,8 +33,7 @@
 </app-settings-section>
 
 <app-backdrop class="file-dialog-backdrop"
-    [opened]="fileSelectDialogOpened"
-    *ngIf="fileSelect.selectedMountpoint">
+    [opened]="fileSelectDialogOpened">
     <app-file-select-dialog
         [folderSelect]="true"
         [openButtonText]="'select' | locale | async"
