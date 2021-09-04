@@ -1,7 +1,7 @@
-import { Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 
-import { BehaviorSubject, interval, Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 import {
   ConfirmationService,
@@ -9,18 +9,42 @@ import {
   RecordBroadcastService,
 } from '../../services';
 
-const BROADCASTING_AVAILABILITY_CHECK_INTERVAL = 500;
+const AVAILABILITY_CHECK_INTERVAL = 500;
+type recordControl = 'recordButton' | 'pauseStopControls';
 
 @Component({
   selector: 'app-record-broadcast-control',
   templateUrl: './record-broadcast-control.component.html',
   styleUrls: ['./record-broadcast-control.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecordBroadcastControlComponent implements OnDestroy {
 
-  public wrapped = true;
+  public readonly wrapped = new BehaviorSubject<boolean>(true);
 
-  public readonly broadcastAvailability = new BehaviorSubject<boolean>(false);
+  public readonly broadcastingAvailability =
+  interval(AVAILABILITY_CHECK_INTERVAL).pipe(
+    switchMap(() => this.recordBroadcastService.isBroadcastingAvailable()),
+  );
+
+  public readonly recordingAvailability =
+  interval(AVAILABILITY_CHECK_INTERVAL).pipe(
+    map(() => this.recordBroadcastService.isRecordingAvailable()),
+  );
+
+  public readonly recordControlState: Observable<recordControl> =
+  this.recordBroadcastService.state.pipe(
+    map(state => !state || state === 'broadcasting'
+      ? 'recordButton'
+      : 'pauseStopControls'),
+  );
+
+  public readonly broadcastButtonIcon =
+  this.recordBroadcastService.state.pipe(
+    map(state => state
+      ? 'assets/icons/broadcast/broadcast-stop.svg'
+      : 'assets/icons/broadcast/broadcast-blue.svg'),
+  );
 
   private readonly subscriptions: Subscription[] = [];
 
@@ -28,13 +52,7 @@ export class RecordBroadcastControlComponent implements OnDestroy {
     private readonly confirmation: ConfirmationService,
     private readonly documentService: DocumentService,
     public readonly recordBroadcastService: RecordBroadcastService,
-  ) {
-    this.subscriptions.push(
-      interval(BROADCASTING_AVAILABILITY_CHECK_INTERVAL).pipe(
-        switchMap(() => this.recordBroadcastService.isBroadcastingAvailable()),
-      ).subscribe(value => this.broadcastAvailability.next(value)),
-    );
-  }
+  ) { }
 
   public ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
@@ -62,10 +80,11 @@ export class RecordBroadcastControlComponent implements OnDestroy {
       return;
     }
 
-    if (this.documentService.count === 1) {
-      await this.recordBroadcastService.startBroadcasting(
-        this.documentService.opened[0],
-      );
+    if (this.documentService.opened.value.size === 1) {
+      const doc = this.documentService.opened.value.get(0);
+      if (doc) {
+        await this.recordBroadcastService.startBroadcasting(doc);
+      }
     } else {
       this.confirmation.state = 'select-broadcasting';
     }

@@ -1,14 +1,21 @@
-import { AfterViewInit, Component, Input, ElementRef, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  AfterViewInit,
+  Component,
+  Input,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 
 import { ResizeSensor } from 'css-element-queries';
 
-import { PdfDocument,
-  PdfOrientation } from '../../../models';
+import { PdfDocument, PdfOrientation } from '../../../models';
 
 @Component({
   selector: 'app-pdf-view',
   templateUrl: './pdf-view.component.html',
   styleUrls: ['./pdf-view.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PdfViewComponent implements AfterViewInit {
 
@@ -16,7 +23,7 @@ export class PdfViewComponent implements AfterViewInit {
   private readonly canvas: ElementRef<HTMLCanvasElement>;
 
   @Input()
-  private readonly pdf: PdfDocument;
+  public pdf: PdfDocument;
 
   @Input()
   public orientation: PdfOrientation = 'undefined';

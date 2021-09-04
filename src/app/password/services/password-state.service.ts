@@ -34,7 +34,7 @@ export class PasswordStateService {
   }
 
   public async continueWithPassword(): Promise<void> {
-    const documentsLength = this.documentService.opened.length;
+    const documentsLength = this.documentService.opened.value.size;
 
     switch (this.pageState) {
     case 'settings':

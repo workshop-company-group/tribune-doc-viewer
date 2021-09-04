@@ -4,10 +4,9 @@
         (button-click)="router.navigateByUrl('/main-menu')">
     </app-icon-button>
 
-    <app-file-title-menu-item 
-      class="left-item"
-      *ngIf="documentService.count > 0"
-      [doc]="documentService.opened[0]"
+    <app-file-title-menu-item class="left-item"
+      *ngIf="(documentService.opened | async)?.get(0) as doc"
+      [doc]="doc"
       (click)="documentService.select(0)"
       (close-click)="documentService.close(0)">
     </app-file-title-menu-item>
@@ -17,14 +16,14 @@
     <div class="item-container">
         <app-file-title-menu-item 
             class="right-item"
-            *ngIf="documentService.count > 1"
-            [doc]="documentService.opened[1]"
+            *ngIf="(documentService.opened | async)?.get(1) as doc"
+            [doc]="doc"
             (click)="documentService.select(1)"
             (close-click)="documentService.close(1)">
         </app-file-title-menu-item>
 
         <div class="button-container"
-            *ngIf="documentService.count === 1"
+            *ngIf="(documentService.count | async) === 1"
             (click)="openDocument()">
             <app-icon-button class="add-document-button"
                 iconSrc="assets/icons/plus.svg"

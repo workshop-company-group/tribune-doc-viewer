@@ -1,20 +1,19 @@
 <div class="record-broadcast-container"
     *ngIf="!wrapped">
-    <div class="record-container">
+    <div class="record-container"
+        [ngSwitch]="recordControlState | async">
         <span class="hint">{{ 'recording' | locale | async }}</span>
 
         <app-record-broadcast-button
             iconSrc="assets/icons/record/record-red.svg"
-            [disabled]="!recordBroadcastService.isRecordingAvailable()"
-            *ngIf="recordBroadcastService.state.value === null
-                || recordBroadcastService.state.value === 'broadcasting'"
+            [disabled]="!(recordingAvailability | async)"
+            *ngSwitchCase="'recordButton'"
             (button-click)="recordBroadcastService.startRecording()">
         </app-record-broadcast-button>
 
         <app-record-controls
-            [recordState]="recordBroadcastService.state.value"
-            *ngIf="recordBroadcastService.state.value === 'recording'
-                || recordBroadcastService.state.value === 'paused'"
+            [recordState]="recordBroadcastService.state | async"
+            *ngSwitchCase="'pauseStopControls'"
             (pause-click)="pauseClickHandler()"
             (stop-click)="stopRecording()">
         </app-record-controls>
@@ -24,17 +23,15 @@
         <span class="hint">{{ 'broadcasting' | locale | async }}</span>
 
         <app-record-broadcast-button
-            [disabled]="!broadcastAvailability.value"
-            [iconSrc]="recordBroadcastService.state.value === null
-                    ? 'assets/icons/broadcast/broadcast-blue.svg'
-                    : 'assets/icons/broadcast/broadcast-stop.svg'"
+            [disabled]="!(broadcastingAvailability | async)"
+            [iconSrc]="broadcastButtonIcon | async"
             (button-click)="broadcastClickHandler()">
         </app-record-broadcast-button>
     </div>
 </div>
 
 <app-icon-button class="wrap-control"
-     [ngClass]="{ 'wrapped': wrapped }"
+     [ngClass]="{ 'wrapped': wrapped | async }"
      iconSrc="assets/icons/arrows/down-arrow.svg"
-     (button-click)="wrapped = !wrapped">
+     (button-click)="wrapped.next(!wrapped.value)">
 </app-icon-button>

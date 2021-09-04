@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { map } from 'rxjs/operators';
+
 import { DocumentService } from '../../../file-view/services';
 import { LicenseService } from '../../../license/services';
 import { AuthService, PasswordStateService } from '../../../password/services';
@@ -13,6 +15,10 @@ import { UpdateService } from '../../../update/services/update.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainMenuPageComponent {
+
+  public readonly fileViewButtonText = this.documentService.isEmpty.pipe(
+    map(isEmpty => isEmpty ? 'start' : 'continue'),
+  );
 
   constructor(
     public readonly auth: AuthService,

@@ -1,38 +1,39 @@
-<div class="left-container"
-    [ngClass]="{'fullscreen': documentService.count < 2}"
-    *ngIf="documentService.count >= 0">
+<ng-container *ngIf="documentService.count | async as documentCount">
+    <div class="left-container"
+        [ngClass]="{'fullscreen': documentCount < 2}">
 
-    <div class="add-container"
-        *ngIf="documentService.count === 0">
+        <div class="add-container"
+            *ngIf="documentService.isEmpty | async">
 
-        <app-large-icon-button class="add-button"
-            iconSrc="assets/icons/plus.svg"
-            (button-click)="openDocument()">
-        </app-large-icon-button>
+            <app-large-icon-button class="add-button"
+                iconSrc="assets/icons/plus.svg"
+                (button-click)="openDocument()">
+            </app-large-icon-button>
 
-        <span class="add-hint">
-            {{ 'add-file' | locale | async }}
-        </span>
+            <span class="add-hint">
+                {{ 'add-file' | locale | async }}
+            </span>
+        </div>
+
+        <app-document-view class="document-view"
+            *ngIf="(documentService.opened | async)?.get(0) as doc"
+            [doc]="doc"
+            (click)="documentService.select(0)">
+        </app-document-view>
     </div>
 
-    <app-document-view class="document-view"
-        *ngIf="documentService.count > 0"
-        [doc]="documentService.opened[0]"
-        (click)="documentService.select(0)">
-    </app-document-view>
-</div>
-
-<div class="right-container"
-    *ngIf="documentService.count > 1">
-
-    <app-document-view class="document-view"
-        [doc]="documentService.opened[1]"
-        (click)="documentService.select(1)">
-    </app-document-view>
-</div>
+    <div class="right-container"
+        *ngIf="documentCount > 1">
+        <app-document-view class="document-view"
+            *ngIf="(documentService.opened | async)?.get(1) as doc"
+            [doc]="doc"
+            (click)="documentService.select(1)">
+        </app-document-view>
+    </div>
+</ng-container>
 
 <div class="record-broadcast-container"
-     *ngIf="documentService.count > 0">
+     *ngIf="!(documentService.isEmpty | async)">
     <app-record-broadcast-control
         class="record-broadcast-control">
     </app-record-broadcast-control>

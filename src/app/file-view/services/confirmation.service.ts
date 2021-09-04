@@ -13,17 +13,19 @@ type ConfirmationState = null | 'stop-recording'
 })
 export class ConfirmationService {
 
-  private readonly stateObservable = new
+  private readonly stateSubject = new
   BehaviorSubject<ConfirmationState>(null);
+
+  public readonly stateObservable = this.stateSubject.asObservable();
 
   constructor() { }
 
   public get state(): ConfirmationState {
-    return this.stateObservable.value;
+    return this.stateSubject.value;
   }
 
   public set state(value: ConfirmationState) {
-    this.stateObservable.next(value);
+    this.stateSubject.next(value);
   }
 
   public clearConfirmation(): void {

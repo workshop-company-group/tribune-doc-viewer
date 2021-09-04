@@ -53,9 +53,6 @@ export class LicenseDialogComponent implements OnDestroy, OnInit {
     const result = await this.license.activate(this.keyControl.value);
 
     this.wrongKey = !result;
-    if (result) {
-      // TODO
-    }
   }
 
   public exit(): void {

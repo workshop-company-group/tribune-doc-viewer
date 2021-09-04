@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { RecordOf } from 'immutable';
 
 import { ExternalViewerService,
   RecorderService,
@@ -13,7 +14,7 @@ import { BroadcastError } from './broadcast-error';
 })
 export class RecordBroadcastService {
 
-  private doc?: OpenedDocument;
+  private doc?: RecordOf<OpenedDocument>;
 
   public state = new BehaviorSubject<RecordBroadcastState>(null);
 
@@ -57,7 +58,7 @@ export class RecordBroadcastService {
     this.doc.recordBroadcastState.next('paused');
   }
 
-  public async startBroadcasting(doc: OpenedDocument): Promise<void> {
+  public async startBroadcasting(doc: RecordOf<OpenedDocument>): Promise<void> {
     if (!(await this.isBroadcastingAvailable())) {
       throw new BroadcastError('broadcasting is not available');
     }

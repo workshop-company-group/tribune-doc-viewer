@@ -4,19 +4,12 @@
 
 <div class="slides-container">
     <app-slide-thumbnail class="slide first"
-        [pdf]="documentService.opened[0].pdf"
-        [page]="documentService.opened[0].currentPage.value"
-        [selected]="documentService.opened[0].selected"
-        (click)="documentService.select(0)"
-        [ngClass]="documentService.opened[0].pdf.orientation">
-    </app-slide-thumbnail>
-
-    <app-slide-thumbnail class="slide second"
-        [pdf]="documentService.opened[1].pdf"
-        [page]="documentService.opened[1].currentPage.value"
-        [selected]="documentService.opened[1].selected"
-        (click)="documentService.select(1)"
-        [ngClass]="documentService.opened[1].pdf.orientation">
+        *ngFor="let doc of documentService.opened; index as i"
+        [pdf]="doc.pdf"
+        [page]="doc.currentPage | async"
+        [selected]="doc.selected"
+        (click)="documentService.select(i)"
+        [ngClass]="doc.pdf.orientation">
     </app-slide-thumbnail>
 </div>
 

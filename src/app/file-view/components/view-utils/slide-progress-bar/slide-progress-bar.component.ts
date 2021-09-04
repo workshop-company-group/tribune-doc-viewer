@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+
+import { RecordOf } from 'immutable';
 
 import { OpenedDocument } from '../../../models';
 
@@ -6,11 +8,12 @@ import { OpenedDocument } from '../../../models';
   selector: 'app-slide-progress-bar',
   templateUrl: './slide-progress-bar.component.html',
   styleUrls: ['./slide-progress-bar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SlideProgressBarComponent {
 
   @Input()
-  public readonly doc: OpenedDocument;
+  public doc: RecordOf<OpenedDocument>;
 
   constructor() { }
 

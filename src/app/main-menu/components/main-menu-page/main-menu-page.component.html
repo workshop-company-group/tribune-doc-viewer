@@ -13,7 +13,7 @@
 <div class="buttons-container">
     <app-normal-button class="button"
         (button-click)="openFileView()">
-        {{ (documentService.isEmpty() ? 'start' : 'continue') | locale | async }}
+        {{ fileViewButtonText | locale | async }}
     </app-normal-button>
     <app-normal-button class="button"
         (button-click)="openSettings()">

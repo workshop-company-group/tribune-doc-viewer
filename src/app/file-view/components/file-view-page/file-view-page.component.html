@@ -4,33 +4,33 @@
 <app-file-viewer class="viewer">
 </app-file-viewer>
 
-
-<app-backdrop [opened]="confirmation.state === 'stop-recording'">
+<app-backdrop [opened]="finishRecordConfirmationOpened | async">
     <app-finish-record-confirmation class="confirmation"
-        (confirm-click)="confirmation.state = null">
+        (confirm-click)="confirmation.clearConfirmation()">
     </app-finish-record-confirmation>
 </app-backdrop>
 
-<app-backdrop [opened]="confirmation.state === 'select-broadcasting'"
-    *ngIf="documentService.opened.length === 2">
-    <app-file-select-confirmation class="confirmation"
-        (cancel-click)="confirmation.state = null"
-        (select-click)="startBroadcasting()">
-    </app-file-select-confirmation>
-</app-backdrop>
+<ng-container *ngIf="documentService.count | async as documentCount">
+    <app-backdrop [opened]="fileSelectConfirmationOpened | async"
+        *ngIf="documentCount === 2">
+        <app-file-select-confirmation class="confirmation"
+            (cancel-click)="confirmation.clearConfirmation()"
+            (select-click)="startBroadcasting()">
+        </app-file-select-confirmation>
+    </app-backdrop>
+</ng-container>
 
-<app-backdrop [opened]="confirmation.state === 'close-broadcasting'
-                    || confirmation.state === 'close-recording'">
+<app-backdrop [opened]="fileCloseConfirmationOpened | async">
     <app-file-close-confirmation class="confirmation"
         (cancel-click)="cancelClosing()"
         (confirm-click)="closeDocument()">
     </app-file-close-confirmation>
 </app-backdrop>
 
-<app-backdrop [opened]="confirmation.state === 'select-file'">
+<app-backdrop [opened]="fileSelectDialogOpened | async">
     <app-file-select-dialog class="confirmation"
         [openButtonText]="'add' | locale | async"
-        (close-click)="confirmation.state = null"
+        (close-click)="confirmation.clearConfirmation()"
         (open-click)="fileSelectedHandler($event)">
     </app-file-select-dialog>
 </app-backdrop>

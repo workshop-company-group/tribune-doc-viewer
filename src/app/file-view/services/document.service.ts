@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { List, Record, RecordOf } from 'immutable';
 
 import { Document,
   OpenedDocument,
@@ -16,7 +18,45 @@ import { FileSystemService } from '../../shared/services';
 })
 export class DocumentService {
 
-  public readonly opened: OpenedDocument[] = [];
+  /**
+   * Currently opened documents.
+   */
+  public readonly opened = new
+  BehaviorSubject<List<RecordOf<OpenedDocument>>>(List());
+
+  /**
+   * Number of opened documents.
+   */
+  public readonly count = this.opened.pipe(
+    map(docs => docs.size),
+  );
+
+  /**
+   * Boolean value that is true if no documents are opened.
+   */
+  public readonly isEmpty = this.count.pipe(
+    map(count => count === 0),
+  );
+
+  /**
+   * Currently selected document.
+   * May be undefined only during single event loop (i. e. inside function
+   * block, at the end of function must be not undefined).
+   */
+  public readonly selected = this.opened.pipe(
+    map(docs => docs.find(doc => doc.selected)),
+  );
+
+  private readonly documentFactory = Record<OpenedDocument>({
+    // Should be reinitialized
+    doc: { originPath: '', convertedPath: '', title: '' },
+    // Should be reinitialized
+    pdf: new PdfDocument(),
+    selected: false,
+    currentPage: new BehaviorSubject<number>(0),
+    recordBroadcastState: new BehaviorSubject<RecordBroadcastState>(null),
+    closingState: new BehaviorSubject<boolean>(false),
+  });
 
   constructor(
     private readonly converter: ConversionService,
@@ -24,21 +64,9 @@ export class DocumentService {
     private readonly pdfService: PdfService,
   ) {}
 
-  public get count(): number {
-    return this.opened.length;
-  }
-
-  public get selected(): OpenedDocument {
-    const selectedDocument = this.opened.find(doc => doc.selected);
-    if (!selectedDocument) {
-      throw new Error('Error: Failed to find selected document.');
-    }
-    return selectedDocument;
-  }
-
   private findClosingIndex(): number {
     const closingDocumentIndex =
-      this.opened.findIndex(doc => doc.closingState.value);
+      this.opened.value.findIndex(doc => doc.closingState.value);
     if (closingDocumentIndex === -1) {
       throw new Error('Error: Failed to find closing index.');
     }
@@ -49,47 +77,42 @@ export class DocumentService {
     const doc: Document = await this.converter.convertDocument(path);
     const pdf: PdfDocument = await this.pdfService.loadPdf(doc.convertedPath);
 
-    this.opened.push({
-      doc,
-      pdf,
-      selected: false,
-      currentPage: new BehaviorSubject<number>(0),
-      recordBroadcastState: new BehaviorSubject<RecordBroadcastState>(null),
-      closingState: new BehaviorSubject<boolean>(false),
-    });
-
-    // selecting opened document
     this.unselectAll();
-    this.opened[this.opened.length - 1].selected = true;
-
+    this.opened.next(
+      this.opened.value.push(
+        this.documentFactory({ doc, pdf, selected: true }),
+      ),
+    );
   }
 
   public async close(index?: number): Promise<void> {
     const closingIndex = index ?? this.findClosingIndex();
 
-    await this.fileSystem.removeFile(
-      this.opened[closingIndex].doc.convertedPath,
+    const closingDocument = this.opened.value.get(closingIndex);
+    if (!closingDocument) {
+      throw new Error('Error: Cannot find document to close.');
+    }
+    await this.fileSystem.removeFile(closingDocument.doc.convertedPath);
+    this.opened.next(
+      this.opened.value.splice(closingIndex, 1),
     );
-    this.opened.splice(closingIndex, 1);
 
-    if (this.opened.length > 0) {
+    if (this.opened.value.size > 0) {
       this.select(0);
     }
   }
 
-  public isEmpty(): boolean {
-    return this.opened.length === 0;
-  }
-
   public select(index: number): void {
     this.unselectAll();
-    this.opened[index].selected = true;
+    this.opened.next(
+      this.opened.value.setIn([index, 'selected'], true),
+    );
   }
 
   private unselectAll(): void {
-    for (const doc of this.opened) {
-      doc.selected = false;
-    }
+    this.opened.next(
+      this.opened.value.map(doc => doc.set('selected', false)),
+    );
   }
 
 }

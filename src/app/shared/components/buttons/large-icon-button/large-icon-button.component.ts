@@ -1,9 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-large-icon-button',
   templateUrl: './large-icon-button.component.html',
   styleUrls: ['./large-icon-button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LargeIconButtonComponent {
 
@@ -11,7 +18,7 @@ export class LargeIconButtonComponent {
   public iconSrc: string;
 
   @Output('button-click')
-  public clickEmitter = new EventEmitter<void>();
+  public readonly clickEmitter = new EventEmitter<void>();
 
   constructor() { }
 
