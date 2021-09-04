@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   AfterViewInit,
   Component,
   Input,
@@ -35,18 +36,11 @@ export class PdfViewComponent implements AfterViewInit {
 
   @Input()
   private set page(value: number) {
-    void this.pdf.getPage(value).then(page => {
-      this.sideRatio = page.width / page.height;
-
-      if (this.orientation === 'undefined') {
-        this.calculateOrientation();
-      }
-
-      void page.renderScaled(this.canvas.nativeElement);
-    });
+    void this.renderPage(value);
   }
 
   constructor(
+    private readonly cd: ChangeDetectorRef,
     private readonly el: ElementRef<HTMLElement>,
   ) { }
 
@@ -63,6 +57,18 @@ export class PdfViewComponent implements AfterViewInit {
     } else {
       this.orientation = 'vertical';
     }
+  }
+
+  private async renderPage(index: number): Promise<void> {
+    const page = await this.pdf.getPage(index);
+    this.sideRatio = page.width / page.height;
+
+    if (this.orientation === 'undefined') {
+      this.calculateOrientation();
+    }
+
+    await page.renderScaled(this.canvas.nativeElement);
+    this.cd.detectChanges();
   }
 
 }

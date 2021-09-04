@@ -1,9 +1,9 @@
-<ng-container *ngIf="documentService.count | async as documentCount">
+<ng-container *ngIf="documentService.opened | async as documents">
     <div class="left-container"
-        [ngClass]="{'fullscreen': documentCount < 2}">
+        [ngClass]="{'fullscreen': documents.size < 2}">
 
         <div class="add-container"
-            *ngIf="documentService.isEmpty | async">
+            *ngIf="documents.size === 0">
 
             <app-large-icon-button class="add-button"
                 iconSrc="assets/icons/plus.svg"
@@ -16,25 +16,25 @@
         </div>
 
         <app-document-view class="document-view"
-            *ngIf="(documentService.opened | async)?.get(0) as doc"
+            *ngIf="documents.get(0) as doc"
             [doc]="doc"
             (click)="documentService.select(0)">
         </app-document-view>
     </div>
 
     <div class="right-container"
-        *ngIf="documentCount > 1">
+        *ngIf="documents.size > 1">
         <app-document-view class="document-view"
-            *ngIf="(documentService.opened | async)?.get(1) as doc"
+            *ngIf="documents.get(1) as doc"
             [doc]="doc"
             (click)="documentService.select(1)">
         </app-document-view>
     </div>
-</ng-container>
 
-<div class="record-broadcast-container"
-     *ngIf="!(documentService.isEmpty | async)">
-    <app-record-broadcast-control
-        class="record-broadcast-control">
-    </app-record-broadcast-control>
-</div>
+    <div class="record-broadcast-container"
+         *ngIf="documents.size !== 0">
+        <app-record-broadcast-control
+            class="record-broadcast-control">
+        </app-record-broadcast-control>
+    </div>
+</ng-container>

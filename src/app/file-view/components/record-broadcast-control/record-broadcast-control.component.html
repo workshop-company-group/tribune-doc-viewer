@@ -1,5 +1,5 @@
 <div class="record-broadcast-container"
-    *ngIf="!wrapped">
+    [ngClass]="{ 'wrapped': wrapped | async }">
     <div class="record-container"
         [ngSwitch]="recordControlState | async">
         <span class="hint">{{ 'recording' | locale | async }}</span>

@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 
 import { RecordOf } from 'immutable';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { OpenedDocument } from '../../../models';
 
@@ -10,11 +17,19 @@ import { OpenedDocument } from '../../../models';
   styleUrls: ['./slide-progress-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SlideProgressBarComponent {
+export class SlideProgressBarComponent implements OnInit {
 
   @Input()
   public doc: RecordOf<OpenedDocument>;
 
+  public displayedPage: Observable<number>;
+
   constructor() { }
+
+  public ngOnInit(): void {
+    this.displayedPage = this.doc.currentPage.pipe(
+      map(page => page + 1),
+    );
+  }
 
 }

@@ -1,10 +1,10 @@
-<ng-container *ngIf="doc.currentPage | async as page">
+<ng-container *ngIf="displayedPage | async as page">
     <div class="filler" 
-        [ngStyle]="{'width': (page + 1) * 100 / doc.pdf.numPages + '%'}">
+        [ngStyle]="{'width': page * 100 / doc.pdf.numPages + '%'}">
     </div>
     <span class="counter">
         {{ ('number-of-all' | locale 
-                : (page + 1).toString()
+                : page.toString()
                 : doc.pdf.numPages.toString()
            ) | async }}
     </span>

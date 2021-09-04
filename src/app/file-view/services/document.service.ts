@@ -25,20 +25,6 @@ export class DocumentService {
   BehaviorSubject<List<RecordOf<OpenedDocument>>>(List());
 
   /**
-   * Number of opened documents.
-   */
-  public readonly count = this.opened.pipe(
-    map(docs => docs.size),
-  );
-
-  /**
-   * Boolean value that is true if no documents are opened.
-   */
-  public readonly isEmpty = this.count.pipe(
-    map(count => count === 0),
-  );
-
-  /**
    * Currently selected document.
    * May be undefined only during single event loop (i. e. inside function
    * block, at the end of function must be not undefined).
@@ -47,10 +33,13 @@ export class DocumentService {
     map(docs => docs.find(doc => doc.selected)),
   );
 
+
+  /**
+   * Factory for document creation.
+   * All of fields should be initialized on call.
+   */
   private readonly documentFactory = Record<OpenedDocument>({
-    // Should be reinitialized
     doc: { originPath: '', convertedPath: '', title: '' },
-    // Should be reinitialized
     pdf: new PdfDocument(),
     selected: false,
     currentPage: new BehaviorSubject<number>(0),
@@ -80,7 +69,14 @@ export class DocumentService {
     this.unselectAll();
     this.opened.next(
       this.opened.value.push(
-        this.documentFactory({ doc, pdf, selected: true }),
+        this.documentFactory({
+          doc,
+          pdf,
+          selected: true,
+          currentPage: new BehaviorSubject<number>(0),
+          recordBroadcastState: new BehaviorSubject<RecordBroadcastState>(null),
+          closingState: new BehaviorSubject<boolean>(false),
+        }),
       ),
     );
   }

@@ -10,9 +10,9 @@
     </app-finish-record-confirmation>
 </app-backdrop>
 
-<ng-container *ngIf="documentService.count | async as documentCount">
+<ng-container *ngIf="documentService.opened | async as documents">
     <app-backdrop [opened]="fileSelectConfirmationOpened | async"
-        *ngIf="documentCount === 2">
+        *ngIf="documents.size === 2">
         <app-file-select-confirmation class="confirmation"
             (cancel-click)="confirmation.clearConfirmation()"
             (select-click)="startBroadcasting()">

@@ -16,7 +16,8 @@ import { UpdateService } from '../../../update/services/update.service';
 })
 export class MainMenuPageComponent {
 
-  public readonly fileViewButtonText = this.documentService.isEmpty.pipe(
+  public readonly fileViewButtonText = this.documentService.opened.pipe(
+    map(documents => documents.size === 0),
     map(isEmpty => isEmpty ? 'start' : 'continue'),
   );
 

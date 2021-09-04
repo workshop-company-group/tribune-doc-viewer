@@ -40,7 +40,7 @@ export class LocalePipe implements PipeTransform {
 
     let filledPhrase = localedPhrase;
     args.forEach((arg, index) => {
-      filledPhrase = phrase.replace(`{${index}}`, args[index]);
+      filledPhrase = filledPhrase.replace(`{${index}}`, arg);
     });
 
     return filledPhrase;

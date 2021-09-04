@@ -21,6 +21,8 @@
 
     margin: 35px 30px 35px 50px;
 
+    transition: var(--base-transition);
+
     .record-container, .broadcast-container {
       display: flex;
       flex-direction: row;
@@ -33,6 +35,14 @@
 
         color: var(--base-black-color);
       }
+    }
+
+    &.wrapped {
+      overflow: hidden;
+      width: 0;
+      height: 0;
+
+      margin: 0;
     }
   }
 
