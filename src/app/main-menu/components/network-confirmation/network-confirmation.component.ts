@@ -1,16 +1,21 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+
+import { WindowStateService } from '../../../shared/services';
 
 @Component({
   selector: 'app-network-confirmation',
   templateUrl: './network-confirmation.component.html',
   styleUrls: ['./network-confirmation.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NetworkConfirmationComponent implements OnInit {
+export class NetworkConfirmationComponent {
 
-  constructor() { }
+  constructor(
+    public readonly windowState: WindowStateService,
+  ) { }
 
-  ngOnInit(): void {
+  public exit(): void {
+    this.windowState.exit();
   }
 
 }

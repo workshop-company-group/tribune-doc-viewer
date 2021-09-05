@@ -3,6 +3,7 @@
 :host {
   display: flex;
   width: 590px;
+  box-sizing: border-box;
 
   flex-direction: column;
   align-items: center;
@@ -24,6 +25,7 @@
     @extend %primary-light-font;
 
     color: var(--base-black-color);
+    text-align: center;
   }
 
   .button-container {

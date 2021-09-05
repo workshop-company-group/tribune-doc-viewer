@@ -1,7 +1,8 @@
 <h1 class="heading">{{ 'no-connection' | locale | async }}</h1>
 <p class="description">{{ 'check-network' | locale | async }}</p>
 <div class="button-container">
-    <app-small-button class="exit">
+    <app-small-button class="exit"
+        (button-click)="exit()">
         {{ 'activation-exit' | locale | async }}
     </app-small-button>
     <app-small-button class="retry"
