@@ -274,6 +274,11 @@
     "en": "Save to document directory",
     "kz": "Құжаттар каталогына сақтаңыз"
   },
+  "connection-in-progress": {
+    "ru": "Подключение...",
+    "en": "Connection...",
+    "kz": "Қосылу..."
+  },
   "no-connection": {
     "ru": "Нет подключения",
     "en": "No connection",
