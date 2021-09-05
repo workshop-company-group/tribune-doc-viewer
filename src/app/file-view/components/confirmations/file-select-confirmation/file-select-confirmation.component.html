@@ -4,7 +4,7 @@
 
 <div class="slides-container">
     <app-slide-thumbnail class="slide first"
-        *ngFor="let doc of documentService.opened; index as i"
+        *ngFor="let doc of documentService.opened | async; index as i"
         [pdf]="doc.pdf"
         [page]="doc.currentPage | async"
         [selected]="doc.selected"
