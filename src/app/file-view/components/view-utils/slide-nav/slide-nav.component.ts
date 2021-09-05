@@ -1,4 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+
+import { RecordOf } from 'immutable';
 
 import { OpenedDocument } from '../../../models';
 
@@ -6,21 +13,22 @@ import { OpenedDocument } from '../../../models';
   selector: 'app-slide-nav',
   templateUrl: './slide-nav.component.html',
   styleUrls: ['./slide-nav.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SlideNavComponent implements OnInit {
 
   @Input()
-  public readonly doc: OpenedDocument;
+  public doc: RecordOf<OpenedDocument>;
 
   @Input()
-  public readonly wrap: boolean = false;
+  public wrap = false;
 
-  public pageIterable;
+  public pageIterable: number[];
 
   constructor() { }
 
   public ngOnInit(): void {
-    this.pageIterable = new Array(this.doc.pdf.numPages);
+    this.pageIterable = new Array<number>(this.doc.pdf.numPages);
   }
 
 }

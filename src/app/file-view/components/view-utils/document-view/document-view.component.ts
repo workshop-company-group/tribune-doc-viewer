@@ -1,4 +1,11 @@
-import { Component, ElementRef, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Input,
+} from '@angular/core';
+
+import { RecordOf } from 'immutable';
 
 import { OpenedDocument } from '../../../models';
 
@@ -8,14 +15,15 @@ const HALF_SCREEN_WIDTH_RATIO = 0.6;
   selector: 'app-document-view',
   templateUrl: './document-view.component.html',
   styleUrls: ['./document-view.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocumentViewComponent {
 
   @Input()
-  public readonly doc: OpenedDocument;
+  public doc: RecordOf<OpenedDocument>;
 
   constructor(
-    private readonly el: ElementRef,
+    private readonly el: ElementRef<HTMLElement>,
   ) { }
 
   public isHalfScreen(): boolean {

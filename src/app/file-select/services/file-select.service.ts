@@ -13,13 +13,13 @@ export class FileSelectService {
 
   public mountpoints: Mountpoint[] = [];
 
-  public selectedMountpoint: Mountpoint;
+  public selectedMountpoint?: Mountpoint;
 
-  public currentDirPath: string;
+  public currentDirPath?: string;
 
-  public currentDirContent: FolderContent;
+  public currentDirContent?: FolderContent;
 
-  public selectedPath: string;
+  public selectedPath?: string;
 
   constructor(
     private readonly fileSystem: FileSystemService,
@@ -30,10 +30,13 @@ export class FileSelectService {
     this.currentDirContent = this.filterDirContent(
       this.fileSystem.getFolderContent(path),
     );
-    this.selectedPath = '';
+    this.selectedPath = undefined;
   }
 
   public changeDirToParent(): void {
+    if (!this.currentDirPath) {
+      throw new Error('Error: Current directory is not selected.');
+    }
     this.changeDir(this.fileSystem.getParentDir(this.currentDirPath));
   }
 
@@ -54,8 +57,23 @@ export class FileSelectService {
   }
 
   public isCurrentDirRoot(): boolean {
+    if (!this.currentDirPath || !this.selectedMountpoint) {
+      throw new Error('Error: Current directory or mountpoint is not selected');
+    }
     return !this.fileSystem.dirAboveExists(this.currentDirPath)
       || this.currentDirPath === this.selectedMountpoint.path;
+  }
+
+  /**
+   * Checks if service is loaded and ready for work.
+   * Service is ready for work if mountpoints are loaded,
+   * mountpoint and current directory are selected.
+   */
+  public isLoaded(): boolean {
+    return !!this.mountpoints.length
+      && !!this.selectedMountpoint
+      && !!this.currentDirPath
+      && !!this.currentDirContent;
   }
 
   // must be called before using any other methods
@@ -79,11 +97,7 @@ export class FileSelectService {
   }
 
   public select(fileLike: FileInfo | Folder | null): void {
-    if (!fileLike) {
-      this.selectedPath = '';
-      return;
-    }
-    this.selectedPath = fileLike.path;
+    this.selectedPath = fileLike?.path;
   }
 
   public selectMountpoint(mountpoint: Mountpoint): void {

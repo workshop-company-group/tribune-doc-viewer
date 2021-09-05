@@ -15,10 +15,14 @@ export class LicenseGuard implements CanActivate {
   ) {}
 
   public async canActivate(
+    // Angular interface CanActivate syntax
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     route: ActivatedRouteSnapshot,
+    // Angular interface CanActivate syntax
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     state: RouterStateSnapshot,
   ): Promise<boolean> {
-    if (await this.license.keySubject.value) {
+    if (this.license.keySubject.value) {
       return true;
     }
     await this.router.navigateByUrl('/main-menu');

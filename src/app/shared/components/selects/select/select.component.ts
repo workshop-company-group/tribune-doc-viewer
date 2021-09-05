@@ -1,6 +1,15 @@
-import { Component, ElementRef, forwardRef,
-  HostBinding, HostListener, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  forwardRef,
+  HostBinding,
+  HostListener,
+  Input,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { List } from 'immutable';
 
 @Component({
   selector: 'app-select',
@@ -13,21 +22,22 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectComponent implements ControlValueAccessor {
 
   public value: string;
 
   @Input()
-  public set options(value: string[] | null) {
-    if (!value || !value.length) {
+  public set options(value: List<string> | null) {
+    if (!value || !value.size) {
       this.disabled = true;
       return;
     }
     this.valueOptions = value;
   }
 
-  public valueOptions: string[] = [];
+  public valueOptions = List<string>();
 
   public opened = false;
 
@@ -39,21 +49,21 @@ export class SelectComponent implements ControlValueAccessor {
   public disabled = false;
 
   constructor(
-    private readonly element: ElementRef,
+    private readonly el: ElementRef<HTMLElement>,
   ) { }
 
   public get iconSrc(): string {
     return this.disabled
-      ? "assets/icons/arrows/down-arrow-filled-disabled.svg"
-      : "assets/icons/arrows/down-arrow-filled.svg";
+      ? 'assets/icons/arrows/down-arrow-filled-disabled.svg'
+      : 'assets/icons/arrows/down-arrow-filled.svg';
   }
 
   @HostListener('document:click', ['$event'])
-  public handleClick(event: any) {
-    if (!this.element.nativeElement.contains(event.target)) {
-      this.changeOverlayState(false);
-    } else {
+  public handleClick(event: Event): void {
+    if (event.target && this.el.nativeElement.contains(event.target as Node)) {
       event.stopImmediatePropagation();
+    } else {
+      this.changeOverlayState(false);
     }
   }
 

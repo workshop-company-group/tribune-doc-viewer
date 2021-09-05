@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { map } from 'rxjs/operators';
 
 import { DocumentService } from '../../../file-view/services';
 import { LicenseService } from '../../../license/services';
@@ -10,8 +12,14 @@ import { UpdateService } from '../../../update/services/update.service';
   selector: 'app-main-menu-page',
   templateUrl: './main-menu-page.component.html',
   styleUrls: ['./main-menu-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainMenuPageComponent {
+
+  public readonly fileViewButtonText = this.documentService.opened.pipe(
+    map(documents => documents.size === 0),
+    map(isEmpty => isEmpty ? 'start' : 'continue'),
+  );
 
   constructor(
     public readonly auth: AuthService,

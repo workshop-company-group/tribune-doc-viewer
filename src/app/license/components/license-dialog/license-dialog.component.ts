@@ -1,23 +1,31 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 
 import { WindowStateService } from '../../../shared/services';
-import { LicenseService } from '../../services';
+import { LicenseService, KEY_LENGTH } from '../../services';
 
 @Component({
   selector: 'app-license-dialog',
   templateUrl: './license-dialog.component.html',
   styleUrls: ['./license-dialog.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LicenseDialogComponent implements OnInit {
+export class LicenseDialogComponent implements OnDestroy, OnInit {
 
   public wrongKey = false;
 
   public readonly keyControl = new FormControl('', [
+    // Angular syntax of using `required` validator
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     Validators.required,
-    Validators.minLength(25),
+    Validators.minLength(KEY_LENGTH),
   ]);
 
   private readonly subscriptions: Subscription[] = [];
@@ -31,13 +39,12 @@ export class LicenseDialogComponent implements OnInit {
     this.subscriptions.forEach(
       subscription => subscription.unsubscribe(),
     );
-    this.subscriptions.length = 0;
   }
 
   public ngOnInit(): void {
     this.subscriptions.push(
       this.keyControl.valueChanges.subscribe(
-        () => this.wrongKey = false,
+        () => { this.wrongKey = false; },
       ),
     );
   }
@@ -46,9 +53,6 @@ export class LicenseDialogComponent implements OnInit {
     const result = await this.license.activate(this.keyControl.value);
 
     this.wrongKey = !result;
-    if (result) {
-      // TODO
-    }
   }
 
   public exit(): void {

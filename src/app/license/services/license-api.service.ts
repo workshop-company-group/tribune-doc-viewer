@@ -12,7 +12,7 @@ export class LicenseApiService {
   ) { }
 
   public activate(key: string): Promise<void> {
-    return this.http.patch<void>(
+    return this.http.patch(
       `/api/licenses/${key}`, {}, {
         params: {
           // eslint-disable-next-line camelcase
@@ -21,7 +21,7 @@ export class LicenseApiService {
           is_activated: 'true',
         },
       },
-    ).toPromise();
+    ).toPromise() as Promise<unknown> as Promise<void>;
   }
 
   public validate(key: string): Promise<LicenseApiResponse> {

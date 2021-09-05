@@ -16,7 +16,7 @@ export class PasswordStateService {
   private readonly pageStateSubject = new
   BehaviorSubject<PasswordPageState>(null);
 
-  public pageStateObservable = this.pageStateSubject.asObservable();
+  public readonly pageStateObservable = this.pageStateSubject.asObservable();
 
   constructor(
     private readonly documentService: DocumentService,
@@ -34,6 +34,8 @@ export class PasswordStateService {
   }
 
   public async continueWithPassword(): Promise<void> {
+    const documentsLength = this.documentService.opened.value.size;
+
     switch (this.pageState) {
     case 'settings':
       this.pageState = null;
@@ -53,12 +55,13 @@ export class PasswordStateService {
       }
 
       // remove converted documents
-      const documentsLength = this.documentService.opened.length;
       for (let i = 0; i < documentsLength; i++) {
         await this.documentService.close(0);
       }
 
       this.windowState.exit();
+      break;
+    case null:
       break;
     }
   }

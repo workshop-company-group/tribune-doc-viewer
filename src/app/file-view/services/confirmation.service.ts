@@ -9,21 +9,27 @@ type ConfirmationState = null | 'stop-recording'
 | 'select-broadcasting';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConfirmationService {
 
-  private readonly stateObservable = new
+  private readonly stateSubject = new
   BehaviorSubject<ConfirmationState>(null);
+
+  public readonly stateObservable = this.stateSubject.asObservable();
 
   constructor() { }
 
-  get state(): ConfirmationState {
-    return this.stateObservable.value;
+  public get state(): ConfirmationState {
+    return this.stateSubject.value;
   }
 
-  set state(value: ConfirmationState) {
-    this.stateObservable.next(value);
+  public set state(value: ConfirmationState) {
+    this.stateSubject.next(value);
+  }
+
+  public clearConfirmation(): void {
+    this.state = null;
   }
 
 }

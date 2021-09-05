@@ -8,6 +8,9 @@ export interface OpenedDocument {
   doc: Document;
   pdf: PdfDocument;
   selected: boolean;
+  /**
+   * Index of opened page in document. Indexing start at 0.
+   */
   currentPage: BehaviorSubject<number>;
   recordBroadcastState: BehaviorSubject<RecordBroadcastState>;
   /**

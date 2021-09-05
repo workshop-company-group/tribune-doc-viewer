@@ -103,6 +103,7 @@
     "electron-drivelist": "8.0.10",
     "file-loader": "6.0.0",
     "get-file-info": "1.0.3",
+    "immutable": "4.0.0-rc.14",
     "jsonfile": "4.0.0",
     "pdfjs-dist": "2.6.347",
     "read-ini-file": "3.0.1",

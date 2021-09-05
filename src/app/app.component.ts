@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { ElectronService } from './core/services';
@@ -10,6 +10,7 @@ import { routeAnimations } from './animations';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [ routeAnimations ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
 
@@ -17,10 +18,8 @@ export class AppComponent {
     private readonly electron: ElectronService,
   ) { }
 
-  public prepareRoute(outlet: RouterOutlet): string {
-    return outlet
-      && outlet.activatedRouteData
-      && outlet.activatedRouteData.animationState;
+  public prepareRoute(outlet: RouterOutlet): string | undefined {
+    return outlet.activatedRouteData.animationState as string | undefined;
   }
 
 }

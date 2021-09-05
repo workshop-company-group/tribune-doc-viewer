@@ -1,4 +1,9 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  Input,
+} from '@angular/core';
 import { ControlValueAccessor, FormControl,
   NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -13,6 +18,7 @@ import { ControlValueAccessor, FormControl,
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent implements ControlValueAccessor {
 
@@ -23,9 +29,11 @@ export class InputComponent implements ControlValueAccessor {
 
   @Input()
   public set disabled(value: boolean) {
-    value ?
-      this.inputControl.disable() :
+    if (value) {
+      this.inputControl.disable();
+    } else {
       this.inputControl.enable();
+    }
   }
 
   public changeHandler: (obj: string) => void = () => {

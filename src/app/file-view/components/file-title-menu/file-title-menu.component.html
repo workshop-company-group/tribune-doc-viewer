@@ -1,38 +1,38 @@
-<div class="left-container">
-    <app-icon-button class="menu-button"
-        src="assets/icons/menu.svg"
-        (button-click)="router.navigateByUrl('/main-menu')">
-    </app-icon-button>
+<ng-container *ngIf="documentService.opened | async as documents">
+    <div class="left-container">
+        <app-icon-button class="menu-button"
+            iconSrc="assets/icons/menu.svg"
+            (button-click)="router.navigateByUrl('/main-menu')">
+        </app-icon-button>
 
-    <app-file-title-menu-item 
-      class="left-item"
-      *ngIf="documentService.count > 0"
-      [document]="documentService.opened[0]"
-      (click)="documentService.select(0)"
-      (close)="documentService.close(0)">
-    </app-file-title-menu-item>
-</div>
-
-<div class="right-container">
-    <div class="item-container">
-        <app-file-title-menu-item 
-            class="right-item"
-            *ngIf="documentService.count > 1"
-            [document]="documentService.opened[1]"
-            (click)="documentService.select(1)"
-            (close)="documentService.close(1)">
+        <app-file-title-menu-item class="left-item"
+            *ngIf="documents.get(0) as doc"
+            [doc]="doc"
+            (click)="documentService.select(0)"
+            (close-click)="documentService.close(0)">
         </app-file-title-menu-item>
-
-        <div class="button-container"
-            *ngIf="documentService.count === 1"
-            (click)="openDocument()">
-            <app-icon-button class="add-document-button"
-                src="assets/icons/plus.svg"
-                (button-click)="openDocument()">
-            </app-icon-button>
-        </div>
     </div>
 
-    <img class="logo" 
-        src="assets/logos/white-logo-shorten.svg">
-</div>
+    <div class="right-container">
+        <div class="item-container">
+            <app-file-title-menu-item class="right-item"
+                *ngIf="documents.get(1) as doc"
+                [doc]="doc"
+                (click)="documentService.select(1)"
+                (close-click)="documentService.close(1)">
+            </app-file-title-menu-item>
+
+            <div class="button-container"
+                *ngIf="documents.size === 1"
+                (click)="openDocument()">
+                <app-icon-button class="add-document-button"
+                    iconSrc="assets/icons/plus.svg"
+                    (button-click)="openDocument()">
+                </app-icon-button>
+            </div>
+        </div>
+
+        <img class="logo" 
+            src="assets/logos/white-logo-shorten.svg">
+    </div>
+</ng-container>
