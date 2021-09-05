@@ -6,7 +6,8 @@
         {{ 'activation-exit' | locale | async }}
     </app-small-button>
     <app-small-button class="retry"
-        [accent]="true">
-        {{ 'retry' | locale | async }}
+        [accent]="true"
+        [disabled]="isConnecting | async">
+        {{ retryButtonText | locale | async }}
     </app-small-button>
 </div>
