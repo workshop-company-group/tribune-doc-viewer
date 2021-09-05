@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+
+import { RecordOf } from 'immutable';
 
 import { OpenedDocument } from '../../models';
 import { ConfirmationService } from '../../services';
@@ -6,15 +14,16 @@ import { ConfirmationService } from '../../services';
 @Component({
   selector: 'app-file-title-menu-item',
   templateUrl: './file-title-menu-item.component.html',
-  styleUrls: ['./file-title-menu-item.component.scss']
+  styleUrls: ['./file-title-menu-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileTitleMenuItemComponent {
 
-  @Input('document')
-  public doc: OpenedDocument;
+  @Input()
+  public doc: RecordOf<OpenedDocument>;
 
-  @Output('close')
-  public closeEvent = new EventEmitter<void>();
+  @Output('close-click')
+  public readonly closeEvent = new EventEmitter<void>();
 
   constructor(
     private readonly confirmation: ConfirmationService,

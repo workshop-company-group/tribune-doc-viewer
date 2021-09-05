@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
 
 import { BehaviorSubject } from 'rxjs';
 
 import { LicenseError } from '../exceptions';
-import { AppConfig } from '../../../environments/environment';
 
 import { LicenseApiService } from './license-api.service';
 import { LicenseApiResponseStatus } from '../models';
@@ -15,8 +13,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as util from 'util';
 
+export const KEY_LENGTH = 25;
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LicenseService {
   public readonly keySubject = new BehaviorSubject<string | null>(null);
@@ -24,14 +24,14 @@ export class LicenseService {
   private readonly defaultPath: string = path.join(app.getPath('userData'), 'license.key');
 
   constructor(
-    private readonly api: LicenseApiService
+    private readonly api: LicenseApiService,
   ) {}
 
   private async saveKey(key: string): Promise<void> {
     const writeFileAsync = util.promisify(fs.writeFile);
 
     this.keySubject.next(key); // save key to RAM
-    await writeFileAsync(this.defaultPath, key, {flag: 'wx'});
+    await writeFileAsync(this.defaultPath, key, { flag: 'wx' });
   }
 
   public async removeKey(): Promise<void> {
@@ -46,16 +46,16 @@ export class LicenseService {
     const readFileAsync = util.promisify(fs.readFile);
 
     if (!(await existsAsync(this.defaultPath)))
-      throw new LicenseError('License file does not exist')
+      throw new LicenseError('License file does not exist');
     return (await readFileAsync(this.defaultPath)).toString();
   }
 
   public async isLicenseKeyValid(key: string): Promise<boolean> {
     try {
       const validationResult = await this.api.validate(key);
-      return validationResult.status === LicenseApiResponseStatus.OK
-    } catch(err) {
-        throw new LicenseError('Something went wrong');
+      return validationResult.status === LicenseApiResponseStatus.OK;
+    } catch (err) {
+      throw new LicenseError('Something went wrong');
     }
     return true;
   }
@@ -81,7 +81,7 @@ export class LicenseService {
   public async isSavedLicenseKeyValid(): Promise<boolean> {
     const savedKey = await this.readLicenseFromFile();
     if (savedKey.length > 0)
-      return await this.isLicenseKeyValid(savedKey);
+      return this.isLicenseKeyValid(savedKey);
     return false;
   }
 }

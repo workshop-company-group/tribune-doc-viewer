@@ -1,14 +1,20 @@
-import { Component, OnDestroy, OnInit, } from '@angular/core';
-import { FormControl, FormGroup, } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
-import { Subscription, } from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { AuthService, } from '../../../password/services';
+import { AuthService } from '../../../password/services';
 
 @Component({
   selector: 'app-password-settings-section',
   templateUrl: './password-settings-section.component.html',
-  styleUrls: ['./password-settings-section.component.scss']
+  styleUrls: ['./password-settings-section.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PasswordSettingsSectionComponent implements OnDestroy, OnInit {
 
@@ -18,6 +24,7 @@ export class PasswordSettingsSectionComponent implements OnDestroy, OnInit {
   });
 
   public wrongPasswordHint = false;
+
   public passwordControlsOpened = false;
 
   private readonly subscriptions: Subscription[] = [];
@@ -36,7 +43,7 @@ export class PasswordSettingsSectionComponent implements OnDestroy, OnInit {
 
   public ngOnInit(): void {
     this.subscriptions.push(
-      this.currentControl.valueChanges.subscribe((value) => {
+      this.currentControl.valueChanges.subscribe(() => {
         this.wrongPasswordHint = false;
       }),
     );
@@ -47,8 +54,8 @@ export class PasswordSettingsSectionComponent implements OnDestroy, OnInit {
   }
 
   public savePassword(): void {
-    const currentPassword = this.currentControl.value;
-    const updatePassword = this.updateControl.value;
+    const currentPassword = this.currentControl.value as string;
+    const updatePassword = this.updateControl.value as string;
 
     if (!this.auth.passwordIsValid(currentPassword)) {
       this.wrongPasswordHint = true;
@@ -57,7 +64,7 @@ export class PasswordSettingsSectionComponent implements OnDestroy, OnInit {
 
     this.auth.setPassword(updatePassword);
     this.closeEditingMode();
- }
+  }
 
   public closeEditingMode(): void {
     this.passwordControlsOpened = false;

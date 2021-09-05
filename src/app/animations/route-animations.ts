@@ -1,7 +1,6 @@
 import {
   animate,
   AnimationMetadata,
-  AnimationQueryMetadata,
   group,
   style,
   transition,
@@ -16,7 +15,7 @@ const initialRouteStyles = query(':enter, :leave', [
     position: 'absolute',
     top: 0,
     left: 0,
-  })
+  }),
 ]);
 
 const slideUpAnimation: AnimationMetadata[] = [

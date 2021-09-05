@@ -1,28 +1,35 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject, } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 type ConfirmationState = null | 'stop-recording'
-                              | 'close-recording'
-                              | 'close-broadcasting'
-                              | 'select-file'
-                              | 'select-broadcasting';
+| 'close-recording'
+| 'close-broadcasting'
+| 'select-file'
+| 'select-broadcasting';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConfirmationService {
 
-  private readonly stateObservable = new BehaviorSubject<ConfirmationState>(null);
+  private readonly stateSubject = new
+  BehaviorSubject<ConfirmationState>(null);
+
+  public readonly stateObservable = this.stateSubject.asObservable();
 
   constructor() { }
 
-  get state(): ConfirmationState {
-    return this.stateObservable.value;
+  public get state(): ConfirmationState {
+    return this.stateSubject.value;
   }
 
-  set state(value: ConfirmationState) {
-    this.stateObservable.next(value);
+  public set state(value: ConfirmationState) {
+    this.stateSubject.next(value);
+  }
+
+  public clearConfirmation(): void {
+    this.state = null;
   }
 
 }

@@ -51,3 +51,8 @@ node-build:
 
 electron-build:
 	@echo ":::testing electron release build.."
+
+lint:
+	@echo ":::code linting.."
+	docker exec -i $(NAME)$(HASH) npm run lint
+	docker exec -i $(NAME)$(HASH) npm run lint:styles

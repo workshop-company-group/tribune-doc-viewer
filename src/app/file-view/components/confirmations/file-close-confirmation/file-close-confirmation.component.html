@@ -1,11 +1,13 @@
-<span class="title"
-    *ngIf="confirmation.state === 'close-broadcasting'">
-    {{ 'file-broadcasting' | locale | async }}
-</span>
-<span class="title"
-    *ngIf="confirmation.state === 'close-recording'">
-    {{ 'recording-in-progress' | locale | async }}
-</span>
+<ng-container [ngSwitch]="confirmation.stateObservable | async">
+    <span class="title"
+        *ngSwitchCase="'close-broadcasting'">
+        {{ 'file-broadcasting' | locale | async }}
+    </span>
+    <span class="title"
+        *ngSwitchCase="'close-recording'">
+        {{ 'recording-in-progress' | locale | async }}
+    </span>
+</ng-container>
 
 <span class="subtitle">
     {{ 'file-close-prompt' | locale | async }}

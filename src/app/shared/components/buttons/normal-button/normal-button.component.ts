@@ -1,20 +1,27 @@
-import { Component, EventEmitter, Input, Output, } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-normal-button',
   templateUrl: './normal-button.component.html',
-  styleUrls: ['./normal-button.component.scss']
+  styleUrls: ['./normal-button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NormalButtonComponent {
 
   @Input()
-  public readonly disabled = false;
+  public disabled = false;
 
   @Input()
-  public readonly accent = false;
+  public accent = false;
 
   @Output('button-click')
-  public clickEmitter = new EventEmitter<void>();
+  public readonly clickEmitter = new EventEmitter<void>();
 
   constructor() { }
 

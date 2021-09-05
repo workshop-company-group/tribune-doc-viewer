@@ -1,12 +1,10 @@
 import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import * as path from 'path';
-import { electron } from 'process';
-import { Subject } from 'rxjs';
 import * as drivelist from 'electron-drivelist';
 import * as url from 'url';
 
-let win: BrowserWindow = null;
-let externalWin: BrowserWindow = null;
+let win: BrowserWindow;
+let externalWin: BrowserWindow;
 
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
@@ -24,16 +22,19 @@ function createWindow(): BrowserWindow {
     height: size.height,
     webPreferences: {
       nodeIntegration: true,
-      allowRunningInsecureContent: (serve) ? true : false,
-      contextIsolation: false,  // false if you want to run 2e2 test with Spectron
-      enableRemoteModule : true // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular)
+      allowRunningInsecureContent: !!(serve),
+      // false if you want to run 2e2 test with Spectron
+      contextIsolation: false,
+      // true if you want to run 2e2 test with
+      // Spectron or use remote module in renderer context (ie. Angular)
+      enableRemoteModule: true,
     },
   });
   win.webContents.openDevTools();
-  win.loadURL(url.format({
+  void win.loadURL(url.format({
     pathname: path.join(__dirname, 'dist/index.html'),
     protocol: 'file:',
-    slashes: true
+    slashes: true,
   }));
 
   win.on('closed', () => {
@@ -44,11 +45,10 @@ function createWindow(): BrowserWindow {
 
 function createExternalWindow(id: number): BrowserWindow {
   const electronScreen = screen;
-  const displays = electronScreen.getAllDisplays()
-  const externalDisplay = displays.find((display) => {
-    // return display.bounds.x !== 0 || display.bounds.y !== 0
-    return display.id === id;
-  })
+  const displays = electronScreen.getAllDisplays();
+  const externalDisplay = displays.find(display =>
+    display.id === id,
+  );
 
   if (externalDisplay) {
     externalWin = new BrowserWindow({
@@ -57,31 +57,36 @@ function createExternalWindow(id: number): BrowserWindow {
       fullscreen: true,
       webPreferences: {
         nodeIntegration: true,
-        allowRunningInsecureContent: (serve) ? true : false,
-        contextIsolation: false,  // false if you want to run 2e2 test with Spectron
-        enableRemoteModule : true // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular)
+        allowRunningInsecureContent: !!(serve),
+        // false for 2e2 test with Spectron
+        contextIsolation: false,
+        // true for 2e2 test with Spectron
+        // or use remote module in renderer context (ie. Angular)
+        enableRemoteModule: true,
       },
     });
     externalWin.webContents.openDevTools();
-    externalWin.loadURL(url.format({
+    void externalWin.loadURL(url.format({
       pathname: path.join(__dirname, 'src/external/external.html'),
       protocol: 'file:',
-      slashes: true
-    }))
-      // .then(() => { isExternalWinCreated.next(); });
+      slashes: true,
+    }));
+    // .then(() => { isExternalWinCreated.next(); });
 
     externalWin.on('closed', () => {
       // externalWin.webContents.send('reset-pdf');
-    })
+    });
   }
 
   return externalWin;
 }
 
+const CREATE_WINDOW_TIMEOUT = 400;
+const PROMISE_TIMEOUT = 2000;
 try {
   app.disableHardwareAcceleration();
   app.commandLine.appendSwitch('js-flags', '--max-old-space-size=4096');
-  app.on('ready', () => setTimeout(createWindow, 400));
+  app.on('ready', () => setTimeout(createWindow, CREATE_WINDOW_TIMEOUT));
 
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {
@@ -92,7 +97,8 @@ try {
   });
 
   app.on('activate', () => {
-    if (win === null) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (!win) {
       createWindow();
     }
   });
@@ -104,10 +110,10 @@ try {
   ipcMain.handle('external-window', async (event, arg) => {
 
     createExternalWindow(arg);
-    const promise1 = new Promise((resolve, reject) => {
+    const promise1 = new Promise(resolve => {
       setTimeout(() => {
         resolve('foo');
-      }, 2000);
+      }, PROMISE_TIMEOUT);
     });
     await promise1;
     // await isExternalWinCreated.toPromise();
@@ -140,9 +146,7 @@ try {
   });
 
   // Returns list of drives
-  ipcMain.handle('drive-list', async (event, arg) => {
-    return await drivelist.list();
-  });
+  ipcMain.handle('drive-list', () => drivelist.list());
 
 } catch (e) {
   // Catch Error

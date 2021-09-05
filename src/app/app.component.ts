@@ -1,36 +1,25 @@
-import { Component } from '@angular/core';
-import { RouterOutlet, } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 import { ElectronService } from './core/services';
-import { AppConfig } from '../environments/environment';
 
-import { routeAnimations, } from './animations';
+import { routeAnimations } from './animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [ routeAnimations, ],
+  animations: [ routeAnimations ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
 
-  constructor(private electronService: ElectronService) {
-    // console.log('AppConfig', AppConfig);
+  constructor(
+    private readonly electron: ElectronService,
+  ) { }
 
-    if (electronService.isElectron) {
-      // console.log(process.env);
-      // console.log('Run in electron');
-      // console.log('Electron ipcRenderer', this.electronService.ipcRenderer);
-      // console.log('NodeJS childProcess', this.electronService.childProcess);
-    } else {
-      // console.log('Run in browser');
-    }
-  }
-
-  public prepareRoute(outlet: RouterOutlet): string {
-    return outlet
-      && outlet.activatedRouteData
-      && outlet.activatedRouteData.animationState;
+  public prepareRoute(outlet: RouterOutlet): string | undefined {
+    return outlet.activatedRouteData.animationState as string | undefined;
   }
 
 }

@@ -6,19 +6,22 @@
   align-items: flex-start;
 
   background: var(--base-white-color);
-  box-shadow: var(--strong-shadow);
   border-radius: 10px;
+  box-shadow: var(--strong-shadow);
 
   pointer-events: auto;
 
   .record-broadcast-container {
-    width: 470px;
-    margin: 35px 30px 35px 50px;
-
     display: flex;
+    width: 470px;
+
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
+    margin: 35px 30px 35px 50px;
+
+    transition: var(--base-transition);
 
     .record-container, .broadcast-container {
       display: flex;
@@ -26,12 +29,20 @@
       align-items: center;
 
       .hint {
+        @extend %primary-light-font;
+
         margin-right: 20px;
 
         color: var(--base-black-color);
-
-        @extend %primary-light-font;
       }
+    }
+
+    &.wrapped {
+      overflow: hidden;
+      width: 0;
+      height: 0;
+
+      margin: 0;
     }
   }
 

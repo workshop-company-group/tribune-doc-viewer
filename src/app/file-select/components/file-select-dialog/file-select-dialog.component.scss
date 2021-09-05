@@ -1,21 +1,21 @@
-@import "../../../../styles/mixins.scss";
+@import '../../../../styles/mixins';
 
 :host {
+  display: flex;
+  overflow: hidden;
   height: 1000px;
 
-  display: flex;
   flex-direction: row;
 
   border-radius: 10px;
-  overflow: hidden;
 
   .left-container {
+    display: flex;
     height: 100%;
 
-    padding: 20px;
-
-    display: flex;
     flex-direction: column;
+
+    padding: 20px;
 
     background: var(--faint-light-grey-color);
 
@@ -29,39 +29,34 @@
       }
 
       .title {
+        @extend %primary-regular-font;
+
         margin-left: 10px;
 
         color: var(--base-black-color);
-        @extend %primary-regular-font;
       }
     }
 
     .drive-container {
-      margin-top: 15px;
-      padding: 10px;
-
       display: flex;
       flex-direction: column;
 
+      padding: 10px;
+      margin-top: 15px;
+
       .drive {
-        margin: 15px 0;
         --normal-button-justify-content: flex-start;
+
+        margin: 15px 0;
+      }
+
+      .filler-drive {
+        visibility: hidden;
       }
     }
   }
 
   .right-container {
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-between;
-
-    background: var(--base-white-color);
-
-    @extend %primary-light-font;
-
     /* local variables */
     --icon-field-width: 125px;
     --name-field-width: 440px;
@@ -72,28 +67,39 @@
     --file-right-padding: 20px;
     --file-icon-height: 30px;
 
+    @extend %primary-light-font;
+
+    display: flex;
+    height: 100%;
+
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    background: var(--base-white-color);
+
     .dir-content-container {
+      display: flex;
       /* will be recalculated by flex-container
       needed here for overflow-y: scroll to work */
       height: 0;
 
-      display: flex;
       flex-direction: column;
       flex-grow: 1;
 
       .title-container {
-        margin: 30px 0 10px 0;
-
         display: flex;
         flex-direction: row;
+
+        margin: 30px 0 10px;
 
         color: var(--faint-dark-grey-color);
 
         .name {
           width: var(--name-field-width);
 
-          margin-left: var(--icon-field-width);
           margin-right: var(--field-margin);
+          margin-left: var(--icon-field-width);
         }
 
         .type {
@@ -117,9 +123,9 @@
         overflow-y: scroll;
 
         .icon-container {
+          display: flex;
           width: var(--icon-field-width);
 
-          display: flex;
           flex-direction: row;
           justify-content: center;
 
@@ -129,18 +135,17 @@
         }
 
         .go-back-button {
+          display: flex;
           height: var(--file-height);
           min-height: var(--file-height);
 
-          display: flex;
           flex-direction: row;
           align-items: center;
 
           cursor: pointer;
-          user-select: none;
-
           -webkit-tap-highlight-color: transparent;
           transition: var(--base-transition);
+          user-select: none;
 
           &:active {
             background: var(--faint-light-grey-color);
@@ -152,20 +157,19 @@
         }
 
         .file-container, .folder-container {
+          display: flex;
           height: var(--file-height);
           min-height: var(--file-height);
 
-          padding-right: var(--file-right-padding);
-
-          display: flex;
           flex-direction: row;
           align-items: center;
 
-          cursor: pointer;
-          user-select: none;
+          padding-right: var(--file-right-padding);
 
+          cursor: pointer;
           -webkit-tap-highlight-color: transparent;
           transition: var(--base-transition);
+          user-select: none;
 
           &.selected {
             background: var(--faint-light-grey-color);
@@ -178,17 +182,17 @@
           .name {
             width: var(--name-field-width);
 
-            color: var(--base-black-color);
-
             margin-right: var(--field-margin);
+
+            color: var(--base-black-color);
           }
 
           .type {
             width: var(--type-field-width);
 
-            color: var(--faint-dark-grey-color);
-
             margin-right: var(--field-margin);
+
+            color: var(--faint-dark-grey-color);
           }
 
           .size {

@@ -17,7 +17,7 @@
          [ngClass]="{ 'visible': doc.recordBroadcastState.value !== null }">
 
     <app-icon-button class="close-button" 
-        [src]="doc.selected
+        [iconSrc]="doc.selected
             ? 'assets/icons/crosses/cross-white.svg'
             : 'assets/icons/crosses/cross-black.svg'"
         (button-click)="close()">

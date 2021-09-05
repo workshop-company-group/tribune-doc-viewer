@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot,
-  Router, RouterStateSnapshot, } from '@angular/router';
+  Router, RouterStateSnapshot } from '@angular/router';
 
 import { LicenseService } from '../services';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LicenseGuard implements CanActivate {
 
@@ -15,15 +15,17 @@ export class LicenseGuard implements CanActivate {
   ) {}
 
   public async canActivate(
+    // Angular interface CanActivate syntax
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    // Angular interface CanActivate syntax
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    state: RouterStateSnapshot,
   ): Promise<boolean> {
-    if (await this.license.keySubject.value) {
+    if (this.license.keySubject.value) {
       return true;
-    } else {
-      await this.router.navigateByUrl('/main-menu');
-      return false;
     }
+    await this.router.navigateByUrl('/main-menu');
+    return false;
   }
-
 }

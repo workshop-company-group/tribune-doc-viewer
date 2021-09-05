@@ -1,40 +1,36 @@
-<app-file-view-background class="background">
-</app-file-view-background>
-
 <app-file-title-menu class="title-menu">
 </app-file-title-menu>
 
 <app-file-viewer class="viewer">
 </app-file-viewer>
 
-
-<app-backdrop [opened]="confirmation.state === 'stop-recording'">
+<app-backdrop [opened]="finishRecordConfirmationOpened | async">
     <app-finish-record-confirmation class="confirmation"
-        (confirm-click)="confirmation.state = null">
+        (confirm-click)="confirmation.clearConfirmation()">
     </app-finish-record-confirmation>
 </app-backdrop>
 
-<app-backdrop [opened]="confirmation.state === 'select-broadcasting'"
-    *ngIf="documentService.opened.length === 2">
-    <app-file-select-confirmation class="confirmation"
-        (cancel-click)="confirmation.state = null"
-        (select-click)="startBroadcasting()">
-    </app-file-select-confirmation>
-</app-backdrop>
+<ng-container *ngIf="documentService.opened | async as documents">
+    <app-backdrop [opened]="fileSelectConfirmationOpened | async"
+        *ngIf="documents.size === 2">
+        <app-file-select-confirmation class="confirmation"
+            (cancel-click)="confirmation.clearConfirmation()"
+            (select-click)="startBroadcasting()">
+        </app-file-select-confirmation>
+    </app-backdrop>
+</ng-container>
 
-<app-backdrop [opened]="confirmation.state === 'close-broadcasting'
-                    || confirmation.state === 'close-recording'">
+<app-backdrop [opened]="fileCloseConfirmationOpened | async">
     <app-file-close-confirmation class="confirmation"
         (cancel-click)="cancelClosing()"
         (confirm-click)="closeDocument()">
     </app-file-close-confirmation>
 </app-backdrop>
 
-<app-backdrop [opened]="confirmation.state === 'select-file'"
-    *ngIf="fileSelect.selectedMountpoint">
+<app-backdrop [opened]="fileSelectDialogOpened | async">
     <app-file-select-dialog class="confirmation"
-        [open-button]="'add' | locale | async"
-        (close-click)="confirmation.state = null"
+        [openButtonText]="'add' | locale | async"
+        (close-click)="confirmation.clearConfirmation()"
         (open-click)="fileSelectedHandler($event)">
     </app-file-select-dialog>
 </app-backdrop>

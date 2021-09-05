@@ -6,10 +6,10 @@ import { LocalePipe } from './pipes';
 
 @NgModule({
   declarations: [
-    LocalePipe
+    LocalePipe,
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
     LocalePipe,

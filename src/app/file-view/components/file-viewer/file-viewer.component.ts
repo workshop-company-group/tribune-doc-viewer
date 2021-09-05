@@ -1,25 +1,21 @@
-import { Component, } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { ConfirmationService,
-  DocumentService } from '../../services';
-
-import { FileSelectService, } from '../../../file-select/services';
+import { ConfirmationService, DocumentService } from '../../services';
 
 @Component({
   selector: 'app-file-viewer',
   templateUrl: './file-viewer.component.html',
-  styleUrls: ['./file-viewer.component.scss']
+  styleUrls: ['./file-viewer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileViewerComponent {
 
   constructor(
     public readonly confirmation: ConfirmationService,
     public readonly documentService: DocumentService,
-    public readonly fileSelect: FileSelectService,
   ) { }
 
-  public async openDocument(): Promise<void> {
-    await this.fileSelect.loadMountpoints();
+  public openDocument(): void {
     this.confirmation.state = 'select-file';
   }
 

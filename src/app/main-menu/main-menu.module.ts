@@ -6,7 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { LicenseModule } from '../license/license.module';
 import { LocaleModule } from '../locale/locale.module';
 
-import { MainMenuPageComponent, } from './components';
+import { MainMenuPageComponent } from './components';
 
 
 @NgModule({
@@ -19,6 +19,6 @@ import { MainMenuPageComponent, } from './components';
     LocaleModule,
     MainMenuRoutingModule,
     SharedModule,
-  ]
+  ],
 })
 export class MainMenuModule { }

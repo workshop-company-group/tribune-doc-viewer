@@ -1,11 +1,17 @@
-import { Component, EventEmitter, Output, } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 
 import { ConfirmationService } from '../../../services';
 
 @Component({
   selector: 'app-file-close-confirmation',
   templateUrl: './file-close-confirmation.component.html',
-  styleUrls: ['./file-close-confirmation.component.scss']
+  styleUrls: ['./file-close-confirmation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileCloseConfirmationComponent {
 

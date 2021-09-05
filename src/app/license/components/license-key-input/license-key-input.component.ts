@@ -1,9 +1,17 @@
-import { Component, forwardRef, Input, OnDestroy, OnInit, } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { ControlValueAccessor, FormControl,
-  NG_VALUE_ACCESSOR, } from '@angular/forms';
+  NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { Subscription, } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+
+import { KEY_LENGTH } from '../../services';
 
 @Component({
   selector: 'app-license-key-input',
@@ -14,17 +22,22 @@ import { filter, map, tap } from 'rxjs/operators';
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => LicenseKeyInputComponent),
       multi: true,
-    }
+    },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LicenseKeyInputComponent
 implements ControlValueAccessor, OnDestroy, OnInit {
 
   public readonly inputControl = new FormControl('');
 
-  private changeHandler: Function = () => {};
+  private changeHandler: (obj: string) => void = () => {
+    // empty
+  };
 
-  private touchedHandler: Function = () => {};
+  private touchedHandler: () => void = () => {
+    // empty
+  };
 
   private readonly subscriptions: Subscription[] = [];
 
@@ -32,20 +45,18 @@ implements ControlValueAccessor, OnDestroy, OnInit {
 
   public ngOnDestroy(): void {
     this.subscriptions.forEach(
-      subscription => subscription.unsubscribe()
+      subscription => subscription.unsubscribe(),
     );
-    this.subscriptions.length = 0;
   }
 
   public ngOnInit(): void {
     this.subscriptions.push(
       this.inputControl.valueChanges.pipe(
-        filter(value => !!value.length),
+        filter((value: string) => !!value.length),
         map(value => this.formatInput(value)),
       ).subscribe(value => {
         this.inputControl.setValue(value, { emitEvent: false });
-        this.changeHandler(value
-          .split('-').join(''));
+        this.changeHandler(value.split('-').join(''));
       }),
     );
   }
@@ -54,21 +65,24 @@ implements ControlValueAccessor, OnDestroy, OnInit {
     this.inputControl.setValue(this.formatInput(obj));
   }
 
-  public registerOnChange(fn: Function): void {
+  public registerOnChange(fn: (obj: string) => void): void {
     this.changeHandler = fn;
   }
 
-  public registerOnTouched(fn: Function): void {
+  public registerOnTouched(fn: () => void): void {
     this.touchedHandler = fn;
   }
 
   private formatInput(value: string): string {
-    const formatted = value
+    const uppercasedNonsplited = value
       .split('-').join('')
-      .slice(0, 25)
+      .slice(0, KEY_LENGTH)
       .replace(/[^0-9a-z]/gi, '')
       .toUpperCase();
-    return formatted.length ? formatted.match(/.{1,5}/g).join('-') : formatted;
+
+    const splitted = uppercasedNonsplited.match(/.{1,5}/g);
+
+    return splitted?.join('-') ?? uppercasedNonsplited;
   }
 
 }

@@ -7,13 +7,13 @@
 </span>
 
 <div class="logo-container">
-    <img class="logo" src="assets/logos/colorful-logo.svg" alt="BM Group">
+    <img class="logo" src="assets/logos/colorful-logo.svg" alt="WS Company Group">
 </div>
 
 <div class="buttons-container">
     <app-normal-button class="button"
         (button-click)="openFileView()">
-        {{ (documentService.isEmpty() ? 'start' : 'continue') | locale | async }}
+        {{ fileViewButtonText | locale | async }}
     </app-normal-button>
     <app-normal-button class="button"
         (button-click)="openSettings()">

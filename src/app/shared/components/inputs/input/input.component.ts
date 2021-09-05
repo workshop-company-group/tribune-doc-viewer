@@ -1,6 +1,11 @@
-import { Component, forwardRef, Input, } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  Input,
+} from '@angular/core';
 import { ControlValueAccessor, FormControl,
-  NG_VALUE_ACCESSOR, } from '@angular/forms';
+  NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
@@ -13,24 +18,31 @@ import { ControlValueAccessor, FormControl,
       multi: true,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent implements ControlValueAccessor {
 
   @Input()
-  public placeholder: string = '';
+  public placeholder = '';
 
   public readonly inputControl = new FormControl('');
 
   @Input()
   public set disabled(value: boolean) {
-    value ?
-      this.inputControl.disable() :
+    if (value) {
+      this.inputControl.disable();
+    } else {
       this.inputControl.enable();
+    }
   }
 
-  public changeHandler: Function = () => {};
+  public changeHandler: (obj: string) => void = () => {
+    // empty
+  };
 
-  public touchedHandler: Function = () => {};
+  public touchedHandler: () => void = () => {
+    // empty
+  };
 
   constructor() { }
 
@@ -38,11 +50,11 @@ export class InputComponent implements ControlValueAccessor {
     this.inputControl.setValue(obj, { emitEvent: false });
   }
 
-  public registerOnChange(fn: Function): void {
+  public registerOnChange(fn: (obj: string) => void): void {
     this.changeHandler = fn;
   }
 
-  public registerOnTouched(fn: Function): void {
+  public registerOnTouched(fn: () => void): void {
     this.touchedHandler = fn;
   }
 

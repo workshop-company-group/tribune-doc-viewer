@@ -1,11 +1,17 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 
 import { DocumentService } from '../../../services';
 
 @Component({
   selector: 'app-file-select-confirmation',
   templateUrl: './file-select-confirmation.component.html',
-  styleUrls: ['./file-select-confirmation.component.scss']
+  styleUrls: ['./file-select-confirmation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileSelectConfirmationComponent {
 

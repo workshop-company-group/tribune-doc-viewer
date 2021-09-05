@@ -1,26 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { PdfDocument } from '../../../models';
 
 @Component({
   selector: 'app-slide-thumbnail',
   templateUrl: './slide-thumbnail.component.html',
-  styleUrls: ['./slide-thumbnail.component.scss']
+  styleUrls: ['./slide-thumbnail.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SlideThumbnailComponent implements OnInit {
+export class SlideThumbnailComponent {
 
   @Input()
-  public readonly pdf: PdfDocument;
+  public pdf: PdfDocument;
 
   @Input()
-  public readonly page: number;
+  public page: number;
 
   @Input()
-  public readonly selected: boolean = false;
+  public selected = false;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

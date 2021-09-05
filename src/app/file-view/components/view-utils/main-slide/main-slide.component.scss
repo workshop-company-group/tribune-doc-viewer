@@ -3,19 +3,25 @@
   grid-template-columns: min-content auto min-content;
   grid-template-rows: auto min-content;
 
-  .pdf-content ::ng-deep canvas {
-    box-shadow: var(--base-shadow);
+  .pdf-content {
+    ::ng-deep {
+      canvas {
+        overflow: hidden;
 
-    border-radius: 10px;
-    overflow: hidden;
+        border-radius: 10px;
+        box-shadow: var(--base-shadow);
+      }
+    }
   }
 
   .previous-button {
     --icon-button-active-background: var(--base-black-color);
     --icon-button-icon-width: 25px;
-    margin-right: 15px;
 
     align-self: center;
+
+    margin-right: 15px;
+
     justify-self: end;
   }
 
@@ -23,9 +29,10 @@
     --icon-button-active-background: var(--base-black-color);
     --icon-button-icon-width: 25px;
 
+    align-self: center;
+
     margin-left: 15px;
 
-    align-self: center;
     justify-self: start;
   }
 
