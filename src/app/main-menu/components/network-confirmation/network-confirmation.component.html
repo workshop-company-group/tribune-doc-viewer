@@ -2,12 +2,15 @@
 <p class="description">{{ 'check-network' | locale | async }}</p>
 <div class="button-container">
     <app-small-button class="exit"
-        (button-click)="exit()">
+        (button-click)="exit()"
+    >
         {{ 'activation-exit' | locale | async }}
     </app-small-button>
     <app-small-button class="retry"
         [accent]="true"
-        [disabled]="isConnecting | async">
+        [disabled]="isConnecting | async"
+        (button-click)="checkConnection()"
+    >
         {{ retryButtonText | locale | async }}
     </app-small-button>
 </div>
