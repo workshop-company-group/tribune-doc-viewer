@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { DocumentService } from '../../../file-view/services';
 import { LicenseService } from '../../../license/services';
+import { NetworkService } from '../../../network/services';
 import { AuthService, PasswordStateService } from '../../../password/services';
 import { UpdateService } from '../../../update/services/update.service';
 
@@ -25,6 +26,7 @@ export class MainMenuPageComponent {
     public readonly auth: AuthService,
     public readonly documentService: DocumentService,
     public readonly license: LicenseService,
+    public readonly network: NetworkService,
     public readonly passwordState: PasswordStateService,
     public readonly router: Router,
     public readonly updateService: UpdateService,

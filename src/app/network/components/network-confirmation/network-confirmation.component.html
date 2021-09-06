@@ -11,6 +11,7 @@
         [disabled]="isConnecting | async"
         (button-click)="checkConnection()"
     >
-        {{ retryButtonText | locale | async }}
+        {{ retryButtonText | locale | async }} 
+        (20)
     </app-small-button>
 </div>

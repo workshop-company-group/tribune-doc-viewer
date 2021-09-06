@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { empty, Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { timeout, catchError, retry } from 'rxjs/operators';
 
 import { NetworkService } from '../services';
@@ -15,7 +15,7 @@ const HTTP_RESPONSE_TIMEOUT = 2000;
 const HTTP_RETRY_NUMBER = 3;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NetworkInterceptor implements HttpInterceptor {
 
@@ -33,9 +33,9 @@ export class NetworkInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       timeout(HTTP_RESPONSE_TIMEOUT),
       retry(HTTP_RETRY_NUMBER),
-      catchError(() => {
-        this.network.connection.next(false)
-        return empty();
+      catchError(error => {
+        this.network.connection.next(false);
+        return throwError(error);
       }),
     );
   }
