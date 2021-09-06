@@ -12,6 +12,8 @@
         (button-click)="checkConnection()"
     >
         {{ retryButtonText | locale | async }} 
-        (20)
+        <ng-container *ngIf="!(isConnecting | async)">
+            ({{ retryTimer | async }})
+        </ng-container>
     </app-small-button>
 </div>
