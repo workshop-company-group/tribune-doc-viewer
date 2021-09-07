@@ -26,6 +26,11 @@
 </div>
 
 <app-backdrop class="license-dialog"
-    [opened]="!(license.keySubject | async)">
+    [opened]="(network.connection | async) && !(license.keySubject | async)">
     <app-license-dialog></app-license-dialog>
+</app-backdrop>
+
+<app-backdrop class="network-confirmation"
+    [opened]="!(network.connection | async)">
+    <app-network-confirmation></app-network-confirmation>
 </app-backdrop>

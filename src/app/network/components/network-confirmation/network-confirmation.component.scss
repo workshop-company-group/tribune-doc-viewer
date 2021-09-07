@@ -1,0 +1,37 @@
+@import '../../../../styles/mixins';
+
+:host {
+  display: flex;
+  width: 590px;
+  box-sizing: border-box;
+
+  flex-direction: column;
+  align-items: center;
+
+  padding: 50px;
+
+  background: var(--faint-light-grey-color);
+  border-radius: 10px;
+  gap: 30px;
+
+  .heading {
+    @extend %primary-bold-font;
+
+    color: var(--base-black-color);
+    text-transform: uppercase;
+  }
+
+  .description {
+    @extend %primary-light-font;
+
+    color: var(--base-black-color);
+    text-align: center;
+  }
+
+  .button-container {
+    display: flex;
+
+    margin-top: 20px;
+    gap: 30px;
+  }
+}

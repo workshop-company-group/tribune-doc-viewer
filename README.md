@@ -23,6 +23,13 @@ npm install -g @angular/cli
 The application code is managed by `main.ts`. 
 You can disable "Developer Tools" by commenting `win.webContents.openDevTools();` in `main.ts`.
 
+### Generating Angular components/services/directives
+
+This project does not generate components/services/directives with test file 
+(`.spec`). If test file is required use flag `--skip-tests=false`.
+
+**All components are generated with OnPush change detection strategy by default.**
+
 ### Build
 
 ```bash

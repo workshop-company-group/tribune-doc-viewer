@@ -5,8 +5,11 @@ import { MainMenuRoutingModule } from './main-menu-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { LicenseModule } from '../license/license.module';
 import { LocaleModule } from '../locale/locale.module';
+import { NetworkModule } from '../network/network.module';
 
-import { MainMenuPageComponent } from './components';
+import {
+  MainMenuPageComponent,
+} from './components';
 
 
 @NgModule({
@@ -18,6 +21,7 @@ import { MainMenuPageComponent } from './components';
     LicenseModule,
     LocaleModule,
     MainMenuRoutingModule,
+    NetworkModule,
     SharedModule,
   ],
 })
