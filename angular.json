@@ -44,6 +44,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles/fonts.scss",
               "src/styles/global.scss",
               "src/styles/mixins.scss",
               "src/styles/variables.scss"
