@@ -180,11 +180,14 @@
           }
 
           .name {
+            overflow: hidden;
             width: var(--name-field-width);
 
             margin-right: var(--field-margin);
 
             color: var(--base-black-color);
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
 
           .type {

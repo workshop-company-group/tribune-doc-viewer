@@ -26,8 +26,6 @@ import { FileCloseConfirmationComponent,
   FileSelectConfirmationComponent,
   FinishRecordConfirmationComponent } from './components/confirmations';
 
-import { DocumentTitlePipe } from './pipes';
-
 @NgModule({
   declarations: [
     FileViewPageComponent,
@@ -46,7 +44,6 @@ import { DocumentTitlePipe } from './pipes';
     FileCloseConfirmationComponent,
     FileSelectConfirmationComponent,
     FinishRecordConfirmationComponent,
-    DocumentTitlePipe,
   ],
   imports: [
     CommonModule,

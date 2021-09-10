@@ -52,7 +52,11 @@
 
     z-index: 2;
 
+    overflow: hidden;
     width: 100%;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .broadcast-icon {
