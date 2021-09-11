@@ -1,5 +1,5 @@
-<app-normal-button
+<button appNormalButton 
     [accent]="selected"
-    (button-click)="clickEmitter.emit()">
+    (click)="clickEmitter.emit()">
     <ng-content></ng-content>
-</app-normal-button>
+</button>

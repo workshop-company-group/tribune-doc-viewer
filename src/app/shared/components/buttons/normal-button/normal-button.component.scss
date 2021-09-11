@@ -1,73 +1,68 @@
 @import '../../../../../styles/mixins';
 
 :host {
-  display: block;
+  @extend %primary-regular-font;
+
+  position: relative;
+
+  display: flex;
+  overflow: hidden;
   width: 395px;
+  height: 70px;
 
-  button {
-    @extend %primary-regular-font;
+  flex-direction: row;
+  align-items: center;
+  justify-content: var(--normal-button-justify-content);
 
-    position: relative;
+  padding: var(--normal-button-padding);
 
-    display: flex;
-    overflow: hidden;
+  background: var(--button-background);
+  border-radius: 10px;
+  box-shadow: var(--base-shadow);
+
+  color: var(--button-color);
+
+  transition: var(--base-transition);
+
+  .accent-background {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
     width: 100%;
-    height: 70px;
+    height: 100%;
 
-    flex-direction: row;
-    align-items: center;
-    justify-content: var(--normal-button-justify-content);
+    background: var(--button-accent-background);
 
-    padding: var(--normal-button-padding);
-
-    background: var(--button-background);
-    border-radius: 10px;
-    box-shadow: var(--base-shadow);
-
-    color: var(--button-color);
-
+    transform: var(--button-accent-background-transform);
     transition: var(--base-transition);
+  }
 
-    .accent-background {
-      position: absolute;
-      z-index: 1;
-      top: 0;
-      left: 0;
+  span {
+    z-index: 2;
 
-      width: 100%;
-      height: 100%;
+    overflow: hidden;
 
-      background: var(--button-accent-background);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-      transform: var(--button-accent-background-transform);
-      transition: var(--base-transition);
-    }
+  &:disabled {
+    --button-background: var(--faint-light-grey-vertical-gradient);
+    --button-color: var(--faint-dark-grey-color);
+  }
 
-    span {
-      z-index: 2;
+  &:active {
+    transform: var(--button-active-transform);
+  }
 
-      overflow: hidden;
+  &.accent {
+    &:not(:disabled) {
+      color: var(--button-accent-color);
 
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    &:disabled {
-      --button-background: var(--faint-light-grey-vertical-gradient);
-      --button-color: var(--faint-dark-grey-color);
-    }
-
-    &:active {
-      transform: var(--button-active-transform);
-    }
-
-    &.accent {
-      &:not(:disabled) {
-        color: var(--button-accent-color);
-
-        .accent-background {
-          transform: none;
-        }
+      .accent-background {
+        transform: none;
       }
     }
   }

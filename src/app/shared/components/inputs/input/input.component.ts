@@ -2,7 +2,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   forwardRef,
+  EventEmitter,
   Input,
+  Output,
 } from '@angular/core';
 import { ControlValueAccessor, FormControl,
   NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -26,6 +28,9 @@ export class InputComponent implements ControlValueAccessor {
   public placeholder = '';
 
   public readonly inputControl = new FormControl('');
+
+  @Output('enter')
+  public readonly enterEmitter = new EventEmitter<void>();
 
   @Input()
   public set disabled(value: boolean) {

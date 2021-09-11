@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
+  ElementRef,
+  HostBinding,
   Input,
-  Output,
 } from '@angular/core';
 
 @Component({
-  selector: 'app-normal-button',
+  selector: 'button[appNormalButton]',
   templateUrl: './normal-button.component.html',
   styleUrls: ['./normal-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,14 +15,15 @@ import {
 export class NormalButtonComponent {
 
   @Input()
-  public disabled = false;
-
-  @Input()
+  @HostBinding('class.accent')
   public accent = false;
 
-  @Output('button-click')
-  public readonly clickEmitter = new EventEmitter<void>();
+  constructor(
+    public readonly el: ElementRef<HTMLButtonElement>,
+  ) { }
 
-  constructor() { }
+  public click(): void {
+    this.el.nativeElement.click();
+  }
 
 }

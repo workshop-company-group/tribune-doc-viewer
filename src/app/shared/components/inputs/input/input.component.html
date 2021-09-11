@@ -3,4 +3,6 @@
        spellcheck="false"
        [placeholder]="placeholder"
        (input)="changeHandler($event.target.value)"
-       (blur)="touchedHandler()">
+       (blur)="touchedHandler()"
+       (keydown.enter)="enterEmitter.emit()"
+>
