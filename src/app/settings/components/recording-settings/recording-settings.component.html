@@ -5,11 +5,12 @@
                   [ngClass]="{ 'visible': pathDoesNotExist }">
                 {{ 'directory-not-exist' | locale | async }}
             </span>
-            <app-input [formControl]="pathControl"
+            <input appInput class="path-input"
+                [formControl]="pathControl"
                 [placeholder]="'path-to-directory' | locale | async"
                 [disabled]="saveToggle.value"
-                (enter)="applyButton.click()"
-            ></app-input>
+                (keydown.enter)="applyButton.click()"
+            >
         </div>
 
         <button appNormalButton class="browse-button"

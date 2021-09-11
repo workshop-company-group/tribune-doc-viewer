@@ -1,10 +1,15 @@
 import { Location } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { AuthService, PasswordStateService } from '../../services';
+import { InputComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-password-page',

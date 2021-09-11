@@ -1,70 +1,27 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  forwardRef,
-  EventEmitter,
-  Input,
-  Output,
+  ElementRef,
+  HostBinding,
 } from '@angular/core';
-import { ControlValueAccessor, FormControl,
-  NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'app-input',
+  selector: 'input[appInput]',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
-      multi: true,
-    },
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputComponent implements ControlValueAccessor {
+export class InputComponent {
 
-  @Input()
-  public placeholder = '';
+  @HostBinding()
+  public readonly spellcheck = false;
 
-  public readonly inputControl = new FormControl('');
+  constructor(
+    public readonly el: ElementRef,
+  ) { }
 
-  @Output('enter')
-  public readonly enterEmitter = new EventEmitter<void>();
-
-  @Input()
-  public set disabled(value: boolean) {
-    if (value) {
-      this.inputControl.disable();
-    } else {
-      this.inputControl.enable();
-    }
-  }
-
-  public changeHandler: (obj: string) => void = () => {
-    // empty
-  };
-
-  public touchedHandler: () => void = () => {
-    // empty
-  };
-
-  constructor() { }
-
-  public writeValue(obj: string): void {
-    this.inputControl.setValue(obj, { emitEvent: false });
-  }
-
-  public registerOnChange(fn: (obj: string) => void): void {
-    this.changeHandler = fn;
-  }
-
-  public registerOnTouched(fn: () => void): void {
-    this.touchedHandler = fn;
-  }
-
-  public setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+  public focus(): void {
+    this.el.nativeElement.focus();
   }
 
 }
