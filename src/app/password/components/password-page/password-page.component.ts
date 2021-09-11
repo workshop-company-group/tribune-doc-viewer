@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
 
@@ -14,7 +14,11 @@ import { AuthService, PasswordStateService } from '../../services';
 })
 export class PasswordPageComponent implements OnDestroy {
 
-  public readonly password = new FormControl('');
+  public readonly password = new FormControl('', [
+    // Angular syntax of using `required` validator
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    Validators.required,
+  ]);
 
   public readonly isPasswordWrong = new BehaviorSubject<boolean>(false);
 
