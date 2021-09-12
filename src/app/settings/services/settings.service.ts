@@ -16,7 +16,9 @@ import { Display } from '../../shared/models';
 
 import { SystemService } from '../../shared/services';
 
-const INTERNAL_DISPLAYS = 3;
+const UNIX_INTERNAL_DISPLAYS = 3;
+const WINDOWS_INTERNAL_DISPLAYS = 2;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -68,6 +70,7 @@ export class SettingsService {
 
   public async checkDisplay(): Promise<void> {
     const displays = await this.getAvailableDisplays();
+
     const conn = this.screenConnection;
 
     if (conn !== '')
@@ -103,9 +106,11 @@ export class SettingsService {
 
   public async getAvailableDisplays(): Promise<Display[]> {
     const displays = (await si.graphics()).displays;
-    if (displays.length < INTERNAL_DISPLAYS)
+    const internal_displays = process.platform == 'win32' ? WINDOWS_INTERNAL_DISPLAYS : UNIX_INTERNAL_DISPLAYS;
+
+    if (displays.length < internal_displays)
       return [];
-    return displays.slice(INTERNAL_DISPLAYS - 1);
+    return displays.slice(internal_displays - 1);
   }
 
   public get settings(): Settings {
