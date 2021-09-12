@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { WebviewDirective } from './directives/';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IconButtonComponent,
+import {
+  IconButtonComponent,
   LargeIconButtonComponent,
-  NormalButtonComponent,
-  SmallButtonComponent,
-  SelectableButtonComponent } from './components/buttons';
+  TextButtonComponent,
+  SelectableButtonComponent
+} from './components/buttons';
 import { InputComponent } from './components/inputs';
 import { BackdropComponent } from './components';
 import { SelectComponent } from './components/selects';
@@ -19,8 +20,7 @@ import { ToggleComponent } from './components/toggles';
     WebviewDirective,
     BackdropComponent,
     LargeIconButtonComponent,
-    NormalButtonComponent,
-    SmallButtonComponent,
+    TextButtonComponent,
     SelectableButtonComponent,
     InputComponent,
     SelectComponent,
@@ -37,8 +37,7 @@ import { ToggleComponent } from './components/toggles';
     BackdropComponent,
     IconButtonComponent,
     LargeIconButtonComponent,
-    NormalButtonComponent,
-    SmallButtonComponent,
+    TextButtonComponent,
     SelectableButtonComponent,
     SelectComponent,
     ToggleComponent,

@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { WindowStateService } from '../../../shared/services';
 import { LicenseService, KEY_LENGTH } from '../../services';
@@ -19,7 +19,7 @@ import { LicenseService, KEY_LENGTH } from '../../services';
 })
 export class LicenseDialogComponent implements OnDestroy, OnInit {
 
-  public wrongKey = false;
+  public readonly wrongKey = new BehaviorSubject<boolean>(false);
 
   public readonly keyControl = new FormControl('', [
     // Angular syntax of using `required` validator
@@ -44,7 +44,7 @@ export class LicenseDialogComponent implements OnDestroy, OnInit {
   public ngOnInit(): void {
     this.subscriptions.push(
       this.keyControl.valueChanges.subscribe(
-        () => { this.wrongKey = false; },
+        () => this.wrongKey.next(false),
       ),
     );
   }
@@ -52,7 +52,7 @@ export class LicenseDialogComponent implements OnDestroy, OnInit {
   public async activate(): Promise<void> {
     const result = await this.license.activate(this.keyControl.value);
 
-    this.wrongKey = !result;
+    this.wrongKey.next(!result);
   }
 
   public exit(): void {

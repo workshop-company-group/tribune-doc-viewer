@@ -70,10 +70,11 @@
         </div>
     </div>
 
-    <app-small-button class="add-button"
+    <button appTextButton
+        class="small-text-button-size add-button"
         [accent]="true"
         [disabled]="!fileSelect.selectedPath"
-        (button-click)="openEmitter.emit(fileSelect.selectedPath)">
+        (click)="openEmitter.emit(fileSelect.selectedPath)">
         {{ openButtonText }}
-    </app-small-button>
+    </button>
 </div>

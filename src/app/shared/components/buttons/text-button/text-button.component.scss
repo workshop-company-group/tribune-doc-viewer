@@ -1,16 +1,11 @@
 @import '../../../../../styles/mixins';
 
 :host {
-  @extend %primary-regular-font;
-
   position: relative;
 
   display: flex;
   overflow: hidden;
-  width: 395px;
-  height: 70px;
 
-  flex-direction: row;
   align-items: center;
   justify-content: var(--normal-button-justify-content);
 
@@ -54,7 +49,9 @@
   }
 
   &:active {
-    transform: var(--button-active-transform);
+    &:not(:disabled) {
+      transform: var(--button-active-transform);
+    }
   }
 
   &.accent {

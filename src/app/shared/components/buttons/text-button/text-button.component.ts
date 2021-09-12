@@ -7,12 +7,12 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'button[appNormalButton]',
-  templateUrl: './normal-button.component.html',
-  styleUrls: ['./normal-button.component.scss'],
+  selector: 'button[appTextButton]',
+  templateUrl: './text-button.component.html',
+  styleUrls: ['./text-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NormalButtonComponent {
+export class TextButtonComponent {
 
   @Input()
   @HostBinding('class.accent')

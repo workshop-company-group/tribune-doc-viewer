@@ -11,15 +11,18 @@
 </div>
 
 <div class="buttons-container">
-    <button appNormalButton class="button"
+    <button appTextButton
+        class="medium-text-button-size button"
         (click)="openFileView()">
         {{ fileViewButtonText | locale | async }}
     </button>
-    <button appNormalButton class="button"
+    <button appTextButton
+        class="medium-text-button-size button"
         (click)="openSettings()">
         {{ 'settings' | locale | async }}
     </button>
-    <button appNormalButton class="button"
+    <button appTextButton
+        class="medium-text-button-size button"
         (click)="quitApplication()">
         {{ 'exit' | locale | async }}
     </button>

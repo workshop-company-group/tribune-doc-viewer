@@ -14,13 +14,15 @@
 </span>
 
 <div class="buttons-container">
-    <app-small-button class="confirm-button"
-        (button-click)="confirmClickEmitter.emit()">
+    <button appTextButton
+        class="small-text-button-size confirm-button"
+        (click)="confirmClickEmitter.emit()">
         {{ 'close' | locale | async }}
-    </app-small-button>
-    <app-small-button class="cancel-button"
+    </button>
+    <button appTextButton
+        class="small-text-button-size cancel-button"
         [accent]="true"
-        (button-click)="cancelClickEmitter.emit()">
+        (click)="cancelClickEmitter.emit()">
         {{ 'cancel' | locale | async }}
-    </app-small-button>
+    </button>
 </div>

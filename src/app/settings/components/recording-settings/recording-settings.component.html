@@ -13,13 +13,15 @@
             >
         </div>
 
-        <button appNormalButton class="browse-button"
+        <button appTextButton
+            class="medium-text-button-size browse-button"
             [disabled]="saveToggle.value"
             (click)="fileSelectDialogOpened = true">
             {{ 'browse' | locale | async }}
         </button>
 
-        <button appNormalButton class="apply-button"
+        <button appTextButton
+            class="medium-text-button-size apply-button"
             #applyButton
             [accent]="true"
             [disabled]="saveToggle.value 

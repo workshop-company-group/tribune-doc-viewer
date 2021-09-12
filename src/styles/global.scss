@@ -1,3 +1,5 @@
+@import 'mixins';
+
 @for $i from 1 to 6 {
   h#{$i} {
     margin: 0;
@@ -24,4 +26,18 @@ button {
 input {
   border: 0;
   outline: 0;
+}
+
+.small-text-button-size {
+  @extend %primary-light-font;
+
+  width: 230px;
+  height: 50px;
+}
+
+.medium-text-button-size {
+  @extend %primary-regular-font;
+
+  width: 395px;
+  height: 70px;
 }

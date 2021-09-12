@@ -1,19 +1,24 @@
 <h1 class="heading">{{ 'no-connection' | locale | async }}</h1>
+
 <p class="description">{{ 'check-network' | locale | async }}</p>
+
 <div class="button-container">
-    <app-small-button class="exit"
-        (button-click)="exit()"
+    <button appTextButton
+        class="small-text-button-size exit"
+        (click)="exit()"
     >
         {{ 'activation-exit' | locale | async }}
-    </app-small-button>
-    <app-small-button class="retry"
+    </button>
+
+    <button appTextButton
+        class="small-text-button-size retry"
         [accent]="true"
         [disabled]="isConnecting | async"
-        (button-click)="checkConnection()"
+        (click)="checkConnection()"
     >
         {{ retryButtonText | locale | async }} 
         <ng-container *ngIf="!(isConnecting | async)">
             ({{ retryTimer | async }})
         </ng-container>
-    </app-small-button>
+    </button>
 </div>
