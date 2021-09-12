@@ -13,7 +13,7 @@ import { ElectronService } from '../../core/services';
   providedIn: 'root',
 })
 export class ConversionService {
-  private readonly sofficeCommand = process.platform === 'win32' ? 'soffice' : 'libreoffice';
+  private readonly sofficeCommand = process.platform === 'win32' ? '"C:\\Program Files\\LibreOffice\\program\\soffice"' : 'soffice';
 
   constructor(
     private readonly electron: ElectronService,
@@ -53,7 +53,7 @@ export class ConversionService {
       jspath.join(dir, name + Date.now().toString() + outputType);
 
     if (type === '.pdf') {
-      await execAsync(`cp "${path}" "${newConvertedPath}"`);
+      fs.copyFileSync(path, newConvertedPath)
       return {
         originPath: path,
         convertedPath: newConvertedPath,
@@ -64,7 +64,7 @@ export class ConversionService {
     await execAsync(
       `${this.sofficeCommand} --headless ` +
       `--convert-to ${outputType.slice(1)} ` +
-      `--outdir "${dir}" "${path}"`,
+      `--outdir "${dir}" "${path}"`
     );
 
     this.fileRename(convertedPath, newConvertedPath);
