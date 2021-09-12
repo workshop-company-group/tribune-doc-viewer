@@ -12,6 +12,7 @@ p {
 
 body {
   margin: 0;
+  user-select: none;
 }
 
 button {
@@ -20,7 +21,6 @@ button {
 
   background: transparent;
   outline: 0;
-  user-select: none;
 }
 
 input {
