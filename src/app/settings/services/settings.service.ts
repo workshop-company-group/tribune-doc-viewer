@@ -106,11 +106,11 @@ export class SettingsService {
 
   public async getAvailableDisplays(): Promise<Display[]> {
     const displays = (await si.graphics()).displays;
-    const internal_displays = process.platform == 'win32' ? WINDOWS_INTERNAL_DISPLAYS : UNIX_INTERNAL_DISPLAYS;
+    const internalDisplays = process.platform === 'win32' ? WINDOWS_INTERNAL_DISPLAYS : UNIX_INTERNAL_DISPLAYS;
 
-    if (displays.length < internal_displays)
+    if (displays.length < internalDisplays)
       return [];
-    return displays.slice(internal_displays - 1);
+    return displays.slice(internalDisplays - 1);
   }
 
   public get settings(): Settings {
