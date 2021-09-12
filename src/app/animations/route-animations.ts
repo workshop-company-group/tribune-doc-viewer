@@ -56,7 +56,7 @@ const moveRightAnimation: AnimationMetadata[] = [
 
 
 export const routeAnimations = trigger('routeAnimations', [
-  transition('main-menu => file-view, password => settings', moveLeftAnimation),
+  transition('main-menu => file-view, main-menu => settings, password => settings', moveLeftAnimation),
   transition('file-view => main-menu, settings => main-menu', moveRightAnimation),
   transition('main-menu => password', slideUpAnimation),
   transition('password => main-menu', slideDownAnimation),
