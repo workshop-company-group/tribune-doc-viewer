@@ -11,7 +11,10 @@ import {
   SelectableButtonComponent
 } from './components/buttons';
 import { InputComponent } from './components/inputs';
-import { BackdropComponent } from './components';
+import {
+  BackdropComponent,
+  SpinnerComponent,
+} from './components';
 import { SelectComponent } from './components/selects';
 import { ToggleComponent } from './components/toggles';
 
@@ -26,6 +29,7 @@ import { ToggleComponent } from './components/toggles';
     SelectComponent,
     ToggleComponent,
     IconButtonComponent,
+    SpinnerComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +46,7 @@ import { ToggleComponent } from './components/toggles';
     SelectComponent,
     ToggleComponent,
     InputComponent,
+    SpinnerComponent,
   ],
 })
 export class SharedModule {}

@@ -211,4 +211,14 @@
       margin: 15px var(--file-right-padding) 30px 0;
     }
   }
+
+  .spinner-container {
+    display: flex;
+    height: 100%;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 30px 0;
+  }
 }
