@@ -53,7 +53,7 @@ export class ConversionService {
       jspath.join(dir, name + Date.now().toString() + outputType);
 
     if (type === '.pdf') {
-      fs.copyFileSync(path, newConvertedPath)
+      fs.copyFileSync(path, newConvertedPath);
       return {
         originPath: path,
         convertedPath: newConvertedPath,
@@ -64,7 +64,7 @@ export class ConversionService {
     await execAsync(
       `${this.sofficeCommand} --headless ` +
       `--convert-to ${outputType.slice(1)} ` +
-      `--outdir "${dir}" "${path}"`
+      `--outdir "${dir}" "${path}"`,
     );
 
     this.fileRename(convertedPath, newConvertedPath);
