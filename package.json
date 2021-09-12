@@ -5,6 +5,11 @@
   "homepage": "https://github.com/Tribunes/tribune-doc-viewer",
   "main": "main.js",
   "private": true,
+  "files": [
+    "*.js",
+    "build",
+    "node_modules"
+  ],
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "ng": "ng",
@@ -25,7 +30,8 @@
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "lint": "npx eslint main.ts 'src/**/*.ts'",
     "lint:styles": "npx stylelint 'src/**/*.scss'",
-    "lint:fix": "npx eslint 'src/**/*.ts' --fix; npx stylelint 'src/**/*.scss' --fix"
+    "lint:fix": "npx eslint 'src/**/*.ts' --fix; npx stylelint 'src/**/*.scss' --fix",
+    "release": "npm run build:prod && electron-builder --win"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "12.1.0",
@@ -100,7 +106,7 @@
     "crypto-js": "4.0.0",
     "css-element-queries": "1.2.3",
     "dotenv": "8.2.0",
-    "electron-drivelist": "8.0.10",
+    "drivelist": "9.2.4",
     "file-loader": "6.0.0",
     "get-file-info": "1.0.3",
     "immutable": "4.0.0-rc.14",
