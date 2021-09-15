@@ -4,10 +4,12 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { List, Record, RecordOf } from 'immutable';
 
-import { Document,
+import {
+  Document,
   OpenedDocument,
   PdfDocument,
-  RecordBroadcastState } from '../models';
+  RecordBroadcastState,
+} from '../models';
 
 import { ConversionService } from './conversion.service';
 import { PdfService } from './pdf.service';
