@@ -17,6 +17,7 @@
     "build": "npm run electron:serve-tsc && ng build --base-href ./",
     "build:dev": "npm run build -- -c dev",
     "build:prod": "npm run build -- -c production",
+    "build:release": "npm run build:prod && electron-builder --win",
     "ng:serve": "ng serve -c web -o",
     "electron:serve-tsc": "tsc -p tsconfig.serve.json",
     "electron:serve": "wait-on tcp:4200 && npm run electron:serve-tsc && npx electron . --serve",
@@ -30,8 +31,7 @@
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "lint": "npx eslint main.ts 'src/**/*.ts'",
     "lint:styles": "npx stylelint 'src/**/*.scss'",
-    "lint:fix": "npx eslint 'src/**/*.ts' --fix; npx stylelint 'src/**/*.scss' --fix",
-    "release": "npm run build:prod && electron-builder --win"
+    "lint:fix": "npx eslint 'src/**/*.ts' --fix; npx stylelint 'src/**/*.scss' --fix"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "12.1.0",
