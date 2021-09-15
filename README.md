@@ -13,6 +13,12 @@ Install dependencies with npm :
 npm install
 ```
 
+### PDF.js
+
+Version `2.5.207` should be used for `pdfjs-dist` package. 
+[Reason](https://github.com/VadimDez/ng2-pdf-viewer/issues/717#issuecomment-776115196) 
+is described in [this issue](https://github.com/VadimDez/ng2-pdf-viewer/issues/717).
+
 ## Development
 
 Install Angular-cli to be able to generate Angular components.
