@@ -3,7 +3,7 @@
   "directories": {
     "output": "release/"
   },
-    "files": [
+  "files": [
         "**/*",
         "!**/*.ts",
         "!*.code-workspace",
@@ -18,11 +18,11 @@
         "!karma.conf.js",
         "!tsconfig.json",
         "!tslint.json"
-    ],
+  ],
   "win": {
     "icon": "icon.png",
     "target": [
-      "portable"
+      "NSIS"
     ]
   },
   "mac": {

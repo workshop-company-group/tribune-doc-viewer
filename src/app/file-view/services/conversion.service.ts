@@ -9,11 +9,14 @@ import * as util from 'util';
 import { Document } from '../models';
 import { ElectronService } from '../../core/services';
 
+const WINDOWS_SOFFICE_EXECUATBLE = '"C:\\Program Files\\LibreOffice\\program\\soffice"';
+const UNIX_SOFFICE_EXECUTABLE = 'soffice';
+
 @Injectable({
   providedIn: 'root',
 })
 export class ConversionService {
-  private readonly sofficeCommand = process.platform === 'win32' ? 'soffice' : 'libreoffice';
+  private readonly sofficeCommand = process.platform === 'win32' ? WINDOWS_SOFFICE_EXECUATBLE : UNIX_SOFFICE_EXECUTABLE;
 
   constructor(
     private readonly electron: ElectronService,
@@ -53,7 +56,7 @@ export class ConversionService {
       jspath.join(dir, name + Date.now().toString() + outputType);
 
     if (type === '.pdf') {
-      await execAsync(`cp "${path}" "${newConvertedPath}"`);
+      fs.copyFileSync(path, newConvertedPath);
       return {
         originPath: path,
         convertedPath: newConvertedPath,

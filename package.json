@@ -5,6 +5,11 @@
   "homepage": "https://github.com/Tribunes/tribune-doc-viewer",
   "main": "main.js",
   "private": true,
+  "files": [
+    "*.js",
+    "build",
+    "node_modules"
+  ],
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "ng": "ng",
@@ -12,6 +17,7 @@
     "build": "npm run electron:serve-tsc && ng build --base-href ./",
     "build:dev": "npm run build -- -c dev",
     "build:prod": "npm run build -- -c production",
+    "build:release": "npm run build:prod && electron-builder --win",
     "ng:serve": "ng serve -c web -o",
     "electron:serve-tsc": "tsc -p tsconfig.serve.json",
     "electron:serve": "wait-on tcp:4200 && npm run electron:serve-tsc && npx electron . --serve",
@@ -100,7 +106,7 @@
     "crypto-js": "4.0.0",
     "css-element-queries": "1.2.3",
     "dotenv": "8.2.0",
-    "electron-drivelist": "8.0.10",
+    "drivelist": "9.2.4",
     "file-loader": "6.0.0",
     "get-file-info": "1.0.3",
     "immutable": "4.0.0-rc.14",

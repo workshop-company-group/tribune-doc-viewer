@@ -6,7 +6,6 @@ import * as loadIniFile from 'read-ini-file';
 import * as writeIniFile from 'write-ini-file';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as si from 'systeminformation';
 
 import { BehaviorSubject } from 'rxjs';
 
@@ -16,7 +15,9 @@ import { Display } from '../../shared/models';
 
 import { SystemService } from '../../shared/services';
 
-const INTERNAL_DISPLAYS = 3;
+const UNIX_INTERNAL_DISPLAYS = 3;
+const WINDOWS_INTERNAL_DISPLAYS = 2;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -52,12 +53,12 @@ export class SettingsService {
   constructor(
     private readonly system: SystemService,
   ) {
-    this.displayCheckWorker.onmessage = (message: MessageEvent) => {
-      const displays = JSON.parse(message.data);
+    this.displayCheckWorker.onmessage = (message: MessageEvent<string>) => {
+      const displays = JSON.parse(message.data) as Display[];
       const externalDisplays = this.filterExternalDisplays(displays);
       // Should be called before emitting value to displays
       this.setExternalDisplay(externalDisplays);
-      this.externalDisplays.next(externalDisplays)
+      this.externalDisplays.next(externalDisplays);
     };
 
     this.initIni();
@@ -125,9 +126,13 @@ export class SettingsService {
   }
 
   private filterExternalDisplays(displays: Display[]): Display[] {
-    if (displays.length < INTERNAL_DISPLAYS)
+    const internalDisplays = process.platform === 'win32'
+      ? WINDOWS_INTERNAL_DISPLAYS
+      : UNIX_INTERNAL_DISPLAYS;
+
+    if (displays.length < internalDisplays)
       return [];
-    return displays.slice(INTERNAL_DISPLAYS - 1);
+    return displays.slice(internalDisplays - 1);
   }
 
   public get settings(): Settings {

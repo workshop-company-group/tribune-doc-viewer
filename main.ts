@@ -1,6 +1,6 @@
 import { app, BrowserWindow, screen, ipcMain } from 'electron';
 import * as path from 'path';
-import * as drivelist from 'electron-drivelist';
+import * as drivelist from 'drivelist';
 import * as url from 'url';
 
 let win: BrowserWindow;
