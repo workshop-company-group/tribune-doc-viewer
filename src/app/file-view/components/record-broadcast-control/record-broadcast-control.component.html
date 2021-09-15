@@ -8,11 +8,11 @@
             iconSrc="assets/icons/record/record-red.svg"
             [disabled]="!(recordingAvailability | async)"
             *ngSwitchCase="'recordButton'"
-            (button-click)="recordBroadcastService.startRecording()">
+            (button-click)="recordBroadcast.startRecording()">
         </app-record-broadcast-button>
 
         <app-record-controls
-            [recordState]="recordBroadcastService.state | async"
+            [recordState]="recordBroadcast.state | async"
             *ngSwitchCase="'pauseStopControls'"
             (pause-click)="pauseClickHandler()"
             (stop-click)="stopRecording()">
@@ -23,7 +23,7 @@
         <span class="hint">{{ 'broadcasting' | locale | async }}</span>
 
         <app-record-broadcast-button
-            [disabled]="!(broadcastingAvailability | async)"
+            [disabled]="!(recordBroadcast.isBroadcastingAvailable | async)"
             [iconSrc]="broadcastButtonIcon | async"
             (button-click)="broadcastClickHandler()">
         </app-record-broadcast-button>
