@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 
+import {
+  PDFDocumentProxy,
+} from 'pdfjs-dist';
+import { List, Record, RecordOf } from 'immutable';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { List, Record, RecordOf } from 'immutable';
 
 import {
   Document,
   OpenedDocument,
-  PdfDocument,
   RecordBroadcastState,
 } from '../models';
 
@@ -42,7 +44,7 @@ export class DocumentService {
    */
   private readonly documentFactory = Record<OpenedDocument>({
     doc: { originPath: '', convertedPath: '', title: '' },
-    pdf: new PdfDocument(),
+    pdf: undefined,
     selected: false,
     currentPage: new BehaviorSubject<number>(0),
     recordBroadcastState: new BehaviorSubject<RecordBroadcastState>(null),
@@ -66,7 +68,8 @@ export class DocumentService {
 
   public async open(path: string): Promise<void> {
     const doc: Document = await this.converter.convertDocument(path);
-    const pdf: PdfDocument = await this.pdfService.loadPdf(doc.convertedPath);
+    const pdf: PDFDocumentProxy =
+    await this.pdfService.loadPdf(doc.convertedPath);
 
     this.unselectAll();
     this.opened.next(

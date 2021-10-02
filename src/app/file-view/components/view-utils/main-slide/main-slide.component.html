@@ -1,22 +1,23 @@
 <app-icon-button class="previous-button"
-    [disabled]="firstPage | async"
+    [disabled]="isFirstPage | async"
     iconSrc="assets/icons/arrows/left-arrow.svg"
     (button-click)="previousSlide()">
 </app-icon-button>
 
 <app-pdf-view class="pdf-content"
-    [pdf]="doc.pdf"
-    [page]="doc.currentPage | async">
+    *ngIf="currentPage | async as page"
+    [page]="page">
 </app-pdf-view>
 
 <app-icon-button class="next-button"
-    [disabled]="lastPage | async"
+    [disabled]="isLastPage | async"
     iconSrc="assets/icons/arrows/right-arrow.svg"
     (button-click)="nextSlide()">
 </app-icon-button>
 
 <div class="grid-item"></div>
 <app-slide-progress-bar class="progress-bar"
+    *ngIf="documentObservable | async as doc"
     [doc]="doc">
 </app-slide-progress-bar>
 <div class="grid-item"></div>

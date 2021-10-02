@@ -46,8 +46,12 @@ export class PdfPage {
 
     canvas.height = viewport.height;
 
+    const canvasContext = canvas.getContext('2d');
+    if (!canvasContext) {
+      throw new Error('Cannot render page. Canvas context is null.');
+    }
     return this.pageProxy.render({
-      canvasContext: canvas.getContext('2d'),
+      canvasContext: canvasContext,
       viewport,
     }).promise;
   }

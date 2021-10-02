@@ -1,12 +1,17 @@
-<nav class="nav-container" 
-    [ngClass]="{ 'horizontal': doc.pdf.orientation === 'horizontal',
-        'vertical': doc.pdf.orientation === 'vertical',
-        'wrap': wrap }">
-    <app-slide-thumbnail class="thumbnail"
-        *ngFor="let page of pageIterable; index as i"
-        [pdf]="doc.pdf"
-        [page]="i"
-        [selected]="i === doc.currentPage.value"
-        (click)="doc.currentPage.next(i)">
-    </app-slide-thumbnail>
-</nav>
+<ng-container *ngIf="documentObservable | async as doc">
+    <nav class="nav-container" 
+         *ngIf="documentOrientation | async as orientation"
+        [ngClass]="{ 'horizontal': orientation === 'horizontal',
+            'vertical': orientation === 'vertical',
+            'wrap': wrap }">
+        <ng-container *ngIf="doc.pdf">
+            <app-slide-thumbnail class="thumbnail"
+                *ngFor="let page of pageIterable; index as i"
+                [pdf]="doc.pdf"
+                [pageIndex]="i"
+                [selected]="i === doc.currentPage.value"
+                (click)="doc.currentPage.next(i)">
+            </app-slide-thumbnail>
+        </ng-container>
+    </nav>
+</ng-container>

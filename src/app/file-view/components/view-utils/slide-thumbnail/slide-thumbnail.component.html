@@ -1,12 +1,11 @@
 <div class="thumbnail-container"
     [ngClass]="{ 'selected': selected }">
     <app-pdf-view class="pdf-view"
-        [orientation]="pdf.orientation"
-        [pdf]="pdf"
-        [page]="page">
-    </app-pdf-view>
+        [orientation]="pdfOrientation | async"
+        [page]="pdfPage | async"
+    ></app-pdf-view>
 
     <div class="page-number">
-        {{ page + 1 }}
+        {{ pageIndex + 1 }}
     </div>
 </div>
