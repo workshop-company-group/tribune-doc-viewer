@@ -1,8 +1,8 @@
 <div class="top-container">
-    <app-icon-button class="close-button"
+    <button appIconButton class="close-button"
         iconSrc="assets/icons/crosses/cross-black.svg"
-        (button-click)="router.navigateByUrl('/main-menu')">
-    </app-icon-button>
+        (click)="router.navigateByUrl('/main-menu')">
+    </button>
 </div>
 
 <span class="title">{{ 'settings' | locale | async }}</span>

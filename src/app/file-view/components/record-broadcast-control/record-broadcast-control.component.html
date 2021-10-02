@@ -30,8 +30,8 @@
     </div>
 </div>
 
-<app-icon-button class="wrap-control"
+<button appIconButton class="wrap-control"
      [ngClass]="{ 'wrapped': wrapped | async }"
      iconSrc="assets/icons/arrows/down-arrow.svg"
-     (button-click)="wrapped.next(!wrapped.value)">
-</app-icon-button>
+     (click)="wrapped.next(!wrapped.value)">
+</button>

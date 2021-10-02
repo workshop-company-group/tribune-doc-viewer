@@ -18,10 +18,10 @@
             : 'assets/icons/broadcast/broadcast-black.svg'"
          [ngClass]="{ 'visible': doc.recordBroadcastState | async }">
 
-    <app-icon-button class="close-button" 
+    <button appIconButton class="close-button" 
         [iconSrc]="doc.selected
             ? 'assets/icons/crosses/cross-white.svg'
             : 'assets/icons/crosses/cross-black.svg'"
-        (button-click)="close()">
-    </app-icon-button>
+        (click)="close()">
+    </button>
 </div>

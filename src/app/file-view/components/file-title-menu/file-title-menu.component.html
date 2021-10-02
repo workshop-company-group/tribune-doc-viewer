@@ -1,9 +1,9 @@
 <ng-container *ngIf="documentService.opened | async as documents">
     <div class="left-container">
-        <app-icon-button class="menu-button"
+        <button appIconButton class="menu-button"
             iconSrc="assets/icons/menu.svg"
-            (button-click)="router.navigateByUrl('/main-menu')">
-        </app-icon-button>
+            (click)="router.navigateByUrl('/main-menu')">
+        </button>
 
         <app-file-title-menu-item class="left-item"
             *ngIf="documents.get(0) as doc"
@@ -25,10 +25,10 @@
             <div class="button-container"
                 *ngIf="documents.size === 1"
                 (click)="openDocument()">
-                <app-icon-button class="add-document-button"
+                <button appIconButton class="add-document-button"
                     iconSrc="assets/icons/plus.svg"
-                    (button-click)="openDocument()">
-                </app-icon-button>
+                    (click)="openDocument()">
+                </button>
             </div>
         </div>
 

@@ -1,9 +1,9 @@
 <div class="left-container">
     <div class="title-container">
-        <app-icon-button class="close-button"
+        <button appIconButton class="close-button"
             iconSrc="assets/icons/crosses/cross-black.svg" 
-            (button-click)="closeEmitter.emit()">
-        </app-icon-button>
+            (click)="closeEmitter.emit()">
+        </button>
         <span class="title">
             {{ (folderSelect ? 'select-folder' : 'select-file') | locale | async }}
         </span>

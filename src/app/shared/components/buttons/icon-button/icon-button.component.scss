@@ -1,44 +1,42 @@
 :host {
-  button {
-    position: relative;
+  position: relative;
 
-    display: flex;
-    width: calc(2.3 * var(--icon-button-icon-width));
-    height: calc(2.3 * var(--icon-button-icon-width));
+  display: flex;
+  width: calc(2.3 * var(--icon-button-icon-width));
+  height: calc(2.3 * var(--icon-button-icon-width));
 
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 
-    .active-background {
-      position: absolute;
-      top: 0;
-      left: 0;
+  .active-background {
+    position: absolute;
+    top: 0;
+    left: 0;
 
-      width: 100%;
-      height: 100%;
+    width: 100%;
+    height: 100%;
 
-      background: var(--icon-button-active-background);
-      border-radius: 50%;
-      opacity: 0;
+    background: var(--icon-button-active-background);
+    border-radius: 50%;
+    opacity: 0;
 
-      transition: var(--base-transition);
-    }
+    transition: var(--base-transition);
+  }
 
+  img {
+    width: var(--icon-button-icon-width);
+  }
+
+  &:disabled {
     img {
-      width: var(--icon-button-icon-width);
+      opacity: .5;
     }
+  }
 
-    &:disabled {
-      img {
-        opacity: .5;
-      }
-    }
-
-    &:active {
-      &:not(:disabled) {
-        .active-background {
-          opacity: .15;
-        }
+  &:active {
+    &:not(:disabled) {
+      .active-background {
+        opacity: .15;
       }
     }
   }
