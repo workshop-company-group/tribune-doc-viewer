@@ -17,7 +17,7 @@ export class InputComponent {
   public readonly spellcheck = false;
 
   constructor(
-    public readonly el: ElementRef,
+    public readonly el: ElementRef<HTMLInputElement>,
   ) { }
 
   public focus(): void {

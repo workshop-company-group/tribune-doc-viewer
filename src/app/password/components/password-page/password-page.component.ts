@@ -9,7 +9,6 @@ import { FormControl, Validators } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { AuthService, PasswordStateService } from '../../services';
-import { InputComponent } from '../../../shared/components';
 
 @Component({
   selector: 'app-password-page',

@@ -8,7 +8,7 @@ import {
   IconButtonComponent,
   LargeIconButtonComponent,
   TextButtonComponent,
-  SelectableButtonComponent
+  SelectableButtonComponent,
 } from './components/buttons';
 import { InputComponent } from './components/inputs';
 import {

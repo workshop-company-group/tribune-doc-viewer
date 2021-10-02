@@ -9,7 +9,7 @@ import { ControlValueAccessor, FormControl,
   NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { KEY_LENGTH } from '../../services';
 
