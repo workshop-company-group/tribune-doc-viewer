@@ -1,7 +1,7 @@
 <app-icon-button class="previous-button"
     [disabled]="isFirstPage | async"
     iconSrc="assets/icons/arrows/left-arrow.svg"
-    (button-click)="previousSlide()">
+    (button-click)="switchPageToPrevious()">
 </app-icon-button>
 
 <app-pdf-view class="pdf-content"
@@ -12,7 +12,7 @@
 <app-icon-button class="next-button"
     [disabled]="isLastPage | async"
     iconSrc="assets/icons/arrows/right-arrow.svg"
-    (button-click)="nextSlide()">
+    (button-click)="switchPageToNext()">
 </app-icon-button>
 
 <div class="grid-item"></div>

@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 
 import { BehaviorSubject, combineLatest } from 'rxjs';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { RecordOf } from 'immutable';
 
 import { OpenedDocument } from '../../../models';
@@ -25,9 +25,15 @@ export class MainSlideComponent {
   // #region Document
 
   @Input()
-  public set doc(doc: RecordOf<OpenedDocument>) {
-    this.validateDocument(doc);
+  public set doc(doc: RecordOf<OpenedDocument> | null) {
+    if (doc) {
+      this.validateDocument(doc);
+    }
     this.documentObservable.next(doc);
+  }
+
+  public get doc(): RecordOf<OpenedDocument> | null {
+    return this.documentObservable.value;
   }
 
   public readonly documentObservable =
@@ -40,7 +46,7 @@ export class MainSlideComponent {
   );
 
   private validateDocument(doc: OpenedDocument): void {
-    if (!isNotNil(doc.pdf)) {
+    if (doc.pdf === undefined) {
       throw new Error('Invalid document: PDF is undefined');
     }
   }
@@ -78,11 +84,17 @@ export class MainSlideComponent {
 
   // #region Document controls API
 
-  public nextSlide(): void {
+  public switchPageToNext(): void {
+    if (this.doc === null) {
+      throw new Error('Cannot switch to next page: document is null');
+    }
     this.doc.currentPage.next(this.doc.currentPage.value + 1);
   }
 
-  public previousSlide(): void {
+  public switchPageToPrevious(): void {
+    if (this.doc === null) {
+      throw new Error('Cannot switch to previous page: document is null');
+    }
     this.doc.currentPage.next(this.doc.currentPage.value - 1);
   }
 

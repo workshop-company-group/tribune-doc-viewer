@@ -5,12 +5,12 @@ import {
 } from '@angular/core';
 
 import { RecordOf } from 'immutable';
-import { PDFDocumentProxy } from 'pdfjs-dist';
 import { BehaviorSubject } from 'rxjs';
-import { filter, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 import { OpenedDocument } from '../../../models';
 import { PdfService } from '../../../services';
+import { isNotNil } from '../../../../shared/utils';
 
 @Component({
   selector: 'app-slide-nav',
@@ -20,30 +20,33 @@ import { PdfService } from '../../../services';
 })
 export class SlideNavComponent {
 
+  constructor(
+    private readonly pdfUtils: PdfService,
+  ) { }
+
   @Input()
   public set doc(value: RecordOf<OpenedDocument>) {
     this.documentObservable.next(value);
 
-    const pageNumber = this.doc.pdf ? this.doc.pdf.numPages : 0;
-    this.pageIterable = new Array<number>(pageNumber);
+    if (!value.pdf) {
+      throw new Error('Invalid document: pdf is undefined');
+    }
+    this.pageIterable = new Array<number>(value.pdf.numPages);
   }
 
   public readonly documentObservable =
-  new BehaviorSubject<RecordOf<OpenedDocument> | undefined>(undefined);
+  new BehaviorSubject<RecordOf<OpenedDocument> | null>(null);
 
   public readonly documentOrientation = this.documentObservable.pipe(
-    filter(doc => !!doc?.pdf),
-    switchMap((doc: RecordOf<OpenedDocument>) =>
-      this.pdfUtils.getOrientation(doc.pdf as PDFDocumentProxy)),
+    filter(isNotNil),
+    map(doc => doc.pdf),
+    filter(isNotNil),
+    switchMap(pdf => this.pdfUtils.getOrientation(pdf)),
   );
 
   @Input()
   public wrap = false;
 
   public pageIterable: number[];
-
-  constructor(
-    private readonly pdfUtils: PdfService,
-  ) { }
 
 }

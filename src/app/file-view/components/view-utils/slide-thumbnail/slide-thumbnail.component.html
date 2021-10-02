@@ -5,7 +5,8 @@
         [page]="pdfPage | async"
     ></app-pdf-view>
 
-    <div class="page-number">
-        {{ pageIndex + 1 }}
+    <div class="page-number"
+        *ngIf="pageIndexObservable | async as index">
+        {{ index }}
     </div>
 </div>

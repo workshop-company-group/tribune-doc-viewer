@@ -43,7 +43,7 @@ export class SlideThumbnailComponent {
 
   @Input()
   public set pageIndex(index: number) {
-    this.pageIndexObservable.next(index);
+    this.pageIndexObservable.next(index + 1);
   }
 
   public readonly pageIndexObservable =
@@ -53,7 +53,7 @@ export class SlideThumbnailComponent {
     this.pdfObservable.pipe(filter(isNotNil)),
     this.pageIndexObservable.pipe(filter(isNotNil)),
   ]).pipe(
-    switchMap(([pdf, pageIndex]) => pdf.getPage(pageIndex + 1)),
+    switchMap(([pdf, pageIndex]) => pdf.getPage(pageIndex)),
   );
 
   @Input()
