@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  HostBinding,
+  HostListener,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -16,7 +22,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class ToggleComponent implements ControlValueAccessor {
 
-  public value: boolean;
+  @HostBinding('class.activated')
+  public value = false;
 
   public changeHandler: (obj: boolean) => void;
 
@@ -24,6 +31,7 @@ export class ToggleComponent implements ControlValueAccessor {
 
   constructor() { }
 
+  @HostListener('click')
   public toggleValue(): void {
     this.value = !this.value;
     this.changeHandler(this.value);

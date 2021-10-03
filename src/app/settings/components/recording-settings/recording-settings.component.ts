@@ -42,8 +42,14 @@ export class RecordingSettingsComponent implements OnDestroy, OnInit {
       this.pathControl.valueChanges.subscribe(value => {
         this.pathDoesNotExist = !this.fileSystem.dirExists(value);
       }),
-      this.saveToggle.valueChanges.subscribe((value: boolean) => {
-        this.settings.withSource = value;
+      this.saveToggle.valueChanges.subscribe((saveWithSource: boolean) => {
+        this.settings.withSource = saveWithSource;
+
+        if (saveWithSource) {
+          this.pathControl.disable();
+        } else {
+          this.pathControl.enable();
+        }
       }),
     );
   }

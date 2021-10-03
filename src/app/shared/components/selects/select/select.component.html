@@ -1,7 +1,9 @@
 <div class="current" [ngClass]="{ 'opened': opened }"
     (click)="changeOverlayState(!opened)">
     <div class="background"></div>
+
     <span>{{ value }}</span>
+
     <img [src]="iconSrc" 
         [alt]="opened ? 'close' : 'open'">
 </div>

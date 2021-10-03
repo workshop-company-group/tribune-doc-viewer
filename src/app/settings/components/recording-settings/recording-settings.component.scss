@@ -6,65 +6,58 @@
 
   justify-content: center;
 
-  .path-container {
+  .section-container {
     display: flex;
-    flex-direction: row;
-    align-items: flex-end;
+    flex-direction: column;
+    gap: 70px;
 
-    margin-bottom: 70px;
-
-    .input-container {
+    .path-container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      align-items: flex-end;
+      gap: 30px;
 
-      .not-found {
-        @extend %primary-light-font;
+      .input-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
 
-        margin-bottom: 10px;
+        .not-found {
+          @extend %primary-light-font;
 
-        color: var(--accent-red-color);
+          color: var(--accent-red-color);
 
-        opacity: 0;
+          opacity: 0;
 
-        transition: var(--base-transition);
+          transition: var(--base-transition);
 
-        &.visible {
-          opacity: 1;
+          &.visible {
+            opacity: 1;
+          }
+        }
+
+        .path-input {
+          --input-text-align: left;
+
+          width: 600px;
         }
       }
 
-      .path-input {
-        --input-text-align: left;
-
-        width: 600px;
-
-        margin-right: 30px;
+      .browse-button,
+      .apply-button {
+        width: 200px;
       }
     }
 
-    .browse-button {
-      width: 200px;
+    .save-toggle {
+      @extend %primary-regular-font;
 
-      margin-right: 30px;
-    }
+      display: flex;
+      align-items: center;
 
-    .apply-button {
-      width: 200px;
-    }
-  }
+      color: var(--base-black-color);
 
-  .save-toggle {
-    @extend %primary-regular-font;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    color: var(--base-black-color);
-
-    app-toggle {
-      margin-right: 30px;
+      gap: 30px;
     }
   }
 }

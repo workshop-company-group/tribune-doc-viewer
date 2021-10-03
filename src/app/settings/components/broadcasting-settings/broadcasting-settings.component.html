@@ -1,9 +1,11 @@
 <app-settings-section [title]="'broadcast-device' | locale | async">
-    <span class="no-device-hint"
-          [ngClass]="{ 'visible': !!(devicesSubject | async) }">
-        {{ 'no-broadcast-device' | locale | async }}
-    </span>
-    <app-select [options]="devicesSubject | async"
-        [formControl]="deviceControl">
-    </app-select>
+    <div class="settings-section">
+        <span class="no-device-hint"
+              [ngClass]="{ 'visible': !!(devicesSubject | async) }">
+            {{ 'no-broadcast-device' | locale | async }}
+        </span>
+        <app-select [options]="devicesSubject | async"
+            [formControl]="deviceControl">
+        </app-select>
+    </div>
 </app-settings-section>

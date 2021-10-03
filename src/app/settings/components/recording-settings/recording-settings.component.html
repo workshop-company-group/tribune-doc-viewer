@@ -1,42 +1,43 @@
 <app-settings-section [title]="'saving' | locale | async">
-    <div class="path-container">
-        <div class="input-container">
-            <span class="not-found"
-                  [ngClass]="{ 'visible': pathDoesNotExist }">
-                {{ 'directory-not-exist' | locale | async }}
-            </span>
-            <input appInput class="path-input"
-                [formControl]="pathControl"
-                [placeholder]="'path-to-directory' | locale | async"
+    <div class="section-container">
+        <div class="path-container">
+            <div class="input-container">
+                <span class="not-found"
+                      [ngClass]="{ 'visible': pathDoesNotExist }">
+                    {{ 'directory-not-exist' | locale | async }}
+                </span>
+                <input appInput class="path-input"
+                    [formControl]="pathControl"
+                    [placeholder]="'path-to-directory' | locale | async"
+                    (keydown.enter)="applyButton.click()"
+                >
+            </div>
+
+            <button appTextButton
+                class="medium-text-button-size browse-button"
                 [disabled]="saveToggle.value"
-                (keydown.enter)="applyButton.click()"
-            >
+                (click)="fileSelectDialogOpened = true">
+                {{ 'browse' | locale | async }}
+            </button>
+
+            <button appTextButton
+                class="medium-text-button-size apply-button"
+                #applyButton
+                [accent]="true"
+                [disabled]="saveToggle.value 
+                    || settings.savePath === pathControl.value
+                    || pathDoesNotExist"
+                (click)="applyPath()">
+                {{ 'apply' | locale | async }}
+            </button>
         </div>
 
-        <button appTextButton
-            class="medium-text-button-size browse-button"
-            [disabled]="saveToggle.value"
-            (click)="fileSelectDialogOpened = true">
-            {{ 'browse' | locale | async }}
-        </button>
+        <div class="save-toggle">
+            <app-toggle [formControl]="saveToggle">
+            </app-toggle>
 
-        <button appTextButton
-            class="medium-text-button-size apply-button"
-            #applyButton
-            [accent]="true"
-            [disabled]="saveToggle.value 
-                || settings.savePath === pathControl.value
-                || pathDoesNotExist"
-            (click)="applyPath()">
-            {{ 'apply' | locale | async }}
-        </button>
-    </div>
-
-    <div class="save-toggle">
-        <app-toggle [formControl]="saveToggle">
-        </app-toggle>
-
-        {{ 'save-to-document-directory' | locale | async }}
+            {{ 'save-to-document-directory' | locale | async }}
+        </div>
     </div>
 </app-settings-section>
 

@@ -8,11 +8,13 @@
 <span class="title">{{ 'settings' | locale | async }}</span>
 
 <nav class="settings-nav">
-    <app-selectable-button *ngFor="let route of navigationRoutes"
+    <button appTextButton appSelectableButton 
+        class="medium-text-button-size"
+        *ngFor="let route of navigationRoutes"
         [selected]="(routeSubject | async) === route"
-        (button-click)="routeSubject.next(route)">
+        (click)="routeSubject.next(route)">
         {{ route | locale | async }}
-    </app-selectable-button>
+    </button>
 </nav>
 
 <div class="router-container"
@@ -20,6 +22,6 @@
     <router-outlet #outlet="outlet"></router-outlet>
 </div>
 
-<div class="bottom-container">
-    <img class="logo" src="assets/logos/grey-logo.svg" alt="Workshop">
-</div>
+<img class="logo" 
+     src="assets/logos/grey-logo.svg"
+     alt="Workshop">

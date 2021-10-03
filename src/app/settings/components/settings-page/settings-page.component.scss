@@ -12,14 +12,13 @@
 
   background: var(--faint-white-gradient);
 
+  gap: 10%;
+
   .top-container {
     display: flex;
     width: 100%;
 
-    flex-direction: row;
     justify-content: flex-end;
-
-    margin-bottom: 5%;
 
     .close-button {
       --icon-button-icon-width: 30px;
@@ -31,47 +30,26 @@
   .title {
     @extend %primary-bold-font;
 
-    margin-bottom: 100px;
-
     color: var(--base-black-color);
     text-transform: uppercase;
   }
 
   .settings-nav {
     display: flex;
-
-    flex-direction: row;
     align-items: center;
-
-    margin-bottom: 5%;
-
-    app-selectable-button {
-      margin-right: 100px;
-
-      &:last-of-type {
-        margin: 0;
-      }
-    }
+    gap: 100px;
   }
 
   .router-container {
     width: 100%;
   }
 
-  .bottom-container {
+  .logo {
     position: absolute;
     bottom: 0;
 
-    display: flex;
-    width: 100%;
-
-    flex-direction: row;
-    justify-content: center;
+    height: 50px;
 
     margin-bottom: 50px;
-
-    img {
-      height: 50px;
-    }
   }
 }

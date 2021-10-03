@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { WebviewDirective } from './directives/';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   IconButtonComponent,
   LargeIconButtonComponent,
   TextButtonComponent,
-  SelectableButtonComponent,
 } from './components/buttons';
 import { InputComponent } from './components/inputs';
 import {
@@ -17,19 +15,19 @@ import {
 } from './components';
 import { SelectComponent } from './components/selects';
 import { ToggleComponent } from './components/toggles';
+import { SelectableButtonDirective } from './directives';
 
 @NgModule({
   declarations: [
-    WebviewDirective,
     BackdropComponent,
     LargeIconButtonComponent,
     TextButtonComponent,
-    SelectableButtonComponent,
     InputComponent,
     SelectComponent,
     ToggleComponent,
     IconButtonComponent,
     SpinnerComponent,
+    SelectableButtonDirective,
   ],
   imports: [
     CommonModule,
@@ -37,16 +35,15 @@ import { ToggleComponent } from './components/toggles';
     ReactiveFormsModule,
   ],
   exports: [
-    WebviewDirective,
     BackdropComponent,
     IconButtonComponent,
     LargeIconButtonComponent,
     TextButtonComponent,
-    SelectableButtonComponent,
     SelectComponent,
     ToggleComponent,
     InputComponent,
     SpinnerComponent,
+    SelectableButtonDirective,
   ],
 })
 export class SharedModule {}

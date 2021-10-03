@@ -14,15 +14,17 @@
             <div class="spinner-container">
                 <app-spinner class="loading-spinner"> </app-spinner>
             </div>
-            <app-selectable-button class="filler-drive drive">
-            </app-selectable-button>
+            <button appTextButton appSelectableButton 
+                class="medium-text-button-size filler-drive drive">
+            </button>
         </ng-container>
-        <app-selectable-button class="drive"
+        <button appTextButton appSelectableButton 
+           class="medium-text-button-size drive"
            *ngFor="let mountpoint of fileSelect.mountpoints"
            [selected]="fileSelect.isMountpointSelected(mountpoint)"
-           (button-click)="fileSelect.selectMountpoint(mountpoint)">
+           (click)="fileSelect.selectMountpoint(mountpoint)">
             {{ mountpoint.path }}
-        </app-selectable-button>
+        </button>
     </div>
 </div>
 

@@ -7,21 +7,25 @@
   flex-direction: column;
   align-items: center;
 
-  .no-device-hint {
-    @extend %primary-light-font;
+  .settings-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 
-    display: block;
+    .no-device-hint {
+      @extend %primary-light-font;
 
-    margin-bottom: 10px;
+      display: block;
 
-    color: var(--accent-red-color);
+      color: var(--accent-red-color);
 
-    opacity: 0;
+      opacity: 0;
 
-    transition: var(--base-transition);
+      transition: var(--base-transition);
 
-    &.visible {
-      opacity: 1;
+      &.visible {
+        opacity: 1;
+      }
     }
   }
 }

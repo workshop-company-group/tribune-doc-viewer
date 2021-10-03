@@ -41,3 +41,16 @@ input {
   width: 395px;
   height: 70px;
 }
+
+.selectable-button {
+  --normal-button-padding: 0 30px;
+
+  --button-background: var(--faint-light-grey-horizontal-gradient);
+
+  // accent
+  --button-accent-background: var(--accent-blue-horizontal-gradient);
+  --button-accent-background-transform: translateX(calc(-100% - 1px));
+
+  // active
+  --button-active-transform: none;
+}
