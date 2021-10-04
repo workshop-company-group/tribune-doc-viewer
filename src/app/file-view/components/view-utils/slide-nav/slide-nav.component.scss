@@ -1,28 +1,32 @@
 .nav-container {
   display: flex;
+
+  box-sizing: border-box;
+
   align-items: center;
+  gap: 30px;
 
   &.vertical {
     height: 100%;
     flex-direction: column;
 
+    padding: 15px 0;
+
     overflow-y: scroll;
 
     .thumbnail {
       width: 155px;
-      margin: 15px 0;
     }
   }
 
   &.horizontal {
     width: 100%;
-    flex-direction: row;
 
+    padding: 0 15px;
     overflow-x: scroll;
 
     .thumbnail {
       height: 155px;
-      margin: 0 15px;
     }
 
     &.wrap {
@@ -31,12 +35,11 @@
       flex-wrap: wrap;
       justify-content: center;
 
+      padding: 0;
+      padding-bottom: 15px;
+
       overflow-x: auto;
       overflow-y: scroll;
-
-      .thumbnail {
-        margin: 15px;
-      }
     }
   }
 }

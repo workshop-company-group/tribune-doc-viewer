@@ -14,14 +14,14 @@
   }
 }
 
-.item-container {
+:host {
   position: relative;
 
   display: flex;
   overflow: hidden;
   height: 100%;
+  box-sizing: border-box;
 
-  flex-direction: row;
   align-items: center;
 
   padding-left: 30px;
@@ -53,7 +53,7 @@
     z-index: 2;
 
     overflow: hidden;
-    width: 100%;
+    flex-grow: 1;
 
     text-overflow: ellipsis;
     white-space: nowrap;

@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  HostBinding,
   Input,
   Output,
 } from '@angular/core';
@@ -19,15 +20,20 @@ import { ConfirmationService } from '../../services';
 })
 export class FileTitleMenuItemComponent {
 
+  constructor(
+    private readonly confirmation: ConfirmationService,
+  ) {}
+
   @Input()
   public doc: RecordOf<OpenedDocument>;
 
   @Output('close-click')
   public readonly closeEvent = new EventEmitter<void>();
 
-  constructor(
-    private readonly confirmation: ConfirmationService,
-  ) {}
+  @HostBinding('class.selected')
+  public get isSelected(): boolean {
+    return this.doc.selected;
+  }
 
   public close(): void {
     this.doc.closingState.next(true);

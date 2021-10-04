@@ -2,7 +2,6 @@
 
 :host {
   display: flex;
-  flex-direction: row;
   align-items: flex-start;
 
   background: var(--base-white-color);
@@ -15,7 +14,6 @@
     display: flex;
     width: 470px;
 
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
 
@@ -25,13 +23,11 @@
 
     .record-container, .broadcast-container {
       display: flex;
-      flex-direction: row;
       align-items: center;
+      gap: 20px;
 
       .hint {
         @extend %primary-light-font;
-
-        margin-right: 20px;
 
         color: var(--base-black-color);
       }

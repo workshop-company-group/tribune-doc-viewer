@@ -15,8 +15,6 @@
     .no-device-hint {
       @extend %primary-light-font;
 
-      display: block;
-
       color: var(--accent-red-color);
 
       opacity: 0;

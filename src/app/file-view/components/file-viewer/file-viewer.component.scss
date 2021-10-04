@@ -7,8 +7,6 @@
   width: 100%;
   height: 100%;
 
-  flex-direction: row;
-
   .left-container, .right-container {
     width: 50%;
     height: 100%;
@@ -36,6 +34,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 4vh;
 
       .upload-document-input {
         display: none;
@@ -43,8 +42,6 @@
 
       .add-hint {
         @extend %primary-bold-font;
-
-        margin-top: 4vh;
 
         color: var(--base-black-color);
 
@@ -62,16 +59,13 @@
   .record-broadcast-container {
     position: absolute;
     z-index: 1;
-    bottom: 0;
+    bottom: 50px;
     left: 0;
 
     display: flex;
     width: 100%;
 
-    flex-direction: row;
     justify-content: center;
-
-    padding-bottom: 50px;
 
     pointer-events: none;
   }
