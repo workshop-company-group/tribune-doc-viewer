@@ -12,7 +12,7 @@
   "cancel": {
     "ru": "Отмена",
     "en": "Cancel",
-    "kz": "Бас тарту / күшін жою"
+    "kz": "Күшін жою"
   },
   "ok": {
     "ru": "Ок",
@@ -72,7 +72,7 @@
   "download": {
     "ru": "Загрузить",
     "en": "Download",
-    "kz": "жүктеу"
+    "kz": "Жүктеу"
   },
   "ignore": {
     "ru": "Отклонить",
@@ -92,7 +92,7 @@
   "product-activation": {
     "ru": "Активация продукта",
     "en": "Product activation",
-    "kz": "өнімді жандандыру"
+    "kz": "Өнімді жандандыру"
   },
   "enter-activation-key": {
     "ru": "Введите ключ активации продукта. После активации продукт будет зарегистрирован на данном устройстве.",
@@ -103,6 +103,26 @@
     "ru": "Неверный ключ активации",
     "en": "Wrong activation key",
     "kz": "Қате белсендіру кілті"
+  },
+  "no-connection": {
+    "ru": "Нет подключения",
+    "en": "No connection",
+    "kz": "Байланыс жоқ"
+  },
+  "check-network": {
+    "ru": "Нет подключения к интернету. Проверьте соединение и повторите попытку.",
+    "en": "No Internet connection. Check the network and retry.",
+    "kz": "Интернет байланысы жоқ. Желіні тексеріп, әрекетті қайталаңыз."
+  },
+  "retry": {
+    "ru": "Повторить",
+    "en": "Retry",
+    "kz": "Қайталап көріңіз"
+  },
+  "connection-in-progress": {
+    "ru": "Подключение...",
+    "en": "Connection...",
+    "kz": "Қосылу..."
   },
   "add-file": {
     "ru": "Добавить файл",
@@ -180,8 +200,8 @@
     "kz": "Жазу аяқталды"
   },
   "recording-broadcasting": {
-    "ru": "Запись/Трансляция",
-    "en": "Recording/Broadcasting",
+    "ru": "Запись / Трансляция",
+    "en": "Recording / Broadcasting",
     "kz": "Жазу / Хабар тарату"
   },
   "select-file-to-record": {
@@ -199,11 +219,6 @@
     "en": "Broadcast device",
     "kz": "Тарату құрылғысы"
   },
-  "no-broadcast-device": {
-    "ru": "Не найдено устройств для трансляции",
-    "en": "No broadcast device found",
-    "kz": "Тарату құрылғысы табылмады"
-  },
   "file-broadcasting": {
     "ru": "Файл транслируется",
     "en": "The file is being broadcast",
@@ -213,6 +228,11 @@
     "ru": "Выберите файл для трансляции",
     "en": "Select file to broadcast",
     "kz": "Тарату үшін файлды таңдаңыз"
+  },
+  "no-broadcast-device": {
+    "ru": "Не найдено устройств для трансляции",
+    "en": "No broadcast device found",
+    "kz": "Тарату құрылғысы табылмады"
   },
   "enter-password": {
     "ru": "Введите пароль администратора",
@@ -259,39 +279,19 @@
     "en": "Save to",
     "kz": "Сақтауға"
   },
-  "path-to-directory": {
-    "ru": "Путь к директории сохранения",
-    "en": "Path to saving folder",
-    "kz": "Қалтаны сақтау жолы"
+  "save-to-document-directory": {
+    "ru": "Сохранять в директорию документа",
+    "en": "Save to document directory",
+    "kz": "Құжаттар каталогына сақтаңыз"
   },
   "directory-not-exist": {
     "ru": "Директория не существует",
     "en": "Incorrect path to folder",
     "kz": "Қапшыққа жол дұрыс емес"
   },
-  "save-to-document-directory": {
-    "ru": "Сохранять в директорию документа",
-    "en": "Save to document directory",
-    "kz": "Құжаттар каталогына сақтаңыз"
-  },
-  "connection-in-progress": {
-    "ru": "Подключение...",
-    "en": "Connection...",
-    "kz": "Қосылу..."
-  },
-  "no-connection": {
-    "ru": "Нет подключения",
-    "en": "No connection",
-    "kz": "Байланыс жоқ"
-  },
-  "check-network": {
-    "ru": "Нет подключения к интернету. Проверьте соединение и повторите попытку.",
-    "en": "No Internet connection. Check the network and retry.",
-    "kz": "Интернет байланысы жоқ. Желіні тексеріп, әрекетті қайталаңыз."
-  },
-  "retry": {
-    "ru": "Повторить",
-    "en": "Retry",
-    "kz": "Қайталап көріңіз"
+  "path-to-directory": {
+    "ru": "Путь к директории сохранения",
+    "en": "Path to saving folder",
+    "kz": "Қалтаны сақтау жолы"
   }
 }

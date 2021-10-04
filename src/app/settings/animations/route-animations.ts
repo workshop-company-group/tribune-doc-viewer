@@ -42,6 +42,6 @@ const moveRightAnimation: AnimationMetadata[] = [
 
 
 export const routeAnimations = trigger('routeAnimations', [
-  transition('general => recording, recording => broadcasting', moveLeftAnimation),
-  transition('broadcasting => recording, recording => general', moveRightAnimation),
+  transition('general => recording, general => broadcasting, recording => broadcasting', moveLeftAnimation),
+  transition('broadcasting => recording, broadcasting => general, recording => general', moveRightAnimation),
 ]);

@@ -11,18 +11,21 @@
 </div>
 
 <div class="buttons-container">
-    <app-normal-button class="button"
-        (button-click)="openFileView()">
+    <button appTextButton
+        class="medium-text-button-size button"
+        (click)="openFileView()">
         {{ fileViewButtonText | locale | async }}
-    </app-normal-button>
-    <app-normal-button class="button"
-        (button-click)="openSettings()">
+    </button>
+    <button appTextButton
+        class="medium-text-button-size button"
+        (click)="openSettings()">
         {{ 'settings' | locale | async }}
-    </app-normal-button>
-    <app-normal-button class="button"
-        (button-click)="quitApplication()">
+    </button>
+    <button appTextButton
+        class="medium-text-button-size button"
+        (click)="quitApplication()">
         {{ 'exit' | locale | async }}
-    </app-normal-button>
+    </button>
 </div>
 
 <app-backdrop class="license-dialog"

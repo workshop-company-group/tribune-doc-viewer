@@ -32,7 +32,7 @@ export class RecorderService {
 
   public async getCapturerSource():
   Promise<Electron.DesktopCapturerSource | null> {
-    const availableDisplays = await this.settings.getAvailableDisplays();
+    const availableDisplays = this.settings.externalDisplays.value;
     let sourceNumber = -1;
     const con = this.settings.screenConnection;
 

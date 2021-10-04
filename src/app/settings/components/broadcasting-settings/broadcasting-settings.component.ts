@@ -7,7 +7,7 @@ import {
 import { FormControl } from '@angular/forms';
 
 import { interval, Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged, switchMap, map } from 'rxjs/operators';
+import { distinctUntilChanged, tap, switchMap, map } from 'rxjs/operators';
 import { List } from 'immutable';
 
 import { SettingsService } from '../../services';
@@ -43,7 +43,8 @@ export class BroadcastingSettingsComponent implements OnDestroy, OnInit {
         this.settings.screenConnection = device;
       }),
       interval(DISPLAY_RELOAD_PERIOD).pipe(
-        switchMap(() => this.settings.getAvailableDisplays()),
+        tap(() => this.settings.checkExternalConnections()),
+        switchMap(() => this.settings.externalDisplays),
         map(displays => displays.map(display => display.connection)),
         distinctUntilChanged((curr, next) =>
           JSON.stringify(curr.sort()) === JSON.stringify(next.sort()),

@@ -6,7 +6,6 @@ import * as loadIniFile from 'read-ini-file';
 import * as writeIniFile from 'write-ini-file';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as si from 'systeminformation';
 
 import { BehaviorSubject } from 'rxjs';
 
@@ -44,11 +43,26 @@ export class SettingsService {
 
   private _settings: Settings;
 
+  private readonly displayCheckWorker = new Worker(
+    new URL('../web-workers/display-check.worker', import.meta.url),
+    { type: 'module' },
+  );
+
+  public readonly externalDisplays = new BehaviorSubject<Display[]>([]);
+
   constructor(
     private readonly system: SystemService,
   ) {
+    this.displayCheckWorker.onmessage = (message: MessageEvent<string>) => {
+      const displays = JSON.parse(message.data) as Display[];
+      const externalDisplays = this.filterExternalDisplays(displays);
+      // Should be called before emitting value to displays
+      this.setExternalDisplay(externalDisplays);
+      this.externalDisplays.next(externalDisplays);
+    };
+
     this.initIni();
-    void this.checkDisplay();
+    this.checkExternalConnections();
   }
 
   private save(): void {
@@ -68,12 +82,20 @@ export class SettingsService {
     }
   }
 
-  public async checkDisplay(): Promise<void> {
-    const displays = await this.getAvailableDisplays();
+  /**
+   * Sends emit to worker that returns array of connected displays.
+   */
+  public checkExternalConnections(): void {
+    this.displayCheckWorker.postMessage('');
+  }
 
-    const conn = this.screenConnection;
-
-    if (conn !== '')
+  /**
+   * Checks if set display is in connected displays and resets if not.
+   *
+   * @param displays Connected displays.
+   */
+  private setExternalDisplay(displays: Display[]): void {
+    if (this.screenConnection !== '')
       for (const display of displays)
         if (display.connection === this.settings.screen.connection)
           return;
@@ -103,10 +125,10 @@ export class SettingsService {
     return settings;
   }
 
-
-  public async getAvailableDisplays(): Promise<Display[]> {
-    const displays = (await si.graphics()).displays;
-    const internalDisplays = process.platform === 'win32' ? WINDOWS_INTERNAL_DISPLAYS : UNIX_INTERNAL_DISPLAYS;
+  private filterExternalDisplays(displays: Display[]): Display[] {
+    const internalDisplays = process.platform === 'win32'
+      ? WINDOWS_INTERNAL_DISPLAYS
+      : UNIX_INTERNAL_DISPLAYS;
 
     if (displays.length < internalDisplays)
       return [];

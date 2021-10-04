@@ -9,7 +9,7 @@ import { ControlValueAccessor, FormControl,
   NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { KEY_LENGTH } from '../../services';
 
@@ -52,7 +52,6 @@ implements ControlValueAccessor, OnDestroy, OnInit {
   public ngOnInit(): void {
     this.subscriptions.push(
       this.inputControl.valueChanges.pipe(
-        filter((value: string) => !!value.length),
         map(value => this.formatInput(value)),
       ).subscribe(value => {
         this.inputControl.setValue(value, { emitEvent: false });

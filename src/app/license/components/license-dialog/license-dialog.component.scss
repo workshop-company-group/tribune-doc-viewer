@@ -30,6 +30,7 @@
 
       h1 {
         @extend %primary-bold-font;
+        text-transform: uppercase;
       }
     }
 
@@ -74,11 +75,6 @@
 
       .exit {
         margin-right: 30px;
-      }
-
-      .activate {
-        --button-background: var(--accent-blue-vertical-gradient);
-        --button-color: var(--base-white-color);
       }
     }
   }

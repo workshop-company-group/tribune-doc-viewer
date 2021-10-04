@@ -11,7 +11,7 @@
 
 <div class="form">
     <span class="wrong-key"
-        [ngClass]="{ 'visible': wrongKey }">
+        [ngClass]="{ 'visible': wrongKey | async }">
         {{ 'wrong-activation-key' | locale | async }}
     </span>
 
@@ -20,15 +20,18 @@
     </app-license-key-input>
 
     <div class="buttons-container">
-        <app-small-button class="exit"
-            (button-click)="exit()">
+        <button appTextButton
+            class="small-text-button-size exit"
+            (click)="exit()">
             {{ 'activation-exit' | locale | async }}
-        </app-small-button>
-        <app-small-button class="activate"
+        </button>
+
+        <button appTextButton
+            class="small-text-button-size activate"
             [accent]="true"
-            [disabled]="keyControl.invalid"
-            (button-click)="activate()">
+            [disabled]="(wrongKey | async) || keyControl.invalid"
+            (click)="activate()">
             {{ 'activate' | locale | async }}
-        </app-small-button>
+        </button>
     </div>
 </div>

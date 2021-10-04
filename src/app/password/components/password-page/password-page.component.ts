@@ -1,8 +1,12 @@
 import { Location } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+} from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { AuthService, PasswordStateService } from '../../services';
 
@@ -14,9 +18,13 @@ import { AuthService, PasswordStateService } from '../../services';
 })
 export class PasswordPageComponent implements OnDestroy {
 
-  public readonly password = new FormControl('');
+  public readonly password = new FormControl('', [
+    // Angular syntax of using `required` validator
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    Validators.required,
+  ]);
 
-  public isPasswordWrong = false;
+  public readonly isPasswordWrong = new BehaviorSubject<boolean>(false);
 
   private readonly subscriptions: Subscription[] = [];
 
@@ -27,7 +35,7 @@ export class PasswordPageComponent implements OnDestroy {
   ) {
     this.subscriptions.push(
       this.password.valueChanges.subscribe(
-        () => { this.isPasswordWrong = false; },
+        () => this.isPasswordWrong.next(false),
       ),
     );
   }
@@ -41,7 +49,7 @@ export class PasswordPageComponent implements OnDestroy {
     if (isValid) {
       await this.passwordState.continueWithPassword();
     } else {
-      this.isPasswordWrong = true;
+      this.isPasswordWrong.next(true);
     }
   }
 

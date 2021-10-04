@@ -6,7 +6,7 @@
     <app-slide-thumbnail class="slide first"
         *ngFor="let doc of documentService.opened | async; index as i"
         [pdf]="doc.pdf"
-        [page]="doc.currentPage | async"
+        [pageIndex]="doc.currentPage | async"
         [selected]="doc.selected"
         (click)="documentService.select(i)"
         [ngClass]="doc.pdf.orientation">
@@ -14,15 +14,17 @@
 </div>
 
 <div class="buttons-container">
-    <app-small-button class="cancel-button"
-        (button-click)="cancelClickEmitter.emit()">
+    <button appTextButton
+        class="small-text-button-size cancel-button"
+        (click)="cancelClickEmitter.emit()">
         {{ 'cancel' | locale | async }}
-    </app-small-button>
+    </button>
 
-    <app-small-button class="select-button"
+    <button appTextButton
+        class="small-text-button-size select-button"
         [accent]="true"
-        (button-click)="selectClickEmitter.emit()">
+        (click)="selectClickEmitter.emit()">
         {{ 'select' | locale | async }}
-    </app-small-button>
+    </button>
 </div>
 

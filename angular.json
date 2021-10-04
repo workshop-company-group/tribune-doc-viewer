@@ -44,6 +44,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles/fonts.scss",
               "src/styles/global.scss",
               "src/styles/mixins.scss",
               "src/styles/variables.scss"
@@ -51,7 +52,8 @@
             "scripts": [],
             "customWebpackConfig": {
               "path": "./angular.webpack.js"
-            }
+            },
+            "webWorkerTsConfig": "tsconfig.worker.json"
           },
           "configurations": {
             "dev": {
@@ -144,7 +146,8 @@
             ],
             "customWebpackConfig": {
               "path": "./angular.webpack.js"
-            }
+            },
+            "webWorkerTsConfig": "tsconfig.worker.json"
           }
         },
         "lint": {

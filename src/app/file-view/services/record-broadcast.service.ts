@@ -16,7 +16,9 @@ export class RecordBroadcastService {
 
   private doc?: RecordOf<OpenedDocument>;
 
-  public state = new BehaviorSubject<RecordBroadcastState>(null);
+  public readonly state = new BehaviorSubject<RecordBroadcastState>(null);
+
+  public readonly isBroadcastingAvailable = new BehaviorSubject<boolean>(false);
 
   private docSubscription: {
     state: Subscription | undefined;
@@ -30,7 +32,14 @@ export class RecordBroadcastService {
     private readonly external: ExternalViewerService,
     private readonly recorder: RecorderService,
     private readonly windowStateService: WindowStateService,
-  ) { }
+  ) {
+    this.windowStateService.isExternalConnected.subscribe(connected =>
+      this.isBroadcastingAvailable.next(connected));
+  }
+
+  public checkBroacastingAvailability(): void {
+    this.windowStateService.checkExternalConnected();
+  }
 
   public resumeRecording(): void {
     if (!this.doc) {
@@ -39,10 +48,6 @@ export class RecordBroadcastService {
 
     this.recorder.continue();
     this.doc.recordBroadcastState.next('recording');
-  }
-
-  public async isBroadcastingAvailable(): Promise<boolean> {
-    return this.windowStateService.isExternalConnected();
   }
 
   public isRecordingAvailable(): boolean {
@@ -59,7 +64,7 @@ export class RecordBroadcastService {
   }
 
   public async startBroadcasting(doc: RecordOf<OpenedDocument>): Promise<void> {
-    if (!(await this.isBroadcastingAvailable())) {
+    if (!this.isBroadcastingAvailable.value) {
       throw new BroadcastError('broadcasting is not available');
     }
     this.doc = doc;

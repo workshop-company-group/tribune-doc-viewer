@@ -1,0 +1,20 @@
+@keyframes loading {
+  0% {
+    transform: rotate(0);
+  }
+
+  30% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+img {
+  width: 100px;
+  height: 100px;
+
+  animation: loading calc(3 * var(--base-transition)) linear infinite;
+}

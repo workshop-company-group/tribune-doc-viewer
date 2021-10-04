@@ -10,9 +10,13 @@
     </div>
 
     <div class="drive-container">
-        <app-selectable-button class="filler-drive drive"
-            *ngIf="!fileSelect.isLoaded()">
-        </app-selectable-button>
+        <ng-container *ngIf="!fileSelect.isLoaded()">
+            <div class="spinner-container">
+                <app-spinner class="loading-spinner"> </app-spinner>
+            </div>
+            <app-selectable-button class="filler-drive drive">
+            </app-selectable-button>
+        </ng-container>
         <app-selectable-button class="drive"
            *ngFor="let mountpoint of fileSelect.mountpoints"
            [selected]="fileSelect.isMountpointSelected(mountpoint)"
@@ -28,6 +32,11 @@
             <span class="name">{{ 'name' | locale | async }}</span>
             <span class="type">{{ 'type' | locale | async }}</span>
             <span class="size">{{ 'size' | locale | async }}</span>
+        </div>
+
+        <div class="spinner-container"
+            *ngIf="!fileSelect.currentDirContent">
+            <app-spinner class="loading-spinner"> </app-spinner>
         </div>
 
         <div class="dir-content"
@@ -70,10 +79,11 @@
         </div>
     </div>
 
-    <app-small-button class="add-button"
+    <button appTextButton
+        class="small-text-button-size add-button"
         [accent]="true"
         [disabled]="!fileSelect.selectedPath"
-        (button-click)="openEmitter.emit(fileSelect.selectedPath)">
+        (click)="openEmitter.emit(fileSelect.selectedPath)">
         {{ openButtonText }}
-    </app-small-button>
+    </button>
 </div>

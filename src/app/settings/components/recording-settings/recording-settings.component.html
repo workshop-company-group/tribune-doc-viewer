@@ -1,27 +1,35 @@
 <app-settings-section [title]="'saving' | locale | async">
     <div class="path-container">
-        <div class="input-container"><span class="not-found"
+        <div class="input-container">
+            <span class="not-found"
                   [ngClass]="{ 'visible': pathDoesNotExist }">
                 {{ 'directory-not-exist' | locale | async }}
-            </span><app-input [formControl]="pathControl"
+            </span>
+            <input appInput class="path-input"
+                [formControl]="pathControl"
                 [placeholder]="'path-to-directory' | locale | async"
-                [disabled]="saveToggle.value">
-            </app-input></div>
+                [disabled]="saveToggle.value"
+                (keydown.enter)="applyButton.click()"
+            >
+        </div>
 
-        <app-normal-button class="browse-button"
+        <button appTextButton
+            class="medium-text-button-size browse-button"
             [disabled]="saveToggle.value"
-            (button-click)="fileSelectDialogOpened = true">
+            (click)="fileSelectDialogOpened = true">
             {{ 'browse' | locale | async }}
-        </app-normal-button>
+        </button>
 
-        <app-normal-button class="apply-button"
+        <button appTextButton
+            class="medium-text-button-size apply-button"
+            #applyButton
             [accent]="true"
             [disabled]="saveToggle.value 
                 || settings.savePath === pathControl.value
                 || pathDoesNotExist"
-            (button-click)="applyPath()">
+            (click)="applyPath()">
             {{ 'apply' | locale | async }}
-        </app-normal-button>
+        </button>
     </div>
 
     <div class="save-toggle">

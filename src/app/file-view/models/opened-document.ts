@@ -1,12 +1,12 @@
+import { PDFDocumentProxy } from 'pdfjs-dist';
 import { BehaviorSubject } from 'rxjs';
 
 import { Document } from './document';
-import { PdfDocument } from './pdf';
 import { RecordBroadcastState } from './record-broadcast-state';
 
 export interface OpenedDocument {
   doc: Document;
-  pdf: PdfDocument;
+  pdf?: PDFDocumentProxy;
   selected: boolean;
   /**
    * Index of opened page in document. Indexing start at 0.

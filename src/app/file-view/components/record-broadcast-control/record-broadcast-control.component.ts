@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 
 import { BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import {
   ConfirmationService,
@@ -22,25 +22,20 @@ export class RecordBroadcastControlComponent implements OnDestroy {
 
   public readonly wrapped = new BehaviorSubject<boolean>(true);
 
-  public readonly broadcastingAvailability =
-  interval(AVAILABILITY_CHECK_INTERVAL).pipe(
-    switchMap(() => this.recordBroadcastService.isBroadcastingAvailable()),
-  );
-
   public readonly recordingAvailability =
   interval(AVAILABILITY_CHECK_INTERVAL).pipe(
-    map(() => this.recordBroadcastService.isRecordingAvailable()),
+    map(() => this.recordBroadcast.isRecordingAvailable()),
   );
 
   public readonly recordControlState: Observable<recordControl> =
-  this.recordBroadcastService.state.pipe(
+  this.recordBroadcast.state.pipe(
     map(state => !state || state === 'broadcasting'
       ? 'recordButton'
       : 'pauseStopControls'),
   );
 
   public readonly broadcastButtonIcon =
-  this.recordBroadcastService.state.pipe(
+  this.recordBroadcast.state.pipe(
     map(state => state
       ? 'assets/icons/broadcast/broadcast-stop.svg'
       : 'assets/icons/broadcast/broadcast-blue.svg'),
@@ -51,39 +46,45 @@ export class RecordBroadcastControlComponent implements OnDestroy {
   constructor(
     private readonly confirmation: ConfirmationService,
     private readonly documentService: DocumentService,
-    public readonly recordBroadcastService: RecordBroadcastService,
-  ) { }
+    public readonly recordBroadcast: RecordBroadcastService,
+  ) {
+    this.subscriptions.push(
+      interval(AVAILABILITY_CHECK_INTERVAL).subscribe(
+        () => this.recordBroadcast.checkBroacastingAvailability(),
+      ),
+    );
+  }
 
   public ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   public pauseClickHandler(): void {
-    if (this.recordBroadcastService.state.value === 'recording') {
-      this.recordBroadcastService.pauseRecording();
-    } else if (this.recordBroadcastService.state.value === 'paused') {
-      this.recordBroadcastService.resumeRecording();
+    if (this.recordBroadcast.state.value === 'recording') {
+      this.recordBroadcast.pauseRecording();
+    } else if (this.recordBroadcast.state.value === 'paused') {
+      this.recordBroadcast.resumeRecording();
     }
   }
 
   public stopRecording(): void {
-    this.recordBroadcastService.stopRecording();
+    this.recordBroadcast.stopRecording();
     this.confirmation.state = 'stop-recording';
   }
 
   public async broadcastClickHandler(): Promise<void> {
-    if (this.recordBroadcastService.state.value) {
-      if (this.recordBroadcastService.state.value !== 'broadcasting') {
+    if (this.recordBroadcast.state.value) {
+      if (this.recordBroadcast.state.value !== 'broadcasting') {
         this.stopRecording();
       }
-      this.recordBroadcastService.stopBroadcasting();
+      this.recordBroadcast.stopBroadcasting();
       return;
     }
 
     if (this.documentService.opened.value.size === 1) {
       const doc = this.documentService.opened.value.get(0);
       if (doc) {
-        await this.recordBroadcastService.startBroadcasting(doc);
+        await this.recordBroadcast.startBroadcasting(doc);
       }
     } else {
       this.confirmation.state = 'select-broadcasting';

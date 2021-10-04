@@ -2,14 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit,
 } from '@angular/core';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { RecordOf } from 'immutable';
 
 import { OpenedDocument } from '../../../models';
+import { isNotNil } from '../../../../shared/utils';
 
 @Component({
   selector: 'app-main-slide',
@@ -17,32 +17,87 @@ import { OpenedDocument } from '../../../models';
   styleUrls: ['./main-slide.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainSlideComponent implements OnInit {
-
-  @Input()
-  public doc: RecordOf<OpenedDocument>;
-
-  public firstPage: Observable<boolean>;
-
-  public lastPage: Observable<boolean>;
+export class MainSlideComponent {
 
   constructor() { }
 
-  public ngOnInit(): void {
-    this.firstPage = this.doc.currentPage.pipe(
-      map(page => page <= 0),
-    );
-    this.lastPage = this.doc.currentPage.pipe(
-      map(page => page >= this.doc.pdf.numPages - 1),
-    );
+
+  // #region Document
+
+  @Input()
+  public set doc(doc: RecordOf<OpenedDocument> | null) {
+    if (doc) {
+      this.validateDocument(doc);
+    }
+    this.documentObservable.next(doc);
   }
 
-  public nextSlide(): void {
+  public get doc(): RecordOf<OpenedDocument> | null {
+    return this.documentObservable.value;
+  }
+
+  public readonly documentObservable =
+  new BehaviorSubject<RecordOf<OpenedDocument> | null>(null);
+
+  private readonly pdf = this.documentObservable.pipe(
+    filter(isNotNil),
+    map(doc => doc.pdf),
+    filter(isNotNil),
+  );
+
+  private validateDocument(doc: OpenedDocument): void {
+    if (!doc.pdf) {
+      throw new Error('Invalid document: PDF is undefined');
+    }
+  }
+
+  // #endregion
+
+
+  // #region Current document page
+
+  private readonly currentPageIndex = this.documentObservable.pipe(
+    filter(isNotNil),
+    switchMap(doc => doc.currentPage),
+  );
+
+  public readonly currentPage = combineLatest([
+    this.pdf,
+    this.currentPageIndex,
+  ]).pipe(
+    switchMap(([pdf, pageIndex]) => pdf.getPage(pageIndex + 1)),
+  );
+
+  public isFirstPage = this.currentPageIndex.pipe(
+    map(pageIndex => pageIndex <= 0),
+  );
+
+  public isLastPage = combineLatest([
+    this.currentPageIndex,
+    this.pdf,
+  ]).pipe(
+    map(([pageIndex, pdf]) => pageIndex >= pdf.numPages - 1),
+  );
+
+  // #endregion
+
+
+  // #region Document controls API
+
+  public switchPageToNext(): void {
+    if (!this.doc) {
+      throw new Error('Cannot switch to next page: document is null');
+    }
     this.doc.currentPage.next(this.doc.currentPage.value + 1);
   }
 
-  public previousSlide(): void {
+  public switchPageToPrevious(): void {
+    if (!this.doc) {
+      throw new Error('Cannot switch to previous page: document is null');
+    }
     this.doc.currentPage.next(this.doc.currentPage.value - 1);
   }
+
+  // #endregion
 
 }

@@ -11,9 +11,13 @@
 
     z-index: 2;
 
+    overflow: hidden;
+
     color: var(--base-black-color);
+    text-overflow: ellipsis;
     transition: var(--base-transition);
     user-select: none;
+    white-space: nowrap;
   }
 
   &.disabled {
