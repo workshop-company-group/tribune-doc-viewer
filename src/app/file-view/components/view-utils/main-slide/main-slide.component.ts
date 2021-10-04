@@ -46,7 +46,7 @@ export class MainSlideComponent {
   );
 
   private validateDocument(doc: OpenedDocument): void {
-    if (doc.pdf === undefined) {
+    if (!doc.pdf) {
       throw new Error('Invalid document: PDF is undefined');
     }
   }
@@ -85,14 +85,14 @@ export class MainSlideComponent {
   // #region Document controls API
 
   public switchPageToNext(): void {
-    if (this.doc === null) {
+    if (!this.doc) {
       throw new Error('Cannot switch to next page: document is null');
     }
     this.doc.currentPage.next(this.doc.currentPage.value + 1);
   }
 
   public switchPageToPrevious(): void {
-    if (this.doc === null) {
+    if (!this.doc) {
       throw new Error('Cannot switch to previous page: document is null');
     }
     this.doc.currentPage.next(this.doc.currentPage.value - 1);
