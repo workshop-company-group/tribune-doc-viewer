@@ -1,6 +1,7 @@
 <div class="left-container">
     <div class="title-container">
-        <button appIconButton class="close-button"
+        <button appIconButton 
+            class="close-button"
             iconSrc="assets/icons/crosses/cross-black.svg" 
             (click)="closeEmitter.emit()">
         </button>
@@ -15,14 +16,14 @@
                 <app-spinner class="loading-spinner"> </app-spinner>
             </div>
             <button appTextButton appSelectableButton 
-                class="medium-text-button-size filler-drive drive">
-            </button>
+                class="medium-text-button-size filler-drive drive"
+            > </button>
         </ng-container>
         <button appTextButton appSelectableButton 
-           class="medium-text-button-size drive"
-           *ngFor="let mountpoint of fileSelect.mountpoints"
-           [selected]="fileSelect.isMountpointSelected(mountpoint)"
-           (click)="fileSelect.selectMountpoint(mountpoint)">
+            class="medium-text-button-size drive"
+            *ngFor="let mountpoint of fileSelect.mountpoints"
+            [selected]="fileSelect.isMountpointSelected(mountpoint)"
+            (click)="fileSelect.selectMountpoint(mountpoint)">
             {{ mountpoint.path }}
         </button>
     </div>
@@ -59,8 +60,10 @@
                 <div class="icon-container">
                     <img src="assets/icons/file-formats/folder.svg">
                 </div>
-                <span class="name">{{ folder.name }}</span>
-                <span class="type">{{ 'folder' | locale | async }}</span>
+                <div class="meta-container">
+                    <span class="name">{{ folder.name }}</span>
+                    <span class="type">{{ 'folder' | locale | async }}</span>
+                </div>
             </div>
 
             <ng-container *ngIf="!folderSelect">
@@ -71,11 +74,13 @@
                     <div class="icon-container">
                         <img [src]="fileSelect.getFileTypeIconPath(file.type)">
                     </div>
-                    <span class="name">{{ file.name }}</span>
-                    <span class="type">
-                        {{ ('file-extension' | locale : (file.type | uppercase)) | async }}
-                    </span>
-                    <span class="size">{{ file.size }}</span>
+                    <div class="meta-container">
+                        <span class="name">{{ file.name }}</span>
+                        <span class="type">
+                            {{ ('file-extension' | locale : (file.type | uppercase)) | async }}
+                        </span>
+                        <span class="size">{{ file.size }}</span>
+                    </div>
                 </div>
             </ng-container>
         </div>

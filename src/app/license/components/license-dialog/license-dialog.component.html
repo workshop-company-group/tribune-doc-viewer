@@ -10,14 +10,16 @@
 </div>
 
 <div class="form">
-    <span class="wrong-key"
-        [ngClass]="{ 'visible': wrongKey | async }">
-        {{ 'wrong-activation-key' | locale | async }}
-    </span>
+    <div class="input-container">
+        <span class="wrong-key"
+            [ngClass]="{ 'visible': wrongKey | async }">
+            {{ 'wrong-activation-key' | locale | async }}
+        </span>
 
-    <app-license-key-input class="key-input"
-       [formControl]="keyControl">
-    </app-license-key-input>
+        <app-license-key-input class="key-input"
+           [formControl]="keyControl">
+        </app-license-key-input>
+    </div>
 
     <div class="buttons-container">
         <button appTextButton

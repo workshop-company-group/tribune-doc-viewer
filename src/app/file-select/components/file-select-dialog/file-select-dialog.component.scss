@@ -5,24 +5,27 @@
   overflow: hidden;
   height: 1000px;
 
-  flex-direction: row;
-
   border-radius: 10px;
 
   .left-container {
     display: flex;
     height: 100%;
 
+    box-sizing: border-box;
     flex-direction: column;
 
-    padding: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
 
     background: var(--faint-light-grey-color);
 
+    gap: 25px;
+
     .title-container {
       display: flex;
-      flex-direction: row;
       align-items: center;
+
+      gap: 10px;
 
       .close-button {
         --icon-button-icon-width: 25px;
@@ -31,23 +34,22 @@
       .title {
         @extend %primary-regular-font;
 
-        margin-left: 10px;
-
         color: var(--base-black-color);
       }
     }
 
     .drive-container {
       display: flex;
+      overflow: auto;
       flex-direction: column;
 
       padding: 10px;
-      margin-top: 15px;
+      padding-right: 20px;
+      margin-right: 10px;
+      gap: 30px;
 
       .drive {
         --normal-button-justify-content: flex-start;
-
-        margin: 15px 0;
       }
 
       .filler-drive {
@@ -72,11 +74,14 @@
     display: flex;
     height: 100%;
 
+    box-sizing: border-box;
     flex-direction: column;
     align-items: flex-end;
-    justify-content: space-between;
+
+    padding: 30px 0;
 
     background: var(--base-white-color);
+    gap: 15px;
 
     .dir-content-container {
       display: flex;
@@ -86,32 +91,27 @@
 
       flex-direction: column;
       flex-grow: 1;
+      gap: 10px;
 
       .title-container {
         display: flex;
-        flex-direction: row;
 
-        margin: 30px 0 10px;
+        padding-right: var(--file-right-padding);
+        padding-left: var(--icon-field-width);
 
         color: var(--faint-dark-grey-color);
+        gap: var(--field-margin);
 
         .name {
           width: var(--name-field-width);
-
-          margin-right: var(--field-margin);
-          margin-left: var(--icon-field-width);
         }
 
         .type {
           width: var(--type-field-width);
-
-          margin-right: var(--field-margin);
         }
 
         .size {
           width: var(--size-field-width);
-
-          margin-right: var(--file-right-padding);
         }
       }
 
@@ -120,13 +120,14 @@
         flex-direction: column;
         flex-grow: 1;
 
-        overflow-y: scroll;
+        padding-right: var(--file-right-padding);
+
+        overflow-y: auto;
 
         .icon-container {
           display: flex;
           width: var(--icon-field-width);
 
-          flex-direction: row;
           justify-content: center;
 
           img {
@@ -139,7 +140,6 @@
           height: var(--file-height);
           min-height: var(--file-height);
 
-          flex-direction: row;
           align-items: center;
 
           cursor: pointer;
@@ -161,10 +161,7 @@
           height: var(--file-height);
           min-height: var(--file-height);
 
-          flex-direction: row;
           align-items: center;
-
-          padding-right: var(--file-right-padding);
 
           cursor: pointer;
           -webkit-tap-highlight-color: transparent;
@@ -179,11 +176,14 @@
             background: var(--faint-light-grey-color);
           }
 
+          .meta-container {
+            display: inline-flex;
+            gap: var(--field-margin);
+          }
+
           .name {
             overflow: hidden;
             width: var(--name-field-width);
-
-            margin-right: var(--field-margin);
 
             color: var(--base-black-color);
             text-overflow: ellipsis;
@@ -192,8 +192,6 @@
 
           .type {
             width: var(--type-field-width);
-
-            margin-right: var(--field-margin);
 
             color: var(--faint-dark-grey-color);
           }
@@ -208,7 +206,7 @@
     }
 
     .add-button {
-      margin: 15px var(--file-right-padding) 30px 0;
+      margin-right: var(--file-right-padding);
     }
   }
 

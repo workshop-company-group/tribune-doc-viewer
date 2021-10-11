@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  Input,
+} from '@angular/core';
 
 @Component({
   selector: 'app-backdrop',
@@ -9,6 +14,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class BackdropComponent {
 
   @Input()
+  @HostBinding('class.opened')
   public opened = false;
 
   constructor() { }

@@ -19,14 +19,12 @@
   .top-container {
     display: flex;
     flex-direction: column;
+    gap: 50px;
 
     .header-container {
       display: flex;
-      flex-direction: row;
       align-items: center;
       justify-content: space-between;
-
-      margin-bottom: 50px;
 
       h1 {
         @extend %primary-bold-font;
@@ -43,39 +41,41 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 50px;
 
-    .wrong-key {
-      @extend %primary-light-font;
-
-      margin-bottom: 10px;
-
-      color: var(--accent-red-color);
-
-      opacity: 0;
-
-      transition: var(--base-transition);
-
-      &.visible {
-        opacity: 1;
-      }
-    }
-
-    .key-input {
+    .input-container {
+      display: flex;
       width: 100%;
 
-      margin-bottom: 50px;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+
+      .wrong-key {
+        @extend %primary-light-font;
+
+        color: var(--accent-red-color);
+
+        opacity: 0;
+
+        transition: var(--base-transition);
+
+        &.visible {
+          opacity: 1;
+        }
+      }
+
+      .key-input {
+        width: 100%;
+      }
     }
 
     .buttons-container {
       display: flex;
       width: 100%;
 
-      flex-direction: row;
       justify-content: flex-end;
-
-      .exit {
-        margin-right: 30px;
-      }
+      gap: 30px;
     }
   }
 }
